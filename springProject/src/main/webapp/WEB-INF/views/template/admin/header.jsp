@@ -22,8 +22,8 @@
 			<li><a href="#">메인</a></li>
 			<li><a href="#">카테고리관리</a></li>
 			<li><a href="#">상품관리</a></li>
-			<li><a href="#">주문관리</a></li>
-			<li><a href="#">회원관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/adminOrder/adminOrderList.do">주문관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/adminMember/adminMemberList.do">회원관리</a></li>
 			<li><a href="#">매출관리</a></li>
 			<c:if test="${!empty mem_num && mem_auth==4}">
 				<li><a href="#">관리자관리</a></li>
