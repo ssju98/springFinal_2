@@ -49,7 +49,10 @@
 	<bean id="sqlSessionFactory"
 	         class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="typeAliasesPackage" value="kr.spring.member.vo"/>
+		<property name="typeAliasesPackage" value="kr.spring.member.vo, kr.spring.category.vo, 
+											kr.spring.product.vo, kr.spring.soption.vo, kr.spring.cart.vo, 
+											kr.spring.sorder.vo, kr.spring.sorder_detail.vo, kr.spring.delevery.vo,
+											kr.spring.delivery_status.vo, kr.spring.review.vo, kr.spring.qna.vo"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.spring.**.dao"/>
