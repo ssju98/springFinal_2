@@ -9,7 +9,7 @@
 		<input type="text">
 		<button><img src="${pageContext.request.contextPath}/resources/images/search.png" height="25" style="padding-left: 14px;"></button>
 	</div>
-	<div class="header-menu">
+	<div class="header-menu" class="mb-3">
 		<ul>
 		<c:if test="${empty mem_num}">
 			<li class="noLogin"><a href="#">로그인</a></li>
@@ -59,7 +59,6 @@
 				<li><a href="#">문의남기기</a>
 			</li>
 			</ul>
-
 	</ul>
 </div>
 <!-- 상단 끝 -->

@@ -57,9 +57,11 @@ html, body{
 	content:none;
 }
 
+
 /* 상단 메뉴 */
 #top-menu{
 	background: #2a3954;
+	height:60px;
 }
 
 #top-menu ul{
@@ -120,6 +122,11 @@ html, body{
 
 #sidebar .menu li a{
 	text-decoration: none;
+	color:#0d0d0d;
+}
+
+#sidebar .menu li a:hover{
+	color:#52a0ea;
 }
 
 /* 사이드 메뉴 끝 */

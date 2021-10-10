@@ -178,7 +178,7 @@ create sequence review_seq;
 create sequence sorder_seq;
 create sequence sorder_detail_seq;
 create sequence cart_seq;
-create sequence category_top_seq;
+CREATE SEQUENCE category_top_seq INCREMENT BY 100 start with 100;
 create sequence category_sub_seq;
 create sequence product_seq;
 create sequence option_seq;
