@@ -57,7 +57,7 @@
 				<beans:value>/WEB-INF/tiles-def/shopMain.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/adminMain.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/adminMember.xml</beans:value>
-				<beans:value>/WEB-INF/tiles-def/adminOrder.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/adminOrder.xml</beans:value> 
 			</beans:list>
 		</beans:property>
 	</beans:bean>
