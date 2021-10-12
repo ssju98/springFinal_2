@@ -57,10 +57,10 @@ public class DurationFromNow {
 		if (sec < 5) return "5초미만";
 		if (sec < 60) return sec + "초 전";
 
-		int min = (int)(sec / 60);
+		int min = sec / 60;
 		if (min < 60) return min + "분 전";
 
-		int hour = (int)(min / 60);
+		int hour = min / 60;
 		if (hour < 24) return hour + "시간 전";
 
 		Calendar c1 = Calendar.getInstance();

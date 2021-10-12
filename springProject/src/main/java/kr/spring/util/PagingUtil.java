@@ -57,7 +57,7 @@ public class PagingUtil {
 		startCount = (currentPage - 1) * rowCount + 1;
 		endCount = currentPage * rowCount;
 		// 시작 페이지와 마지막 페이지 값 구하기.
-		int startPage = (int) ((currentPage - 1) / pageCount) * pageCount + 1;
+		int startPage = (currentPage - 1) / pageCount * pageCount + 1;
 		int endPage = startPage + pageCount - 1;
 		// 마지막 페이지가 전체 페이지 수보다 크면 전체 페이지 수로 설정
 		if (endPage > totalPage) {

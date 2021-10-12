@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!-- 
+-->
+
+<tiles-definitions>
+    <definition name="loginForm" extends="shopMain">
+    	<put-attribute name="title" value="로그인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/login/loginForm.jsp"/>
+    </definition>
+
+    <definition name="findIdForm" extends="shopMain">
+    	<put-attribute name="title" value="아이디 찾기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/login/findIdForm.jsp"/>
+    </definition>
+    
+</tiles-definitions>
+
+
+
