@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.category_sub.dao.Category_subMapper">  
+  	<update id="updateCategory_sub" parameterType="category_subVO">
+		UPDATE category_sub
+		SET 
+		  c_sub_name = #{c_sub_name}
+		WHERE c_sub_no = #{c_sub_no}		  	   
+	</update>
+</mapper>

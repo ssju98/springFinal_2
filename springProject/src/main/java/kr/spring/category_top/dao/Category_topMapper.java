@@ -12,11 +12,9 @@ public interface Category_topMapper {
 	public int selectC_top_no();
 	@Insert("INSERT INTO category_top (c_top_no, c_top_name) VALUES (#{c_top_no}, #{c_top_name})")
 	public void insertCategory_top(Category_topVO category_top);
-
 	
-	@Select("SELECT * FROM category_top WHERE c_top_no=#{c_top_no}") public
-	Category_topVO selectCategory_top(Integer c_top_no);
-	 
+	@Select("SELECT * FROM category_top WHERE c_top_no=#{c_top_no}")
+	public Category_topVO selectCategory_top(Integer c_top_no);
 	
 	@Update("UPDATE category_top SET c_top_name=#{c_top_name} WHERE c_top_no=#{c_top_no}")
 	public void updateCategory_top(Category_topVO category_top);
