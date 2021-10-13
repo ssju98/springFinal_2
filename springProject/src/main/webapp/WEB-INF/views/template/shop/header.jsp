@@ -2,18 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!-- 상단 시작 -->
-<div id="header">
+<div id="header" class="mb-3">
 	<a href="#">
 	<img src="${pageContext.request.contextPath}/resources/images/logo.png" ></a>
 	<div class="searchbar">
 		<input type="text">
-		<button><img src="${pageContext.request.contextPath}/resources/images/search.png" height="25" style="padding-left: 14px;"></button>
+		<button><img src="${pageContext.request.contextPath}/resources/images/search.png" height="24" style="padding-left: 14px;"></button>
 	</div>
-	<div class="header-menu" class="mb-3">
+	<div class="header-menu">
 		<ul>
 		<c:if test="${empty mem_num}">
-			<li class="noLogin"><a href="${pageContext.request.contextPath}/login/loginForm.do">로그인</a></li>
-			<li class="noLogin"><a href="${pageContext.request.contextPath}/member/registerUser.do">회원가입</a></li>
+			<li class="noLogin"><a href="#">로그인</a></li>
+			<li class="noLogin"><a href="#">회원가입</a></li>
 		</c:if>
 		<c:if test="${!empty mem_num && mem_auth==2}">
 			<li><a href="#">장바구니</a></li>
@@ -21,15 +21,9 @@
 			<li><a href="#">마이페이지</a></li>
 		</c:if>
 		<c:if test="${!empty mem_num && (mem_auth==3 || mem_auth==4) }">
-			<li><a href="${pageContext.request.contextPath}/admin/adminInfoForm.do">마이페이지</a></li>
-			<li><a href="${pageContext.request.contextPath}/admin/main.do">관리자페이지로</a></li>
+			<li><a href="#">마이페이지</a></li>
+			<li><a href="#">관리자페이지로</a></li>
 		</c:if>
-		
-		<c:if test="${!empty mem_num }">
-		<li><a href="${pageContext.request.contextPath}/login/logout.do">로그아웃</a></li>
-		
-		</c:if> 
-	
 		</ul> 
 	</div>
 </div>
@@ -64,6 +58,7 @@
 				<li><a href="#">문의남기기</a>
 			</li>
 			</ul>
+
 	</ul>
 </div>
 <!-- 상단 끝 -->

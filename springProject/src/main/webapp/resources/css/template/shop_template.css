@@ -6,7 +6,7 @@
 	margin:0;
 	padding:0;
 	color:#0d0d0d;
-	 font-family: 'Noto Sans KR';
+	font-family: 'Noto Sans KR';
 }
 
 html, body{
@@ -22,7 +22,6 @@ html, body{
 }
 
 #header img {
-	max-height: 100%;
 	float:left;
 }
 
@@ -41,6 +40,7 @@ html, body{
 #header .header-menu li a{
 	font-family: "Elice Digital Baeum",sans-serif;
 	text-decoration: none;
+	color:#0d0d0d;
 }
 
 #header .header-menu li a:hover{
@@ -73,13 +73,14 @@ html, body{
 }
 
 .searchbar input {
-	font-size:18px;
+	font-size:15px;
 	width:325px;
 	padding-left:10px;
 	border:0px;
 	outline:none;
 	float:left;
 	line-height: 35px;
+	height:30px;
 }
 
 .searchbar button{
@@ -93,7 +94,7 @@ html, body{
 
 /*카테고리 메뉴*/
 #menu {
-	padding-top:15px;
+	float:none;
 	width:1200px;
     height: 50px;
     margin:0 auto;
@@ -129,6 +130,7 @@ html, body{
 	font-family: "Elice Digital Baeum",sans-serif;
 	text-decoration:none;
     display: block;
+    color:#0d0d0d;
 }
 
 .main1 li a:hover {
@@ -153,6 +155,7 @@ html, body{
 
 .main2 li a	{
 	padding-left:10px;
+	color:#0d0d0d;
 }
 
 
@@ -185,7 +188,8 @@ html, body{
 }
 
 #main-width{
-	z-index:-1;
+	height:83%;
 	width:1200px;
 	margin:0 auto;
 }
+
