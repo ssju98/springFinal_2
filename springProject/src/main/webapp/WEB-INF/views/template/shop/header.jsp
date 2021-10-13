@@ -13,7 +13,7 @@
 		<ul>
 		<c:if test="${empty mem_num}">
 			<li class="noLogin"><a href="${pageContext.request.contextPath}/login/loginForm.do">로그인</a></li>
-			<li class="noLogin"><a href="#">회원가입</a></li>
+			<li class="noLogin"><a href="${pageContext.request.contextPath}/member/registerUser.do">회원가입</a></li>
 		</c:if>
 		<c:if test="${!empty mem_num && mem_auth==2}">
 			<li><a href="#">장바구니</a></li>

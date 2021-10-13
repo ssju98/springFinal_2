@@ -11,25 +11,32 @@ public class MemberVO {
 	
 	private int mem_num;//회원번호
 	@Pattern(regexp="^[A-Za-z0-9]{4,12}$") 
-	private String id;//아이디
-	private int auth;//회원레벨
+	private String mem_id;//아이디
+	private int mem_auth;//부여번호
 	@NotEmpty
-	private String name;//이름
+	private String mem_name;//이름
 	@Pattern(regexp="^[A-Za-z0-9]{4,12}$") 
-	private String passwd;//비밀번호
+	private String mem_passwd;//비밀번호
 	@NotEmpty
-	private String phone;//연락처
+	private String mem_phone;//연락처
 	@Email
 	@NotEmpty
-	private String email;//이메일
+	private String mem_email;//이메일
 	@Size(min=5,max=5)
-	private String zipcode;//우편번호
+	private String mem_zipcode;//우편번호
 	@NotEmpty
-	private String address1;//주소
+	private String mem_address1;//주소
 	@NotEmpty
-	private String address2;//나머지 주소
+	private String mem_address2;//나머지 주소
 	private Date mem_date;//가입일
 	
+	//비밀번호 일치 여부 체크
+	public boolean isCheckedPassword(String userPasswd) {
+		if(mem_auth > 1 && mem_passwd.equals(userPasswd)) {
+			return true;
+		}
+		return false;
+	}
 	
 	public int getMem_num() {
 		return mem_num;
@@ -37,59 +44,59 @@ public class MemberVO {
 	public void setMem_num(int mem_num) {
 		this.mem_num = mem_num;
 	}
-	public String getId() {
-		return id;
+	public String getMem_id() {
+		return mem_id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
 	}
-	public int getAuth() {
-		return auth;
+	public int getMem_auth() {
+		return mem_auth;
 	}
-	public void setAuth(int auth) {
-		this.auth = auth;
+	public void setMem_auth(int mem_auth) {
+		this.mem_auth = mem_auth;
 	}
-	public String getName() {
-		return name;
+	public String getMem_name() {
+		return mem_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
 	}
-	public String getPasswd() {
-		return passwd;
+	public String getMem_passwd() {
+		return mem_passwd;
 	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setMem_passwd(String mem_passwd) {
+		this.mem_passwd = mem_passwd;
 	}
-	public String getPhone() {
-		return phone;
+	public String getMem_phone() {
+		return mem_phone;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setMem_phone(String mem_phone) {
+		this.mem_phone = mem_phone;
 	}
-	public String getEmail() {
-		return email;
+	public String getMem_email() {
+		return mem_email;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMem_email(String mem_email) {
+		this.mem_email = mem_email;
 	}
-	public String getZipcode() {
-		return zipcode;
+	public String getMem_zipcode() {
+		return mem_zipcode;
 	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+	public void setMem_zipcode(String mem_zipcode) {
+		this.mem_zipcode = mem_zipcode;
 	}
-	public String getAddress1() {
-		return address1;
+	public String getMem_address1() {
+		return mem_address1;
 	}
-	public void setAddress1(String address1) {
-		this.address1 = address1;
+	public void setMem_address1(String mem_address1) {
+		this.mem_address1 = mem_address1;
 	}
-	public String getAddress2() {
-		return address2;
+	public String getMem_address2() {
+		return mem_address2;
 	}
-	public void setAddress2(String address2) {
-		this.address2 = address2;
+	public void setMem_address2(String mem_address2) {
+		this.mem_address2 = mem_address2;
 	}
 	public Date getMem_date() {
 		return mem_date;
@@ -97,19 +104,16 @@ public class MemberVO {
 	public void setMem_date(Date mem_date) {
 		this.mem_date = mem_date;
 	}
-	
-	//비밀번호 일치 여부 체크
-	public boolean isCheckedPassword(String userPasswd) {
-		if(auth > 1 && passwd.equals(userPasswd)) {
-			return true;
-		}
-		return false;
-	}
-	
 	@Override
 	public String toString() {
-		return "MemberVO [mem_num=" + mem_num + ", id=" + id + ", auth=" + auth + ", name=" + name + ", passwd="
-				+ passwd + ", phone=" + phone + ", email=" + email + ", zipcode=" + zipcode + ", address1=" + address1
-				+ ", address2=" + address2 + ", mem_date=" + mem_date + "]";
+		return "MemberVO [mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", mem_name="
+				+ mem_name + ", mem_passwd=" + mem_passwd + ", mem_phone=" + mem_phone + ", mem_email=" + mem_email
+				+ ", mem_zipcode=" + mem_zipcode + ", mem_address1=" + mem_address1 + ", mem_address2=" + mem_address2
+				+ ", mem_date=" + mem_date + ", getMem_num()=" + getMem_num() + ", getMem_id()=" + getMem_id()
+				+ ", getMem_auth()=" + getMem_auth() + ", getMem_name()=" + getMem_name() + ", getMem_passwd()="
+				+ getMem_passwd() + ", getMem_phone()=" + getMem_phone() + ", getMem_email()=" + getMem_email()
+				+ ", getMem_zipcode()=" + getMem_zipcode() + ", getMem_address1()=" + getMem_address1()
+				+ ", getMem_address2()=" + getMem_address2() + ", getMem_date()=" + getMem_date() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 }
