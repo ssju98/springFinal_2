@@ -6,7 +6,7 @@
 
 <tiles-definitions>
     <definition name="adminMemberList" extends="adminMain">
-    	<put-attribute name="title" value="회원관리"/>
+    	<put-attribute name="title" value="회원목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/adminMember/adminMemberList.jsp"/>
     	<put-attribute name="left" value="/WEB-INF/views/adminMember/left.jsp"/>
     </definition>

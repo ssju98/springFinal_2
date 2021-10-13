@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+/* 가로 폭 */
+div#narrow-width{
+	width: 500px;
+}
+div#normal-width{
+	width: 700px;
+}
+.table input[type="date"]{
+	width: 120px;
+}
+
+/* 세로 폭*/
+table#form-height td{
+	padding: 8px;
+}
+
+/* 폰트 */
+.blank-text{
+	color: rgb(192, 192, 192);
+}

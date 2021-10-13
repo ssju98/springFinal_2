@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title"/></title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css"> 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.min.css"> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/template/admin_template.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>

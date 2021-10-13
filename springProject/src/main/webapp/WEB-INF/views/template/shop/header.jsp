@@ -22,7 +22,7 @@
 		</c:if>
 		<c:if test="${!empty mem_num && (mem_auth==3 || mem_auth==4) }">
 			<li><a href="${pageContext.request.contextPath}/admin/adminInfoForm.do">마이페이지</a></li>
-			<li><a href="${pageContext.request.contextPath}/main/admin.do">관리자페이지로</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/main.do">관리자페이지로</a></li>
 		</c:if>
 		
 		<c:if test="${!empty mem_num }">
