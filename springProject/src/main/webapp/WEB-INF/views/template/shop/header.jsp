@@ -12,7 +12,7 @@
 	<div class="header-menu">
 		<ul>
 		<c:if test="${empty mem_num}">
-			<li class="noLogin"><a href="#">로그인</a></li>
+			<li class="noLogin"><a href="${pageContext.request.contextPath}/login/loginForm.do">로그인</a></li>
 			<li class="noLogin"><a href="#">회원가입</a></li>
 		</c:if>
 		<c:if test="${!empty mem_num && mem_auth==2}">
@@ -23,6 +23,9 @@
 		<c:if test="${!empty mem_num && (mem_auth==3 || mem_auth==4) }">
 			<li><a href="#">마이페이지</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/main.do">관리자페이지로</a></li>
+		</c:if>
+		<c:if test="${!empty mem_num}">
+			<li><a href="${pageContext.request.contextPath}/login/logout.do">로그아웃</a></li>
 		</c:if>
 		</ul> 
 	</div>

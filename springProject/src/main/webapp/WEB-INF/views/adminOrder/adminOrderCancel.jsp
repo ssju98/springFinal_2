@@ -3,39 +3,55 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- CSS file -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin1_style.css">
+<script type="text/javascript">
+	window.onload = function(){
+		var form = document.getElementById('delete_form');
+		form.onsubmit = function(){
+			var mem_id = document.getElementById('mem_id');
+			var mem_passwd = document.getElementById('mem_passwd');
+			//아이디, 비밀번호 유효성 체크
+			if(mem_id.value.trim() == ''){
+				mem_id.focus();
+				mem_id.value='';
+				alert('아이디를 입력하세요!');
+				return false;
+			}
+			if(mem_passwd.value.trim() == ''){
+				mem_passwd.focus();
+				mem_passwd.value='';
+				alert('비밀번호를 입력하세요!');
+				return false;
+			}
+		};
+	};
+</script>
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
-	<h3>주문 취소(관리자 인증)</h3>
-	<div id="narrow-width">
-		<form>
-			<!-- *****임시 데이터***** -->
-			<%-- <form:hidden path="mem_num"/> --%>
-			<table class="table table-borderless table-sm">
-				<tr>
-					<td style="width:150px;">아이디</td>
+	<h3 id="header-3">주문 취소</h3>
+	<div id="narrow-width" class="element-center text-center">
+		<h4>최고관리자 인증</h4>
+		<hr class="sub-line">
+		<form action="orderCancel.do" method="post" id="delete_form" class="form">
+			<input type="hidden" name="manage_num" value="${order_no}"/>
+			<table class="table table-borderless table-sm" style="width: 80%; margin: 0 auto;">
+				<tr class="sub-line">
+					<th>아이디</th>
 					<td>
-						<%-- <form:password path="mem_id"/>
-						<form:errors path="mem_id" /> --%>
-						<input type="text">
+						<input type="text" name="mem_id" id="mem_id" class="form-control form-control-sm">
 					</td>
 				</tr>
 				<tr>
-					<td>비밀번호</td>
+					<th>비밀번호</th>
 					<td>
-						<%-- <form:password path="mem_passwd"/>
-						<form:errors path="mem_passwd" /> --%>
-						<input type="text">
+						<input type="password" name="mem_passwd" id="mem_passwd" class="form-control form-control-sm">
 					</td>
 				</tr>
 			</table>
-			<div class="text-center">
-				<button class="btn btn-dark">인증</button>
+			<div class="element-center">
+				<input type="submit" value="인증" class="btn btn-dark">
 				<input type="button" value="취소" class="btn btn-secondary" onclick="location.href='orderList.do'">
 			</div>
 		</form>
 	</div>
 </div>
-<!-- Bootstrap JS -->
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <!-- 중앙 내용 끝 -->

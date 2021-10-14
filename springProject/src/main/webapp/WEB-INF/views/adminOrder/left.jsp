@@ -4,8 +4,6 @@
 <div id="sidebar">
 	<ul class="menu">
 		<li><a href="${pageContext.request.contextPath}/admin/orderList.do">주문목록</a></li>
-		<li><a href="${pageContext.request.contextPath}/admin/orderDetail.do?order_no=1">주문상세</a></li>
-		<li><a href="${pageContext.request.contextPath}/admin/orderCancel.do">주문취소</a></li>
 		<li><a href="${pageContext.request.contextPath}/admin/deliveryList.do">배송관리</a></li>
 		<li><a href="${pageContext.request.contextPath}/admin/deliveryTrack.do">송장입력</a></li>
 	</ul>

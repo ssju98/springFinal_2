@@ -8,7 +8,7 @@ import kr.spring.adminOrder.vo.AdminOrderVO;
 public interface AdminOrderService {
 	
 	//============== 주문관리 ==============
-	public int getOrderCount();
+	public int getOrderCount(Map<String,Object> map);
 	public List<AdminOrderVO> getOrderList(Map<String,Object> map);
 	public AdminOrderVO selectOrder(int order_no);
 	public void deleteOrder(int order_no);

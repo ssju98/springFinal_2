@@ -29,7 +29,7 @@ public class AdminMemberVO {
 	private String mem_address2;
 	private Date mem_date;
 	
-	//회원삭제시 회원번호 저장
+	//회원삭제, 주문취소시 관리대상번호 저장
 	private int manage_num;
 	
 	//비밀번호 일치 여부 체크

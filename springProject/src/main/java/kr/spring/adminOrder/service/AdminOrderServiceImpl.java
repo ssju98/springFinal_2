@@ -18,8 +18,8 @@ public class AdminOrderServiceImpl implements AdminOrderService{
 	private AdminOrderMapper adminOrderMapper;
 	
 	@Override
-	public int getOrderCount() {
-		return adminOrderMapper.getOrderCount();
+	public int getOrderCount(Map<String,Object> map) {
+		return adminOrderMapper.getOrderCount(map);
 	}
 	@Override
 	public List<AdminOrderVO> getOrderList(Map<String, Object> map) {

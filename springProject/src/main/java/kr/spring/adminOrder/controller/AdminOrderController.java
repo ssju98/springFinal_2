@@ -4,16 +4,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.adminMember.service.AdminMemberService;
+import kr.spring.adminMember.vo.AdminMemberVO;
 import kr.spring.adminOrder.service.AdminOrderService;
 import kr.spring.adminOrder.vo.AdminOrderVO;
 import kr.spring.util.PagingUtil;
@@ -21,11 +28,13 @@ import kr.spring.util.PagingUtil;
 @Controller
 public class AdminOrderController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminOrderController.class);
-	private int rowCount = 10;
-	private int pageCount = 10;
+	private int rowCount = 10;	//표시할 데이터 수
+	private int pageCount = 10;	//표시할 페이지 수
 
 	@Autowired
 	private AdminOrderService adminOrderService;
+	@Autowired
+	private AdminMemberService adminMemberService;
 	
 	//자바빈(VO) 초기화
 	@ModelAttribute
@@ -35,16 +44,27 @@ public class AdminOrderController {
 	
 	//주문 목록
 	@RequestMapping("/admin/orderList.do")
-	public ModelAndView adminOrderList(@RequestParam(value="pageNum", defaultValue="1") int currentPage) {
-		logger.debug("<<adminOrderList 호출 - currentPage>> : " + currentPage);
+	public ModelAndView adminOrderList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+									   @RequestParam(value="d_status_num", defaultValue="") String d_status_num,
+									   @RequestParam(value="keyfield", defaultValue="") String keyfield,
+									   @RequestParam(value="keyword", defaultValue="") String keyword) {
 		
-		int count = adminOrderService.getOrderCount();
+		logger.debug("##### adminOrderList 호출 - currentPage : " + currentPage + ", d_status_num : " + d_status_num + ", keyfield : " + keyfield +", keyword : " + keyword);
 		
-		PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "orderList.do");
+		//검색 조건
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("d_status_num", d_status_num);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//결과데이터 수
+		int count = adminOrderService.getOrderCount(map);
+		logger.debug("***** count : " + count);
+		
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "orderList.do");
 		
 		List<AdminOrderVO> list = null;
 		if(count > 0) {
-			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("start", page.getStartCount());
 			map.put("end", page.getEndCount());
 			
@@ -62,20 +82,74 @@ public class AdminOrderController {
 	
 	//주문 상세
 	@RequestMapping("/admin/orderDetail.do")
-	public String adminOrderDetail(@RequestParam int order_no, Model model) {
-		logger.debug("<<adminOrderDetail 호출 - order_no>> : " + order_no);
+	public String adminOrderDetail(@RequestParam int order_no, HttpServletRequest request,Model model) {
+		logger.debug("##### adminOrderDetail 호출 - order_no : " + order_no);
 		
+		//주문 존재여부 체크
 		AdminOrderVO adminOrderVO = adminOrderService.selectOrder(order_no);
-		model.addAttribute("adminOrderVO", adminOrderVO);
+		if(adminOrderVO == null) {
+			//alert창에 표시할 내용
+			model.addAttribute("message", "존재하지 않는 주문입니다!");
+			model.addAttribute("url", request.getContextPath() + "/admin/orderList.do");
+			
+			return "common/resultView";
+		}
 		
-		logger.debug("<<adminOrderDetail 호출 - adminOrderVO>> : " + adminOrderVO);
+		model.addAttribute("adminOrderVO", adminOrderVO);
 		
 		return "adminOrderDetail";
 	}
 	
-	//주문 취소
-	@RequestMapping("/admin/orderCancel.do")
-	public String adminOrderCancel() {
+	//주문 취소 폼 - 최고관리자 인증
+	@GetMapping("/admin/orderCancel.do")
+	public String adminOrderCancelForm(@RequestParam int order_no, HttpServletRequest request, Model model) {
+		logger.debug("##### adminOrderCancelForm 호출 - order_no : " + order_no);
+		
+		//주문 존재여부 체크
+		AdminOrderVO adminOrderVO = adminOrderService.selectOrder(order_no);
+		if(adminOrderVO == null) {
+			//alert창에 표시할 내용
+			model.addAttribute("message", "존재하지 않는 주문입니다!");
+			model.addAttribute("url", request.getContextPath() + "/admin/orderList.do");
+			
+			return "common/resultView";
+		}
+		
+		//취소할 주문번호
+		model.addAttribute("order_no", order_no);
+		
 		return "adminOrderCancel";
+	}
+	
+	//주문 취소 처리
+	@PostMapping("/admin/orderCancel.do")
+	public String adminOrderCancel(AdminMemberVO adminMemberVO, HttpSession session, HttpServletRequest request, Model model) {
+		logger.debug("##### adminOrderCancelForm 호출 - adminMemberVO : " + adminMemberVO);
+		
+		String mem_id=(String)session.getAttribute("mem_id"); //로그인한 아이디
+		AdminMemberVO dbMember = adminMemberService.selectCheckMember(mem_id); //입력한 아이디,비밀번호,취소할 주문번호
+		boolean check = false;
+		
+		//로그인한 아이디와 입력한 아이디가 일치하는 경우
+		if(dbMember != null && dbMember.getMem_id().equals(mem_id)) {
+			//비밀번호 일치 여부 체크
+			check = dbMember.isCheckedPassword(adminMemberVO.getMem_passwd());
+		}
+		
+		if(check) {
+			//주문정보 삭제
+			adminOrderService.deleteOrder(adminMemberVO.getManage_num());
+			
+			//완료시 alert창에 표시할 내용
+			model.addAttribute("message", "주문 취소 완료!");
+			model.addAttribute("url", request.getContextPath() + "/admin/orderList.do");
+	
+		}else {
+			//실패시 alert창에 표시할 내용
+			model.addAttribute("message", "아이디 또는 비밀번호 불일치!");
+			model.addAttribute("url", request.getContextPath() + "/admin/orderCancel.do?order_no=" + adminMemberVO.getManage_num());
+		}
+		
+		return "common/resultView";
 	}
 }

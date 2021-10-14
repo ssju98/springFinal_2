@@ -78,16 +78,21 @@
 	
 	<!-- interceptor 설정 -->
 	<interceptors>
-	<!-- 로그인 여부 체크 -->
-	<interceptor>
-		<mapping path="/admin/**"/>
-		<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
-	</interceptor>
-	<!-- 관리자 여부 체크 -->
-	<interceptor>
-		<mapping path="/admin/**"/>
-		<beans:bean class="kr.spring.interceptor.AdminCheckInterceptor"/>
-	</interceptor>
+		<!-- 로그인 여부 체크 -->
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
+		</interceptor>
+		<!-- 관리자 여부 체크 -->
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<beans:bean class="kr.spring.interceptor.AdminCheckInterceptor"/>
+		</interceptor>
+		<!-- 최고관리자 여부 체크 -->
+		<interceptor>
+			<mapping path="/admin/memberDelete.do"/>
+			<beans:bean class="kr.spring.interceptor.SuperAdminCheckInterceptor"/>
+		</interceptor>
 	</interceptors>
 	
 </beans:beans>

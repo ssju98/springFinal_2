@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -27,8 +28,8 @@ import kr.spring.util.PagingUtil;
 @Controller
 public class AdminMemberController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
-	private int rowCount = 10;
-	private int pageCount = 10;
+	private int rowCount = 10;	//표시할 데이터 수
+	private int pageCount = 10;	//표시할 페이지 수
 	
 	@Autowired
 	private AdminMemberService adminMemberService;
@@ -46,7 +47,7 @@ public class AdminMemberController {
 										@RequestParam(value="keyfield", defaultValue="") String keyfield,
 										@RequestParam(value="keyword", defaultValue="") String keyword) {
 		
-		logger.debug("##### adminMemberList 호출 - currentPage : " + currentPage + "/ auth_num : " + auth_num  + "/ keyfield : " + keyfield +" / keyword : " + keyword);
+		logger.debug("##### adminMemberList 호출 - currentPage : " + currentPage + ", auth_num : " + auth_num  + ", keyfield : " + keyfield + ", keyword : " + keyword);
 		
 		//검색 조건
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -54,9 +55,8 @@ public class AdminMemberController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
-		//데이터 개수
+		//결과데이터 수
 		int count = adminMemberService.getMemberCount(map);
-		
 		logger.debug("***** count : " + count);
 		
 		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage,count,rowCount,pageCount,"memberList.do");
@@ -80,23 +80,38 @@ public class AdminMemberController {
 	
 	//회원 상세
 	@RequestMapping("/admin/memberDetail.do")
-	public ModelAndView adminMemberDetail(@RequestParam int mem_num) {
+	public String adminMemberDetail(@RequestParam int mem_num, HttpServletRequest request, Model model) {
 		logger.debug("##### adminMemberDetail 호출 - mem_num : " + mem_num);
 		
-		AdminMemberVO adminMemberVO = adminMemberService.selectMember(mem_num);
+		//회원 존재여부 체크
+		AdminMemberVO member = adminMemberService.selectMember(mem_num);
+		if(member == null) {
+			//alert창에 표시할 내용
+			model.addAttribute("message", "존재하지 않는 회원입니다!");
+			model.addAttribute("url", request.getContextPath() + "/admin/memberList.do");
+			
+			return "common/resultView";
+		}
 		
-		return new ModelAndView("adminMemberDetail", "adminMemberVO", adminMemberVO);
+		AdminMemberVO adminMemberVO = adminMemberService.selectMember(mem_num);
+		model.addAttribute("adminMemberVO", adminMemberVO);
+		
+		return "adminMemberDetail";
 	}
 	
 	//회원 수정 폼
 	@GetMapping("/admin/memberUpdate.do")
-	public String adminMemberUpdateForm(@RequestParam int mem_num, Model model) {
+	public String adminMemberUpdateForm(@RequestParam int mem_num, HttpServletRequest request, Model model) {
 		logger.debug("##### adminMemberUpdateForm 호출 - mem_num : " + mem_num);
 		
-		//탈퇴회원 체크
+		//회원 존재여부 체크
 		AdminMemberVO member = adminMemberService.selectMember(mem_num);
-		if(member.getMem_auth()==0) {
-			return "redirect:/admin/memberList.do";
+		if(member == null || member.getMem_auth() == 0) {
+			//alert창에 표시할 내용
+			model.addAttribute("message", "존재하지 않거나 탈퇴한 회원입니다!");
+			model.addAttribute("url", request.getContextPath() + "/admin/memberList.do");
+			
+			return "common/resultView";
 		}
 		
 		AdminMemberVO adminMemberVO = adminMemberService.selectMember(mem_num);
@@ -107,70 +122,76 @@ public class AdminMemberController {
 	
 	//회원 수정 처리
 	@PostMapping("/admin/memberUpdate.do")
-	public String adminMemberUpdateSubmit(@Valid AdminMemberVO adminMemberVO, BindingResult result) {
-		logger.debug("##### adminMemberUpdateForm 호출 - adminMemberVO : " + adminMemberVO);
+	public String adminMemberUpdate(@Valid AdminMemberVO adminMemberVO, BindingResult result, HttpServletRequest request, Model model) {
+		logger.debug("##### adminMemberUpdate 호출 - adminMemberVO : " + adminMemberVO);
 		
-		//유효성 체크
+		//입력데이터 유효성 체크
 		if(result.hasErrors()) { 
 			logger.debug("***** ERROR : " + result.getAllErrors());
+			
 			return "adminMemberUpdate";
 		}
 		
+		//회원정보 수정
 		adminMemberService.updateMember(adminMemberVO);
 		
-		return "redirect:/admin/memberList.do";
+		//완료시 alert창에 표시할 내용
+		model.addAttribute("message", "회원정보 수정완료!");
+		model.addAttribute("url", request.getContextPath() + "/admin/memberList.do");
+		
+		return "common/resultView";
 	}
 
-	//회원 삭제 폼
+	//회원 삭제 폼 - 최고관리자 인증
 	@GetMapping("/admin/memberDelete.do")
-	public String adminMemberDeleteForm(@RequestParam int mem_num, Model model, HttpSession session) {
-		logger.debug("##### adminMemberDelete[GET] 호출 - mem_num : " + mem_num);
+	public String adminMemberDeleteForm(@RequestParam int mem_num, HttpServletRequest request, Model model) {
+		logger.debug("##### adminMemberDeleteForm 호출 - mem_num : " + mem_num);
 		
-		//탈퇴회원 체크
+		//회원 존재여부 체크
 		AdminMemberVO member = adminMemberService.selectMember(mem_num);
-		if(member.getMem_auth()==0) {
-			return "redirect:/admin/memberList.do";
+		if(member == null || member.getMem_auth() == 0) {
+			//alert창에 표시할 내용
+			model.addAttribute("message", "존재하지 않거나 탈퇴한 회원입니다!");
+			model.addAttribute("url", request.getContextPath() + "/admin/memberList.do");
+			
+			return "common/resultView";
 		}
 		
-		//최고관리자 체크
-		Integer mem_auth = (Integer)session.getAttribute("mem_auth");
-		logger.debug("***** mem_auth : " + mem_auth);
-		if(mem_auth != 4) {
-			return "redirect:/admin/memberList.do";
-		}
-		
-		//회원번호 저장
-		AdminMemberVO adminMemberVO = new AdminMemberVO();
-		adminMemberVO.setManage_num(mem_num);
-		model.addAttribute("adminMemberVO", adminMemberVO);
+		//삭제할 회원번호
+		model.addAttribute("mem_num", mem_num);
 		
 		return "adminMemberDelete";
 	}
 	
 	//회원 삭제 처리
 	@PostMapping("/admin/memberDelete.do")
-	public String adminMemberDelete(AdminMemberVO adminMemberVO, HttpSession session) {
-		logger.debug("##### adminMemberDelete[POST] 호출");
-		logger.debug("***** mem_id : " + adminMemberVO.getMem_id() + ", mem_passwd : " + adminMemberVO.getMem_passwd() + ", manage_num : " + adminMemberVO.getManage_num());
+	public String adminMemberDelete(AdminMemberVO adminMemberVO, HttpSession session, HttpServletRequest request, Model model) {
+		logger.debug("##### adminMemberDelete 호출 - adminMemberVO : " + adminMemberVO);
 		
-		Integer mem_auth = (Integer)session.getAttribute("mem_auth");
-		String mem_id = (String)session.getAttribute("mem_id");
-		logger.debug("***** mem_auth : " + mem_auth + " / mem_id : " + mem_id);
-		
-		AdminMemberVO dbMember = adminMemberService.selectCheckMember(adminMemberVO.getMem_id());
+		String mem_id = (String)session.getAttribute("mem_id"); //로그인한 아이디
+		AdminMemberVO dbMember = adminMemberService.selectCheckMember(adminMemberVO.getMem_id()); //입력한 아이디,비밀번호,삭제할 회원번호
 		boolean check = false;
 		
-		//최고관리자 아이디, 비밀번호 체크
-		if(mem_auth == 4 && dbMember!=null && dbMember.getMem_id().equals(mem_id)) {
+		//로그인한 아이디와 입력한 아이디가 일치하는 경우
+		if(dbMember != null && dbMember.getMem_id().equals(mem_id)) {
+			//비밀번호 일치 여부 체크
 			check = dbMember.isCheckedPassword(adminMemberVO.getMem_passwd());
 		}
 		
-		//최고관리자 인증 성공시 회원 삭제
 		if(check) {
-			adminMemberService.deleteMember(adminMemberVO.getManage_num());			
-			return "redirect:/admin/memberList.do";
+			//회원정보 삭제
+			adminMemberService.deleteMember(adminMemberVO.getManage_num());
+			
+			//완료시 alert창에 표시할 내용
+			model.addAttribute("message", "회원정보 삭제 완료!");
+			model.addAttribute("url", request.getContextPath() + "/admin/memberList.do");
+		
 		}else {
-			return "login/loginFail";
+			//실패시 alert창에 표시할 내용
+			model.addAttribute("message", "아이디 또는 비밀번호 불일치!");
+			model.addAttribute("url", request.getContextPath() + "/admin/memberDelete.do?mem_num=" + adminMemberVO.getManage_num());
 		}
+		
+		return "common/resultView";
 	}
 }
