@@ -2,26 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>대분류 카테고리 목록</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css">
-<script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-<!-- header -->
-<jsp:include page="/WEB-INF/views/template/category_top/header.jsp"/>
 
-<!-- menu -->
-<jsp:include page="/WEB-INF/views/template/category_top/layout.jsp"/>
 <div id="main-width">
 <div id="menuinfo">대분류 카테고리 목록</div>
-<div class="card mt-3">
+<%-- <div class="card mt-3">
 		    <div class="card-body object-center text-center">
-				<c:if test="${count>0}">
+				 <c:if test="${count>0}">
 				<table class="table table-hover text-center line-bottom">
 					<thead>
 					<tr>
@@ -39,10 +25,7 @@
 					</tbody>
 				</table>
 				${pagingHtml}
-				</c:if>
+				</c:if> 
 			</div>
-		</div>
+		</div> --%>
 	</div>
-<jsp:include page="/WEB-INF/views/template/shop/footer.jsp"/>
-</body>
-</html>

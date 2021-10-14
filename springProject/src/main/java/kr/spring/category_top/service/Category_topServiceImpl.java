@@ -22,7 +22,7 @@ public class Category_topServiceImpl implements Category_topService{
 	}
 
 	@Override
-	public Category_topVO selectCategory_top(Integer c_top_no) {
+	public Category_topVO selectCategory_top(int c_top_no) {
 		return category_topMapper.selectCategory_top(c_top_no);
 	}
 	
