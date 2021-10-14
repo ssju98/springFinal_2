@@ -5,10 +5,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin1_style.css">
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
-	<h3>주문 상세 정보</h3>
+	<h3 id="header-3">주문 상세 정보</h3>
 	<!-- 주문 정보 -->
-	<div>
-		<table class="table table-bordered">
+	<div id="normal-width">
+		<table class="table table-bordered cell-2">
 			<tr>
 				<th>주문번호</th>
 				<td>${adminOrderVO.order_no}</td>
@@ -48,15 +48,17 @@
 				<td>(${adminOrderVO.order_zipcode}) ${adminOrderVO.order_address1} ${adminOrderVO.order_address2}</td>
 			</tr>
 		</table>
-		<div class="text-center">
-			<input type="button" value="주문취소" class="btn btn-secondary" onclick="location.href=''">
+		<div class="element-center text-center">
+			<input type="button" value="주문취소" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/admin/orderCancel.do?order_no=${adminOrderVO.order_no}'" 
+				<c:if test="${mem_auth != 4}">disabled</c:if>
+			>
 		</div>
 	</div>
 	<!-- 주문 상품 -->
-	<div>
-		<h5>주문 상품</h5>
+	<div id="wide_width">
+		<h4 id="header-4">주문상품목록</h4>
 		<table class="table table-bordered">
-			<thead class="table-secondary">
+			<thead>
 				<tr>
 					<th>상품번호</th>
 					<th>상품명</th>

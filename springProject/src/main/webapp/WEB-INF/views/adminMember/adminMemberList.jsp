@@ -22,43 +22,47 @@
 </script>
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
-	<h3>회원 목록</h3>
-	<!-- 회원 조회 조건 -->
+	<h3 id="header-3">회원 목록</h3>
+	<!-- 회원 검색 조건 -->
 	<div id="normal-width">
 		<form action="memberList.do" method="get" id="search_form">
 			<table class="table table-borderless table-sm">
 				<tr>
-					<th>회원유형</th>
+					<th width="13%">회원유형</th>
 					<td>
-						<input type="radio" name="auth_num" value="" checked="checked">전체
-						<input type="radio" name="auth_num" value="2">일반
-						<input type="radio" name="auth_num" value="1">정지
-						<input type="radio" name="auth_num" value="0">탈퇴
+						<div class="form-check-inline">
+							<input type="radio" name="auth_num" value="" checked="checked" class="form-check-input">전체
+							<input type="radio" name="auth_num" value="2" class="form-check-input ml-2">일반
+							<input type="radio" name="auth_num" value="1" class="form-check-input ml-2">정지
+							<input type="radio" name="auth_num" value="0" class="form-check-input ml-2">탈퇴
+						</div>
 					</td>
 				</tr>
 				<tr>
-					<th>조회조건</th>
+					<th>검색조건</th>
 					<td>
-						<select name="keyfield" id="keyfield">
-							<option value="mem_num">회원번호</option>
-							<option value="mem_id">아이디</option>
-							<option value="mem_phone">연락처</option>
-						</select>
-						<input type="search" name="keyword" id="keyword">
-						<input type="submit" value="조회" class="btn btn-dark btn-sm">
+						<div class="form-inline">
+							<select name="keyfield" id="keyfield" class="form-control form-control-sm">
+								<option value="mem_num">회원번호</option>
+								<option value="mem_id">아이디</option>
+								<option value="mem_phone">연락처</option>
+							</select>
+							<input type="search" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control form-control-sm ml-1">
+							<input type="submit" value="검색" class="btn btn-dark btn-sm ml-1">
+						</div>
 					</td>
 				</tr>
 			</table>
 		</form>
 	</div>
-	<!-- 회원 조회 결과 -->
-	<div>
+	<!-- 회원 검색 결과 -->
+	<div id="wide_width">
 		<c:if test="${count == 0}">
-		회원 정보가 없습니다.
+			회원 정보가 없습니다.
 		</c:if>
 		<c:if test="${count > 0}">
-		<table class="table table-hover table-bordered table-sm">
-			<thead class="table-secondary">
+		<table class="table table-hover table-bordered">
+			<thead>
 				<tr>
 					<th>회원번호</th>
 					<th>구분</th>
@@ -83,17 +87,17 @@
 					<td>
 						<input type="button" value="상세" class="btn btn-secondary btn-sm" onclick="location.href='memberDetail.do?mem_num=${adminMemberVO.mem_num}'">
 						<c:if test="${adminMemberVO.mem_auth != 0}">
-						<input type="button" value="수정" class="btn btn-secondary btn-sm" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
-						<input type="button" value="삭제" class="btn btn-secondary btn-sm" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'" 
-							<c:if test="${mem_auth != 4}">disabled</c:if>
-						>
+							<input type="button" value="수정" class="btn btn-secondary btn-sm" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
+							<input type="button" value="삭제" class="btn btn-secondary btn-sm" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"  
+								<c:if test="${mem_auth != 4}">disabled</c:if>
+							>
 						</c:if>
 					</td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<div class="text-center">${pagingHtml}</div>
+		<div class="text-center mt-4">${pagingHtml}</div>
 		</c:if>
 	</div>
 </div>

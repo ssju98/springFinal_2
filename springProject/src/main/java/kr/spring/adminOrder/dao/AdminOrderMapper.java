@@ -11,8 +11,7 @@ import kr.spring.adminOrder.vo.AdminOrderVO;
 public interface AdminOrderMapper {
 
 	//============== 주문관리 ==============
-	@Select("SELECT COUNT(*) FROM sorder")
-	public int getOrderCount();
+	public int getOrderCount(Map<String,Object> map);
 	
 	public List<AdminOrderVO> getOrderList(Map<String,Object> map);
 	

@@ -2,15 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- CSS file -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin1_style.css">
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
-	<h3>회원 상세 정보</h3>
+	<h3 id="header-3">회원 상세 정보</h3>
 	<!-- 회원 정보 -->
-	<div>
-		<table class="table table-bordered">
+	<div id="normal-width">
+		<table class="table table-bordered cell-2">
 			<tr>
 				<th>회원번호</th>
-				<td>${adminMemberVO.mem_num}</td>
+				<td>${adminMemberVO.mem_num}</td>				
 			</tr>
 			<tr>
 				<th>회원유형</th>
@@ -28,6 +30,7 @@
 			<tr>
 				<th>이름</th>
 				<td>${adminMemberVO.mem_name}</td>
+				
 			</tr>
 			<tr>
 				<th>연락처</th>
@@ -47,20 +50,20 @@
 			</tr>
 			</c:if>
 		</table>
-		<div class="text-center">
+		<div class="element-center text-center">
 			<c:if test="${adminMemberVO.mem_auth != 0}">
-			<input type="button" value="회원수정" class="btn btn-secondary" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
-			<input type="button" value="회원삭제" class="btn btn-secondary" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"
+			<input type="button" value="회원수정" class="btn btn-dark" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
+			<input type="button" value="회원삭제" class="btn btn-dark" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"
 				<c:if test="${mem_auth != 4}">disabled</c:if>
 			>
 			</c:if>
 		</div>
 	</div>
 	<!-- 활동 정보 -->
-	<div>
-		<h5>활동정보</h5>
+	<div id="wide_width">
+		<h4 id="header-4">활동정보</h4>
 		<table class="table table-bordered">
-			<thead class="table-secondary">
+			<thead>
 				<tr>
 					<th>주문건수</th>
 					<th>취소건수</th>
