@@ -9,5 +9,6 @@ public interface Category_topService {
 	public List selectCategory_top(Category_topVO category_top);
 	public void updateCategory_top(Category_topVO category_top);
 	public void deleteCategory_top(Category_topVO category_top);
+	public List<Category_topVO> category_topSelectAll();
 	
 }

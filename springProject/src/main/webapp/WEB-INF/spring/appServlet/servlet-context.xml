@@ -65,6 +65,7 @@
 				<beans:value>/WEB-INF/tiles-def/member.xml</beans:value>
 				
 				<beans:value>/WEB-INF/tiles-def/category_top.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/shopProduct.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
@@ -92,6 +93,11 @@
 		<interceptor>
 			<mapping path="/admin/memberDelete.do"/>
 			<beans:bean class="kr.spring.interceptor.SuperAdminCheckInterceptor"/>
+		</interceptor>
+		<!-- 메뉴 인터셉트 -->
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:bean class="kr.spring.interceptor.MenuCheckInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

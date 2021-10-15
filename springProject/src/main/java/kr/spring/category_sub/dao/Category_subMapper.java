@@ -1,5 +1,7 @@
 package kr.spring.category_sub.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -20,4 +22,7 @@ public interface Category_subMapper {
 	public void updateCategory_sub(Category_subVO category_sub);
 	@Delete("DELETE FROM category_sub WHERE c_sub_no=#{c_sub_no}")
 	public void deleteCategory_sub(Integer c_sub_no);
+	
+	@Select("SELECT * FROM category_sub ORDER BY c_sub_no")
+	public List<Category_subVO> category_subSelectAll();
 }

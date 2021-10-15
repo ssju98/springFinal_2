@@ -1,5 +1,7 @@
 package kr.spring.category_top.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -15,6 +17,10 @@ public interface Category_topMapper {
 	
 	@Select("SELECT * FROM category_top")
 	public Category_topVO selectCategory_top(Category_topVO category_top);
+	
+	@Select("SELECT * FROM category_top ORDER BY c_top_no")
+	public List<Category_topVO> category_topSelectAll();
+	
 	
 	@Update("UPDATE category_top SET c_top_name=#{c_top_name} WHERE c_top_no=#{c_top_no}")
 	public void updateCategory_top(Category_topVO category_top);

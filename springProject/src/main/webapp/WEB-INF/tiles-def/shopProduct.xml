@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="shopProductList" extends="shopMain">
+    	<put-attribute name="title" value="상품페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/productList.jsp"/>
+    </definition>
+     <definition name="shopProductDetail" extends="shopMain">
+    	<put-attribute name="title" value="상품상세페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/productDetail.jsp"/> 
+    </definition>
+      <definition name="cart" extends="shopMain">
+    	<put-attribute name="title" value="장바구니페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/cart.jsp"/> 
+    </definition>
+</tiles-definitions>
+
+
+

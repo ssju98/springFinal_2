@@ -68,7 +68,7 @@ public class Category_topController {
 		
 		session.setAttribute("category_top", list);
 		
-		Category_topVO category_top = category_topService.selectCategory_top();
+		//Category_topVO category_top = category_topService.selectCategory_top();
 				
 		logger.debug("상위카테고리 정보 : " + list);
 		
@@ -80,9 +80,9 @@ public class Category_topController {
 	public String formUpdate(HttpSession session, Model model) {
 		Integer c_top_no = (Integer) session.getAttribute("c_top_no");
 
-		Category_topVO category_topVO = category_topService.selectCategory_top(c_top_no);
+		//Category_topVO category_topVO = category_topService.selectCategory_top(c_top_no);
 
-		model.addAttribute("category_topVO", category_topVO);
+		//model.addAttribute("category_topVO", category_topVO);
 
 		return "category_topModify"; // 타일스 설정
 	}

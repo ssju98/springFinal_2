@@ -1,5 +1,7 @@
 package kr.spring.category_sub.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,5 +36,11 @@ public class Category_subServiceImpl implements Category_subService{
 	public void deleteCategory_sub(Category_subVO category_sub) {
 		
 	}
+
+	@Override
+	public List<Category_subVO> category_subSelectAll() {
+		return category_subMapper.category_subSelectAll();
+	}
+
 	
 }
