@@ -20,6 +20,13 @@
 					WHERE mem_num=#{mem_num}
 	</update>
 	
+	<update id="updateInfoPasswdAction" parameterType="kr.spring.login.vo.LoginVO">
+		UPDATE member_detail SET mem_passwd=#{mem_passwd}
+						WHERE mem_num = #{mem_num}
+	</update>
+	
+	
+	
 </mapper>
 
 

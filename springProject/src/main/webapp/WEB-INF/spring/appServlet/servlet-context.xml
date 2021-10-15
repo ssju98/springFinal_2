@@ -61,6 +61,8 @@
 				
           	  	<beans:value>/WEB-INF/tiles-def/login.xml</beans:value>
            	 	<beans:value>/WEB-INF/tiles-def/adminInfo.xml</beans:value>
+           	 	<beans:value>/WEB-INF/tiles-def/adminRevenue.xml</beans:value>
+           	 	
 				
 				<beans:value>/WEB-INF/tiles-def/member.xml</beans:value>
 				

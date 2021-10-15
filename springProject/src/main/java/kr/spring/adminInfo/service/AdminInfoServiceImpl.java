@@ -21,6 +21,11 @@ public class AdminInfoServiceImpl implements AdminInfoService{
 	public void updateInfoAction(LoginVO loginVO) {
 		adminInfoMapper.updateInfoAction(loginVO);
 	}
+
+	@Override
+	public void updateInfoPasswdAction(LoginVO loginVO) {
+		adminInfoMapper.updateInfoPasswdAction(loginVO);
+	}
 	
 	
 

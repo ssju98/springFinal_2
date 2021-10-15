@@ -24,7 +24,7 @@
 			<li><a href="#">상품관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/orderList.do">주문관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/memberList.do">회원관리</a></li>
-			<li><a href="#">매출관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/admin/termRevenue.do">매출관리</a></li>
 			<c:if test="${!empty mem_num && mem_auth==4}">
 				<li><a href="#">관리자관리</a></li>
 			</c:if>

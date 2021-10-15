@@ -44,6 +44,19 @@
         }).open();
     }
 </script>
+<style>
+
+#adminModify{
+	width:50%;
+	margin:0 auto;
+	padding: 85px 0;
+}
+
+table tr:last-child{
+	display:none;
+}
+
+</style>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#adminModify').submit(function(){

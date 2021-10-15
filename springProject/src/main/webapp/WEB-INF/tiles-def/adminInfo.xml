@@ -18,6 +18,11 @@
     	<put-attribute name="title" value="관리자-마이페이지 수정폼 "/>
     	<put-attribute name="body" value="/WEB-INF/views/adminInfo/adminInfoUpdateForm.jsp"/>
     </definition>
+
+    <definition name="adminInfoPasswdUpdateForm" extends="shopMain">
+    	<put-attribute name="title" value="관리자-마이페이지 비밀번호 수정 폼 "/>
+    	<put-attribute name="body" value="/WEB-INF/views/adminInfo/adminInfoPasswdUpdate.jsp"/>
+    </definition>
     
     
 </tiles-definitions>

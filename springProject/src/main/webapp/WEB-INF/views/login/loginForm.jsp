@@ -9,14 +9,28 @@
 <script  type="text/javascript" src="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.css"></script>
 
 <style type="text/css">
+#menu ul li a{
+	color:black;
+}
+
+.header-menu ul li a{
+	color:black;
+}
+
+.form__container{
+	display:flex;
+	justify-content:center;
+	width:100%;
+	
+}
+
 .login-form{
 width:300px;
 margin-top:80px;
-margin-left:600px;
 }
 </style>
 
-<form action="${pageContext.request.contextPath}/login/loginAction.do" method="post">
+<form class="form__container" action="${pageContext.request.contextPath}/login/loginAction.do" method="post">
 <div class="login-form">
   <div class="mb-3">
   	<h1>로그인</h1>
