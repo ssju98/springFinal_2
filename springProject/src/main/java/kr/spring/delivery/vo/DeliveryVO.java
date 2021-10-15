@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class DeliveryVO {
 	private int delivery_no;
-	private int order_no;
+	private String order_no;
 	private String d_status_name;
 	private Date delivery_date;
 	private String dcompany_name;
@@ -16,10 +16,10 @@ public class DeliveryVO {
 	public void setDelivery_no(int delivery_no) {
 		this.delivery_no = delivery_no;
 	}
-	public int getOrder_no() {
+	public String getOrder_no() {
 		return order_no;
 	}
-	public void setOrder_no(int order_no) {
+	public void setOrder_no(String order_no) {
 		this.order_no = order_no;
 	}
 	public String getD_status_name() {
