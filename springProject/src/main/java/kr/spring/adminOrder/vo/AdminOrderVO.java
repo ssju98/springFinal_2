@@ -3,7 +3,7 @@ package kr.spring.adminOrder.vo;
 import java.sql.Date;
 
 public class AdminOrderVO {
-	private int order_no;
+	private String order_no;
 	private int mem_num;
 	private String order_zipcode;
 	private String order_address1;
@@ -23,10 +23,10 @@ public class AdminOrderVO {
 	public void setDelivery_pay(int delivery_pay) {
 		this.delivery_pay = delivery_pay;
 	}
-	public int getOrder_no() {
+	public String getOrder_no() {
 		return order_no;
 	}
-	public void setOrder_no(int order_no) {
+	public void setOrder_no(String order_no) {
 		this.order_no = order_no;
 	}
 	public int getMem_num() {
