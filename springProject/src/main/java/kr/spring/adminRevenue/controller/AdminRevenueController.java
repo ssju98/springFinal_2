@@ -39,7 +39,7 @@ public class AdminRevenueController {
 	
 	@RequestMapping("/admin/termRevenue.do")
 	public ModelAndView termChartRevenue() {
-		return new ModelAndView("termRevenue");
+		return new ModelAndView("termRevenue");///ㅇㅇㅇㅇ
 	}
 	
 }

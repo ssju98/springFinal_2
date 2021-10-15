@@ -6,6 +6,9 @@
 
 	<select id="adminInfo" parameterType="String" resultType="kr.spring.login.vo.LoginVO">
 	
+	
+	
+	
 	</select>
 
 	
