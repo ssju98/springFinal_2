@@ -1,5 +1,7 @@
 package kr.spring.category_top.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +24,8 @@ public class Category_topServiceImpl implements Category_topService{
 	}
 
 	@Override
-	public Category_topVO selectCategory_top(int c_top_no) {
-		return category_topMapper.selectCategory_top(c_top_no);
+	public List selectCategory_top(Category_topVO category_top) {
+		return category_topMapper.selectCategory_top(category_top);
 	}
 	
 	@Override
@@ -34,6 +36,18 @@ public class Category_topServiceImpl implements Category_topService{
 	@Override
 	public void deleteCategory_top(Category_topVO category_top) {
 		
+	}
+
+	@Override
+	public Category_topVO selectCategory_top(int c_top_no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List listCategory_top() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

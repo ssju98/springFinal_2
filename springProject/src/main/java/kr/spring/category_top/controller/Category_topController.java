@@ -1,5 +1,8 @@
 package kr.spring.category_top.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -47,7 +50,7 @@ public class Category_topController {
 
 	// 상위카테고리 상세정보
 	@RequestMapping("/category_top/detail.do")
-	public String process(/* HttpSession session, Model model */) {
+	public List selectCategory_top(HttpSession session, Model model) {
 		/*
 		 * Integer c_top_no = (Integer)session.getAttribute("c_top_no"); int c_top_no =
 		 * 200;
@@ -59,8 +62,17 @@ public class Category_topController {
 		 * 
 		 * model.addAttribute("category_top", category_top);
 		 */
+		List<Category_topVO> list = new ArrayList<Category_topVO>();
 		
-		return "category_top"; // 타일스 식별자
+		list = (List)session.getAttribute("category_top");
+		
+		session.setAttribute("category_top", list);
+		
+		Category_topVO category_top = category_topService.selectCategory_top();
+				
+		logger.debug("상위카테고리 정보 : " + list);
+		
+		return list; // 타일스 식별자
 	}
 
 	// 상위카테고리 정보 수정 - 수정 폼
