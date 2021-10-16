@@ -34,11 +34,11 @@ public class MenuCheckInterceptor extends HandlerInterceptorAdapter{
 			logger.debug("====공통 정보 처리 진입====");
 		}
 		
-		List<Category_topVO> list_top = category_topService.category_topSelectAll();
+		//List<Category_topVO> list_top = category_topService.category_topSelectAll();
 		List<Category_subVO> list_sub = category_subService.category_subSelectAll();
 
 	
-		request.setAttribute("category_top", list_top);
+		//request.setAttribute("category_top", list_top);
 		request.setAttribute("category_sub", list_sub);
 		
 		return true;

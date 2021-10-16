@@ -1,6 +1,5 @@
 package kr.spring.category_top.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -49,8 +48,8 @@ public class Category_topController {
 	}
 
 	// 상위카테고리 상세정보
-	@RequestMapping("/category_top/detail.do")
-	public List selectCategory_top(HttpSession session, Model model) {
+	@RequestMapping("/category_top/list.do")
+	public String selectCategory_top(HttpSession session, Model model) {
 		/*
 		 * Integer c_top_no = (Integer)session.getAttribute("c_top_no"); int c_top_no =
 		 * 200;
@@ -62,29 +61,25 @@ public class Category_topController {
 		 * 
 		 * model.addAttribute("category_top", category_top);
 		 */
-		List<Category_topVO> list = new ArrayList<Category_topVO>();
-		
-		list = (List)session.getAttribute("category_top");
-		
-		session.setAttribute("category_top", list);
-		
-		//Category_topVO category_top = category_topService.selectCategory_top();
+		List<Category_topVO> list = category_topService.selectCategory_top();
 				
 		logger.debug("상위카테고리 정보 : " + list);
 		
-		return list; // 타일스 식별자
+		model.addAttribute("list", list);
+		
+		return "category_top_list"; // 타일스 식별자
 	}
 
 	// 상위카테고리 정보 수정 - 수정 폼
 	@GetMapping("/category_top/update.do")
 	public String formUpdate(HttpSession session, Model model) {
-		Integer c_top_no = (Integer) session.getAttribute("c_top_no");
+		Integer c_top_no = (Integer)session.getAttribute("c_top_no");
 
-		//Category_topVO category_topVO = category_topService.selectCategory_top(c_top_no);
+		//Category_topVO category_topVO = category_topService.updateCategory_top(category_topVO);
 
 		//model.addAttribute("category_topVO", category_topVO);
 
-		return "category_topModify"; // 타일스 설정
+		return "category_top_update"; // 타일스 설정
 	}
 
 	// 상위카테고리 정보 수정 - 수정 데이터 처리

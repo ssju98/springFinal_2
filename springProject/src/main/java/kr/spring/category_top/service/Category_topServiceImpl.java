@@ -23,10 +23,10 @@ public class Category_topServiceImpl implements Category_topService{
 		category_topMapper.insertCategory_top(category_top);
 	}
 
-	/*
-	 * @Override public List selectCategory_top(Category_topVO category_top) {
-	 * return category_topMapper.selectCategory_top(category_top); }
-	 */
+	@Override
+	public List<Category_topVO> selectCategory_top() {
+		return category_topMapper.selectCategory_top();
+	}
 	
 	@Override
 	public void updateCategory_top(Category_topVO category_top) {
@@ -37,24 +37,5 @@ public class Category_topServiceImpl implements Category_topService{
 	public void deleteCategory_top(Category_topVO category_top) {
 		
 	}
-
-	@Override
-	public List selectCategory_top(Category_topVO category_top) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Category_topVO> category_topSelectAll() {
-		return category_topMapper.category_topSelectAll();
-	}
-
-	/*
-	 * @Override public Category_topVO selectCategory_top(int c_top_no) { // TODO
-	 * Auto-generated method stub return null; }
-	 * 
-	 * @Override public List listCategory_top() { // TODO Auto-generated method stub
-	 * return null; }
-	 */
 	
 }

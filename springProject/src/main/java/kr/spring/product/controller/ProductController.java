@@ -45,14 +45,14 @@ public class ProductController {
 			list = productService.ProductCategorySelectAll(c_top_no, c_sub_no);
 		}
 		
-		List<Category_topVO> list_top = category_topService.category_topSelectAll();
+		//List<Category_topVO> list_top = category_topService.category_topSelectAll();
 		List<Category_subVO> list_sub = category_subService.category_subSelectAll();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("shopProductList");
 		mav.addObject("list",list);
 		mav.addObject("count",count);
-		mav.addObject("category_top",list_top);
+		//mav.addObject("category_top",list_top);
 		mav.addObject("category_sub",list_sub);
 
 		return mav;
