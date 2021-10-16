@@ -104,16 +104,12 @@ public class MemberVO {
 	public void setMem_date(Date mem_date) {
 		this.mem_date = mem_date;
 	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", mem_name="
 				+ mem_name + ", mem_passwd=" + mem_passwd + ", mem_phone=" + mem_phone + ", mem_email=" + mem_email
 				+ ", mem_zipcode=" + mem_zipcode + ", mem_address1=" + mem_address1 + ", mem_address2=" + mem_address2
-				+ ", mem_date=" + mem_date + ", getMem_num()=" + getMem_num() + ", getMem_id()=" + getMem_id()
-				+ ", getMem_auth()=" + getMem_auth() + ", getMem_name()=" + getMem_name() + ", getMem_passwd()="
-				+ getMem_passwd() + ", getMem_phone()=" + getMem_phone() + ", getMem_email()=" + getMem_email()
-				+ ", getMem_zipcode()=" + getMem_zipcode() + ", getMem_address1()=" + getMem_address1()
-				+ ", getMem_address2()=" + getMem_address2() + ", getMem_date()=" + getMem_date() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", mem_date=" + mem_date + "]";
 	}
 }

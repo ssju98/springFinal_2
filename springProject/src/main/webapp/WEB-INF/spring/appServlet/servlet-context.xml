@@ -84,6 +84,9 @@
 		<!-- 로그인 여부 체크 -->
 		<interceptor>
 			<mapping path="/admin/**"/>
+			<mapping path="/member/myPage.do"/>
+			<mapping path="/member/update.do"/>
+			<mapping path="/member/delete.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 		<!-- 관리자 여부 체크 -->
