@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin1_style.css">
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
-	<h3 id="header-3">회원 상세 정보</h3>
+	<h3 id="header-3">회원정보 상세</h3>
 	<!-- 회원 정보 -->
 	<div id="normal-width">
 		<table class="table table-bordered cell-2">
@@ -52,8 +52,8 @@
 		</table>
 		<div class="element-center text-center">
 			<c:if test="${adminMemberVO.mem_auth != 0}">
-			<input type="button" value="회원수정" class="btn btn-dark" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
-			<input type="button" value="회원삭제" class="btn btn-dark" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"
+			<input type="button" value="수정" class="btn btn-info" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
+			<input type="button" value="삭제" class="btn btn-danger" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"
 				<c:if test="${mem_auth != 4}">disabled</c:if>
 			>
 			</c:if>

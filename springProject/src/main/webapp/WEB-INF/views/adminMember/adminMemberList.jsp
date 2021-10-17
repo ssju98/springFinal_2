@@ -87,8 +87,8 @@
 					<td>
 						<input type="button" value="상세" class="btn btn-secondary btn-sm" onclick="location.href='memberDetail.do?mem_num=${adminMemberVO.mem_num}'">
 						<c:if test="${adminMemberVO.mem_auth != 0}">
-							<input type="button" value="수정" class="btn btn-secondary btn-sm" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
-							<input type="button" value="삭제" class="btn btn-secondary btn-sm" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"  
+							<input type="button" value="수정" class="btn btn-info btn-sm" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
+							<input type="button" value="삭제" class="btn btn-danger btn-sm" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"  
 								<c:if test="${mem_auth != 4}">disabled</c:if>
 							>
 						</c:if>

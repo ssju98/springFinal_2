@@ -49,7 +49,7 @@ public class AdminOrderController {
 									   @RequestParam(value="keyfield", defaultValue="") String keyfield,
 									   @RequestParam(value="keyword", defaultValue="") String keyword) {
 		
-		logger.debug("##### adminOrderList 호출 - currentPage : " + currentPage + ", d_status_num : " + d_status_num + ", keyfield : " + keyfield +", keyword : " + keyword);
+		logger.debug("<<adminOrderList 호출>> currentPage : " + currentPage + ", d_status_num : " + d_status_num + ", keyfield : " + keyfield +", keyword : " + keyword);
 		
 		//검색 조건
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -59,7 +59,6 @@ public class AdminOrderController {
 		
 		//결과데이터 수
 		int count = adminOrderService.getOrderCount(map);
-		logger.debug("***** count : " + count);
 		
 		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "orderList.do");
 		
@@ -82,34 +81,44 @@ public class AdminOrderController {
 	
 	//주문 상세
 	@RequestMapping("/admin/orderDetail.do")
-	public String adminOrderDetail(@RequestParam int order_no, HttpServletRequest request,Model model) {
-		logger.debug("##### adminOrderDetail 호출 - order_no : " + order_no);
+	public ModelAndView adminOrderDetail(@RequestParam String order_no, HttpServletRequest request) {
+		logger.debug("<<adminOrderDetail 호출>> order_no : " + order_no);
+		
+		//주문 존재여부 체크
+		AdminOrderVO adminOrder = adminOrderService.selectOrder(order_no);
+		
+		ModelAndView mav = new ModelAndView();
+		if(adminOrder == null) {
+			mav.setViewName("common/resultView");
+			mav.addObject("message", "존재하지 않는 주문입니다.");
+			mav.addObject("url", request.getContextPath() + "/admin/orderList.do");
+			
+		}else {
+			mav.setViewName("adminOrderDetail");
+			mav.addObject("adminMember", adminMemberService.selectMember(adminOrder.getMem_num()));
+			mav.addObject("adminOrder", adminOrder);
+		}
+		
+		return mav;
+	}
+	
+	//주문 취소 폼 - 최고관리자 인증
+	@GetMapping("/admin/orderCancel.do")
+	public String adminOrderCancelForm(@RequestParam String order_no, HttpServletRequest request, Model model) {
+		logger.debug("<<adminOrderCancelForm 호출>> order_no : " + order_no);
 		
 		//주문 존재여부 체크
 		AdminOrderVO adminOrderVO = adminOrderService.selectOrder(order_no);
 		if(adminOrderVO == null) {
-			//alert창에 표시할 내용
-			model.addAttribute("message", "존재하지 않는 주문입니다!");
+			model.addAttribute("message", "존재하지 않는 주문입니다.");
 			model.addAttribute("url", request.getContextPath() + "/admin/orderList.do");
 			
 			return "common/resultView";
 		}
 		
-		model.addAttribute("adminOrderVO", adminOrderVO);
-		
-		return "adminOrderDetail";
-	}
-	
-	//주문 취소 폼 - 최고관리자 인증
-	@GetMapping("/admin/orderCancel.do")
-	public String adminOrderCancelForm(@RequestParam int order_no, HttpServletRequest request, Model model) {
-		logger.debug("##### adminOrderCancelForm 호출 - order_no : " + order_no);
-		
-		//주문 존재여부 체크
-		AdminOrderVO adminOrderVO = adminOrderService.selectOrder(order_no);
-		if(adminOrderVO == null) {
-			//alert창에 표시할 내용
-			model.addAttribute("message", "존재하지 않는 주문입니다!");
+		//배송 여부 체크
+		if(!(adminOrderVO.getD_status_name().equals("결제완료") || adminOrderVO.getD_status_name().equals("배송준비중"))) {
+			model.addAttribute("message", "이미 배송이 시작된 주문은 취소할 수 없습니다.");
 			model.addAttribute("url", request.getContextPath() + "/admin/orderList.do");
 			
 			return "common/resultView";
@@ -124,7 +133,7 @@ public class AdminOrderController {
 	//주문 취소 처리
 	@PostMapping("/admin/orderCancel.do")
 	public String adminOrderCancel(AdminMemberVO adminMemberVO, HttpSession session, HttpServletRequest request, Model model) {
-		logger.debug("##### adminOrderCancelForm 호출 - adminMemberVO : " + adminMemberVO);
+		logger.debug("<<adminOrderCancelForm 호출>> adminMemberVO : " + adminMemberVO);
 		
 		String mem_id=(String)session.getAttribute("mem_id"); //로그인한 아이디
 		AdminMemberVO dbMember = adminMemberService.selectCheckMember(mem_id); //입력한 아이디,비밀번호,취소할 주문번호
@@ -139,14 +148,12 @@ public class AdminOrderController {
 		if(check) {
 			//주문정보 삭제
 			adminOrderService.deleteOrder(adminMemberVO.getManage_num());
-			
-			//완료시 alert창에 표시할 내용
-			model.addAttribute("message", "주문 취소 완료!");
+
+			model.addAttribute("message", "주문취소가 완료되었습니다.");
 			model.addAttribute("url", request.getContextPath() + "/admin/orderList.do");
 	
 		}else {
-			//실패시 alert창에 표시할 내용
-			model.addAttribute("message", "아이디 또는 비밀번호 불일치!");
+			model.addAttribute("message", "아이디 또는 비밀번호 일치하지 않습니다.");
 			model.addAttribute("url", request.getContextPath() + "/admin/orderCancel.do?order_no=" + adminMemberVO.getManage_num());
 		}
 		

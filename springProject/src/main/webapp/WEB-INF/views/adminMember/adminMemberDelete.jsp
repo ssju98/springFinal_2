@@ -27,7 +27,7 @@
 </script>
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
-	<h3 id="header-3">회원 삭제</h3>
+	<h3 id="header-3">회원정보 삭제</h3>
 	<div id="narrow-width" class="element-center text-center">
 		<h4>최고관리자 인증</h4>
 		<hr class="sub-line">

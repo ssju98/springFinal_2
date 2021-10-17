@@ -1,5 +1,8 @@
 package kr.spring.delivery.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +45,31 @@ public class DeliveryServiceImpl implements DeliveryService {
 	@Override
 	public DeliveryVO selectOrderDelivery(String order_no) {
 		return deliveryMapper.selectOrderDelivery(order_no);
+	}
+	
+	//============== 배송관리 ==============
+	@Override
+	public int getDeliveryCount(Map<String, Object> map) {
+		return deliveryMapper.getDeliveryCount(map);
+	}
+
+	@Override
+	public List<DeliveryVO> getDeliveryList(Map<String, Object> map) {
+		return deliveryMapper.getDeliveryList(map);
+	}
+
+	@Override
+	public DeliveryVO selectDelivery(int delivery_no) {
+		return deliveryMapper.selectDelivery(delivery_no);
+	}
+
+	@Override
+	public void insertTracking(DeliveryVO deliveryVO) {
+		deliveryMapper.insertTracking(deliveryVO);
+	}
+
+	@Override
+	public void updateStatus(DeliveryVO deliveryVO) {
+		deliveryMapper.updateStatus(deliveryVO);
 	}
 }

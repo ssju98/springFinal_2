@@ -21,18 +21,22 @@ public class AdminOrderServiceImpl implements AdminOrderService{
 	public int getOrderCount(Map<String,Object> map) {
 		return adminOrderMapper.getOrderCount(map);
 	}
+	
 	@Override
 	public List<AdminOrderVO> getOrderList(Map<String, Object> map) {
 		return adminOrderMapper.getOrderList(map);
 	}
+	
 	@Override
-	public AdminOrderVO selectOrder(int order_no) {
+	public AdminOrderVO selectOrder(String order_no) {
 		return adminOrderMapper.selectOrder(order_no);
 	}
+	
 	@Override
-	public void deleteOrder(int order_no) {
+	public void deleteOrder(String order_no) {
 		adminOrderMapper.deleteOrderDetail(order_no);
 		adminOrderMapper.deleteOrderDelivery(order_no);
 		adminOrderMapper.deleteOrder(order_no);
 	}
+	
 }

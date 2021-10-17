@@ -5,7 +5,7 @@ div#narrow-width{
 	width: 400px;
 }
 div#normal-width{
-	width: 700px;
+	width: 800px;
 }
 div#wide_width table {
 	width: 97%;
@@ -24,7 +24,12 @@ div#wide_width table {
     vertical-align: middle;
 }
 .blank-text{
-	color: rgb(192, 192, 192);
+	color: rgb(150, 150, 150);
+}
+
+/* 버튼 */
+.btn-admin{
+	background-color: #2a3954;
 }
 
 /* 테이블 */
@@ -38,10 +43,10 @@ div#wide_width table {
 table.table{
 	margin-left: 10px;
 }
-table.cell-4 th{
+table.cell-4 th, tr.cell-4 th{
 	width: 15%;
 }
-table.cell-4 td{
+table.cell-4 td, tr.cell-4 td{
 	width: 35%;
 }
 table.cell-2 th{
@@ -56,17 +61,16 @@ table.cell-2 td{
 .table input[type="date"]{
 	width: 120px;
 }
-table input#mem_address1, table input#mem_address2 {
+table input#mem_address1, table input#mem_address2, table input#tracking_num{
 	width: 300px;
 }
 table input#mem_id, table input#mem_passwd {
 	width: 180px;
 }
-table input#mem_name, table input#mem_phone, 
-table input#mem_email, table input#mem_zipcode, table select#mem_auth {
+table input#mem_name, table input#mem_phone, table input#mem_email,
+table input#mem_zipcode, table select#mem_auth, table select#d_status_num {
 	width: 150px;
 }
-
 
 /* 요소 정렬 */
 .element-center{

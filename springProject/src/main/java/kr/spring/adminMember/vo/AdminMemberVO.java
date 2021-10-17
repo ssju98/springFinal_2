@@ -30,7 +30,7 @@ public class AdminMemberVO {
 	private Date mem_date;
 	
 	//회원삭제, 주문취소시 관리대상번호 저장
-	private int manage_num;
+	private String manage_num;
 	
 	//비밀번호 일치 여부 체크
 	public boolean isCheckedPassword(String userPasswd) {
@@ -106,10 +106,10 @@ public class AdminMemberVO {
 	public void setMem_date(Date mem_date) {
 		this.mem_date = mem_date;
 	}
-	public int getManage_num() {
+	public String getManage_num() {
 		return manage_num;
 	}
-	public void setManage_num(int manage_num) {
+	public void setManage_num(String manage_num) {
 		this.manage_num = manage_num;
 	}
 

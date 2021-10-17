@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Select;
 
 import kr.spring.adminOrder.vo.AdminOrderVO;
 
@@ -15,13 +14,12 @@ public interface AdminOrderMapper {
 	
 	public List<AdminOrderVO> getOrderList(Map<String,Object> map);
 	
-	public AdminOrderVO selectOrder(int order_no);
+	public AdminOrderVO selectOrder(String order_no);
 	
 	@Delete("DELETE FROM sorder_detail WHERE order_no=#{order_no}")
-	public void deleteOrderDetail(int order_no);
+	public void deleteOrderDetail(String order_no);
 	@Delete("DELETE FROM delivery WHERE order_no=#{order_no}")
-	public void deleteOrderDelivery(int order_no);
+	public void deleteOrderDelivery(String order_no);
 	@Delete("DELETE FROM sorder WHERE order_no=#{order_no}")
-	public void deleteOrder(int order_no);
-	
+	public void deleteOrder(String order_no);
 }

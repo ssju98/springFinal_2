@@ -1,5 +1,8 @@
 package kr.spring.delivery.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -25,4 +28,17 @@ public interface DeliveryMapper {
 	
 	@Select("SELECT * from delivery where order_no = ${order_no}")
 	public DeliveryVO selectOrderDelivery(String order_no);
+	
+	//============== 배송관리 ==============
+	public int getDeliveryCount(Map<String,Object> map);
+	
+	public List<DeliveryVO> getDeliveryList(Map<String,Object> map);
+	
+	public DeliveryVO selectDelivery(int delivery_no);
+	
+	@Update("UPDATE delivery SET d_status_num=2, tracking_num=#{tracking_num} WHERE delivery_no=#{delivery_no}")
+	public void insertTracking(DeliveryVO deliveryVO);
+	
+	@Update("UPDATE delivery SET d_status_num=#{d_status_num} WHERE delivery_no=#{delivery_no}")
+	public void updateStatus(DeliveryVO deliveryVO);
 }
