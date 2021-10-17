@@ -36,4 +36,10 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.ProductCategorySelectCount(c_top_no, c_sub_no);
 	}
 
+	@Override
+	public void productAmountUpdate(int p_amount, int p_no) {
+		productMapper.productAmountUpdate(p_amount, p_no);
+		
+	}
+
 }

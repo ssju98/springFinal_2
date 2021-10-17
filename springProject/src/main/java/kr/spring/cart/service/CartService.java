@@ -14,4 +14,5 @@ public interface CartService {
 	public int selectCartProduct(int p_no, int mem_num);
 	public void UpdateDuplicationProduct(int p_no,int cart_amount,int mem_num);
 	public void updateCart(CartVO cart);
+	public void deleteAllCart(int mem_num);
 }

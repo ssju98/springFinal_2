@@ -17,6 +17,34 @@
     	<put-attribute name="title" value="장바구니페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/shop/cart.jsp"/> 
     </definition>
+    <definition name="shopOrder" extends="shopMain">
+    	<put-attribute name="title" value="주문페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/order.jsp"/> 
+    </definition>
+     <definition name="orderList" extends="shopMain">
+    	<put-attribute name="title" value="주문내역페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/orderList.jsp"/> 
+    </definition>
+    <definition name="orderCancel" extends="shopMain">
+    	<put-attribute name="title" value="주문취소페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/orderCancel.jsp"/> 
+    </definition>
+    <definition name="orderExchange" extends="shopMain">
+    	<put-attribute name="title" value="주문교환페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/orderExchange.jsp"/> 
+    </definition>
+     <definition name="refundExchange" extends="shopMain">
+    	<put-attribute name="title" value="주문반품페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/orderRefund.jsp"/> 
+    </definition>
+     <definition name="orderDetail" extends="shopMain">
+    	<put-attribute name="title" value="주문내역상세페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/orderDetail.jsp"/> 
+    </definition>
+     <definition name="orderResult" extends="shopMain">
+    	<put-attribute name="title" value="주문완료"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/orderResult.jsp"/> 
+    </definition>
 </tiles-definitions>
 
 

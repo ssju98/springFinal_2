@@ -54,6 +54,11 @@ public class CartServiceImpl implements CartService {
 		cartMapper.updateCart(cart);
 		
 	}
+
+	@Override
+	public void deleteAllCart(int mem_num) {
+		cartMapper.deleteAllCart(mem_num);
+	}
 	
 
 	

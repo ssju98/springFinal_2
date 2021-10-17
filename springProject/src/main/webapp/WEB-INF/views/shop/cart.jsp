@@ -135,7 +135,7 @@
 				<span class="cart-pay-money">
 				<fmt:formatNumber value="${cart_pay+delivery_pay}" pattern="#,###"/>원
 				</span>
-				<span><button class="btn btn-primary cart-pay-btn ml-2">구매하기</button></span>
+				<span><button class="btn btn-primary cart-pay-btn ml-2" onclick="location.href='order.do'">구매하기</button></span>
 			</div>
 		</div>
 	</div>

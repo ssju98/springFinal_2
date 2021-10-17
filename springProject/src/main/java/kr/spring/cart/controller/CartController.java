@@ -25,11 +25,12 @@ import kr.spring.cart.vo.ProductCartVO;
 @Controller
 public class CartController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
 	@Autowired
 	private CartService cartService;
 	
+	//카트 페이지
 	@RequestMapping("/shop/cart.do")
 	public ModelAndView selectCart(HttpSession session) {
 		
@@ -42,6 +43,7 @@ public class CartController {
 		return mav;
 	}
 	
+	//카트 상품 수정
 	@ResponseBody
 	@RequestMapping("/shop/updateCart.do")
 	public Map<String,String> updateCart(HttpSession session, CartVO cart){
@@ -60,6 +62,7 @@ public class CartController {
 		return map;
 	} 
 	
+	//카트 상품 넣기
 	@ResponseBody
 	@RequestMapping("/shop/insertCart.do")
 	public Map<String,String> insertCart(HttpSession session, CartVO cart) {
