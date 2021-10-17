@@ -28,8 +28,18 @@ public interface OrderMapper {
 	  
 	  @Select("select * from sorder s, delivery d, delivery_status e "
 		  		+ "where s.order_no=d.order_no and d.d_status_num=e.d_status_num "
-		  		+ "and s.mem_num = #{mem_num} and d.d_status_num=3 ORDER BY s.order_date desc")
-	  public List<OrderAllVO> selectComplateOrder(int mem_num);
+		  		+ "and s.mem_num = #{mem_num} and d.d_status_num IN(3,5) ORDER BY s.order_date desc")
+	  public List<OrderAllVO> selectRefundOrder(int mem_num);
+	  
+	  @Select("select * from sorder s, delivery d, delivery_status e "
+		  		+ "where s.order_no=d.order_no and d.d_status_num=e.d_status_num "
+		  		+ "and s.mem_num = #{mem_num} and d.d_status_num IN(3,6) ORDER BY s.order_date desc")
+	  public List<OrderAllVO> selectExchageOrder(int mem_num);
+	  
+	  @Select("select * from sorder s, delivery d, delivery_status e "
+		  		+ "where s.order_no=d.order_no and d.d_status_num=e.d_status_num "
+		  		+ "and s.mem_num = #{mem_num} and d.d_status_num IN(3,4) ORDER BY s.order_date desc")
+	  public List<OrderAllVO> selectConfirmOrder(int mem_num);
 	  
 	  @Select("select count(*) FROM sorder s, sorder_detail d WHERE s.order_no=d.order_no and s.mem_num=#{mem_num} GROUP BY s.order_no,s.order_date ORDER BY s.order_date desc")
 	  public List<OrderAllVO> countOrderProduct(int mem_num);

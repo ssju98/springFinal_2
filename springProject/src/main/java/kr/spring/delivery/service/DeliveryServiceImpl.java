@@ -16,8 +16,31 @@ public class DeliveryServiceImpl implements DeliveryService {
 
 	@Override
 	public void insertOrderDelivery(String order_no) {
-		deliveryMapper.insertOrderDelivery(order_no);
-		
+		deliveryMapper.insertOrderDelivery(order_no);		
 	}
 
+	@Override
+	public void updateOrderDeilveryCancel(String order_no) {
+		deliveryMapper.updateOrderDeilveryCancel(order_no);	
+	}
+
+	@Override
+	public void updateOrderDeilveryConfirm(String order_no) {
+		deliveryMapper.updateOrderDeilveryConfirm(order_no);		
+	}
+
+	@Override
+	public void updateOrderDeilveryRefund(String order_no) {
+		deliveryMapper.updateOrderDeilveryRefund(order_no);		
+	}
+
+	@Override
+	public void updateOrderDeilveryExchange(String order_no) {
+		deliveryMapper.updateOrderDeilveryExchange(order_no);		
+	}
+
+	@Override
+	public DeliveryVO selectOrderDelivery(String order_no) {
+		return deliveryMapper.selectOrderDelivery(order_no);
+	}
 }

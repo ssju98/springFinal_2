@@ -3,6 +3,37 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderList.css"> 
+<script>
+$(document).ready(function(){	
+	$("button[id^='refund_btn']").on('click', function(e) {
+		var choice = confirm('반품신청을 하시겠습니까?');
+		if(choice){
+			var order_no = $(this).attr('id').substring(11);
+			var data = { order_no : order_no};
+			$.ajax({
+				url:'updateOrderRefund.do',
+				type:'post',
+				data:data,
+				dataType:'json',
+				catch:false,
+				success:function(param){
+					if(param.result == 'logout'){
+					alert('로그인 후 사용하세요');
+					}else if(param.result =='success'){
+						window.location.href = 'orderRefund.do';
+					}	
+				}, 
+				error:function(){
+					alert('네트워크 오류');
+				}
+			});
+			
+		}else {
+			return;
+		}
+	});	
+});
+</script>
 <div class="top_menu_info">
 	<div>
 	홈 > 반품하기
@@ -17,6 +48,7 @@
 				<li class="order-a"><a href="orderCancel.do">주문취소</a></li>
 				<li class="order-a"><a href="orderExchange.do">교환하기</a></li>
 				<li class="order-current"><a href="orderRefund.do">반품하기</a></li>
+				<li class="order-a"><a href="orderConfirm.do">구매확정</a></li>
 			</ul>
 		</div>
 		<div id="showmenu">구매후기</div>
@@ -69,7 +101,7 @@
 								<h5><span class="badge badge-light">${list.d_status_name}</span></h5>
 							</div>
 							<c:if test="${list.d_status_num == 3}">
-								<button class="btn btn-success btn-xs cancle-btn">반품신청</button>
+								<button class="btn btn-success btn-xs cancle-btn" id="refund_btn_${list.order_no}">반품신청</button>
 							</c:if>
 							<div class="order-state-detail mt-1">
 								<a href="#">주문 상세 보기 > </a>

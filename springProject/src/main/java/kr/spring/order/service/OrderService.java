@@ -10,5 +10,8 @@ public interface OrderService {
 	  public List<OrderAllVO> selectAllOrder(int mem_num);
 	  public List<OrderAllVO> countOrderProduct(int mem_num);
 	  public List<OrderAllVO> selectCancelOrder(int mem_num);
-	  public List<OrderAllVO> selectComplateOrder(int mem_num);
+	  public List<OrderAllVO> selectRefundOrder(int mem_num);
+	  public List<OrderAllVO> selectExchageOrder(int mem_num);
+	  public List<OrderAllVO> selectConfirmOrder(int mem_num);
+	  
 }

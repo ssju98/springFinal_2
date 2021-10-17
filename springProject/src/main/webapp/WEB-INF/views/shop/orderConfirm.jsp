@@ -5,13 +5,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderList.css"> 
 <script>
 $(document).ready(function(){	
-	$("button[id^='exchange_btn']").on('click', function(e) {
-		var choice = confirm('교환신청을 하시겠습니까?');
+	$("button[id^='confirm_btn']").on('click', function(e) {
+		var choice = confirm('구매확정을 하시겠습니까?');
 		if(choice){
-			var order_no = $(this).attr('id').substring(13);
+			var order_no = $(this).attr('id').substring(12);
 			var data = { order_no : order_no};
 			$.ajax({
-				url:'updateOrderExchange.do',
+				url:'updateOrderConfirm.do',
 				type:'post',
 				data:data,
 				dataType:'json',
@@ -20,7 +20,7 @@ $(document).ready(function(){
 					if(param.result == 'logout'){
 					alert('로그인 후 사용하세요');
 					}else if(param.result =='success'){
-						window.location.href = 'orderExchange.do';
+						window.location.href = 'orderConfirm.do';
 					}	
 				}, 
 				error:function(){
@@ -36,7 +36,7 @@ $(document).ready(function(){
 </script>
 <div class="top_menu_info">
 	<div>
-	홈 > 교환하기
+	홈 > 구매확정
 	</div>
 </div>
 <div id="main-width">
@@ -46,9 +46,9 @@ $(document).ready(function(){
 			<ul>
 				<li class="order-a"><a href="orderList.do">주문 &#183; 배송</a></li>
 				<li class="order-a"><a href="orderCancel.do">주문취소</a></li>
-				<li class="order-current"><a href="orderExchange.do">교환하기</a></li>
+				<li class="order-a"><a href="orderExchange.do">교환하기</a></li>
 				<li class="order-a"><a href="orderRefund.do">반품하기</a></li>
-				<li class="order-a"><a href="orderConfirm.do">구매확정</a></li>
+				<li class="order-current"><a href="orderConfirm.do">구매확정</a></li>
 			</ul>
 		</div>
 		<div id="showmenu">구매후기</div>
@@ -61,7 +61,7 @@ $(document).ready(function(){
 	</div>
 	<div class="top-small-menu">
 		<div class="top-small-menu-title mt-3">
-			교환하기
+			구매확정
 		</div>
 		<table class="order-table" border="1">
 			<colgroup>
@@ -101,7 +101,7 @@ $(document).ready(function(){
 								<h5><span class="badge badge-light">${list.d_status_name}</span></h5>
 							</div>
 							<c:if test="${list.d_status_num == 3}">
-								<button class="btn btn-info btn-xs cancle-btn" id="exchange_btn_${list.order_no}">교환신청</button>
+								<button class="btn btn-warning btn-xs cancle-btn" id="confirm_btn_${list.order_no}">구매확정</button>
 							</c:if>
 							<div class="order-state-detail mt-1">
 								<a href="#">주문 상세 보기 > </a>

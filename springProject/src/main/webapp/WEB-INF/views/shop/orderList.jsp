@@ -17,6 +17,7 @@
 				<li class="order-a"><a href="orderCancel.do">주문취소</a></li>
 				<li class="order-a"><a href="orderExchange.do">교환하기</a></li>
 				<li class="order-a"><a href="orderRefund.do">반품하기</a></li>
+				<li class="order-a"><a href="orderConfirm.do">구매확정</a></li>
 			</ul>
 		</div>
 		<div id="showmenu">구매후기</div>

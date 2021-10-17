@@ -2,7 +2,9 @@ package kr.spring.order.controller;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -14,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.adminOrder.vo.AdminOrderVO;
@@ -151,7 +155,7 @@ public class OrderController {
 	  @RequestMapping("/shop/orderExchange")
 	  public ModelAndView exchangeOrder(HttpSession session) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderAllVO> list = orderService.selectComplateOrder(mem_num);
+		  List<OrderAllVO> list = orderService.selectExchageOrder(mem_num);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("orderExchange");
@@ -164,7 +168,7 @@ public class OrderController {
 	  @RequestMapping("/shop/orderRefund")
 	  public ModelAndView refundOrder(HttpSession session) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderAllVO> list = orderService.selectComplateOrder(mem_num);
+		  List<OrderAllVO> list = orderService.selectRefundOrder(mem_num);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("refundExchange");
@@ -178,7 +182,79 @@ public class OrderController {
 		  return "orderDetail";
 	  }
 	  
+	  //주문구매확정페이지
+	  @RequestMapping("/shop/orderConfirm")
+	  public ModelAndView confirmOrder(HttpSession session) {
+		  Integer mem_num = (Integer)session.getAttribute("mem_num");
+		  List<OrderAllVO> list = orderService.selectConfirmOrder(mem_num);
+		 
+		  ModelAndView mav = new ModelAndView();
+		  mav.setViewName("orderConfirm");
+		  mav.addObject("list",list);
+		  return mav;
+	  } 
 	  
-	 
-	 
+	  //주문상태변경(결제완료->취소)
+	  @ResponseBody
+	  @RequestMapping("/shop/updateOrderCancel.do")
+	  public Map<String,String> updateOrderCancel(HttpSession session, DeliveryVO delivery){
+		 Map<String,String> map=new HashMap<String,String>();
+		 Integer mem_num = (Integer)session.getAttribute("mem_num");
+		
+		 if(mem_num == null) {
+			 map.put("result", "logout");
+		 }else {
+			 deliveryService.updateOrderDeilveryCancel(delivery.getOrder_no());
+			 map.put("result", "success");
+		 }
+		 return map;
+	  }
+	  
+	  //주문상태변경(배송완료->구매확정)
+	  @ResponseBody
+	  @RequestMapping("/shop/updateOrderConfirm.do")
+	  public Map<String,String> updateOrderConfirm(HttpSession session, DeliveryVO delivery){
+		 Map<String,String> map=new HashMap<String,String>();
+		 Integer mem_num = (Integer)session.getAttribute("mem_num");
+		
+		 if(mem_num == null) {
+			 map.put("result", "logout");
+		 }else {
+			 deliveryService.updateOrderDeilveryConfirm(delivery.getOrder_no());
+			 map.put("result", "success");
+		 }
+		 return map;
+	  }
+	  
+	  //주문상태변경(배송완료->반품)
+	  @ResponseBody
+	  @RequestMapping("/shop/updateOrderRefund.do")
+	  public Map<String,String> updateOrderRefund(HttpSession session, DeliveryVO delivery){
+		 Map<String,String> map=new HashMap<String,String>();
+		 Integer mem_num = (Integer)session.getAttribute("mem_num");
+		
+		 if(mem_num == null) {
+			 map.put("result", "logout");
+		 }else {
+			 deliveryService.updateOrderDeilveryRefund(delivery.getOrder_no());
+			 map.put("result", "success");
+		 }
+		 return map;
+	  }
+	  
+	  //주문상태변경(배송완료->교환)
+	  @ResponseBody
+	  @RequestMapping("/shop/updateOrderExchange.do")
+	  public Map<String,String> updateOrderExchange(HttpSession session, DeliveryVO delivery){
+		 Map<String,String> map=new HashMap<String,String>();
+		 Integer mem_num = (Integer)session.getAttribute("mem_num");
+		
+		 if(mem_num == null) {
+			 map.put("result", "logout");
+		 }else {
+			 deliveryService.updateOrderDeilveryExchange(delivery.getOrder_no());
+			 map.put("result", "success");
+		 }
+		 return map;
+	  }
 }
