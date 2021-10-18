@@ -45,12 +45,21 @@ public class OrderServiceImpl implements OrderService{
 
 	@Override
 	public List<OrderAllVO> selectConfirmOrder(int mem_num) {
-		// TODO Auto-generated method stub
 		return orderMapper.selectConfirmOrder(mem_num);
 	}
 
 	@Override
 	public List<OrderAllVO> selectExchageOrder(int mem_num) {
 		return orderMapper.selectExchageOrder(mem_num);
+	}
+
+	@Override
+	public List<OrderAllVO> selectOrderDetailProduct(String order_no) {
+		return orderMapper.selectOrderDetailProduct(order_no);
+	}
+
+	@Override
+	public OrderAllVO selectOrderDetailInfo(String order_no) {
+		return orderMapper.selectOrderDetailInfo(order_no);
 	}
 }

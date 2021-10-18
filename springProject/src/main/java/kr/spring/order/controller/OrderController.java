@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -53,12 +54,7 @@ public class OrderController {
 		private DeliveryService deliveryService;
 		@Autowired
 		private ProductService productService;
-		
-	  //자바빈(VO) 초기화
-	  @ModelAttribute public AdminOrderVO initCommand() { 
-		  return new AdminOrderVO(); 
-	  }
-	 
+
 	  //주문페이지	호출 
 	  @GetMapping("/shop/order") 
 	  public ModelAndView insertOrderForm(HttpSession session) { 
@@ -137,6 +133,20 @@ public class OrderController {
 		  
 		  return mav; 
 	  }
+	  
+	  //주문상세내역페이지
+	  @RequestMapping("/shop/orderDetail")
+	  public ModelAndView detailOrder(HttpSession session, @RequestParam String order_no) {
+		 
+		 List<OrderAllVO> listProduct = orderService.selectOrderDetailProduct(order_no);
+		 OrderAllVO order = orderService.selectOrderDetailInfo(order_no);
+		 
+		 ModelAndView  mav = new ModelAndView();
+		 mav.setViewName("orderDetail");
+		 mav.addObject("listProduct", listProduct);
+		 mav.addObject("order",order);
+		 return mav;
+	  }
 		 
 	  
 	  //주문취소페이지
@@ -176,11 +186,7 @@ public class OrderController {
 		  return mav;
 	  }
 	  
-	  //주문상세내역페이지
-	  @RequestMapping("/shop/orderDetail")
-	  public String detailOrder() {
-		  return "orderDetail";
-	  }
+	  
 	  
 	  //주문구매확정페이지
 	  @RequestMapping("/shop/orderConfirm")
@@ -205,6 +211,13 @@ public class OrderController {
 			 map.put("result", "logout");
 		 }else {
 			 deliveryService.updateOrderDeilveryCancel(delivery.getOrder_no());
+			  //주문 상태 변경 후, 상품의 수량변경 위해 orderDetail목록 가져옴
+			  List<OrderDetailVO> orderList = orderDetailService.selectOrderDetail(delivery.getOrder_no());
+			  
+			  //상품 수량 변경
+			  for(OrderDetailVO vo : orderList) {
+				  productService.productAmountPlusUpdate(vo.getOrder_d_amount(), vo.getP_no());
+			  }
 			 map.put("result", "success");
 		 }
 		 return map;
@@ -237,6 +250,13 @@ public class OrderController {
 			 map.put("result", "logout");
 		 }else {
 			 deliveryService.updateOrderDeilveryRefund(delivery.getOrder_no());
+			  //주문 상태 변경 후, 상품의 수량변경 위해 orderDetail목록 가져옴
+			  List<OrderDetailVO> orderList = orderDetailService.selectOrderDetail(delivery.getOrder_no());
+			  
+			  //상품 수량 변경
+			  for(OrderDetailVO vo : orderList) {
+				  productService.productAmountPlusUpdate(vo.getOrder_d_amount(), vo.getP_no());
+			  }
 			 map.put("result", "success");
 		 }
 		 return map;

@@ -42,4 +42,10 @@ public class ProductServiceImpl implements ProductService{
 		
 	}
 
+	@Override
+	public void productAmountPlusUpdate(int p_amount, int p_no) {
+		productMapper.productAmountPlusUpdate(p_amount, p_no);
+		
+	}
+
 }

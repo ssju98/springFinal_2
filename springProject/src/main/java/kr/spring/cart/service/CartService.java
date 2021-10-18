@@ -15,4 +15,6 @@ public interface CartService {
 	public void UpdateDuplicationProduct(int p_no,int cart_amount,int mem_num);
 	public void updateCart(CartVO cart);
 	public void deleteAllCart(int mem_num);
+	public int countCartAll(int mem_num);
+	//public ProductCartVO selectOrderOneProduct(String order_no);
 }

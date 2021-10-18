@@ -1,5 +1,7 @@
 package kr.spring.cart.vo;
 
+import java.util.Arrays;
+
 public class ProductCartVO {
 		private int p_no;
 		private String p_name;
@@ -92,5 +94,11 @@ public class ProductCartVO {
 		public void setCart_amount(int cart_amount) {
 			this.cart_amount = cart_amount;
 		}
-		
+		@Override
+		public String toString() {
+			return "ProductCartVO [p_no=" + p_no + ", p_name=" + p_name + ", p_price=" + p_price + ", p_amount="
+					+ p_amount + ", p_image_name=" + p_image_name + ", p_discount=" + p_discount + ", p_sub_text="
+					+ p_sub_text + ", c_top_no=" + c_top_no + ", c_sub_no=" + c_sub_no + ", cart_no=" + cart_no
+					+ ", mem_num=" + mem_num + ", cart_amount=" + cart_amount + "]";
+		}
 }

@@ -5,6 +5,14 @@ public class CartVO {
 	private int mem_num;
 	private int p_no;
 	private int cart_amount;
+	private int p_amount;
+	
+	public int getP_amount() {
+		return p_amount;
+	}
+	public void setP_amount(int p_amount) {
+		this.p_amount = p_amount;
+	}
 	public int getCart_no() {
 		return cart_no;
 	}
@@ -32,8 +40,6 @@ public class CartVO {
 	@Override
 	public String toString() {
 		return "CartVO [cart_no=" + cart_no + ", mem_num=" + mem_num + ", p_no=" + p_no + ", cart_amount=" + cart_amount
-				+ "]";
+				+ ", p_amount=" + p_amount + "]";
 	}
-	
-	
 }

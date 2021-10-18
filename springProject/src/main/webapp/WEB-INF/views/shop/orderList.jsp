@@ -70,7 +70,7 @@
 								<h5><span class="badge badge-light">${list.d_status_name}</span></h5>
 							</div>
 							<div class="order-state-detail mt-1">
-								<a href="#">주문 상세 보기 > </a>
+								<a href="orderDetail.do?order_no=${list.order_no}">주문 상세 보기 > </a>
 							</div>
 						</td>
 					</tr>	

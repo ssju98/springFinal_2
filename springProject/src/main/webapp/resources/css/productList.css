@@ -172,6 +172,15 @@
 	align-content: center;
 }
 
+.soldout-div{
+	background: #d1d1d1; 
+	border-radius: 5px; 
+	color:white; 
+	height:20px; 
+	width:30px; 
+	align-content: center;
+}
+
 .special-price-text{
 	font-size: 11.5px; 
 	color:white; 

@@ -104,7 +104,7 @@ $(document).ready(function(){
 								<button class="btn btn-warning btn-xs cancle-btn" id="confirm_btn_${list.order_no}">구매확정</button>
 							</c:if>
 							<div class="order-state-detail mt-1">
-								<a href="#">주문 상세 보기 > </a>
+								<a href="orderDetail.do?order_no=${list.order_no}">주문 상세 보기 > </a>
 							</div>
 						</td>
 					</tr>	

@@ -20,8 +20,8 @@
 				주문접수가 완료되었습니다.
 			</div>
 			<div class="pb-5">
-				<button class="btn btn-outline-primary shop-btn">쇼핑 계속하기</button>
-				<button class="btn btn-primary orderlist-btn">주문 내역보기</button>
+				<button class="btn btn-outline-primary shop-btn"  onclick="location.href='${pageContext.request.contextPath}/shop/main.do'">쇼핑 계속하기</button>
+				<button class="btn btn-primary orderlist-btn" onclick="location.href='orderList.do'">주문 내역보기</button>
 			</div>
 		</div>
 	</div>

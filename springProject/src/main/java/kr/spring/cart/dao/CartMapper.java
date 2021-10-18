@@ -28,6 +28,12 @@ public interface CartMapper {
 	public void updateCart(CartVO cart);
 	@Delete("DELETE FROM CART WHERE mem_num = #{mem_num}")
 	public void deleteAllCart(int mem_num);
+	@Select("SELECT count(*) FROM CART where mem_num=#{mem_num}")
+	public int countCartAll(int mem_num);
+//	@Select("select * from product p "
+//			+ "(select * from sorder_detail where order_no=#{order_no}) a "
+//			+ "where a.p_no = product.p_no and rownum = 1")
+//	public ProductCartVO selectOrderOneProduct(String order_no);
 	
 	
 }

@@ -117,13 +117,13 @@
 			<div class="form-group row">
 				<label for="order_name" class="col-sm-2 col-form-label">받는 사람</label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control" id="order_name" name="order_name"  placeholder="받으시는 분의 성함을 입력하세요."/>
+					<input type="text" class="form-control" id="order_name" name="order_name" value="${member.mem_name}"  placeholder="받으시는 분의 성함을 입력하세요."/>
 				</div>
 			 </div>
 			 <div class="form-group row">
 			 	<label for="order_phone" class="col-sm-2 col-form-label">휴대전화</label>
 			 	<div class="col-sm-5">
-			    	<input type="text" class="form-control" id="order_phone" name="order_phone" placeholder="휴대전화 번호를 입력하세요.">
+			    	<input type="text" class="form-control" id="order_phone" name="order_phone" value="${member.mem_phone}" placeholder="휴대전화 번호를 입력하세요.">
 			    </div>
 			</div>
 			<div class="form-group row">

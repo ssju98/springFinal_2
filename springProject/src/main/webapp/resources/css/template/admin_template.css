@@ -38,10 +38,12 @@ html, body{
 
 .title2 li a{
 	text-decoration: none;
+	color:#0d0d0d;
 }
 
 .title2 li a:hover{
 	font-weight: bold;
+	color:#0d0d0d;
 }
 
 .title2 ul>li::after{

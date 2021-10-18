@@ -36,10 +36,14 @@ public class CartController {
 		
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		List<ProductCartVO> list= cartService.selectCart(mem_num);
+		int count = cartService.countCartAll(mem_num);
+		for(int i = 0; i<list.size(); i++) {
+			System.out.println(list);
+		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("cart");
 		mav.addObject("list",list);
-		
+		mav.addObject("count",count);
 		return mav;
 	}
 	

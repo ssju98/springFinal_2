@@ -43,23 +43,37 @@ $(document).ready(function() {
 					<div class="image-ani">
 					<img src="photoView.do?p_no=${product.p_no}" width="240" height="auto">
 				</div>
-				<div class="list-name mt-2 pl-2">
-					${product.p_name}
-				</div>
-				<c:if test="${product.p_discount != 0}">
-				<div class="list-sale mr-1 pl-2">
-					${product.p_discount}%
-				</div>
-				</c:if>
+				
+					<div class="list-name mt-2 pl-2">
+						${product.p_name}
+					</div>
+					<c:if test="${product.p_amount==0 }">
+						<c:if test="${product.p_discount != 0}">
+							<div class="list-sale mr-1 pl-2" style="opacity: 0.2">
+								${product.p_discount}%
+							</div>
+						</c:if>
+					</c:if>
+				<c:if test="${product.p_amount!=0 }">
 				<div class="list-price pl-2">
 					<c:if test="${product.p_discount != 0}">
-						<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원
-						
+						<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원				
 					</c:if>
 					<c:if test="${product.p_discount == 0}">
-					<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
+						<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
 					</c:if>
 					</div>
+				</c:if>
+				<c:if test="${product.p_amount==0 }">
+				<div class="list-price pl-2" style="opacity: 0.2">
+					<c:if test="${product.p_discount != 0}">
+						<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원				
+					</c:if>
+					<c:if test="${product.p_discount == 0}">
+						<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
+					</c:if>
+					</div>
+				</c:if>
 				<div class="list-rating pl-2">
 					<div class="list-star">
 						<img src="${pageContext.request.contextPath}/resources/images/star.png" width="15px;" height="auto;">
@@ -70,15 +84,24 @@ $(document).ready(function() {
 							리뷰 19
 						</span>	
 					</div>
-				</div>	
-				<c:if test="${product.p_discount != 0}">
-				<div class="special-price-div ml-2">
-					<div class="special-price-text">
-						특가
-					</div>
-				</div>	
+				</div>
+				<c:if test="${product.p_amount != 0}">	
+					<c:if test="${product.p_discount != 0}">
+						<div class="special-price-div ml-2">
+							<div class="special-price-text">
+								특가
+							</div>
+						</div>	
+					</c:if>
 				</c:if>
-			</div>
+				<c:if test="${product.p_amount == 0}">	
+					<div class="soldout-div ml-2">
+						<div class="special-price-text">
+							품절
+						</div>
+					</div>	
+				</c:if>
+				</div>
 			</c:forEach>
 			<c:if test="${count%4==3}">
 				<div class="list-container-empty" style="width: 240px; height: 360px; cursor:auto;"> </div>

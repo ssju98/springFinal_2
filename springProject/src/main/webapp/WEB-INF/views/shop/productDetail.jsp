@@ -106,48 +106,90 @@
 		<div class="product-detail-delivery-sub mb-4">
 			5만원 이상 구매시 무료배송
 		</div>
-		<div class="product-option-container p-2">
-			<div class="product-option-amount">
-				수량
+		<c:if test="${product.p_amount != 0}">	
+			<div class="product-option-container p-2">
+				<div class="product-option-amount">
+					수량
+				</div>
+				<select id="select_amount" class="form-select product-option-select mt-3" >
+					<c:if test="${product.p_amount != 0 && product.p_amount >= 10}">	
+						<c:forEach var="i" begin="1" end="10">
+							<option value="${i}"
+								<c:if test="${i==1}">
+									selected="selected"</c:if>>
+									${i}
+			       			</option>
+						</c:forEach>
+					</c:if>
+					<c:if test="${product.p_amount != 0 && product.p_amount < 10}">	
+						<c:forEach var="i" begin="1" end="${product.p_amount}">
+							<option value="${i}"
+								<c:if test="${i==1}">
+									selected="selected"</c:if>>
+									${i}
+			       			</option>
+						</c:forEach>
+					</c:if>
+				</select>
+				<div id="proudct-option-price" class="proudct-option-price mt-3" >
+					<c:if test="${product.p_discount != 0}">
+						<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원		
+					</c:if>
+					<c:if test="${product.p_discount == 0}">
+						<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
+					</c:if>
+				</div>
 			</div>
-			<select id="select_amount" class="form-select product-option-select mt-3" >
-				<c:forEach var="i" begin="1" end="10">
-						<option value="${i}"
-							<c:if test="${i==1}">
-								selected="selected"</c:if>>
-							${i}
-	       				</option>
-				</c:forEach>
-			</select>
-			<div id="proudct-option-price" class="proudct-option-price mt-3" >
-				<c:if test="${product.p_discount != 0}">
-					<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원		
-				</c:if>
-				<c:if test="${product.p_discount == 0}">
-					<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
-				</c:if>
+		</c:if>
+			<c:if test="${product.p_amount == 0}">	
+			<div class="product-option-container p-2"  style="opacity: 0.4;">
+				<div class="product-option-amount">
+					수량
+				</div>
+				<select id="select_amount" class="form-select product-option-select mt-3" >
+						<option value="0" selected="selected" disabled="disabled">0</option>
+				</select>
+				<div id="proudct-option-price" class="proudct-option-price mt-3" >
+					<c:if test="${product.p_discount != 0}">
+						<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원		
+					</c:if>
+					<c:if test="${product.p_discount == 0}">
+						<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
+					</c:if>
+				</div>
 			</div>
-		</div>
+		</c:if>
 		<div class="product-detail-pay-container">
 			<div class="product-detail-pay-text mt-4">
 				주문금액
 			</div>
 			<div id="product-detail-pay-text2" class="product-detail-pay-text2 mt-3">
-				<c:if test="${product.p_discount != 0}">
-					<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원		
+				<c:if test="${product.p_amount != 0}">
+					<c:if test="${product.p_discount != 0}">
+						<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원		
+					</c:if>
+					<c:if test="${product.p_discount == 0}">
+						<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
+					</c:if>
 				</c:if>
-				<c:if test="${product.p_discount == 0}">
-					<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
+				<c:if test="${product.p_amount == 0}">
+					0원
 				</c:if>
 			</div>
 		</div>
-		
-		<button class="btn btn-outline-primary cart-btn">
-			장바구니
-		</button>
-		<button class="btn btn-primary order-btn">
-			바로구매
-		</button>
+		<c:if test="${product.p_amount != 0}">	
+			<button class="btn btn-outline-primary cart-btn">
+				장바구니
+			</button>
+			<button class="btn btn-primary order-btn">
+				바로구매
+			</button>
+		</c:if>
+		<c:if test="${product.p_amount == 0}">	
+			<button class="btn btn-secondary soldout-btn" disabled="disabled">
+				품절
+			</button>
+		</c:if>
 	</div> 
 	</div>
 	

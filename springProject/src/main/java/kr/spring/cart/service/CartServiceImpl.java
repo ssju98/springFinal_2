@@ -59,6 +59,16 @@ public class CartServiceImpl implements CartService {
 	public void deleteAllCart(int mem_num) {
 		cartMapper.deleteAllCart(mem_num);
 	}
+
+	@Override
+	public int countCartAll(int mem_num) {
+		return cartMapper.countCartAll(mem_num);
+	}
+
+	/*
+	 * @Override public ProductCartVO selectOrderOneProduct(String order_no) {
+	 * return cartMapper.selectOrderOneProduct(order_no); }
+	 */
 	
 
 	

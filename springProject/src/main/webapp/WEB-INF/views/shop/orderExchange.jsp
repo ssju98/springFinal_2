@@ -104,7 +104,7 @@ $(document).ready(function(){
 								<button class="btn btn-info btn-xs cancle-btn" id="exchange_btn_${list.order_no}">교환신청</button>
 							</c:if>
 							<div class="order-state-detail mt-1">
-								<a href="#">주문 상세 보기 > </a>
+								<a href="orderDetail.do?order_no=${list.order_no}">주문 상세 보기 > </a>
 							</div>
 						</td>
 					</tr>	

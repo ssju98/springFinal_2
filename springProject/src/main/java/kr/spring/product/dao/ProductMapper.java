@@ -12,11 +12,13 @@ public interface ProductMapper {
 	public List<ProductVO> ProductSelectAll();
 	@Select("Select * FROM product WHERE p_no=#{p_no}")
 	public ProductVO ProductSelect(int p_no);
-	@Select("select * from product where c_top_no = #{param1} AND c_sub_no = #{param2}")
+	@Select("select * from product where c_top_no = #{param1} AND c_sub_no = #{param2} order by decode(p_amount,0,1)DESC")
 	public List<ProductVO> ProductCategorySelectAll(int param1, int param2);
 	@Select("select count(*) from product where c_top_no = #{param1} AND c_sub_no = #{param2}")
 	public int ProductCategorySelectCount(int param1, int param2);
 	@Update("update product set p_amount=p_amount-#{param1} where p_no=#{param2}")
 	public void productAmountUpdate(int param1, int param2);
+	@Update("update product set p_amount=p_amount+#{param1} where p_no=#{param2}")
+	public void productAmountPlusUpdate(int param1, int param2);
 
 }
