@@ -3,13 +3,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- CSS file -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin1_style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
-	<h3 id="header-3">회원정보 상세</h3>
-	<!-- 회원 정보 -->
-	<div id="normal-width">
-		<table class="table table-bordered cell-2">
+	<div id="wide-width" class="wide-table">
+		<h4 id="header-main">회원 상세정보</h4>
+		<!-- 회원 정보 -->
+		<table class="table table-bordered">
 			<tr>
 				<th>회원번호</th>
 				<td>${adminMemberVO.mem_num}</td>				
@@ -17,9 +17,9 @@
 			<tr>
 				<th>회원유형</th>
 				<td>
-					<c:if test="${adminMemberVO.mem_auth == 0}">탈퇴</c:if>
-					<c:if test="${adminMemberVO.mem_auth == 1}">정지</c:if>
-					<c:if test="${adminMemberVO.mem_auth == 2}">일반</c:if>
+					<c:if test="${adminMemberVO.mem_auth == 0}"><span class="text-danger">탈퇴회원</span></c:if>
+					<c:if test="${adminMemberVO.mem_auth == 1}">정지회원</c:if>
+					<c:if test="${adminMemberVO.mem_auth == 2}">일반회원</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -50,19 +50,17 @@
 			</tr>
 			</c:if>
 		</table>
-		<div class="element-center text-center">
+		<div class="element-center text-right div-button">
 			<c:if test="${adminMemberVO.mem_auth != 0}">
-			<input type="button" value="수정" class="btn btn-info" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
-			<input type="button" value="삭제" class="btn btn-danger" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"
+			<input type="button" value="회원수정" class="btn btn-primary btn-sm" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
+			<input type="button" value="회원삭제" class="btn btn-danger btn-sm" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"
 				<c:if test="${mem_auth != 4}">disabled</c:if>
 			>
 			</c:if>
 		</div>
-	</div>
-	<!-- 활동 정보 -->
-	<div id="wide_width">
-		<h4 id="header-4">활동정보</h4>
-		<table class="table table-bordered">
+		<!-- 활동 정보 -->
+		<h5 id="header-sub">활동정보</h5>
+		<table class="table table-bordered" id="activity_table">
 			<thead>
 				<tr>
 					<th>주문건수</th>
@@ -72,12 +70,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!-- *****임시 데이터***** -->
 				<tr>
-					<td>{orderCnt}</td>
-					<td>{cancelCnt}</td>
-					<td>{reviewCnt}</td>
-					<td>{qnaCnt}</td>
+					<td><b>${orderCnt}</b> 건</td>
+					<td><b>${cancelCnt}</b> 건</td>
+					<td><b>${reviewCnt}</b> 건</td>
+					<td><b>${qnaCnt}</b> 건</td>
 				</tr>
 			</tbody>
 		</table>

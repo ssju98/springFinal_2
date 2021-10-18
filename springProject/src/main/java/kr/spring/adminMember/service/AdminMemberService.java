@@ -14,4 +14,8 @@ public interface AdminMemberService {
 	public AdminMemberVO selectMember(int mem_num);
 	public void updateMember(AdminMemberVO adminMemberVO);
 	public void deleteMember(int mem_num);
+	public int getOrderCount(int mem_num);
+	public int getCancelCount(int mem_num);
+	public int getReviewCount(int mem_num);
+	public int getQnaCount(int mem_num);
 }

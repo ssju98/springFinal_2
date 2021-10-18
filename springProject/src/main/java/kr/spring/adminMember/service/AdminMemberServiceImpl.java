@@ -48,5 +48,27 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		adminMemberMapper.deleteMember(mem_num);
 		adminMemberMapper.deleteMemberAuth(mem_num);
 	}
+
+	@Override
+	public int getOrderCount(int mem_num) {
+		return adminMemberMapper.getOrderCount(mem_num);
+	}
+
+	@Override
+	public int getCancelCount(int mem_num) {
+		return adminMemberMapper.getCancelCount(mem_num);
+	}
+
+	@Override
+	public int getReviewCount(int mem_num) {
+		return adminMemberMapper.getReviewCount(mem_num);
+	}
+
+	@Override
+	public int getQnaCount(int mem_num) {
+		return adminMemberMapper.getQnaCount(mem_num);
+	}
+
+
 	
 }

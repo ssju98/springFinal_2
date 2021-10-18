@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+/* 가로 너비 */
+div#narrow-width{
+	width: 400px;
+}
+div#wide-width{
+	width: 97%;
+	margin-left: 5px;
+}
+
+
+/* 요소 정렬, 여백 */
+.element-center{
+	margin: 0 auto;
+}
+.btn{
+	margin-left: 2px;
+}
+#header-main{
+	height: 70px;
+	display: table-cell;
+    vertical-align: middle;
+}
+#header-sub{
+	height: 50px;
+	display: table-cell;
+    vertical-align: middle;
+}
+
+
+/* 테이블 셀간격 */
+table.cell-4 th, tr.cell-4 th{
+	width: 15%;
+}
+table.cell-4 td, tr.cell-4 td{
+	width: 35%;
+}
+table.cell-2 th{
+	width: 20%;
+}
+table.cell-2 td{
+	width: 80%;
+}
+
+
+/* 관리자인증 페이지 */
+.narrow-table{
+	border: 1px solid #dee2e6;
+	padding: 50px 30px;
+}
+.narrow-table table{
+	margin: 0 auto;
+	width: 300px;
+}
+.narrow-table input{
+	height: 28px;
+	width: 150px;
+}
+.narrow-table th{
+	width: 100px;
+	font-weight: 500;
+	text-align: left;
+	padding-left: 30px;
+}
+.narrow-table td{
+	padding: 1px 10px;
+}
+
+
+/* 검색창,목록,상세 페이지 */
+.wide-table tr{
+	height: 40px;
+}
+.wide-table th, .wide-table td{
+	font-size: 15px;
+	vertical-align: middle;
+	border-color: #dee2e6;
+}
+.wide-table th{
+	width: 120px;
+	font-weight: 500;
+	text-align: center;
+}
+.wide-table td{
+	padding: 1px 10px;
+}
+.table thead th{
+	vertical-align: middle;
+	background-color: #f2f4f7;
+}
+table-hover.tbody tr:hover {
+  color: #212529;
+  background-color: rgba(0, 0, 0, 0.075);
+}
+.wide-table select#keyfield, .wide-table input#keyword, .wide-table *.btn-sm{
+	height: 28px;
+	line-height: 1.25;
+}
+.wide-table button, .wide-table{
+	border-color: #c1c7d2;
+}
+.wide-table div{
+	vertical-align: middle;
+}
+.wide-table input[type="date"]{
+	border: 1px solid #dee2e6;
+	height: 28px;
+	width: 150px;
+	line-height: 1.25;
+}
+.wide-table input#tracking_num{
+	 width: 250px;
+}
+#search-period input{
+	height: 25px;
+	width: 35px;
+	background-color: #f8f9fa;
+	border-color: #c1c7d2;
+	padding-left: 3px;
+	font-size: 13px;
+	text-align: center;
+}
+
+
+/* 상세 페이지 버튼 */
+.div-button input, .div-button button{
+	height: 35px;
+	width: 80px;
+	line-height: 1.35;
+	background-color: #f8f9fa;
+	border-color: #c1c7d2;
+	color: black;
+}
+
+/* 회원 활동정보 페이지 */
+table#activity_table td, table#activity_table th{
+	font-size: 17px;
+	height: 50px;
+	text-align: center;
+}
+
+
+
+

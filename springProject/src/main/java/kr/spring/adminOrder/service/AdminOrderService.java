@@ -11,5 +11,4 @@ public interface AdminOrderService {
 	public int getOrderCount(Map<String,Object> map);
 	public List<AdminOrderVO> getOrderList(Map<String,Object> map);
 	public AdminOrderVO selectOrder(String order_no);
-	public void deleteOrder(String order_no);
 }

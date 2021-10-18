@@ -32,4 +32,12 @@ public interface AdminMemberMapper {
 	@Update("UPDATE member SET mem_auth=0 WHERE mem_num=#{mem_num}")
 	public void deleteMemberAuth(int mem_num);
 	
+	@Select("SELECT COUNT(*) FROM sorder WHERE mem_num=#{mem_num}")
+	public int getOrderCount(int mem_num);
+	@Select("SELECT COUNT(*) FROM sorder o JOIN delivery d ON o.order_no=d.order_no WHERE d_status_num=7 AND mem_num=#{mem_num}")
+	public int getCancelCount(int mem_num);
+	@Select("SELECT COUNT(*) FROM review WHERE mem_num=#{mem_num}")
+	public int getReviewCount(int mem_num);
+	@Select("SELECT COUNT(*) FROM qna WHERE mem_num=#{mem_num}")
+	public int getQnaCount(int mem_num);
 }

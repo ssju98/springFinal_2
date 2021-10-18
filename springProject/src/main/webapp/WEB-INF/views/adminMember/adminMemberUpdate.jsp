@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- CSS file -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin1_style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
@@ -53,14 +53,14 @@
 </script>
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
-	<h3 id="header-3">회원정보 수정</h3>
-	<!-- 회원 정보 -->
-	<div id="normal-width">
+	<div id="wide-width" class="wide-table">
+		<h4 id="header-main">회원정보 수정</h4>
+		<!-- 회원 정보 -->
 		<form:form action="memberUpdate.do" modelAttribute="adminMemberVO" class="form-inline">
 			<form:hidden path="mem_num"/>
 			<form:hidden path="mem_id"/>
 			<form:hidden path="mem_date"/>
-			<table class="table table-bordered cell-2">
+			<table class="table table-bordered">
 				<tr>
 					<th>회원번호</th>
 					<td>${adminMemberVO.mem_num}</td>
@@ -103,7 +103,7 @@
 					<th>우편번호</th>
 					<td>
 						<form:input path="mem_zipcode" class="form-control form-control-sm"/>
-						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-secondary btn-sm">
+						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-dark btn-sm">
 						<form:errors path="mem_zipcode" class="text-danger"/>
 					</td>
 				</tr>
@@ -125,8 +125,8 @@
 					<td>${adminMemberVO.mem_date}</td>
 				</tr>
 			</table>
-			<div class="element-center text-center">
-				<form:button class="btn btn-dark">수정</form:button>
+			<div class="element-center text-center div-button">
+				<form:button class="btn btn-primary">수정</form:button>
 				<input type="button" value="취소" class="btn btn-secondary" onclick="location.href='memberDetail.do?mem_num=${adminMemberVO.mem_num}'">
 			</div>
 		</form:form>

@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- CSS file -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin1_style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
-	<h3 id="header-3">주문 상세정보</h3>
-	<!-- 주문 정보 -->
-	<div id="normal-width">
+	<div id="wide-width" class="wide-table">
+		<h4 id="header-main">주문 상세정보</h4>
+		<!-- 주문 정보 -->
 		<table class="table table-bordered">
 			<tr class="cell-4">
 				<th>주문번호</th>
@@ -19,7 +19,7 @@
 			<tr class="cell-4">
 				<th>주문자 아이디</th>
 				<td>${adminMember.mem_id}
-					<span class="blank-text">
+					<span class="text-danger">
 					<c:if test="${adminMember.mem_auth == 0}">
 						[탈퇴회원]
 					</c:if>
@@ -48,7 +48,7 @@
 			</tr>
 		</table>
 		<!-- 배송지 정보 -->
-		<h5 id="header-4">배송지 정보</h5>
+		<h5 id="header-sub">배송지 정보</h5>
 		<table class="table table-bordered">
 			<tr class="cell-4">
 				<th>받는사람</th>
@@ -62,16 +62,14 @@
 			</tr>
 		</table>
 		<c:if test="${adminOrder.d_status_name == '결제완료' || adminOrder.d_status_name == '배송준비중'}">
-			<div class="element-center text-center">
-				<input type="button" value="주문취소" class="btn btn-danger" onclick="location.href='${pageContext.request.contextPath}/admin/orderCancel.do?order_no=${adminOrder.order_no}'" 
+			<div class="element-center text-right div-button">
+				<input type="button" value="주문취소" class="btn btn-danger btn-sm" onclick="location.href='${pageContext.request.contextPath}/admin/orderCancel.do?order_no=${adminOrder.order_no}'" 
 					<c:if test="${mem_auth != 4}">disabled</c:if>
 				>
 			</div>
 		</c:if>
-	</div>
 	<!-- 주문 상품 -->
-	<div id="wide_width">
-		<h5 id="header-4">주문 상품</h5>
+		<h5 id="header-sub">주문 상품</h5>
 		<table class="table table-bordered">
 			<thead>
 				<tr>

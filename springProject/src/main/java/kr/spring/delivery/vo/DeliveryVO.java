@@ -1,5 +1,7 @@
 package kr.spring.delivery.vo;
 
+import java.sql.Date;
+
 public class DeliveryVO {
 	private int delivery_no;
 	private String order_no;
@@ -7,7 +9,8 @@ public class DeliveryVO {
 	private String tracking_num;
 	private String dcompany_name;
 	private String d_status_name; //JOIN - delivery_status
-	private String mem_id; //JOIN - member
+	private String mem_id;		//JOIN - member
+	private Date order_date; 	// JOIN - sorder
 	
 	public int getDelivery_no() {
 		return delivery_no;
@@ -51,11 +54,17 @@ public class DeliveryVO {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
+	public Date getOrder_date() {
+		return order_date;
+	}
+	public void setOrder_date(Date order_date) {
+		this.order_date = order_date;
+	}
 	
 	@Override
 	public String toString() {
 		return "DeliveryVO [delivery_no=" + delivery_no + ", order_no=" + order_no + ", d_status_num=" + d_status_num
 				+ ", tracking_num=" + tracking_num + ", dcompany_name=" + dcompany_name + ", d_status_name="
-				+ d_status_name + ", mem_id=" + mem_id + "]";
+				+ d_status_name + ", mem_id=" + mem_id + ", order_date=" + order_date + "]";
 	}
 }
