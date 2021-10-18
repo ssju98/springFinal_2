@@ -46,7 +46,7 @@
 					 		AND m.mem_id LIKE '%' || #{keyword} || '%'
 					 	</if>
 				 	</where>
-			  		ORDER BY d.order_no DESC)a)
+			  		ORDER BY o.order_date DESC, d.order_no DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>	

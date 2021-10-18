@@ -94,6 +94,10 @@ public class AdminMemberController {
 		
 		AdminMemberVO adminMemberVO = adminMemberService.selectMember(mem_num);
 		model.addAttribute("adminMemberVO", adminMemberVO);
+		model.addAttribute("orderCnt", adminMemberService.getOrderCount(mem_num));
+		model.addAttribute("cancelCnt", adminMemberService.getCancelCount(mem_num));
+		model.addAttribute("reviewCnt", adminMemberService.getReviewCount(mem_num));
+		model.addAttribute("qnaCnt", adminMemberService.getQnaCount(mem_num));
 		
 		return "adminMemberDetail";
 	}
@@ -134,7 +138,7 @@ public class AdminMemberController {
 		
 		//완료시 alert창에 표시할 내용
 		model.addAttribute("message", "회원정보 수정이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath() + "/admin/memberList.do");
+		model.addAttribute("url", request.getContextPath() + "/admin/memberDetail.do?mem_num=" + adminMemberVO.getMem_num());
 		
 		return "common/resultView";
 	}

@@ -32,11 +32,4 @@ public class AdminOrderServiceImpl implements AdminOrderService{
 		return adminOrderMapper.selectOrder(order_no);
 	}
 	
-	@Override
-	public void deleteOrder(String order_no) {
-		adminOrderMapper.deleteOrderDetail(order_no);
-		adminOrderMapper.deleteOrderDelivery(order_no);
-		adminOrderMapper.deleteOrder(order_no);
-	}
-	
 }

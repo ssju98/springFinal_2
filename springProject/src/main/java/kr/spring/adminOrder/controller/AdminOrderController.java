@@ -23,6 +23,7 @@ import kr.spring.adminMember.service.AdminMemberService;
 import kr.spring.adminMember.vo.AdminMemberVO;
 import kr.spring.adminOrder.service.AdminOrderService;
 import kr.spring.adminOrder.vo.AdminOrderVO;
+import kr.spring.delivery.service.DeliveryService;
 import kr.spring.util.PagingUtil;
 
 @Controller
@@ -35,6 +36,8 @@ public class AdminOrderController {
 	private AdminOrderService adminOrderService;
 	@Autowired
 	private AdminMemberService adminMemberService;
+	@Autowired
+	private DeliveryService deliveryService;
 	
 	//자바빈(VO) 초기화
 	@ModelAttribute
@@ -45,15 +48,19 @@ public class AdminOrderController {
 	//주문 목록
 	@RequestMapping("/admin/orderList.do")
 	public ModelAndView adminOrderList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+									   @RequestParam(value="start_date", defaultValue="") String start_date,
+									   @RequestParam(value="end_date", defaultValue="") String end_date,
 									   @RequestParam(value="d_status_num", defaultValue="") String d_status_num,
 									   @RequestParam(value="keyfield", defaultValue="") String keyfield,
 									   @RequestParam(value="keyword", defaultValue="") String keyword) {
-		
-		logger.debug("<<adminOrderList 호출>> currentPage : " + currentPage + ", d_status_num : " + d_status_num + ", keyfield : " + keyfield +", keyword : " + keyword);
+		logger.debug("<<adminOrderList 호출>> currentPage : " + currentPage + ", d_status_num : " + d_status_num + 
+				     ", keyfield : " + keyfield +", keyword : " + keyword + "start_date : " + start_date + "end_date : " + end_date);
 		
 		//검색 조건
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("d_status_num", d_status_num);
+		map.put("start_date", start_date);
+		map.put("end_date", end_date);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
@@ -147,7 +154,7 @@ public class AdminOrderController {
 		
 		if(check) {
 			//주문정보 삭제
-			adminOrderService.deleteOrder(adminMemberVO.getManage_num());
+			deliveryService.updateOrderDeilveryCancel(adminMemberVO.getManage_num());
 
 			model.addAttribute("message", "주문취소가 완료되었습니다.");
 			model.addAttribute("url", request.getContextPath() + "/admin/orderList.do");
