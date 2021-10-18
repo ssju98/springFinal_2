@@ -15,8 +15,8 @@ public interface Category_subMapper {
 	@Insert("INSERT INTO category_sub (c_sub_no, c_sub_name, c_top_no) VALUES (#{c_sub_no}, #{c_top_name}, #{c_top_no})")
 	public void insertCategory_sub(Category_subVO category_sub);
 	
-	@Select("SELECT * FROM category_sub WHERE c_sub_no=#{c_sub_no}")
-	public Category_subVO selectCategory_sub(Integer c_sub_no);
+	@Select("SELECT * FROM category_sub ORDER BY c_sub_no")
+	public List<Category_subVO> selectCategory_sub();
 	
 	@Update("UPDATE category_sub SET c_sub_name=#{c_sub_name} WHERE c_sub_no=#{c_sub_no}")
 	public void updateCategory_sub(Category_subVO category_sub);

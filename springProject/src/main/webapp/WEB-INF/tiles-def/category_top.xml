@@ -13,4 +13,13 @@
     	<put-attribute name="title" value="상위 카테고리 수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/category_top/category_topUpdate.jsp"/>
     </definition>
+    <definition name="category_top_delete" extends="adminMain">
+    	<put-attribute name="title" value="상위 카테고리 삭제"/>
+    	<put-attribute name="body" value="/WEB-INF/views/category_top/category_topDelete.jsp"/>
+    </definition>
+    <definition name="category_top_register" extends="adminMain">
+    	<put-attribute name="title" value="상위 카테고리 등록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/category_top/category_topRegister.jsp"/>
+    </definition>
+    
 </tiles-definitions>

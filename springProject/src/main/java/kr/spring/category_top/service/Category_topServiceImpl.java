@@ -18,8 +18,6 @@ public class Category_topServiceImpl implements Category_topService{
 	
 	@Override
 	public void insertCategory_top(Category_topVO category_top) {
-		//상위 카테고리번호 셋팅
-		category_top.setC_top_no(category_topMapper.selectC_top_no());
 		category_topMapper.insertCategory_top(category_top);
 	}
 
@@ -29,13 +27,18 @@ public class Category_topServiceImpl implements Category_topService{
 	}
 	
 	@Override
-	public void updateCategory_top(Category_topVO category_top) {
-		
+	public void updateCategory_top(Category_topVO category_topVO) {
+		category_topMapper.updateCategory_top(category_topVO);
 	}
 	
 	@Override
-	public void deleteCategory_top(Category_topVO category_top) {
-		
+	public void deleteCategory_top(int c_top_no) {
+		category_topMapper.deleteCategory_top(c_top_no);
+	}
+
+	@Override
+	public Category_topVO selectCategory_top(int c_top_no) {
+		return category_topMapper.chooseCategory_top(c_top_no);
 	}
 	
 }

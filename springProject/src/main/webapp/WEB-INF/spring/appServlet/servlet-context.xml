@@ -68,6 +68,7 @@
 				<beans:value>/WEB-INF/tiles-def/member.xml</beans:value>
 				
 				<beans:value>/WEB-INF/tiles-def/category_top.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/category_sub.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/shopProduct.xml</beans:value>
 			</beans:list>
 		</beans:property>

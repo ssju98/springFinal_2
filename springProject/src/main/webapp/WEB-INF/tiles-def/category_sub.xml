@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+    <definition name="category_sub_list" extends="adminMain">
+    	<put-attribute name="title" value="하위 카테고리 목록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/category_top/category_sub/list.jsp"/>
+    </definition>
+    
+</tiles-definitions>

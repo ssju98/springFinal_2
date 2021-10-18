@@ -23,8 +23,8 @@ public class Category_subServiceImpl implements Category_subService{
 	}
 
 	@Override
-	public Category_subVO selectCategory_sub(Integer c_sub_no) {
-		return category_subMapper.selectCategory_sub(c_sub_no);
+	public List<Category_subVO> selectCategory_sub() {
+		return category_subMapper.selectCategory_sub();
 	}
 
 	@Override

@@ -1,11 +1,14 @@
 package kr.spring.category_sub.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.spring.category_sub.service.Category_subService;
 import kr.spring.category_sub.vo.Category_subVO;
 
+@Controller
 public class Category_subController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Category_subController.class);
@@ -29,19 +33,50 @@ public class Category_subController {
 		return new Category_subVO();
 	}
 	
-	//하위카테고리 상세정보
-	@RequestMapping("/category_sub/detail.do")
-	public String process(HttpSession session, Model model) {
-		Integer c_sub_no = (Integer)session.getAttribute("c_sub_no");
-		
-		Category_subVO category_sub = category_subService.selectCategory_sub(c_sub_no);
-		
-		logger.debug("하위 카테고리 상세정보 : " + category_sub);
-		
-		model.addAttribute("category_sub", category_sub);
-		
-		return "category_subView"; //타일스 식별자
+	// 하위 카테고리 등록
+	@GetMapping("/category_sub/category_subRegister")
+	public String category_subRegisterForm(Category_subVO category_subVO){
+		logger.info("<<category_sub_registerForm>>");
+
+		return "category_sub_register"; //타일스 식별자		
 	}
+	
+	// 하위 카테고리 등록
+//	@PostMapping("/category_sub/category_subRegister")
+//	public String category_topRegister(Category_topVO category_topVO){
+//		logger.info("<<category_top_register:>>"+category_subVO.getC_sub_name());
+//
+//		category_subService.insertCategory_sub(category_subVO);
+//
+//		return "redirect:/category_sub/list.do";
+//		
+//	}
+	
+	//하위카테고리 상세정보
+	@RequestMapping("/category_top/category_sub/list.do")
+	public String selectCategory_sub(HttpSession session, Model model) {
+		List<Category_subVO> list = category_subService.selectCategory_sub();
+				
+		logger.debug("하위카테고리 정보 : " + list);
+		
+		model.addAttribute("list", list);
+		
+		return "category_sub_list"; // 타일스 식별자
+	}
+	
+	//하위카테고리 상세정보
+//	@RequestMapping("/category_sub/detail.do")
+//	public String process(HttpSession session, Model model) {
+//		Integer c_sub_no = (Integer)session.getAttribute("c_sub_no");
+//		
+//		Category_subVO category_sub = category_subService.selectCategory_sub(c_sub_no);
+//		
+//		logger.debug("하위 카테고리 상세정보 : " + category_sub);
+//		
+//		model.addAttribute("category_sub", category_sub);
+//		
+//		return "category_subView"; //타일스 식별자
+//	}
 	
 	//하위카테고리 정보 수정 - 수정 폼
 	@GetMapping("/category_sub/update.do")
