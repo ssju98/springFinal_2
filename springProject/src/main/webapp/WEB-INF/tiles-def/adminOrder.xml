@@ -26,7 +26,7 @@
     	<put-attribute name="left" value="/WEB-INF/views/adminOrder/left.jsp"/>
     </definition>
     <definition name="adminDeliveryTrack" extends="adminMain">
-    	<put-attribute name="title" value="송장입력"/>
+    	<put-attribute name="title" value="송장등록"/>
     	<put-attribute name="body" value="/WEB-INF/views/adminOrder/adminDeliveryTrack.jsp"/>
     	<put-attribute name="left" value="/WEB-INF/views/adminOrder/left.jsp"/>
     </definition>

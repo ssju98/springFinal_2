@@ -33,23 +33,22 @@
 		  FROM (SELECT 
 				  * 
 				FROM member m LEFT OUTER JOIN member_detail d ON m.mem_num=d.mem_num
-				<where>
-					<if test="auth_num != ''">
-						and m.mem_auth = #{auth_num}
-					</if>
-					<if test="keyword != '' and keyfield == 'mem_num'">
-						and m.mem_num = #{keyword}
-					</if>
-					<if test="keyword != '' and keyfield == 'mem_id'">
-						and m.mem_id LIKE '%' || #{keyword} || '%'
-					</if>
-					<if test="keyword != '' and keyfield == 'mem_phone'">
-						and d.mem_phone LIKE '%' || #{keyword} || '%'
-					</if>
-				</where>
+				WHERE m.mem_auth IN(0,1,2)
+				<if test="auth_num != ''">
+					AND m.mem_auth = #{auth_num}
+				</if>
+				<if test="keyword != '' and keyfield == 'mem_num'">
+					AND m.mem_num = #{keyword}
+				</if>
+				<if test="keyword != '' and keyfield == 'mem_id'">
+					AND m.mem_id LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyword != '' and keyfield == 'mem_phone'">
+					AND d.mem_phone LIKE '%' || #{keyword} || '%'
+				</if>
 				ORDER BY m.mem_num DESC)a)
 	<![CDATA[
-	WHERE rnum >= #{start} AND rnum <= #{end} AND mem_auth IN(0,1,2)
+	WHERE rnum >= #{start} AND rnum <= #{end}
 	]]>
 	</select>
 </mapper>

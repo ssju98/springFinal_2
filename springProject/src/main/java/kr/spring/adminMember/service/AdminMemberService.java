@@ -18,4 +18,11 @@ public interface AdminMemberService {
 	public int getCancelCount(int mem_num);
 	public int getReviewCount(int mem_num);
 	public int getQnaCount(int mem_num);
+	
+	//============== 관리자관리 ==============
+	public AdminMemberVO selectAdmin(int mem_num);
+	public int getAdminCount();
+	public List<AdminMemberVO> getAdminList(Map<String,Object> map);
+	public void insertAdmin(AdminMemberVO adminMemberVO);
+	public void deleteAdmin(int mem_num);
 }

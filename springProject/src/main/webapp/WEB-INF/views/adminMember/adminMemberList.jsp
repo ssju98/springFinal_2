@@ -64,13 +64,13 @@
 		<table class="table table-hover table-bordered table-sm">
 			<thead>
 				<tr>
-					<th>회원번호</th>
-					<th>회원유형</th>
-					<th>아이디</th>
-					<th>이름</th>
-					<th>연락처</th>
-					<th>이메일</th>
-					<th>관리</th>
+					<th class="c-num">번호</th>
+					<th class="c-auth">회원유형</th>
+					<th class="c-id">아이디</th>
+					<th class="c-name">이름</th>
+					<th class="c-phone">연락처</th>
+					<th class="c-email">이메일</th>
+					<th class="c-manage">관리</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -78,7 +78,7 @@
 				<tr>
 					<td>${adminMemberVO.mem_num}</td>
 					<td>
-						<c:if test="${adminMemberVO.mem_auth == 0}">탈퇴회원</c:if>
+						<c:if test="${adminMemberVO.mem_auth == 0}"><span class="text-danger">탈퇴회원</span></c:if>
 						<c:if test="${adminMemberVO.mem_auth == 1}">정지회원</c:if>
 						<c:if test="${adminMemberVO.mem_auth == 2}">일반회원</c:if>
 					</td>
@@ -95,7 +95,7 @@
 							</button>
 							<button class="btn btn-light btn-sm" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"  
 								<c:if test="${mem_auth != 4}">disabled</c:if>
-							><i class="bi bi-trash mr-1"></i>삭제</button>
+							><i class="bi bi-trash-fill mr-1"></i>삭제</button>
 						</c:if>
 					</td>
 				</tr>

@@ -29,18 +29,84 @@ div#wide-width{
 }
 
 
-/* 테이블 셀간격 */
+/* input 너비 */
+input#tracking_number{
+	width: 250px;
+}
+input#mem_id{
+	width: 150px;
+}
+input#mem_passwd{
+	width: 150px;
+}
+input#mem_name{
+	width: 150px;
+}
+input#mem_phone{
+	width: 150px;
+}
+input#mem_email{
+	width: 150px;
+}
+input#mem_zipcode{
+	width: 150px;
+}
+input#mem_address1{
+	width: 350px;
+}
+input#mem_address2{
+	width: 350px;
+}
+
+
+/* 테이블 행 너비 */
+.wide-table th.c-num{
+	width: 6%
+}
+.wide-table th.c-auth{
+	width: 10%
+}
+.wide-table th.c-id{
+	width: 15%
+}
+.wide-table th.c-name{
+	width: 15%
+}
+.wide-table th.c-phone{
+	width: 17%
+}
+.wide-table th.c-email{
+	width: 17%
+}
+.wide-table th.c-manage{
+	width: 20%
+}
+/**/
+.wide-table th.c-date{
+	width: 10%
+}
+.wide-table th.c-onum{
+	width: 20%
+}
+.wide-table th.c-method{
+	width: 10%
+}
+.wide-table th.c-pay{
+	width: 15%
+}
+.wide-table th.c-satus{
+	width: 10%
+}
+.wide-table th.c-track{
+	width: 20%
+}
+
+
 table.cell-4 th, tr.cell-4 th{
-	width: 15%;
+	width: 12%;
 }
 table.cell-4 td, tr.cell-4 td{
-	width: 35%;
-}
-table.cell-2 th{
-	width: 20%;
-}
-table.cell-2 td{
-	width: 80%;
+	width: 38%;
 }
 
 
@@ -70,7 +136,7 @@ table.cell-2 td{
 
 /* 검색창,목록,상세 페이지 */
 .wide-table tr{
-	height: 40px;
+	height: 45px;
 }
 .wide-table th, .wide-table td{
 	font-size: 15px;
@@ -93,11 +159,10 @@ table-hover.tbody tr:hover {
   color: #212529;
   background-color: rgba(0, 0, 0, 0.075);
 }
-.wide-table select#keyfield, .wide-table input#keyword, .wide-table *.btn-sm{
-	height: 28px;
-	line-height: 1.25;
+.wide-table select#keyfield{
+	padding-top: 1px;
 }
-.wide-table button, .wide-table{
+.wide-table button, .wide-table input[type="button"], .wide-table{
 	border-color: #c1c7d2;
 }
 .wide-table div{
@@ -105,25 +170,31 @@ table-hover.tbody tr:hover {
 }
 .wide-table input[type="date"]{
 	border: 1px solid #dee2e6;
-	height: 28px;
 	width: 150px;
 	line-height: 1.25;
 }
-.wide-table input#tracking_num{
-	 width: 250px;
-}
 #search-period input{
-	height: 25px;
 	width: 35px;
 	background-color: #f8f9fa;
 	border-color: #c1c7d2;
 	padding-left: 3px;
+	margin-bottom: 2px;
 	font-size: 13px;
 	text-align: center;
 }
 
 
-/* 상세 페이지 버튼 */
+/* 아이디 중복체크 결과 표시 */
+tr.id-row{
+	height: 65px;
+}
+span#message_id{
+	font-size: 14px;
+	margin-left: 2px;
+}
+
+
+/* 상세 페이지 내 버튼 */
 .div-button input, .div-button button{
 	height: 35px;
 	width: 80px;
@@ -133,7 +204,24 @@ table-hover.tbody tr:hover {
 	color: black;
 }
 
-/* 회원 활동정보 페이지 */
+
+/* 배송조회 버튼*/
+.btn-tracking{
+	padding: 0 4px;
+	margin-left: 5px;
+	height: 28px;
+	border: none;
+	background-color: #f8f9fa;
+	font-size: 13px;
+}
+.btn-tracking:hover, .btn-tracking:focus{
+	background-color: #e2e6ea;
+}
+.btn-tracking i{
+	margin-right: 1px;
+}
+
+/* 회원 활동정보 테이블 */
 table#activity_table td, table#activity_table th{
 	font-size: 17px;
 	height: 50px;

@@ -17,6 +17,7 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	@Autowired
 	private AdminMemberMapper adminMemberMapper;
 	
+	//============== 회원관리 ==============
 	@Override
 	public int getMemberCount(Map<String,Object> map) {
 		return adminMemberMapper.getMemberCount(map);
@@ -68,7 +69,34 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 	public int getQnaCount(int mem_num) {
 		return adminMemberMapper.getQnaCount(mem_num);
 	}
-
-
 	
+	//============== 관리자관리 ==============
+	@Override
+	public AdminMemberVO selectAdmin(int mem_num) {
+		return adminMemberMapper.selectAdmin(mem_num);
+	}
+	
+	@Override
+	public int getAdminCount() {
+		return adminMemberMapper.getAdminCount();
+	}
+
+	@Override
+	public List<AdminMemberVO> getAdminList(Map<String, Object> map) {
+		return adminMemberMapper.getAdminList(map);
+	}
+	
+	@Override
+	public void insertAdmin(AdminMemberVO adminMemberVO) {
+		adminMemberVO.setMem_num(adminMemberMapper.selectMem_num());
+		adminMemberMapper.insertAdmin(adminMemberVO);
+		adminMemberMapper.insertAdminDetail(adminMemberVO);
+	}
+
+	@Override
+	public void deleteAdmin(int mem_num) {
+		adminMemberMapper.deleteAdminDetail(mem_num);
+		adminMemberMapper.deleteAdmin(mem_num);
+	}
+
 }

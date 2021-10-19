@@ -94,6 +94,14 @@ public class DeliveryController {
 			return "common/resultView";
 		}
 		
+		//송장번호 등록 여부 체크
+		if(deliveryVO.getTracking_num() != null) {
+			model.addAttribute("message", "이미 송장번호가 등록되어 있습니다.");
+			model.addAttribute("url", request.getContextPath() + "/admin/deliveryList.do");
+			
+			return "common/resultView";
+		}
+		
 		AdminOrderVO adminOrderVO = adminOrderService.selectOrder(deliveryVO.getOrder_no());
 		model.addAttribute("deliveryVO", deliveryVO);
 		model.addAttribute("adminOrderVO", adminOrderVO);
@@ -103,17 +111,13 @@ public class DeliveryController {
 	
 	//송장번호 등록 처리
 	@PostMapping("/admin/deliveryTrack.do")
-	public String DeliveryTracking(DeliveryVO deliveryVO, HttpServletRequest request, Model model) {
+	public String DeliveryTracking(DeliveryVO deliveryVO) {
 		logger.debug("<<DeliveryTracking 호출>> deliveryVO : " + deliveryVO);
 		
 		//송장번호 등록
 		deliveryService.insertTracking(deliveryVO);
 		
-		//완료시 alert창에 표시할 내용
-		model.addAttribute("message", "송장번호 등록이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath() + "/admin/deliveryList.do");
-		
-		return "common/resultView";
+		return "redirect:/admin/deliveryList.do";
 	}
 	
 	
@@ -126,13 +130,20 @@ public class DeliveryController {
 		deliveryVO.setDelivery_no(delivery_no);
 		deliveryVO.setD_status_num(d_status_num);
 		
-		//송장번호 등록
+		//배송상태가 1단계 전후인지 체크
+		DeliveryVO dbDelivery = deliveryService.selectDelivery(delivery_no);
+		int before = dbDelivery.getD_status_num(); //이전 상태번호
+		int after = deliveryVO.getD_status_num();  //변경할 상태번호
+		if((after-before) != 1 || before < 0 || after > 3 ) {
+			model.addAttribute("message", "잘못된 접근입니다.");
+			model.addAttribute("url", request.getContextPath() + "/admin/deliveryList.do");
+			
+			return "common/resultView";
+		}
+		
+		//배송상태 변경
 		deliveryService.updateStatus(deliveryVO);
 		
-		//완료시 alert창에 표시할 내용
-		model.addAttribute("message", "배송상태 변경이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath() + "/admin/deliveryList.do");
-		
-		return "common/resultView";
+		return "redirect:/admin/deliveryList.do";
 	}
 }

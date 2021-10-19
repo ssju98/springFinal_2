@@ -54,7 +54,7 @@
 											 kr.spring.soption.vo, kr.spring.cart.vo, kr.spring.order.vo,
 											kr.spring.sorder_detail.vo, kr.spring.delivery.vo,
 											kr.spring.delivery_status.vo, kr.spring.review.vo, kr.spring.qna.vo,
-											kr.spring.adminMember.vo,kr.spring.adminOrder.vo"/>
+											kr.spring.adminMember.vo, kr.spring.adminOrder.vo"/>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.spring.**.dao"/>

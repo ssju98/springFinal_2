@@ -24,7 +24,8 @@
 				alert('송장번호 13자리를 입력해주세요.');
 				return false;
 			}
-			var check = confirm('[송장번호 : ' + tracking_num.value + ']\n배송상태가 [배송중]으로 변경됩니다.');
+			
+			var check = confirm('(송장번호 : ' + tracking_num.value + ')\n배송상태가 [배송중]으로 변경됩니다.');
 			return check;
 		};
 	};

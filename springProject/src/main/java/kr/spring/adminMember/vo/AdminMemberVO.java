@@ -18,8 +18,8 @@ public class AdminMemberVO {
 	private String mem_name;
 	@NotEmpty
 	private String mem_phone;
-	@Email
 	@NotEmpty
+	@Email
 	private String mem_email;
 	@Size(min=5,max=5)
 	private String mem_zipcode;
