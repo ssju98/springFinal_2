@@ -112,13 +112,13 @@
 		<table class="table table-hover table-bordered table-sm">
 			<thead>
 				<tr>
-					<th>주문일</th>
-					<th>주문번호</th>
-					<th>주문아이디</th>
-					<th>결제수단</th>
-					<th>결제금액</th>
-					<th>처리상태</th>
-					<th>관리</th>
+					<th class="c-date">주문일</th>
+					<th class="c-onum">주문번호</th>
+					<th class="c-id">주문아이디</th>
+					<th class="c-method">결제수단</th>
+					<th class="c-pay">결제금액</th>
+					<th class="c-satus">처리상태</th>
+					<th class="c-manage">관리</th>
 				</tr>
 			<thead>
 			<tbody>

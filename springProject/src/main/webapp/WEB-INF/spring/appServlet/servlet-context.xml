@@ -59,6 +59,7 @@
 				
 				<beans:value>/WEB-INF/tiles-def/adminMember.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/adminOrder.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/admin.xml</beans:value>
 				
           	  	<beans:value>/WEB-INF/tiles-def/login.xml</beans:value>
            	 	<beans:value>/WEB-INF/tiles-def/adminInfo.xml</beans:value>
@@ -99,6 +100,9 @@
 		<interceptor>
 			<mapping path="/admin/memberDelete.do"/>
 			<mapping path="/admin/orderCancel.do"/>
+			<mapping path="/admin/adminList.do"/>
+			<mapping path="/admin/adminRegister.do"/>
+			<mapping path="/admin/adminDelete.do"/>
 			<beans:bean class="kr.spring.interceptor.SuperAdminCheckInterceptor"/>
 		</interceptor>
 		<!-- 메뉴 인터셉트 -->

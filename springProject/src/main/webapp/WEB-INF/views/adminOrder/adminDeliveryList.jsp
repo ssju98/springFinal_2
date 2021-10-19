@@ -2,11 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- CSS file -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
 <!-- BootStrap icon -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
+<script type="text/javascript">
+	$(function(){
+		//배송조회 창 열기
+		$('.btn-tracking').click(function(){
+			var tnum = $(this).attr('data-tnum');
+			window.open('https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?displayHeader=N&sid1=' + tnum,
+				    	'_blank', 'titlebar=yes, width=800, height=700');
+ 		});
+		
+		//배송준비 버튼 확인창
+		$('.btn-status1').click(function(){
+			var check = confirm('배송상태가 [배송준비중]로 변경됩니다.');
+			if(check){
+				var dnum = $(this).attr('data-dnum');
+				location.href='dStatusUpdate.do?delivery_no=' + dnum + '&d_status_num=1';
+			}
+		});
+		
+		//배송완료 버튼 확인창
+		$('.btn-status3').click(function(){
+			var check = confirm('배송상태가 [배송완료]로 변경됩니다.');
+			if(check){
+				var dnum = $(this).attr('data-dnum');
+				location.href='dStatusUpdate.do?delivery_no=' + dnum + '&d_status_num=3';
+			}
+		});
+	});
+</script>
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
 	<div id="wide-width" class="wide-table">
@@ -49,12 +76,12 @@
 		<table class="table table-hover table-bordered table-sm">
 			<thead>
 				<tr>
-					<th>주문일</th>
-					<th>주문번호</th>
-					<th>주문자아이디</th>
-					<th>배송상태</th>
-					<th>송장번호</th>
-					<th>관리</th>
+					<th class="c-date">주문일</th>
+					<th class="c-onum">주문번호</th>
+					<th class="c-id">주문자아이디</th>
+					<th class="c-satus">배송상태</th>
+					<th class="c-track">송장번호</th>
+					<th class="c-manage">관리</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -64,19 +91,29 @@
 					<td>${delivery.order_no}</td>
 					<td>${delivery.mem_id}</td>
 					<td>${delivery.d_status_name}</td>
-					<td>${delivery.tracking_num}</td>
+					<td>
+						${delivery.tracking_num}
+						<c:if test="${!empty delivery.tracking_num}">
+							<button class="btn-tracking" data-tnum="${delivery.tracking_num}">
+								<i class="bi bi-zoom-in "></i>조회
+							</button>
+						</c:if>
+					</td>
 					<td>
 						<c:if test="${delivery.d_status_num == 0}">
-							<button class="btn btn-light btn-sm" onclick="location.href='dStatusUpdate.do?delivery_no=${delivery.delivery_no}&d_status_num=1'">
-							<i class="bi bi-box-seam mr-1"></i>배송준비</button>
+							<button class="btn btn-light btn-sm btn-status1" data-dnum="${delivery.delivery_no}">
+								<i class="bi bi-box-seam mr-1"></i>배송준비
+							</button>
 						</c:if>
 						<c:if test="${delivery.d_status_num == 1}">
 							<button class="btn btn-light btn-sm" onclick="location.href='deliveryTrack.do?delivery_no=${delivery.delivery_no}'">
-							<i class="bi bi-truck mr-1"></i>송장등록</button>
+								<i class="bi bi-truck mr-1"></i>송장등록
+							</button>
 						</c:if>
 						<c:if test="${delivery.d_status_num == 2}">
-							<button class="btn btn-light btn-sm" onclick="location.href='dStatusUpdate.do?delivery_no=${delivery.delivery_no}&d_status_num=3'">
-							<i class="bi bi-check-circle mr-1"></i>배송완료</button>
+							<button class="btn btn-light btn-sm btn-status3" data-dnum="${delivery.delivery_no}">
+								<i class="bi bi-check-circle mr-1"></i>배송완료
+							</button>
 						</c:if>
 					</td>
 				</tr>

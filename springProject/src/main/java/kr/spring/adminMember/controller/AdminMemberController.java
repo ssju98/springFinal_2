@@ -3,6 +3,7 @@ package kr.spring.adminMember.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.adminMember.service.AdminMemberService;
@@ -191,6 +193,143 @@ public class AdminMemberController {
 			//실패시 alert창에 표시할 내용
 			model.addAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			model.addAttribute("url", request.getContextPath() + "/admin/memberDelete.do?mem_num=" + adminMemberVO.getManage_num());
+		}
+		
+		return "common/resultView";
+	}
+	
+	//============== 관리자관리 ==============
+	//관리자 목록
+	@RequestMapping("/admin/adminList.do")
+	public ModelAndView adminList(@RequestParam(value="pageNum", defaultValue="1") int currentPage) {
+		
+		logger.debug("<<adminList 호출>> currentPage : " + currentPage);
+		
+		//검색 조건
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		//결과데이터 수
+		int count = adminMemberService.getAdminCount();
+		
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "adminList.do");
+		
+		List<AdminMemberVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
+			
+			list = adminMemberService.getAdminList(map);
+		}
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("pagingHtml", page.getPagingHtml());
+		
+		return mav;
+	}
+	
+	//관리자 등록 - 아이디 중복 체크
+	@RequestMapping("/admin/confirmId.do")
+	@ResponseBody
+	public Map<String,String> process(@RequestParam String mem_id){
+		logger.debug("<<process 호출>> mem_id : " + mem_id);
+		
+		Map<String,String> map = new HashMap<String, String>();
+		
+		AdminMemberVO adminMemberVO = adminMemberService.selectCheckMember(mem_id);
+		if(adminMemberVO != null) {
+			//아이디 중복
+			map.put("result", "idDuplicated");
+		}else {
+			if(!Pattern.matches("^[A-Za-z0-9]{4,12}$", mem_id)) {
+				//패턴 불일치
+				map.put("result", "notMatchPattern");
+			}else {
+				//아이디 미중복
+				map.put("result", "idNotFound");
+			}
+		}
+		return map;
+	}
+	
+	//관리자 등록 폼
+	@RequestMapping("/admin/adminRegister.do")
+	public String adminRegisterForm(Model model) {
+		logger.debug("<<adminRegisterForm 호출>>");
+		return "adminRegister";
+	}
+	
+	//관리자 등록 처리
+	@PostMapping("/admin/adminRegister.do")
+	public String adminRegister(@Valid AdminMemberVO adminMemberVO, BindingResult result, HttpSession session, HttpServletRequest request, Model model) {
+		logger.debug("<<adminRegister 호출>> adminMemberVO : " + adminMemberVO);
+		
+		//입력데이터 유효성 체크
+		if(result.hasErrors()) { 
+			return "adminRegister";
+		}
+		
+		//관리자 등록
+		adminMemberService.insertAdmin(adminMemberVO);
+		
+		//alert창에 표시할 내용
+		model.addAttribute("message", "관리자 등록이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/admin/adminList.do");
+		
+		return "common/resultView";
+	}
+	
+	
+	//관리자 삭제 폼 - 최고관리자 인증
+	@GetMapping("/admin/adminDelete.do")
+	public String adminDeleteForm(@RequestParam int mem_num, HttpServletRequest request, Model model) {
+		logger.debug("<<adminDeleteForm 호출>> mem_num : " + mem_num);
+		
+		//관리자 존재여부 체크
+		AdminMemberVO member = adminMemberService.selectAdmin(mem_num);
+		if(member == null) {
+			//alert창에 표시할 내용
+			model.addAttribute("message", "존재하지 않는 관리자입니다.");
+			model.addAttribute("url", request.getContextPath() + "/admin/adminList.do");
+			
+			return "common/resultView";
+		}
+		
+		//삭제할 회원번호
+		model.addAttribute("mem_num", mem_num);
+		
+		return "adminDelete";
+	}
+	
+	//관리자 삭제 처리
+	@PostMapping("/admin/adminDelete.do")
+	public String adminDelete(AdminMemberVO adminMemberVO, HttpSession session, HttpServletRequest request, Model model) {
+		logger.debug("<<adminDelete 호출>> adminMemberVO : " + adminMemberVO);
+		
+		String mem_id = (String)session.getAttribute("mem_id"); //로그인한 아이디
+		AdminMemberVO dbMember = adminMemberService.selectCheckMember(adminMemberVO.getMem_id()); //입력한 아이디,비밀번호,삭제할 회원번호
+		boolean check = false;
+		
+		//로그인한 아이디와 입력한 아이디가 일치하는 경우
+		if(dbMember != null && dbMember.getMem_id().equals(mem_id)) {
+			//비밀번호 일치 여부 체크
+			check = dbMember.isCheckedPassword(adminMemberVO.getMem_passwd());
+		}
+		
+		if(check) {
+			//관리자정보 삭제
+			adminMemberService.deleteAdmin(Integer.parseInt(adminMemberVO.getManage_num()));
+			
+			//완료시 alert창에 표시할 내용
+			model.addAttribute("message", "관리자 삭제가 완료되었습니다.");
+			model.addAttribute("url", request.getContextPath() + "/admin/adminList.do");
+		
+		}else {
+			//실패시 alert창에 표시할 내용
+			model.addAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			model.addAttribute("url", request.getContextPath() + "/admin/adminDelete.do?mem_num=" + adminMemberVO.getManage_num());
 		}
 		
 		return "common/resultView";
