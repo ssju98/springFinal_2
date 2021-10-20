@@ -11,7 +11,7 @@
 		  mem_email = #{mem_email},
 		  mem_zipcode = #{mem_zipcode},
 		  mem_address1 = #{mem_address1},
-		  mem_address2 = #{mem_address2},
+		  mem_address2 = #{mem_address2}
 		WHERE mem_num = #{mem_num}		  	   
 	</update>
 </mapper>

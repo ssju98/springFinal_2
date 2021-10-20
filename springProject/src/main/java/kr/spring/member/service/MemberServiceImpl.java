@@ -35,7 +35,6 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void updateMember(MemberVO member) {
 		memberMapper.updateMember(member);
-		
 	}
 
 	/*
@@ -50,6 +49,4 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.deleteMember_detail(mem_num);
 		
 	}
-
-
 }
