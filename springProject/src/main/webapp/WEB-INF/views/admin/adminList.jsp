@@ -10,10 +10,6 @@
 <div id="admin-main-width">
 	<div id="wide-width" class="wide-table">
 		<h4 id="header-main">관리자 목록</h4>
-		<c:if test="${count == 0}">
-			관리자 정보가 없습니다.
-		</c:if>
-		<c:if test="${count > 0}">
 		<table class="table table-hover table-bordered table-sm text-center">
 			<thead>
 				<tr>
@@ -56,7 +52,6 @@
 			</tbody>
 		</table>
 		<div class="text-center mt-4">${pagingHtml}</div>
-		</c:if>
 	</div>
 </div>
 <!-- 중앙 내용 끝 -->

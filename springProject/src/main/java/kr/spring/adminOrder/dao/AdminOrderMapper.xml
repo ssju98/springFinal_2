@@ -13,6 +13,12 @@
 			 <where>
 			 	<if test="d_status_num != ''">
 			 		d.d_status_num=#{d_status_num}
+			 		<if test="d_status_num == 5"><!-- 반품 -->
+			 			OR d.d_status_num=8
+			 		</if>
+			 		<if test="d_status_num == 6"><!-- 교환 -->
+			 			OR d.d_status_num=9
+			 		</if>
 			 	</if>
 			 	<if test="d_status_num != '' and keyword != ''">
 			 		AND
@@ -45,7 +51,13 @@
 					<where>
 						<if test="d_status_num != ''">
 					 		d.d_status_num=#{d_status_num}
-					 	</if>
+					 		<if test="d_status_num == 5"><!-- 반품 -->
+					 			OR d.d_status_num=8
+					 		</if>
+					 		<if test="d_status_num == 6"><!-- 교환 -->
+					 			OR d.d_status_num=9
+					 		</if>
+			 			</if>
 					 	<if test="d_status_num != '' and keyword != ''">
 					 		AND
 					 	</if>

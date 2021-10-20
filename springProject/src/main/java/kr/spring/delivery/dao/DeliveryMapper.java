@@ -41,4 +41,9 @@ public interface DeliveryMapper {
 	
 	@Update("UPDATE delivery SET d_status_num=#{d_status_num} WHERE delivery_no=#{delivery_no}")
 	public void updateStatus(DeliveryVO deliveryVO);
+	
+	//============== 교환반품관리 ==============
+	public int getReturnCount(Map<String,Object> map);
+	
+	public List<DeliveryVO> getReturnList(Map<String,Object> map);
 }

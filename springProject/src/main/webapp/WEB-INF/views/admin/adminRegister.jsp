@@ -141,7 +141,7 @@
 		<form:form action="adminRegister.do" modelAttribute="adminMemberVO" class="form-inline" id="register_form">
 			<table class="table table-bordered">
 				<tr>
-					<th>관리자 유형</th>
+					<th>관리자유형</th>
 					<td>
 						<form:select path="mem_auth" class="form-control form-control-sm">
 							<form:option value="3" label="일반관리자"/>

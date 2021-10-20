@@ -58,9 +58,12 @@
 	<div id="wide-width" class="wide-table">
 		<h4 id="header-main">관리자 수정</h4>
 		<form:form action="adminUpdate.do" modelAttribute="adminMemberVO" class="form-inline">
+			<form:hidden path="mem_num"/>
+			<form:hidden path="mem_id"/>
+			<form:hidden path="mem_date"/>
 			<table class="table table-bordered">
 				<tr>
-					<th>관리자 유형</th>
+					<th>관리자유형</th>
 					<td>
 						<form:select path="mem_auth" class="form-control form-control-sm">
 							<form:option value="3" label="일반관리자"/>
@@ -71,13 +74,6 @@
 				<tr>
 					<th>아이디</th>
 					<td>${adminMemberVO.mem_id}</td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td>
-						<form:password path="mem_passwd" placeholder="4~12자리의 영문,숫자" class="form-control form-control-sm"/>
-						<form:errors path="mem_passwd" class="text-danger"/>
-					</td>
 				</tr>
 				<tr>
 					<th>이름</th>

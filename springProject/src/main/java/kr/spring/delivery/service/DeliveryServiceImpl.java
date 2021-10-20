@@ -72,4 +72,14 @@ public class DeliveryServiceImpl implements DeliveryService {
 	public void updateStatus(DeliveryVO deliveryVO) {
 		deliveryMapper.updateStatus(deliveryVO);
 	}
+
+	@Override
+	public int getReturnCount(Map<String, Object> map) {
+		return deliveryMapper.getReturnCount(map);
+	}
+
+	@Override
+	public List<DeliveryVO> getReturnList(Map<String, Object> map) {
+		return deliveryMapper.getReturnList(map);
+	}
 }

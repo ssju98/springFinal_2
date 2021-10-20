@@ -106,7 +106,9 @@
 		</form>
 		<!-- 주문 검색 결과 -->
 		<c:if test="${count == 0}">
-			주문 정보가 없습니다.
+			<div class="card rounded-0">
+				<div class="card-body my-5 text-center">주문 정보가 없습니다.</div>
+			</div>
 		</c:if>
 		<c:if test="${count > 0}">
 		<table class="table table-hover table-bordered table-sm text-center">

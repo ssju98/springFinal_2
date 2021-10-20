@@ -15,41 +15,40 @@
 				    	'_blank', 'titlebar=yes, width=800, height=700');
  		});
 		
-		//배송준비 버튼 확인창
-		$('.btn-status1').click(function(){
-			var check = confirm('배송상태가 [배송준비중]로 변경됩니다.');
+		//반품완료 버튼 확인창
+		$('.btn-status8').click(function(){
+			var check = confirm('처리상태가 [반품완료]로 변경됩니다.');
 			if(check){
 				var dnum = $(this).attr('data-dnum');
-				location.href='dStatusUpdate.do?delivery_no=' + dnum + '&d_status_num=1';
+				location.href='dStatusUpdate.do?delivery_no=' + dnum + '&d_status_num=8';
 			}
 		});
 		
-		//배송완료 버튼 확인창
-		$('.btn-status3').click(function(){
-			var check = confirm('배송상태가 [배송완료]로 변경됩니다.');
+		//교환완료 버튼 확인창
+		$('.btn-status9').click(function(){
+			var check = confirm('처리상태가 [교환완료]로 변경됩니다.');
 			if(check){
 				var dnum = $(this).attr('data-dnum');
-				location.href='dStatusUpdate.do?delivery_no=' + dnum + '&d_status_num=3';
+				location.href='dStatusUpdate.do?delivery_no=' + dnum + '&d_status_num=9';
 			}
 		});
+		
 	});
 </script>
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
 	<div id="wide-width" class="wide-table">
-		<h4 id="header-main">배송 관리</h4>
-		<!-- 배송 검색 조건 -->
-		<form action="deliveryList.do" method="get" id="search_form">
+		<h4 id="header-main">반품/교환 관리</h4>
+		<!-- 반품교환 검색 조건 -->
+		<form action="returnList.do" method="get" id="search_form">
 			<table class="table table-bordered table-sm">
 				<tr>
-					<th>배송상태</th>
+					<th>처리상태</th>
 					<td>
 						<div class="form-check-inline">
 						<input type="radio" name="d_status_num" value="" checked="checked" class="form-check-input">전체
-						<input type="radio" name="d_status_num" value="0" class="form-check-input ml-3">결제완료
-						<input type="radio" name="d_status_num" value="1" class="form-check-input ml-3">배송준비중
-						<input type="radio" name="d_status_num" value="2" class="form-check-input ml-3">배송중
-						<input type="radio" name="d_status_num" value="3" class="form-check-input ml-3">배송완료
+						<input type="radio" name="d_status_num" value="5" class="form-check-input ml-3">반품
+						<input type="radio" name="d_status_num" value="6" class="form-check-input ml-3">교환
 						</div>
 					</td>
 				</tr>
@@ -68,10 +67,10 @@
 				</tr>
 			</table>
 		</form>
-		<!-- 배송 검색 결과 -->
+		<!-- 반품교환 검색 결과 -->
 		<c:if test="${count == 0}">
 			<div class="card rounded-0">
-				<div class="card-body my-5 text-center">배송 처리중인 주문 정보가 없습니다.</div>
+				<div class="card-body my-5 text-center">반품/교환 처리중인 주문 정보가 없습니다.</div>
 			</div>
 		</c:if>
 		<c:if test="${count > 0}">
@@ -81,7 +80,7 @@
 					<th class="c-date">주문일</th>
 					<th class="c-onum">주문번호</th>
 					<th class="c-id">주문자아이디</th>
-					<th class="c-satus">배송상태</th>
+					<th class="c-satus">처리상태</th>
 					<th class="c-track">송장번호</th>
 					<th class="c-manage">관리</th>
 				</tr>
@@ -93,32 +92,22 @@
 					<td>${delivery.order_no}</td>
 					<td>${delivery.mem_id}</td>
 					<td>
-						<c:if test="${delivery.d_status_num == 3}"><span class="text-gray"></c:if>
+						<c:if test="${delivery.d_status_num == 8 || delivery.d_status_num == 9}"><span class="text-gray"></c:if>
 						${delivery.d_status_name}
-						<c:if test="${delivery.d_status_num == 3}"></span></c:if>
+						<c:if test="${delivery.d_status_num == 8 || delivery.d_status_num == 9}"></span></c:if>
 					</td>
 					<td>
 						${delivery.tracking_num}
-						<c:if test="${!empty delivery.tracking_num}">
-							<button class="btn-tracking" data-tnum="${delivery.tracking_num}">
-								<i class="bi bi-zoom-in "></i>조회
-							</button>
-						</c:if>
 					</td>
 					<td class="text-left">
-						<c:if test="${delivery.d_status_num == 0}">
-							<button class="btn btn-light btn-sm btn-status1" data-dnum="${delivery.delivery_no}">
-								<i class="bi bi-box-seam mr-1"></i>배송준비
+						<c:if test="${delivery.d_status_num == 5}">
+							<button class="btn btn-light btn-sm btn-status8" data-dnum="${delivery.delivery_no}">
+								<i class="bi bi-arrow-clockwise mr-1"></i>반품완료
 							</button>
 						</c:if>
-						<c:if test="${delivery.d_status_num == 1}">
-							<button class="btn btn-light btn-sm" onclick="location.href='deliveryTrack.do?delivery_no=${delivery.delivery_no}'">
-								<i class="bi bi-truck mr-1"></i>송장등록
-							</button>
-						</c:if>
-						<c:if test="${delivery.d_status_num == 2}">
-							<button class="btn btn-light btn-sm btn-status3" data-dnum="${delivery.delivery_no}">
-								<i class="bi bi-check-circle mr-1"></i>배송완료
+						<c:if test="${delivery.d_status_num == 6}">
+							<button class="btn btn-light btn-sm btn-status9" data-dnum="${delivery.delivery_no}">
+								<i class="bi bi-arrow-repeat mr-1"></i>교환완료
 							</button>
 						</c:if>
 					</td>

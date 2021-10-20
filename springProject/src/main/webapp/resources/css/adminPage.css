@@ -21,6 +21,7 @@ div#wide-width{
 	height: 70px;
 	display: table-cell;
     vertical-align: middle;
+    font-weight: bold;
 }
 #header-sub{
 	height: 50px;
@@ -29,7 +30,7 @@ div#wide-width{
 }
 
 
-/* 글자색 추가 */
+/* 색 추가 */
 .text-gray {
   color: rgb(153, 159, 166);
 }

@@ -21,13 +21,18 @@
     	<put-attribute name="left" value="/WEB-INF/views/adminOrder/left.jsp"/>
     </definition>
     <definition name="adminDeliveryList" extends="adminMain">
-    	<put-attribute name="title" value="배송목록"/>
+    	<put-attribute name="title" value="배송관리"/>
     	<put-attribute name="body" value="/WEB-INF/views/adminOrder/adminDeliveryList.jsp"/>
     	<put-attribute name="left" value="/WEB-INF/views/adminOrder/left.jsp"/>
     </definition>
     <definition name="adminDeliveryTrack" extends="adminMain">
     	<put-attribute name="title" value="송장등록"/>
     	<put-attribute name="body" value="/WEB-INF/views/adminOrder/adminDeliveryTrack.jsp"/>
+    	<put-attribute name="left" value="/WEB-INF/views/adminOrder/left.jsp"/>
+    </definition>
+    <definition name="adminReturnList" extends="adminMain">
+    	<put-attribute name="title" value="반품/교환관리"/>
+    	<put-attribute name="body" value="/WEB-INF/views/adminOrder/adminReturnList.jsp"/>
     	<put-attribute name="left" value="/WEB-INF/views/adminOrder/left.jsp"/>
     </definition>
 </tiles-definitions>

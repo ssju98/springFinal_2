@@ -19,4 +19,8 @@ public interface DeliveryService {
 	public DeliveryVO selectDelivery(int delivery_no);
 	public void insertTracking(DeliveryVO deliveryVO);
 	public void updateStatus(DeliveryVO deliveryVO);
+	
+	//============== 교환반품관리 ==============
+	public int getReturnCount(Map<String,Object> map);
+	public List<DeliveryVO> getReturnList(Map<String,Object> map);
 }

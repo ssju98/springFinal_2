@@ -130,20 +130,67 @@ public class DeliveryController {
 		deliveryVO.setDelivery_no(delivery_no);
 		deliveryVO.setD_status_num(d_status_num);
 		
-		//배송상태가 1단계 전후인지 체크
 		DeliveryVO dbDelivery = deliveryService.selectDelivery(delivery_no);
 		int before = dbDelivery.getD_status_num(); //이전 상태번호
 		int after = deliveryVO.getD_status_num();  //변경할 상태번호
-		if((after-before) != 1 || before < 0 || after > 3 ) {
-			model.addAttribute("message", "잘못된 접근입니다.");
-			model.addAttribute("url", request.getContextPath() + "/admin/deliveryList.do");
+		
+		//배송상태가 1단계 전후인지 체크
+		if((after-before) == 1 || before >= 0 && after <= 3 ) {
+			//배송상태 변경
+			deliveryService.updateStatus(deliveryVO);
 			
-			return "common/resultView";
+			return "redirect:/admin/deliveryList.do";
 		}
 		
-		//배송상태 변경
-		deliveryService.updateStatus(deliveryVO);
+		//반품교환 여부 체크
+		if((before == 5 && after == 8) || (before == 6 && after == 9)) {
+			//반품교환상태 변경
+			deliveryService.updateStatus(deliveryVO);
+			
+			return "redirect:/admin/returnList.do";
+		}
 		
-		return "redirect:/admin/deliveryList.do";
+		model.addAttribute("message", "잘못된 접근입니다.");
+		model.addAttribute("url", request.getContextPath() + "/shop/main.do");
+		
+		return "common/resultView";
 	}
+	
+	//반품교환취소 목록
+	@RequestMapping("/admin/returnList.do")
+	public ModelAndView adminReturnList(@RequestParam(value="pageNum", defaultValue="1") int currentPage,
+										  @RequestParam(value="d_status_num", defaultValue="") String d_status_num,
+										  @RequestParam(value="keyfield", defaultValue="") String keyfield,
+										  @RequestParam(value="keyword", defaultValue="") String keyword) {
+		
+		logger.debug("<<adminReturnList 호출>> currentPage : " + currentPage + ", d_status_num : " + d_status_num + ", keyfield : " + keyfield +", keyword : " + keyword);
+		
+		//검색 조건
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("d_status_num", d_status_num);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		//결과데이터 수
+		int count = deliveryService.getReturnCount(map);
+		
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "returnList.do");
+		
+		List<DeliveryVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
+			
+			list = deliveryService.getReturnList(map);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminReturnList");
+		mav.addObject("count", count);
+		mav.addObject("list", list);
+		mav.addObject("pagingHtml", page.getPagingHtml());
+		
+		return mav;
+	}
+	
 }
