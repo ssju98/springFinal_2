@@ -113,7 +113,7 @@ public class Category_topController {
 		return "redirect:/category_top/list.do";
 	}
 	
-	//회원 삭제 폼 - 최고관리자 인증
+	//상위카테고리 삭제 폼
 	@GetMapping("/category_top/category_topDelete.do")
 	public String category_topDeleteForm(@RequestParam int c_top_no, HttpServletRequest request, Model model) {
 		logger.debug("category_top deleteForm 호출 - c_top_no : " + c_top_no);
@@ -124,7 +124,7 @@ public class Category_topController {
 		return "category_top_delete";
 	}
 	
-	//회원 삭제 처리
+	//상위카테고리 삭제 처리
 	@PostMapping("/category_top/category_topDelete.do")
 	public String category_topDelete(int c_top_no) {
 		logger.debug("category_top delete 호출 - c_top_no : " + c_top_no);

@@ -12,7 +12,7 @@
 					<tr>
 						<th>상위카테고리 번호</th>
 						<th width="30%">상위카테고리명</th>
-						<th>수정/삭제</th>
+						<th>카테고리 관리</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -23,6 +23,7 @@
 						<td>
 							<input type="button" class="btn btn-info" value="수정" onclick="location.href='category_topUpdate.do?c_top_no=${category_top.c_top_no}'">
 							<input type="button" class="btn btn-danger deleteBtn" value="삭제" onclick="location.href='category_topDelete.do?c_top_no=${category_top.c_top_no}'" id="delete_${category_top.c_top_no}">
+							<input type="button" class="btn btn-secondary" value="하위 카테고리 관리" onclick="location.href='category_sub/list.do?c_top_no=${category_top.c_top_no}'">
 						</td>
 					</tr>
 					
@@ -34,5 +35,5 @@
 			</div>
 			<br><br>
 		</div>
-	<input type="button" class="btn btn-secondary" value="하위 카테고리 관리" onclick="location.href='category_sub/list.do'">
+	
 </div>

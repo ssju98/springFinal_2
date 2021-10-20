@@ -10,7 +10,13 @@ public interface Category_subService {
 	public List<Category_subVO> selectCategory_sub();
 	
 	public void updateCategory_sub(Category_subVO category_sub);
-	public void deleteCategory_sub(Category_subVO category_sub);
+	public void deleteCategory_sub(int c_sub_no);
 	
 	public List<Category_subVO> category_subSelectAll();
+	
+	public List<Category_subVO> category_subWanted(int c_top_no);
+	
+	public Category_subVO category_subWant(int c_top_no);
+
+	public Category_subVO category_subWanted();
 }
