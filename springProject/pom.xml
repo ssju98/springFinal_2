@@ -200,22 +200,40 @@
 			<scope>test</scope>
 		</dependency>
 
-		
-		
+
+
 		<!-- ============최유정 구글차트 시작============================ -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.8</version>
 		</dependency>
 
-		<!-- ============최유정 구글차트 끌============================ -->
+		<!-- ============최유정 구글차트 끌=============================== -->
+
+
+
+		<!-- ============최유정 이메일인증 시작============================ -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+
+		<!-- ============최유정 이메일인증 끝============================== -->
 
 
 

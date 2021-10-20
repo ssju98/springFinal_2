@@ -1,7 +1,5 @@
 package kr.spring.cart.vo;
 
-import java.util.Arrays;
-
 public class ProductCartVO {
 		private int p_no;
 		private String p_name;

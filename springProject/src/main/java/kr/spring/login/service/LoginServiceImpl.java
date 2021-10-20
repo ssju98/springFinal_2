@@ -25,4 +25,10 @@ public class LoginServiceImpl implements LoginService{
 		return loginMapper.loginAction(id);
 	}
 
+	@Override
+	public void sendMail(LoginVO loginVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

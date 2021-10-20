@@ -13,17 +13,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.spring.adminOrder.vo.AdminOrderVO;
 import kr.spring.cart.service.CartService;
 import kr.spring.cart.vo.ProductCartVO;
 import kr.spring.delivery.service.DeliveryService;
@@ -36,7 +33,6 @@ import kr.spring.order.vo.OrderVO;
 import kr.spring.orderDetail.service.OrderDetailService;
 import kr.spring.orderDetail.vo.OrderDetailVO;
 import kr.spring.product.service.ProductService;
-import kr.spring.product.vo.ProductVO;
 
 @Controller
 public class OrderController {

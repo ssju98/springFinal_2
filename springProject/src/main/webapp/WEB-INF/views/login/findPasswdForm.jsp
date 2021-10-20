@@ -5,12 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
+<style type="text/css">
+.form-horizontal{
+	text-align:center;
+	margin-top:50px;
+}
+.fineMain{
+	width:600px;
+	align:center
+}
+</style>
 </head>
 <body>
 <form class="form-horizontal" action="${pageContext.request.contextPath}/login/passwdCodeSend.do" method="post">
 
 <h1>비밀번호 찾기</h1>
 <h3>내 정보에 등록된 이메일로 찾기</h3>
+<div class="fineMain">
   <div class="form-group">
     <label class="control-label col-sm-2" for="mem_name">이름:</label>
     <div class="col-sm-10">
@@ -30,6 +41,7 @@
       <button type="submit" class="btn btn-default">인증번호 전송</button>
     </div>
   </div>
+</div>
 </form>
 </body>
 </html>

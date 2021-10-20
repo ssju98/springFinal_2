@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
-import kr.spring.order.vo.OrderAllVO;
 import kr.spring.orderDetail.vo.OrderDetailVO;
 
 public interface OrderDetailMapper {

@@ -18,7 +18,22 @@ margin-top:80px;
 margin-left:480px;
 }
 	
-</style>	
+</style>
+<script type="text/javascript">
+	
+	var session1 = '<%=(Integer)session.getAttribute("mem_num")%>';
+	if(session1==null){
+		
+		window.history.forward();
+		function noBack() {
+			window.history.forward();
+		}
+		console.log('오잉오잉');
+		console.log(session1+'-----함수안 세션값');
+	}
+	
+	console.log(session1+'함수밖 세션값');
+</script>	
 </head>
 <body>
 <table class="table" id="adminInfoForm">

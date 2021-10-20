@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.category_sub.vo.Category_subVO;
-import kr.spring.category_top.vo.Category_topVO;
 
 public interface Category_subMapper {
 	@Select("SELECT category_sub_seq.nextval FROM dual")

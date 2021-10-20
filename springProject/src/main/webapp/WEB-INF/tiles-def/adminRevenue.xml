@@ -12,14 +12,14 @@
 <tiles-definitions>
 
     <definition name="termRevenue" extends="adminMain">
-    	<put-attribute name="title" value="기간별 매출"/>
+    	<put-attribute name="title" value="상품별 매출"/>
     	<put-attribute name="body" value="/WEB-INF/views/adminRevenue/termRevenue.jsp"/>
     	<put-attribute name="left" value="/WEB-INF/views/adminRevenue/left.jsp"/>
     </definition>
 
 
     <definition name="goodsRevenue" extends="adminMain">
-    	<put-attribute name="title" value="상품별 매출"/>
+    	<put-attribute name="title" value=" 매출"/>
     	<put-attribute name="body" value="/WEB-INF/views/adminRevenue/goodsRevenue.jsp"/>
     	<put-attribute name="left" value="/WEB-INF/views/adminRevenue/left.jsp"/>
     </definition>

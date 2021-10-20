@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Select;
 
 import kr.spring.order.vo.OrderAllVO;
 import kr.spring.order.vo.OrderVO;
-import kr.spring.orderDetail.vo.OrderDetailVO;
 
 public interface OrderMapper {
 	

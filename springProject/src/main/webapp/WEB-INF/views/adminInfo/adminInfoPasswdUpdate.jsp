@@ -42,7 +42,7 @@
 	}
 	
 </script>
-<form id="adminModify" action="${pageContext.request.contextPath}/admin/adminInfoUpdateAction.do" method="post">
+<form id="adminModify" action="${pageContext.request.contextPath}/admin/adminInfoPwUpdateAction.do" method="post">
 <table class="table">
   <h2>변경할 비밀번호 입력</h2>
     <tr>

@@ -24,7 +24,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.qna.service.QnaService;
 import kr.spring.qna.vo.QnaVO;
-import kr.spring.util.StringUtil;
 
 
 @Controller

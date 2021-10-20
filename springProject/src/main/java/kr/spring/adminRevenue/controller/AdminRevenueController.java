@@ -1,45 +1,45 @@
 package kr.spring.adminRevenue.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.spring.adminInfo.controller.AdminInfoController;
 import kr.spring.adminRevenue.service.AdminRevenueService;
 
 /**
   * @FileName : AdminRevenueController.java
   * @Date : 2021. 10. 12. 
   * @Author : 최유정
-  * @Description : term기간별, goods상품별 매출관리 Controller
+  * @Description : goods상품별 매출관리 Controller
   */
 
-@RestController //json을 리턴하는 method가 있는 경우
 @Controller
 public class AdminRevenueController {
 
-	private static final Logger logger = LoggerFactory.getLogger(AdminInfoController.class);
-
+	@Autowired
 	private AdminRevenueService adminRevenueService;
-	
-//	@RequestMapping("/admin/termRevenue.do")
-//	public String termRevenue() {
-//		
-//		return "termRevenue";
-//	}
 
 	@RequestMapping("/admin/goodsRevenue.do")
 	public String goodsRevenue() {
-		
 		return "goodsRevenue";
 	}
 	
 	@RequestMapping("/admin/termRevenue.do")
 	public ModelAndView termChartRevenue() {
-		return new ModelAndView("termRevenue");///ㅇㅇㅇㅇ
+		ModelAndView model = new ModelAndView("termRevenue");
+		return model;
 	}
 	
+	@RequestMapping("/admin/getGoodsRevenue.do")
+	@ResponseBody
+	public List<HashMap<String, Object>> getGoodsRevenue(@RequestParam String startDate, @RequestParam String endDate) {
+		return adminRevenueService.getGoodsRevenue(startDate, endDate);
+	}
+
 }

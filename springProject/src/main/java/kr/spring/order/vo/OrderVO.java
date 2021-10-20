@@ -2,7 +2,6 @@ package kr.spring.order.vo;
 
 import java.sql.Date;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class OrderVO {

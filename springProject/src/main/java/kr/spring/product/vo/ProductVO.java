@@ -1,8 +1,6 @@
 package kr.spring.product.vo;
 
 import java.io.IOException;
-import java.util.Arrays;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductVO {

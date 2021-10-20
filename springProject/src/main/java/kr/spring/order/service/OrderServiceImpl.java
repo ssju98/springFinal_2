@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.spring.adminOrder.vo.AdminOrderVO;
 import kr.spring.order.dao.OrderMapper;
 import kr.spring.order.vo.OrderAllVO;
 import kr.spring.order.vo.OrderVO;

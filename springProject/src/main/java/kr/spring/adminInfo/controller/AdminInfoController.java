@@ -1,19 +1,14 @@
 package kr.spring.adminInfo.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import kr.spring.adminInfo.service.AdminInfoService;
 import kr.spring.login.vo.LoginVO;
 
@@ -23,6 +18,7 @@ import kr.spring.login.vo.LoginVO;
   * @Author : 최유정
   * @Description : 관리자 마이페이지
   */
+
 @Controller
 public class AdminInfoController {
 	
@@ -39,7 +35,7 @@ public class AdminInfoController {
 	}
 	
 	
-	//관리자 마이페이지 폼
+	//관리자 마이페이지 - 폼
 	@RequestMapping("/admin/adminInfoForm.do")
 	public String adminInfoForm(HttpSession session, Model model) {
 		
@@ -60,8 +56,8 @@ public class AdminInfoController {
 	}
 	
 	
-	//관리자 마이페이지 수정 폼
-	@RequestMapping("admin/adminInfoUpdateForm.do")
+	//관리자 마이페이지 - 수정 폼
+	@RequestMapping("/admin/adminInfoUpdateForm.do")
 	public String adminInfoUpdateForm(HttpSession session, Model model) {
 		
 		String mem_id = (String)session.getAttribute("mem_id");
@@ -79,15 +75,18 @@ public class AdminInfoController {
 			System.out.println("그럼 여기로 와....?");
 			return "loginForm"; //타일즈 식별자
 		}
+		
+		
+		
 	}
 	
 	
-	//수정 처리 컨트롤러
-	@RequestMapping("admin/adminInfoUpdateAction.do")
-	public String adminInfoUpdateAction(@Valid LoginVO loginVO, HttpSession session) {
+	//관리자 마이페이지 - 수정 처리
+	@RequestMapping("/admin/adminInfoUpdateAction.do")
+	public String adminInfoUpdateAction(LoginVO loginVO, HttpSession session) {
 		
 		System.out.println(loginVO.toString());
-		
+		System.out.println("~~~~~~~~~~~~~~들어오나");
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		
 		if(mem_num!=null) { // 로그인중이면
@@ -97,14 +96,18 @@ public class AdminInfoController {
 			return "redirect:/admin/adminInfoForm.do"; //수정 성공 - 
 		}
 			
-		
+		System.out.println("==================수정실패====");
+
 		
 		return "adminInfoUpdateForm"; //수정실패
 		
 	}
 	
+	
+	
+	
 	//비밀번호 수정 폼
-	@RequestMapping("admin/adminInfoPasswdUpdate.do")
+	@RequestMapping("/admin/adminInfoPasswdUpdate.do")
 	public String adminInfoPasswdUpdate(HttpSession session, Model model) {
 		
 		String mem_id = (String)session.getAttribute("mem_id");
@@ -121,7 +124,7 @@ public class AdminInfoController {
 	}
 	
 	//관리자 마이페이지 - 비밀번호 수정처리
-	@PostMapping("/admin/adminInfoUpdateAction.do")
+	@PostMapping("/admin/adminInfoPwUpdateAction.do")
 	public String adminInfoUpdateAction(HttpSession session, LoginVO loginVO) {
 		
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
@@ -134,9 +137,6 @@ public class AdminInfoController {
 		}
 		return "adminInfoUpdateForm"; //수정실패
 	}
-	
-	
-	
 }
 
 

@@ -17,6 +17,21 @@
     	<put-attribute name="body" value="/WEB-INF/views/login/findIdForm.jsp"/>
     </definition>
     
+    <definition name="findPasswdForm" extends="shopMain">
+    	<put-attribute name="title" value="비밀번호 찾기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/login/findPasswdForm.jsp"/>
+    </definition>
+    
+    <definition name="passwdCodeCheck" extends="shopMain">
+    	<put-attribute name="title" value="이메일 인증 코드"/>
+    	<put-attribute name="body" value="/WEB-INF/WEB-INF/views/login/passwdCodeCheck.jsp"/>
+    </definition>
+
+    <definition name="logout" extends="shopMain">
+    	<put-attribute name="title" value="로그아웃"/>
+    	<put-attribute name="body" value="/WEB-INF/views/login/logoutRe.jsp"/>
+    </definition>
+    
 </tiles-definitions>
 
 

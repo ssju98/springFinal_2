@@ -1,5 +1,7 @@
 package kr.spring.login.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -36,8 +38,12 @@ public class LoginController {
 	
 	//로그인 처리
 	@PostMapping("/login/loginAction.do")
-	public String loginAction(@Valid LoginVO loginVO, HttpSession session ) {
+	public String loginAction(@Valid LoginVO loginVO, HttpSession session, HttpServletResponse response ) {
 		logger.debug("============로그인처리 Controller===========" +loginVO);
+		
+//		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+//		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+//		response.setHeader("Expires", "0"); // Proxies.
 		
 		LoginVO vo = loginService.loginAction(loginVO.getMem_id());
 		
@@ -64,33 +70,48 @@ public class LoginController {
 	
 	//로그아웃 처리
 	@RequestMapping("/login/logout.do")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletRequest request) {
 		
 		session.invalidate();
+		request.getSession(true);
 		
-		return "shopMain"; //타일스 식별자
+		return "logout"; //타일스 식별자
 		
 	}
+	
+	
+//	//로그아웃 처리
+//	@RequestMapping("/login/logout.do")
+//	public String logout(HttpSession session, HttpServletRequest request) {
+//		
+//		session.invalidate();
+//		request.getSession(true);
+//		
+////		return "/adminInfo/Updatesuccess"; //수정 성공
+//
+//		return "/login/logoutRe"; //타일스 식별자
+//		
+//	}
 	
 	//아이디 찾기 폼
 	@RequestMapping("login/findIdForm.do")
 	public String findInfoForm() {
 		
-		return "login/findIdForm";
+		return "findIdForm";
 	}
 
 	//비밀번호 찾기 폼
 	@RequestMapping("login/findPasswdForm.do")
 	public String findPasswdForm() {
 		
-		return "login/findPasswdForm";
+		return "findPasswdForm";
 	}
 	
 	//비밀번호찾기 인증번호 확인 폼
 	@RequestMapping("login/passwdCodeSend.do")
 	public String passwdCodeCheck() {
 		
-		return "login/passwdCodeCheck";
+		return "passwdCodeCheck";
 	}
 	
 
