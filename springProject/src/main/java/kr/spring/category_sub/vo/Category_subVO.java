@@ -23,4 +23,10 @@ public class Category_subVO {
 	public void setC_top_no(int c_top_no) {
 		this.c_top_no = c_top_no;
 	}
+	@Override
+	public String toString() {
+		return "Category_subVO [c_sub_no=" + c_sub_no + ", c_sub_name=" + c_sub_name + ", c_top_no=" + c_top_no + "]";
+	}
+	
+	
 }

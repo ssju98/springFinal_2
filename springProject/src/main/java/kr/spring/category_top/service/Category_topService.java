@@ -14,4 +14,5 @@ public interface Category_topService {
 	public void updateCategory_top(Category_topVO category_topVO);
 	public void deleteCategory_top(int c_top_no);
 	
+	public Category_topVO selectCategoryOne(int c_top_no);
 }

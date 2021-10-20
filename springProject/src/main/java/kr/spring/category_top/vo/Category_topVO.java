@@ -16,4 +16,10 @@ public class Category_topVO {
 	public void setC_top_name(String c_top_name) {
 		this.c_top_name = c_top_name;
 	}
+	@Override
+	public String toString() {
+		return "Category_topVO [c_top_no=" + c_top_no + ", c_top_name=" + c_top_name + "]";
+	}
+	
+	
 }

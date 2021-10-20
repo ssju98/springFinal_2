@@ -51,7 +51,7 @@
 		<li><a href="#" style="padding-left: 30px;">글쓰기</a>
             <ul class="main2">
 				<li><a href="#">상품후기작성</a>
-				<li><a href="#">문의남기기</a>
+				<li><a href="${pageContext.request.contextPath}/qna/qnaList.do?board_kind=0">문의게시판</a>
 			</li>
 			</ul>
 

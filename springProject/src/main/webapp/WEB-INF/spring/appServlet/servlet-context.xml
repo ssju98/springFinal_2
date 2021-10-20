@@ -71,6 +71,7 @@
 				<beans:value>/WEB-INF/tiles-def/category_top.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/category_sub.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/shopProduct.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/qna.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
@@ -90,6 +91,22 @@
 			<mapping path="/member/myPage.do"/>
 			<mapping path="/member/update.do"/>
 			<mapping path="/member/delete.do"/>
+			<mapping path="/shop/cart.do"/>
+			<mapping path="/shop/deleteCart.do"/>		
+			<mapping path="/shop/order"/>
+			<mapping path="/shop/orderResult"/>
+			<mapping path="/shop/orderList"/>
+			<mapping path="/shop/orderDetail"/>
+			<mapping path="/shop/orderCancel"/>
+			<mapping path="/shop/orderExchange"/>
+			<mapping path="/shop/orderRefund"/>
+			<mapping path="/shop/orderConfirm"/>
+						
+			<mapping path="/qna/qnaDetail.do"/>
+			<mapping path="/qna/qnaWrite.do"/>
+			<mapping path="/qna/qnaReply.do"/>
+			<mapping path="/qna/qnaUpdate.do"/>
+			<mapping path="/qna/qnaDelete.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 		<!-- 관리자 여부 체크 -->

@@ -26,4 +26,7 @@ public interface Category_topMapper {
 	
 	@Select("SELECT * FROM category_top WHERE c_top_no=#{c_top_no}")
 	public Category_topVO chooseCategory_top(int c_top_no);
+	
+	@Select("SELECT * FROM category_top WHERE c_top_no = #{c_top_no}")
+	public Category_topVO selectCategoryOne(int c_top_no);
 }

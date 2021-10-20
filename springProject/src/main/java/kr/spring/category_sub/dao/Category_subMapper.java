@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.category_sub.vo.Category_subVO;
+import kr.spring.category_top.vo.Category_topVO;
 
 public interface Category_subMapper {
 	@Select("SELECT category_sub_seq.nextval FROM dual")
@@ -34,4 +35,7 @@ public interface Category_subMapper {
 	
 	@Select("SELECT * FROM category_sub WHERE c_top_no=#{c_top_no} ORDER BY c_sub_no")
 	public Category_subVO chooseCategory_top(int c_top_no);
+	
+	@Select("SELECT * FROM category_sub WHERE c_sub_no = #{c_sub_no}")
+	public Category_subVO selectCategoryOne(int c_sub_no);
 }

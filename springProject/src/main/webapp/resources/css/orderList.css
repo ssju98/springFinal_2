@@ -110,6 +110,25 @@
 	padding-left: 15px;
 	text-align: left;
 }
+
+.table-product-name-img{
+	float: left; 
+	width: 100px;
+}
+
+.table-product-name{
+	float: left;
+	width:340px;
+	padding-left: 10px;
+}
+
+.table-product-pay{
+	float: left;
+	width:340px; 
+	padding-left: 10px; 
+	font-weight: bold;
+}
+
 .order-state-text{
 	font-weight: bold;
 	font-size: 14px;

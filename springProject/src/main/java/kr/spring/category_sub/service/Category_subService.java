@@ -19,4 +19,6 @@ public interface Category_subService {
 	public Category_subVO category_subWant(int c_top_no);
 
 	public Category_subVO category_subWanted();
+	
+	public Category_subVO selectCategoryOne(int c_sub_no);
 }

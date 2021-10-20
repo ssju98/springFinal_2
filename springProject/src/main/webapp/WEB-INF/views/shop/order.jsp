@@ -61,6 +61,51 @@
             }
         }).open();
     }
+    
+$(document).ready(function(){
+	//핸드폰 번호 정규식
+	var regExpPhone =/(01[016789])[-]([1-9]{1}[0-9]{2,3})[-]([0-9]{4})$/;
+	
+	//폼 유효성 체크
+	$('#insert_form').submit(function(){
+		if($('#order_name').val().trim()==''){
+			alert('이름을 입력해주세요!');
+			$('#order_name').focus();
+			$('#order_name').val('');
+			return false;
+		}
+			
+		if($('#order_phone').val().trim()==''){
+			alert('연락처를 입력해주세요!');
+			$('#order_phone').focus();
+			$('#order_phone').val('');
+			return false;		
+		}else if(!regExpPhone.test($('#order_phone').val().trim())){ //정규식을 이용한 핸드폰번호 유효성 검사
+			alert('000-0000-0000 형식으로 입력해주세요.');
+			return false;
+		}
+		
+		if($('#order_zipcode').val().trim()==''){
+			alert('우편번호를 입력해주세요!');
+			$('#order_zipcode').focus();
+			$('#order_zipcode').val('');
+			return false;
+		}
+		if($('#order_address1').val().trim()==''){
+			alert('주소를 입력해주세요!');
+			$('#order_address1').focus();
+			$('#order_address1').val('');
+			return false;
+		}
+		if($('#order_address2').val().trim()==''){
+			alert('상세주소를 입력해주세요!');
+			$('#order_address2').focus();
+			$('#order_address2').val('');
+			return false;
+		}
+		
+	});
+});
 </script>
 <div class="top_menu_info">
 	<div>
@@ -179,7 +224,7 @@
 		</div>
 		<div class="order-container pt-2 pb-2">
 			<div class="form-check">
-				<input class="form-check-input" type="radio" name="order_method" id="order_method" value="0">
+				<input class="form-check-input" type="radio" name="order_method" id="order_method" value="0" checked="checked">
 				<label class="form-check-label font-weight-bold pl-2" for="order_method_card">
 					<img src="${pageContext.request.contextPath}/resources/images/card.png" width="21" height="auto">
 				</label>

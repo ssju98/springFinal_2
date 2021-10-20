@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +55,11 @@ public class OrderController {
 		private DeliveryService deliveryService;
 		@Autowired
 		private ProductService productService;
+		//자바빈(VO) 초기화
+		@ModelAttribute("orderVO")
+		public OrderVO initCommand() {
+			return new OrderVO();
+		}
 
 	  //주문페이지	호출 
 	  @GetMapping("/shop/order") 
@@ -61,6 +67,11 @@ public class OrderController {
 		  
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  List<ProductCartVO> list = cartService.selectCart(mem_num);
+		  
+		  if(list.isEmpty()) {
+			  return new ModelAndView("/common/notice");
+		  }
+		  
 		  MemberVO member = memberService.selectMember(mem_num);
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("shopOrder");
@@ -71,8 +82,8 @@ public class OrderController {
 	  
 	  //주문 insert
 	  @PostMapping("/shop/order")
-	  public String insertOrder(HttpSession session, OrderVO orderVO, OrderDetailVO orderDetailVO,DeliveryVO deliveryVO) {
-		  
+	  public String insertOrder(HttpSession session, @Valid OrderVO orderVO, OrderDetailVO orderDetailVO,DeliveryVO deliveryVO) {
+			
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  
 		  //주문번호 세팅 (yyyymmdd_랜덤6자리)

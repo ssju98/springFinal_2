@@ -64,6 +64,7 @@
  </script>
 <div class="top_menu_info">
 	<div>
+	${category_top_name.c_top_name} > ${category_sub_name.c_sub_name} > ${product.p_name}
 	</div>
 </div>
 <div id="main-width" class="mt-3">

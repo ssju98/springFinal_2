@@ -2,11 +2,15 @@ package kr.spring.order.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class OrderVO {
 	private String order_no;
 	private int mem_num;
 	private String order_name;
 	private String order_phone;
+	@Size(min=5,max=5)
 	private String order_zipcode;
 	private String order_address1;
 	private String order_address2;

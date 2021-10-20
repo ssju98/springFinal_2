@@ -12,7 +12,7 @@ $(document).ready(function() {
 </script>
 <div class="top_menu_info">
 	<div>
-	가구 > 소파/거실가구
+	${category_top_name.c_top_name} > ${category_sub_name.c_sub_name}
 	</div>
 </div>
 <div id="main-width">
@@ -32,7 +32,7 @@ $(document).ready(function() {
 	</div>
 	<div class="top-small-menu">
 		<div class="top-small-menu-title">
-			소파/거실가구
+			${category_sub_name.c_sub_name}
 		</div>
 		<div class="menu-amount mb-3">
 			${count}개의 상품
@@ -50,6 +50,13 @@ $(document).ready(function() {
 					<c:if test="${product.p_amount==0 }">
 						<c:if test="${product.p_discount != 0}">
 							<div class="list-sale mr-1 pl-2" style="opacity: 0.2">
+								${product.p_discount}%
+							</div>
+						</c:if>
+					</c:if>
+					<c:if test="${product.p_amount!=0 }">
+						<c:if test="${product.p_discount != 0}">
+							<div class="list-sale mr-1 pl-2">
 								${product.p_discount}%
 							</div>
 						</c:if>

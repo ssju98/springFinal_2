@@ -40,5 +40,10 @@ public class Category_topServiceImpl implements Category_topService{
 	public Category_topVO selectCategory_top(int c_top_no) {
 		return category_topMapper.chooseCategory_top(c_top_no);
 	}
+
+	@Override
+	public Category_topVO selectCategoryOne(int c_top_no) {
+		return category_topMapper.selectCategoryOne(c_top_no);
+	}
 	
 }

@@ -45,6 +45,8 @@ public class ProductController {
 			list = productService.ProductCategorySelectAll(c_top_no, c_sub_no);
 		}
 		
+		Category_topVO category_top = category_topService.selectCategoryOne(c_top_no);
+		Category_subVO category_sub = category_subService.selectCategoryOne(c_sub_no);
 		List<Category_topVO> list_top = category_topService.selectCategory_top();
 		List<Category_subVO> list_sub = category_subService.category_subSelectAll();
 		
@@ -54,6 +56,8 @@ public class ProductController {
 		mav.addObject("count",count);
 		mav.addObject("category_top",list_top);
 		mav.addObject("category_sub",list_sub);
+		mav.addObject("category_top_name",category_top);
+		mav.addObject("category_sub_name",category_sub);
 
 		return mav;
 	}
@@ -62,8 +66,18 @@ public class ProductController {
 	@RequestMapping("/shop/productDetail.do")
 	public ModelAndView productDetail(@RequestParam int p_no) {
 		ProductVO product = productService.ProductSelect(p_no);
-		System.out.println(product);
-		return new ModelAndView("shopProductDetail","product",product);
+		Category_topVO category_top = category_topService.selectCategoryOne(product.getC_top_no());
+		Category_subVO category_sub = category_subService.selectCategoryOne(product.getC_sub_no());
+		System.out.println(category_top);
+		System.out.println(category_sub);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("shopProductDetail");
+		mav.addObject("product",product);
+		 mav.addObject("category_top_name",category_top);
+		 mav.addObject("category_sub_name",category_sub);
+		 
+		return mav;
 	}
 	
 	//상품 이미지 출력

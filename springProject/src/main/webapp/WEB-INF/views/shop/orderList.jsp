@@ -55,13 +55,13 @@
 							<fmt:formatDate value="${list.order_date}" pattern="yyyy.MM.dd."/>
 						</td>
 						<td class="table-product">
-							<div style="float: left; width: 100px;">
+							<div class="table-product-name-img">
 								<img src="${pageContext.request.contextPath}/resources/images/testProduct.jpg" width="100" height="100">
 							</div>
-							<div  style="float: left;width:340px;padding-left: 15px;">
-								상품명외
+							<div class="table-product-name">
+								상품명 외 3건
 							</div>
-							<div  style="float: left;width:340px; padding-left: 15px; font-weight: bold;">
+							<div class="table-product-pay">
 								<fmt:formatNumber value="${list.order_pay+list.delivery_pay}" pattern="#,###"/>원
 							</div>
 						</td>
