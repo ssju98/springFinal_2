@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- CSS file -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
 <!-- 중앙 내용 시작 -->
@@ -39,7 +40,7 @@
 				</td>
 				<th>결제금액</th>
 				<td>
-					<fmt:formatNumber value="${adminOrder.order_pay + adminOrder.delivery_pay}" pattern="#,###"/>원 (배송비 포함)
+					<fmt:formatNumber value="${adminOrder.order_pay + adminOrder.delivery_pay}" pattern="#,###"/>원
 				</td>
 			</tr>
 			<tr>
@@ -63,32 +64,39 @@
 		</table>
 		<c:if test="${adminOrder.d_status_name == '결제완료' || adminOrder.d_status_name == '배송준비중'}">
 			<div class="element-center text-right div-button">
-				<input type="button" value="주문취소" class="btn btn-danger btn-sm" onclick="location.href='${pageContext.request.contextPath}/admin/orderCancel.do?order_no=${adminOrder.order_no}'" 
-					<c:if test="${mem_auth != 4}">disabled</c:if>
-				>
+				<c:if test="${mem_auth == 4}">
+				<input type="button" value="주문취소" class="btn btn-danger btn-sm" onclick="location.href='${pageContext.request.contextPath}/admin/orderCancel.do?order_no=${adminOrder.order_no}'">
+				</c:if>
 			</div>
 		</c:if>
-	<!-- 주문 상품 -->
+		<!-- 주문 상품 -->
 		<h5 id="header-sub">주문 상품</h5>
-		<table class="table table-bordered">
+		<table class="table table-bordered text-center">
 			<thead>
 				<tr>
-					<th>상품번호</th>
-					<th>상품명</th>
-					<th>옵션</th>
-					<th>수량</th>
-					<th>가격</th>
+					<th class="c-pnum">상품번호</th>
+					<th class="c-pname">상품명</th>
+					<th class="c-mount">수량</th>
+					<th class="c-pay">총상품금액</th>
+					<th class="c-pay">배송비</th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- *****임시 데이터***** -->
+				<c:forEach var="product" items="${listProduct}" varStatus="status">
 				<tr>
-					<td>{p_no}</td>
-					<td>{p_name}</td>
-					<td>{option_name}</td>
-					<td>{order_d_amount}</td>
-					<td>{order_d_price}</td>
+					<td>${product.p_no}</td>
+					<td>${product.p_name}</td>
+					<td>${product.order_d_amount}</td>
+					<c:if test="${status.first}">
+					<td rowspan="${fn:length(listProduct)}"  class="text-right">
+						<fmt:formatNumber value="${product.order_pay}" pattern="#,###"/>원
+					</td>
+					<td rowspan="${fn:length(listProduct)}"  class="text-right">
+						<fmt:formatNumber value="${product.delivery_pay}" pattern="#,###"/>원
+					</td>
+					</c:if>
 				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>

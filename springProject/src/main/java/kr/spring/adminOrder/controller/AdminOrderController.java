@@ -24,6 +24,8 @@ import kr.spring.adminMember.vo.AdminMemberVO;
 import kr.spring.adminOrder.service.AdminOrderService;
 import kr.spring.adminOrder.vo.AdminOrderVO;
 import kr.spring.delivery.service.DeliveryService;
+import kr.spring.order.service.OrderService;
+import kr.spring.order.vo.OrderAllVO;
 import kr.spring.util.PagingUtil;
 
 @Controller
@@ -34,6 +36,8 @@ public class AdminOrderController {
 
 	@Autowired
 	private AdminOrderService adminOrderService;
+	@Autowired
+	private OrderService orderService;	
 	@Autowired
 	private AdminMemberService adminMemberService;
 	@Autowired
@@ -99,12 +103,15 @@ public class AdminOrderController {
 			mav.setViewName("common/resultView");
 			mav.addObject("message", "존재하지 않는 주문입니다.");
 			mav.addObject("url", request.getContextPath() + "/admin/orderList.do");
-			
-		}else {
-			mav.setViewName("adminOrderDetail");
-			mav.addObject("adminMember", adminMemberService.selectMember(adminOrder.getMem_num()));
-			mav.addObject("adminOrder", adminOrder);
 		}
+		
+		//주문상품 목록
+		List<OrderAllVO> listProduct = orderService.selectOrderDetailProduct(order_no);
+		
+		mav.addObject("listProduct", listProduct);
+		mav.setViewName("adminOrderDetail");
+		mav.addObject("adminMember", adminMemberService.selectMember(adminOrder.getMem_num()));
+		mav.addObject("adminOrder", adminOrder);
 		
 		return mav;
 	}

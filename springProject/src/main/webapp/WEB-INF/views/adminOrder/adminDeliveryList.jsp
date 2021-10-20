@@ -37,7 +37,7 @@
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
 	<div id="wide-width" class="wide-table">
-		<h4 id="header-main">배송 목록</h4>
+		<h4 id="header-main">배송 관리</h4>
 		<!-- 배송 검색 조건 -->
 		<form action="deliveryList.do" method="get" id="search_form">
 			<table class="table table-bordered table-sm">
@@ -73,7 +73,7 @@
 			주문 정보가 없습니다.
 		</c:if>
 		<c:if test="${count > 0}">
-		<table class="table table-hover table-bordered table-sm">
+		<table class="table table-hover table-bordered table-sm text-center">
 			<thead>
 				<tr>
 					<th class="c-date">주문일</th>
@@ -90,7 +90,11 @@
 					<td>${delivery.order_date}</td>
 					<td>${delivery.order_no}</td>
 					<td>${delivery.mem_id}</td>
-					<td>${delivery.d_status_name}</td>
+					<td>
+						<c:if test="${delivery.d_status_num == 3}"><span class="text-gray"></c:if>
+						${delivery.d_status_name}
+						<c:if test="${delivery.d_status_num == 3}"></span></c:if>
+					</td>
 					<td>
 						${delivery.tracking_num}
 						<c:if test="${!empty delivery.tracking_num}">
@@ -99,7 +103,7 @@
 							</button>
 						</c:if>
 					</td>
-					<td>
+					<td class="text-left">
 						<c:if test="${delivery.d_status_num == 0}">
 							<button class="btn btn-light btn-sm btn-status1" data-dnum="${delivery.delivery_no}">
 								<i class="bi bi-box-seam mr-1"></i>배송준비

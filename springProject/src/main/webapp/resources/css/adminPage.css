@@ -2,10 +2,10 @@
 
 /* 가로 너비 */
 div#narrow-width{
-	width: 400px;
+	width: 450px;
 }
 div#wide-width{
-	width: 97%;
+	width: 1200px;
 	margin-left: 5px;
 }
 
@@ -29,8 +29,20 @@ div#wide-width{
 }
 
 
+/* 글자색 추가 */
+.text-gray {
+  color: rgb(153, 159, 166);
+}
+.text-blue {
+  color: rgb(31, 58, 214);
+}
+.text-red {
+  color: rgb(190, 33, 49);
+}
+
+
 /* input 너비 */
-input#tracking_number{
+input#tracking_num{
 	width: 250px;
 }
 input#mem_id{
@@ -63,45 +75,19 @@ input#mem_address2{
 .wide-table th.c-num{
 	width: 6%
 }
-.wide-table th.c-auth{
+.wide-table th.c-auth, .wide-table th.c-date, .wide-table th.c-method, 
+.wide-table th.c-satus, .wide-table th.c-mount, .wide-table th.c-pnum{
 	width: 10%
 }
-.wide-table th.c-id{
+.wide-table th.c-id, .wide-table th.c-name, .wide-table th.c-pay{
 	width: 15%
 }
-.wide-table th.c-name{
-	width: 15%
-}
-.wide-table th.c-phone{
+.wide-table th.c-phone, .wide-table th.c-email{
 	width: 17%
 }
-.wide-table th.c-email{
-	width: 17%
-}
-.wide-table th.c-manage{
+.wide-table th.c-manage, .wide-table th.c-onum, .wide-table th.c-track{
 	width: 20%
 }
-/**/
-.wide-table th.c-date{
-	width: 10%
-}
-.wide-table th.c-onum{
-	width: 20%
-}
-.wide-table th.c-method{
-	width: 10%
-}
-.wide-table th.c-pay{
-	width: 15%
-}
-.wide-table th.c-satus{
-	width: 10%
-}
-.wide-table th.c-track{
-	width: 20%
-}
-
-
 table.cell-4 th, tr.cell-4 th{
 	width: 12%;
 }
@@ -222,11 +208,12 @@ span#message_id{
 }
 
 /* 회원 활동정보 테이블 */
-table#activity_table td, table#activity_table th{
-	font-size: 17px;
-	height: 50px;
+table#activity_table td{
+	font-size: 18px;
+	height: 60px;
 	text-align: center;
 }
+
 
 
 

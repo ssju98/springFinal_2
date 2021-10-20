@@ -14,7 +14,7 @@
 			관리자 정보가 없습니다.
 		</c:if>
 		<c:if test="${count > 0}">
-		<table class="table table-hover table-bordered table-sm">
+		<table class="table table-hover table-bordered table-sm text-center">
 			<thead>
 				<tr>
 					<th class="c-num">번호</th>
@@ -32,18 +32,24 @@
 					<td>${adminMemberVO.mem_num}</td>
 					<td>
 						<c:if test="${adminMemberVO.mem_auth == 3}">일반관리자</c:if>
-						<c:if test="${adminMemberVO.mem_auth == 4}">최고관리자</c:if>
+						<c:if test="${adminMemberVO.mem_auth == 4}"><span class="text-blue">최고관리자</span></c:if>
 					</td>
 					<td>${adminMemberVO.mem_id}</td>
 					<td>${adminMemberVO.mem_name}</td>
 					<td>${adminMemberVO.mem_phone}</td>
 					<td>${adminMemberVO.mem_email}</td>
-					<td>
+					<td class="text-left">
+						<c:if test="${adminMemberVO.mem_auth == 3}">
+						<button class="btn btn-light btn-sm" onclick="location.href='adminUpdate.do?mem_num=${adminMemberVO.mem_num}'">
+							<i class="bi bi-pencil-square mr-1"></i>수정
+						</button>
+						</c:if>
 						<c:if test="${adminMemberVO.mem_auth == 3}">
 						<button class="btn btn-light btn-sm" onclick="location.href='adminDelete.do?mem_num=${adminMemberVO.mem_num}'">
 							<i class="bi bi-trash-fill mr-1"></i>삭제
 						</button>
 						</c:if>
+						
 					</td>
 				</tr>
 				</c:forEach>

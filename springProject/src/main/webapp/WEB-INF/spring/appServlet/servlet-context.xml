@@ -120,6 +120,7 @@
 			<mapping path="/admin/orderCancel.do"/>
 			<mapping path="/admin/adminList.do"/>
 			<mapping path="/admin/adminRegister.do"/>
+			<mapping path="/admin/adminUpdate.do"/>
 			<mapping path="/admin/adminDelete.do"/>
 			<beans:bean class="kr.spring.interceptor.SuperAdminCheckInterceptor"/>
 		</interceptor>

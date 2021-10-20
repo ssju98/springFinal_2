@@ -46,7 +46,7 @@
 				<if test="keyword != '' and keyfield == 'mem_phone'">
 					AND d.mem_phone LIKE '%' || #{keyword} || '%'
 				</if>
-				ORDER BY m.mem_num DESC)a)
+				ORDER BY m.mem_auth DESC, m.mem_num DESC)a)
 	<![CDATA[
 	WHERE rnum >= #{start} AND rnum <= #{end}
 	]]>

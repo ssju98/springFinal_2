@@ -50,7 +50,7 @@ public interface AdminMemberMapper {
 	@Select("SELECT COUNT(*) FROM member WHERE mem_auth IN (3,4)")
 	public int getAdminCount();
 	
-	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM member m JOIN member_detail d ON m.mem_num=d.mem_num WHERE mem_auth IN (3,4) ORDER BY m.mem_num DESC)a) WHERE rnum >= #{start} AND rnum <= #{end}")
+	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM member m JOIN member_detail d ON m.mem_num=d.mem_num WHERE mem_auth IN (3,4) ORDER BY m.mem_auth, m.mem_num DESC)a) WHERE rnum >= #{start} AND rnum <= #{end}")
 	public List<AdminMemberVO> getAdminList(Map<String,Object> map);
 	
 	@Select("SELECT member_seq.nextval FROM dual")

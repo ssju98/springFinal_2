@@ -281,6 +281,46 @@ public class AdminMemberController {
 		return "common/resultView";
 	}
 	
+	//관리자 수정 폼
+	@GetMapping("/admin/adminUpdate.do")
+	public String adminUpdateForm(@RequestParam int mem_num, HttpServletRequest request, Model model) {
+		logger.debug("<<adminUpdateForm 호출>> mem_num : " + mem_num);
+		
+		//관리자 존재여부 체크
+		AdminMemberVO member = adminMemberService.selectAdmin(mem_num);
+		if(member == null || member.getMem_auth() == 0) {
+			//alert창에 표시할 내용
+			model.addAttribute("message", "존재하지 않는 관리자입니다.");
+			model.addAttribute("url", request.getContextPath() + "/admin/adminUpdate.do");
+			
+			return "common/resultView";
+		}
+		
+		AdminMemberVO adminMemberVO = adminMemberService.selectAdmin(mem_num);
+		model.addAttribute("adminMemberVO", adminMemberVO);
+		
+		return "adminUpdate";
+	}
+	
+	//관리자 수정 처리
+	@PostMapping("/admin/adminUpdate.do")
+	public String adminUpdate(@Valid AdminMemberVO adminMemberVO, BindingResult result, HttpServletRequest request, Model model) {
+		logger.debug("<<adminUpdate 호출>> adminMemberVO : " + adminMemberVO);
+		
+		//입력데이터 유효성 체크
+		if(result.hasErrors()) { 
+			return "adminUpdate";
+		}
+		
+		//관리자 수정
+		adminMemberService.updateMember(adminMemberVO);
+		
+		//완료시 alert창에 표시할 내용
+		model.addAttribute("message", "관리자 수정이 완료되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/admin/adminList.do");
+		
+		return "common/resultView";
+	}
 	
 	//관리자 삭제 폼 - 최고관리자 인증
 	@GetMapping("/admin/adminDelete.do")

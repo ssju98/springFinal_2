@@ -57,7 +57,7 @@
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
 	<div id="wide-width" class="wide-table">
-		<h4 id="header-main">주문 목록</h4>
+		<h4 id="header-main">전체 주문 목록</h4>
 		<!-- 주문 검색 조건 -->
 		<form action="orderList.do" method="get" id="search_form">
 			<table class="table table-bordered table-sm">
@@ -109,7 +109,7 @@
 			주문 정보가 없습니다.
 		</c:if>
 		<c:if test="${count > 0}">
-		<table class="table table-hover table-bordered table-sm">
+		<table class="table table-hover table-bordered table-sm text-center">
 			<thead>
 				<tr>
 					<th class="c-date">주문일</th>
@@ -126,16 +126,16 @@
 				<tr>
 					<td>${adminOrder.order_date}</td>
 					<td>${adminOrder.order_no}</td>
-					<td>
-							${adminOrder.mem_id}
-					</td>
+					<td>${adminOrder.mem_id}</td>
 					<td>
 						<c:if test="${adminOrder.order_method == 0}">카드</c:if>
 						<c:if test="${adminOrder.order_method == 1}">현금</c:if>
 					</td>
-					<td><fmt:formatNumber value="${adminOrder.order_pay}" pattern="#,###"/>원</td>
+					<td class="text-right">
+						<fmt:formatNumber value="${adminOrder.order_pay}" pattern="#,###"/>원
+					</td>
 					<td>${adminOrder.d_status_name}</td>
-					<td>
+					<td class="text-left">
 						<button class="btn btn-light btn-sm" class="btn btn-light btn-sm" onclick="location.href='orderDetail.do?order_no=${adminOrder.order_no}'">
 							<i class="bi bi-info-circle mr-1"></i>상세</button>
 						<c:if test="${adminOrder.d_status_name == '결제완료' || adminOrder.d_status_name == '배송준비중'}">

@@ -61,7 +61,7 @@
 			회원 정보가 없습니다.
 		</c:if>
 		<c:if test="${count > 0}">
-		<table class="table table-hover table-bordered table-sm">
+		<table class="table table-hover table-bordered table-sm text-center">
 			<thead>
 				<tr>
 					<th class="c-num">번호</th>
@@ -78,15 +78,15 @@
 				<tr>
 					<td>${adminMemberVO.mem_num}</td>
 					<td>
-						<c:if test="${adminMemberVO.mem_auth == 0}"><span class="text-danger">탈퇴회원</span></c:if>
-						<c:if test="${adminMemberVO.mem_auth == 1}">정지회원</c:if>
+						<c:if test="${adminMemberVO.mem_auth == 0}"><span class="text-gray">탈퇴회원</span></c:if>
+						<c:if test="${adminMemberVO.mem_auth == 1}"><span class="text-red">정지회원</span></c:if>
 						<c:if test="${adminMemberVO.mem_auth == 2}">일반회원</c:if>
 					</td>
 					<td>${adminMemberVO.mem_id}</td>
 					<td>${adminMemberVO.mem_name}</td>
 					<td>${adminMemberVO.mem_phone}</td>
 					<td>${adminMemberVO.mem_email}</td>
-					<td>
+					<td class="text-left">
 						<button class="btn btn-light btn-sm" onclick="location.href='memberDetail.do?mem_num=${adminMemberVO.mem_num}'">
 							<i class="bi bi-info-circle mr-1"></i>상세</button>
 						<c:if test="${adminMemberVO.mem_auth != 0}">

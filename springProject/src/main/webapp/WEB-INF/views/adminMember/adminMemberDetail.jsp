@@ -17,8 +17,8 @@
 			<tr>
 				<th>회원유형</th>
 				<td>
-					<c:if test="${adminMemberVO.mem_auth == 0}"><span class="text-danger">탈퇴회원</span></c:if>
-					<c:if test="${adminMemberVO.mem_auth == 1}">정지회원</c:if>
+					<c:if test="${adminMemberVO.mem_auth == 0}"><span class="text-gray">탈퇴회원</span></c:if>
+					<c:if test="${adminMemberVO.mem_auth == 1}"><span class="text-red">정지회원</span></c:if>
 					<c:if test="${adminMemberVO.mem_auth == 2}">일반회원</c:if>
 				</td>
 			</tr>
@@ -52,10 +52,10 @@
 		</table>
 		<div class="element-center text-right div-button">
 			<c:if test="${adminMemberVO.mem_auth != 0}">
-			<input type="button" value="회원수정" class="btn btn-primary btn-sm" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
-			<input type="button" value="회원삭제" class="btn btn-danger btn-sm" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'"
-				<c:if test="${mem_auth != 4}">disabled</c:if>
-			>
+				<input type="button" value="회원수정" class="btn btn-primary btn-sm" onclick="location.href='memberUpdate.do?mem_num=${adminMemberVO.mem_num}'">
+				<c:if test="${mem_auth == 4}">
+				<input type="button" value="회원삭제" class="btn btn-danger btn-sm" onclick="location.href='memberDelete.do?mem_num=${adminMemberVO.mem_num}'">
+				</c:if>
 			</c:if>
 		</div>
 		<!-- 활동 정보 -->
