@@ -185,7 +185,7 @@ public class OrderController {
 	  @RequestMapping("/shop/orderList") 
 	  public ModelAndView listOrder(HttpSession session) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderAllVO> list = orderService.selectAllOrder(mem_num);
+		  List<OrderListVO> list = orderService.selectAllOrder(mem_num);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("orderList");
@@ -213,7 +213,7 @@ public class OrderController {
 	  @RequestMapping("/shop/orderCancel")
 	  public ModelAndView cancelOrder(HttpSession session) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderAllVO> list = orderService.selectCancelOrder(mem_num);
+		  List<OrderListVO> list = orderService.selectCancelOrder(mem_num);
 		  System.out.println(list);
 		 
 		  ModelAndView mav = new ModelAndView();
@@ -226,7 +226,7 @@ public class OrderController {
 	  @RequestMapping("/shop/orderExchange")
 	  public ModelAndView exchangeOrder(HttpSession session) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderAllVO> list = orderService.selectExchageOrder(mem_num);
+		  List<OrderListVO> list = orderService.selectExchageOrder(mem_num);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("orderExchange");
@@ -239,7 +239,7 @@ public class OrderController {
 	  @RequestMapping("/shop/orderRefund")
 	  public ModelAndView refundOrder(HttpSession session) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderAllVO> list = orderService.selectRefundOrder(mem_num);
+		  List<OrderListVO> list = orderService.selectRefundOrder(mem_num);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("refundExchange");
@@ -253,7 +253,7 @@ public class OrderController {
 	  @RequestMapping("/shop/orderConfirm")
 	  public ModelAndView confirmOrder(HttpSession session) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderAllVO> list = orderService.selectConfirmOrder(mem_num);
+		  List<OrderListVO> list = orderService.selectConfirmOrder(mem_num);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("orderConfirm");

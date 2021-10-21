@@ -58,11 +58,16 @@
 							<div class="table-product-name-img">
 								<img src="${pageContext.request.contextPath}/resources/images/testProduct.jpg" width="100" height="100">
 							</div>
-							<div class="table-product-name">
-								상품명 외 3건
+							<div style="float: left;width:340px;padding-left: 15px;">
+								<c:if test="${list.p_cnt == 0}">
+									${list.p_name}
+								</c:if>
+								<c:if test="${list.p_cnt != 0}">
+									${list.p_name} 외 ${list.p_cnt}개
+								</c:if>
 							</div>
-							<div class="table-product-pay">
-								<fmt:formatNumber value="${list.order_pay+list.delivery_pay}" pattern="#,###"/>원
+							<div  style="float: left;width:340px; padding-left: 15px; font-weight: bold;">
+								<fmt:formatNumber value="${list.order_pay}" pattern="#,###"/>원
 							</div>
 						</td>
 						<td>

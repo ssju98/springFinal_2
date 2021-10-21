@@ -11,9 +11,26 @@ public class OrderListVO {
 	private int p_no;
 	private String p_name;
 	private Byte[] p_image;
-	private int p_image_name;
+	private String p_image_name;
 	private int p_cnt;
 	private String d_status_name;
+	private int Order_pay;
+	private int d_status_num;
+	
+	
+	
+	public int getD_status_num() {
+		return d_status_num;
+	}
+	public void setD_status_num(int d_status_num) {
+		this.d_status_num = d_status_num;
+	}
+	public int getOrder_pay() {
+		return Order_pay;
+	}
+	public void setOrder_pay(int order_pay) {
+		Order_pay = order_pay;
+	}
 	public String getOrder_no() {
 		return order_no;
 	}
@@ -50,10 +67,10 @@ public class OrderListVO {
 	public void setP_image(Byte[] p_image) {
 		this.p_image = p_image;
 	}
-	public int getP_image_name() {
+	public String getP_image_name() {
 		return p_image_name;
 	}
-	public void setP_image_name(int p_image_name) {
+	public void setP_image_name(String p_image_name) {
 		this.p_image_name = p_image_name;
 	}
 	public int getP_cnt() {

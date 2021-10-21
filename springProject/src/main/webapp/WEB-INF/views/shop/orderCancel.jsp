@@ -91,11 +91,16 @@ $(document).ready(function(){
 							<div style="float: left; width: 100px;">
 								<img src="${pageContext.request.contextPath}/resources/images/testProduct.jpg" width="100" height="100">
 							</div>
-							<div  style="float: left;width:340px;padding-left: 15px;">
-								${list.p_no} 외 ${list.p_cnt}개
+							<div style="float: left;width:340px;padding-left: 15px;">
+								<c:if test="${list.p_cnt == 0}">
+									${list.p_name}
+								</c:if>
+								<c:if test="${list.p_cnt != 0}">
+									${list.p_name} 외 ${list.p_cnt}개
+								</c:if>
 							</div>
 							<div  style="float: left;width:340px; padding-left: 15px; font-weight: bold;">
-								<fmt:formatNumber value="${list.order_pay+list.delivery_pay}" pattern="#,###"/>원
+								<fmt:formatNumber value="${list.order_pay}" pattern="#,###"/>원
 							</div>
 						</td>
 						<td>

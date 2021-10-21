@@ -24,7 +24,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<OrderAllVO> selectAllOrder(int mem_num) {
+	public List<OrderListVO> selectAllOrder(int mem_num) {
 		return orderMapper.selectAllOrder(mem_num);
 	}
 
@@ -34,22 +34,17 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<OrderAllVO> selectCancelOrder(int mem_num) {
-		return orderMapper.selectCancelOrder(mem_num);
-	}
-
-	@Override
-	public List<OrderAllVO> selectRefundOrder(int mem_num) {
+	public List<OrderListVO> selectRefundOrder(int mem_num) {
 		return orderMapper.selectRefundOrder(mem_num);
 	}
 
 	@Override
-	public List<OrderAllVO> selectConfirmOrder(int mem_num) {
+	public List<OrderListVO> selectConfirmOrder(int mem_num) {
 		return orderMapper.selectConfirmOrder(mem_num);
 	}
 
 	@Override
-	public List<OrderAllVO> selectExchageOrder(int mem_num) {
+	public List<OrderListVO> selectExchageOrder(int mem_num) {
 		return orderMapper.selectExchageOrder(mem_num);
 	}
 
@@ -61,5 +56,10 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public OrderAllVO selectOrderDetailInfo(String order_no) {
 		return orderMapper.selectOrderDetailInfo(order_no);
+	}
+
+	@Override
+	public List<OrderListVO> selectCancelOrder(int mem_num) {
+		return orderMapper.selectCancelOrder(mem_num);
 	}
 }
