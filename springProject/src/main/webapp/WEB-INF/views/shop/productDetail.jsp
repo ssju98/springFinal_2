@@ -23,7 +23,10 @@
  		
  		$('.order-btn').click(function(){
  			var cart_amount = $('#select_amount option:selected').val();
- 		})
+ 			var p_no = ${product.p_no};
+ 			location.href="${pageContext.request.contextPath}/shop/orderNow.do?p_no="+p_no+"&cart_amount="+cart_amount;
+ 			
+ 		});
  		
  		$('.cart-btn').click(function(){
  			 var p_no = ${product.p_no};
@@ -74,7 +77,7 @@
 <div id="main-width" class="mt-3">
 	<div class="main-width-container">
 	<div class="product-detail-sumnail">
-		<img src="photoView.do?p_no=${product.p_no}" width="520" height="520">
+		<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${product.p_no}" width="520" height="520">
 	</div>
 	<div class="product-detail-info ml-5 mt-4">
 		<div class="product-detail-name" >
@@ -186,7 +189,7 @@
 			<button class="btn btn-outline-primary cart-btn">
 				장바구니
 			</button>
-			<button class="btn btn-primary order-btn" onclick="location.href='${pageContext.request.contextPath}/shop/orderNow.do?p_no=${product.p_no}&cart_amount=${cart_amount}'">
+			<button class="btn btn-primary order-btn">
 				바로구매
 			</button>
 		</c:if>

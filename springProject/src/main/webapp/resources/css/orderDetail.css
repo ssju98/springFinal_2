@@ -201,6 +201,12 @@
 	border: 1px solid #09addb;
 }
 
+.history-btn{
+	width:275px;
+	height:45px;
+	font-weight: 500;
+}
+
 .order-current a{
 	color:#35c5f0;
 }

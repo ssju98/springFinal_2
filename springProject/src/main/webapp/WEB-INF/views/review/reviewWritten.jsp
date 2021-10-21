@@ -56,7 +56,7 @@
 						</td>
 						<td class="table-product">
 							<div class="table-product-name-img" onclick="location.href='${pageContext.request.contextPath}/shop/productDetail.do?p_no=${list.p_no}'">
-								<img src="${pageContext.request.contextPath}/shop/photoView.do?p_no=${list.p_no}" width="100" height="100">
+								<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${list.p_no}" width="100" height="100">
 							</div>
 							<div class="table-product-name">
 								${list.p_name}

@@ -15,10 +15,6 @@ public interface OrderMapper {
 	  @Insert("Insert into sorder(order_no,mem_num,order_zipcode,order_address1,order_address2,order_name, order_phone,order_method, order_pay, delivery_pay) "
 	  		+ "VALUES(#{order_no},#{mem_num}, #{order_zipcode}, #{order_address1}, #{order_address2},#{order_name},#{order_phone}, #{order_method},#{order_pay},#{delivery_pay})")
 	  public void insertOrder(OrderVO order);
-	  
-	  @Insert("Insert into sorder(order_no,mem_num,order_zipcode,order_address1,order_address2,order_name, order_phone,order_method, order_pay, delivery_pay) "
-		  		+ "VALUES(#{order_no},#{mem_num}, #{order_zipcode}, #{order_address1}, #{order_address2},#{order_name},#{order_phone}, #{order_method},#{order_pay},#{delivery_pay})")
-	  public void insertDirectOrder(OrderVO order);
 	 
 	  public List<OrderListVO> selectAllOrder(int mem_num);  
 	  public List<OrderListVO> selectCancelOrder(int mem_num);	  

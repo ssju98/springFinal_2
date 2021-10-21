@@ -41,7 +41,7 @@ $(document).ready(function() {
 			<c:forEach var="product" items="${list}">
 				<div class="list-content" onclick="location.href='productDetail.do?p_no=${product.p_no}'">
 					<div class="image-ani">
-					<img src="photoView.do?p_no=${product.p_no}" width="240" height="auto">
+					<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${product.p_no}" width="240" height="auto">
 				</div>
 				
 					<div class="list-name mt-2 pl-2">

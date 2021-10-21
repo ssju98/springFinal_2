@@ -110,6 +110,9 @@
 			<mapping path="/qna/qnaReply.do"/>
 			<mapping path="/qna/qnaUpdate.do"/>
 			<mapping path="/qna/qnaDelete.do"/>
+			
+			<mapping path="/review/reviewAvaliable.do"/>
+			<mapping path="/review/reviewWritten.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 		<!-- 관리자 여부 체크 -->

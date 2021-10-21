@@ -27,4 +27,10 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 		return orderDetailMapper.selectOrderDetail(order_no);
 	}
 
+	@Override
+	public void insertDirectOrderDetail(String param1, int param2, int param3) {
+		orderDetailMapper.insertDirectOrderDetail(param1, param2, param3);
+		
+	}
+
 }

@@ -15,4 +15,10 @@ public interface OrderDetailMapper {
 	 
 	@Select("select * from sorder_detail where order_no = #{order_no}")
 	public List<OrderDetailVO> selectOrderDetail(String order_no);
+	
+	@Insert("insert into sorder_Detail(order_d_no, order_no, p_no, order_d_amount) "
+			+ "VALUES(sorder_detail_seq.nextval, #{param1}, #{param2}, #{param3})")
+	public void insertDirectOrderDetail(String param1, int param2, int param3);
+	
+	
 }

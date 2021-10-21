@@ -129,7 +129,7 @@ $(document).ready(function(){
 			<div class="order-container">
 					<div class="order-content">
 						<div class="order-img" onclick="location.href='${pageContext.request.contextPath}/shop/productDetail.do?p_no=${cartList.p_no}'">
-							<img src="photoView.do?p_no=${cartList.p_no}" width="100" height="100">
+							<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${cartList.p_no}" width="100" height="100">
 						</div>
 						<div class="order-name-cart ml-3 pr-2 pt-3">
 							<div class="order-name-text">

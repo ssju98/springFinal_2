@@ -14,7 +14,7 @@
       from SORDER o join SORDER_DETAIL d on o.ORDER_NO = d.ORDER_NO group by o.ORDER_NO, o.order_pay) s2 on s1.ORDER_NO = s2.ORDER_NO
          join (select d.ORDER_NO , ds.D_STATUS_NAME,ds.d_status_num from DELIVERY d
                         join DELIVERY_STATUS ds on d.D_STATUS_NUM = ds.D_STATUS_NUM and d.d_status_num In(0,7)) s3
-              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s2.Order_no
+              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s1.order_date desc
   	</select>
   	
   	<select id="selectAllOrder" parameterType="integer" resultType="OrderListVO">
@@ -28,7 +28,7 @@
       from SORDER o join SORDER_DETAIL d on o.ORDER_NO = d.ORDER_NO group by o.ORDER_NO, o.order_pay) s2 on s1.ORDER_NO = s2.ORDER_NO
          join (select d.ORDER_NO , ds.D_STATUS_NAME,ds.d_status_num from DELIVERY d
                         join DELIVERY_STATUS ds on d.D_STATUS_NUM = ds.D_STATUS_NUM) s3
-              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s2.Order_no
+              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s1.order_date desc
   	</select>
   	
   	  <select id="selectRefundOrder" parameterType="integer" resultType="OrderListVO">
@@ -42,7 +42,7 @@
       from SORDER o join SORDER_DETAIL d on o.ORDER_NO = d.ORDER_NO group by o.ORDER_NO, o.order_pay) s2 on s1.ORDER_NO = s2.ORDER_NO
          join (select d.ORDER_NO , ds.D_STATUS_NAME,ds.d_status_num from DELIVERY d
                         join DELIVERY_STATUS ds on d.D_STATUS_NUM = ds.D_STATUS_NUM and d.d_status_num In(3,5,8)) s3
-              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s2.Order_no
+              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s1.order_date desc
   	</select>
   	
   	 <select id="selectExchageOrder" parameterType="integer" resultType="OrderListVO">
@@ -56,7 +56,7 @@
       from SORDER o join SORDER_DETAIL d on o.ORDER_NO = d.ORDER_NO group by o.ORDER_NO, o.order_pay) s2 on s1.ORDER_NO = s2.ORDER_NO
          join (select d.ORDER_NO , ds.D_STATUS_NAME,ds.d_status_num from DELIVERY d
                         join DELIVERY_STATUS ds on d.D_STATUS_NUM = ds.D_STATUS_NUM and d.d_status_num In(3,6,9)) s3
-              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s2.Order_no
+              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s1.order_date desc
   	</select>
   	
   	  	 <select id="selectConfirmOrder" parameterType="integer" resultType="OrderListVO">
@@ -70,7 +70,7 @@
       from SORDER o join SORDER_DETAIL d on o.ORDER_NO = d.ORDER_NO group by o.ORDER_NO, o.order_pay) s2 on s1.ORDER_NO = s2.ORDER_NO
          join (select d.ORDER_NO , ds.D_STATUS_NAME,ds.d_status_num from DELIVERY d
                         join DELIVERY_STATUS ds on d.D_STATUS_NUM = ds.D_STATUS_NUM and d.d_status_num In(3,4)) s3
-              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s2.Order_no
+              on s2.ORDER_NO = s3.ORDER_NO and s2.mem_num = #{mem_num} order by s1.order_date desc
   	</select>
   	
 </mapper>

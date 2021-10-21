@@ -81,7 +81,7 @@
 			<div class="cart-container">
 				<div class="cart-content">
 						<div class="cart-img" onclick="location.href='${pageContext.request.contextPath}/shop/productDetail.do?p_no=${list.p_no}'">
-							<img src="photoView.do?p_no=${list.p_no}" width="100" height="100">
+							<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${list.p_no}" width="100" height="100">
 						</div>
 						<div class="cart-name ml-3 pr-2 pt-3" onclick="location.href='${pageContext.request.contextPath}/shop/productDetail.do?p_no=${list.p_no}'">
 							${list.p_name}

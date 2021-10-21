@@ -129,7 +129,7 @@
 						<div class="order-container-product mt-3">
 							<div class="order-content-product">
 								<div class="order-img" onclick="location.href='${pageContext.request.contextPath}/shop/productDetail.do?p_no=${product.p_no}'">
-									<img src="photoView.do?p_no=${product.p_no}" width="100" height="100">
+									<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${product.p_no}" width="100" height="100">
 								</div>
 								<div class="order-name-cart ml-2 pr-2 pt-1">
 									<div class="order-name-text">
@@ -149,6 +149,7 @@
 			</div>
 		</div>
 		<div class="btn-div">
+			<button class="btn btn-light history-btn mt-3 mb-4" onclick="history.go(-1)">목록으로</button>
 			<button class="btn btn-primary orderlist-btn mt-3 mb-4" onclick="location.href='${pageContext.request.contextPath}/shop/main.do'">홈으로 이동</button>
 		</div>
 	</div>

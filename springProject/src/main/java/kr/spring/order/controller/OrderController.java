@@ -165,10 +165,14 @@ public class OrderController {
 		  orderVO.setOrder_no(orderNo); //주문번호
 		  orderVO.setMem_num(mem_num); //회원번호
 		  
-		  orderDetailVO.setOrder_no(orderNo);
-		  orderDetailVO.setMem_num(mem_num);
+		  //orderDetailVO.setOrder_no(orderNo);
+		  //orderDetailVO.setMem_num(mem_num);
 		  
 		  deliveryVO.setOrder_no(orderNo);
+		  
+		  orderService.insertOrder(orderVO);  //주문테이블 insert
+		  orderDetailService.insertDirectOrderDetail(orderNo, p_no, cart_amount); //주문상세테이블 insert
+		  deliveryService.insertOrderDelivery(orderNo); //delivery테이블 insert
 		  
 		  productService.productAmountUpdate(cart_amount, p_no);
 		  
@@ -214,7 +218,6 @@ public class OrderController {
 	  public ModelAndView cancelOrder(HttpSession session) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  List<OrderListVO> list = orderService.selectCancelOrder(mem_num);
-		  System.out.println(list);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("orderCancel");

@@ -56,7 +56,7 @@
 						</td>
 						<td class="table-product">
 							<div class="table-product-name-img">
-								<img src="${pageContext.request.contextPath}/resources/images/testProduct.jpg" width="100" height="100">
+								<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${list.p_no}" width="100" height="100">
 							</div>
 							<div style="float: left;width:340px;padding-left: 15px;">
 								<c:if test="${list.p_cnt == 0}">
