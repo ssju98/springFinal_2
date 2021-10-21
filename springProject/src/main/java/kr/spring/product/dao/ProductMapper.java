@@ -1,6 +1,7 @@
 package kr.spring.product.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -10,6 +11,8 @@ import kr.spring.product.vo.ProductVO;
 public interface ProductMapper {
 	@Select("SELECT * FROM product")
 	public List<ProductVO> ProductSelectAll();
+	@Select("SELECT COUNT(*) FROM product")
+	public int selectRowCount(Map<String, Object> map);
 	@Select("Select * FROM product WHERE p_no=#{p_no}")
 	public ProductVO ProductSelect(int p_no);
 	@Select("select * from product where c_top_no = #{param1} AND c_sub_no = #{param2} order by decode(p_amount,0,1)DESC")

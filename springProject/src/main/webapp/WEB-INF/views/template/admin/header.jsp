@@ -21,7 +21,7 @@
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/admin/main.do">메인</a></li>
 			<li><a href="${pageContext.request.contextPath}/category_top/list.do">카테고리관리</a></li>
-			<li><a href="#">상품관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/product/list.do">상품관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/orderList.do">주문관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/memberList.do">회원관리</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/termRevenue.do">매출관리</a></li>

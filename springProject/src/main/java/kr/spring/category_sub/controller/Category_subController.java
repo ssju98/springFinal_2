@@ -121,7 +121,7 @@ public class Category_subController {
 		//카테고리 삭제
 		category_subService.deleteCategory_sub(c_sub_no);
 		
-		return "redirect:/category_top/category_sub/list.do";
+		return "redirect:/category_top/category_sub/list.do?c_top_no="+((c_sub_no/100)*100);
 	}
 	
 }
