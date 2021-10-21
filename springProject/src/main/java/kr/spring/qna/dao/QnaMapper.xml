@@ -3,6 +3,10 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.qna.dao.QnaMapper">  
-  	
+  	<select id="selectAllQna" parameterType="integer" resultType="QnaVO">
+ 		SELECT LEVEL, BOARD_NO,GRPNO,BOARD_TITLE,BOARD_CONTENT,member.MEM_NUM,member.mem_id,BOARD_KIND,BOARD_PARENT,BOARD_DATE
+		FROM QNA, member WHERE BOARD_KIND = #{board_kind} and qna.mem_num=member.mem_num START WITH BOARD_PARENT = 0 
+		CONNECT BY PRIOR BOARD_NO = BOARD_PARENT ORDER SIBLINGS BY GRPNO desc
+  	</select>
   	
 </mapper>

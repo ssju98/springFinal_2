@@ -59,4 +59,11 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.ProductSelectAll();
 	}
 
+	@Override
+	public int countProduct(int p_no) {
+		return productMapper.countProduct(p_no);
+	}
+
+	
+
 }

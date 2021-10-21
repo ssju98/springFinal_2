@@ -15,5 +15,6 @@ public interface ProductService {
 	
 	public int selectRowCount(Map<String, Object> map);
 	public List<ProductVO> selectList(Map<String, Object> map);
+	public int countProduct(int p_no);
 	
 }
