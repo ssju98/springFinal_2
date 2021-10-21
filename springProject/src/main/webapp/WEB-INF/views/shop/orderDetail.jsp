@@ -23,8 +23,8 @@
 		<div id="showmenu">구매후기</div>
 		<div class="menu mt-2">
 			<ul>
-				<li class="order-a"><a href="#">작성 가능한 후기</a></li>
-				<li class="order-a"><a href="#">이미 작성한 후기</a></li>
+				<li class="order-a"><a href="${pageContext.request.contextPath}/review/reviewAvaliable.do">작성 가능한 후기</a></li>
+				<li class="order-a"><a href="${pageContext.request.contextPath}/review/reviewWritten.do">이미 작성한 후기</a></li>
 			</ul>
 		</div>
 	</div>

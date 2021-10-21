@@ -56,8 +56,8 @@ $(document).ready(function(){
 		<div id="showmenu">구매후기</div>
 		<div class="menu mt-2">
 			<ul>
-				<li class="order-a"><a href="#">작성 가능한 후기</a></li>
-				<li class="order-a"><a href="#">이미 작성한 후기</a></li>
+				<li class="order-a"><a href="${pageContext.request.contextPath}/review/reviewAvaliable.do">작성 가능한 후기</a></li>
+				<li class="order-a"><a href="${pageContext.request.contextPath}/review/reviewWritten.do">이미 작성한 후기</a></li>
 			</ul>
 		</div>
 	</div>
@@ -92,7 +92,7 @@ $(document).ready(function(){
 								<img src="${pageContext.request.contextPath}/resources/images/testProduct.jpg" width="100" height="100">
 							</div>
 							<div  style="float: left;width:340px;padding-left: 15px;">
-								상품명외
+								${list.p_no} 외 ${list.p_cnt}개
 							</div>
 							<div  style="float: left;width:340px; padding-left: 15px; font-weight: bold;">
 								<fmt:formatNumber value="${list.order_pay+list.delivery_pay}" pattern="#,###"/>원

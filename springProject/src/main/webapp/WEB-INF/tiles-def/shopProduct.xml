@@ -21,6 +21,12 @@
     	<put-attribute name="title" value="주문페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/shop/order.jsp"/> 
     </definition>
+    
+     <definition name="orderNow" extends="shopMain">
+    	<put-attribute name="title" value="주문페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/buyNow.jsp"/> 
+    </definition>
+    
      <definition name="orderList" extends="shopMain">
     	<put-attribute name="title" value="주문내역페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/shop/orderList.jsp"/> 

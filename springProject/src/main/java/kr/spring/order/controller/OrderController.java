@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.cart.service.CartService;
+import kr.spring.cart.vo.CartVO;
 import kr.spring.cart.vo.ProductCartVO;
 import kr.spring.delivery.service.DeliveryService;
 import kr.spring.delivery.vo.DeliveryVO;
@@ -29,10 +30,12 @@ import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.order.service.OrderService;
 import kr.spring.order.vo.OrderAllVO;
+import kr.spring.order.vo.OrderListVO;
 import kr.spring.order.vo.OrderVO;
 import kr.spring.orderDetail.service.OrderDetailService;
 import kr.spring.orderDetail.vo.OrderDetailVO;
 import kr.spring.product.service.ProductService;
+import kr.spring.product.vo.ProductVO;
 
 @Controller
 public class OrderController {
@@ -57,7 +60,7 @@ public class OrderController {
 			return new OrderVO();
 		}
 
-	  //주문페이지	호출 
+	  //장바구니에서 주문페이지 호출 
 	  @GetMapping("/shop/order") 
 	  public ModelAndView insertOrderForm(HttpSession session) { 
 		  
@@ -76,9 +79,9 @@ public class OrderController {
 		  return mav;
 	  }
 	  
-	  //주문 insert
+	  //장바구니에서 주문 insert
 	  @PostMapping("/shop/order")
-	  public String insertOrder(HttpSession session, @Valid OrderVO orderVO, OrderDetailVO orderDetailVO,DeliveryVO deliveryVO) {
+	  public String insertOrder(HttpSession session, OrderVO orderVO, OrderDetailVO orderDetailVO,DeliveryVO deliveryVO) {
 			
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  
@@ -120,7 +123,57 @@ public class OrderController {
 		  
 		  return "redirect:/shop/orderResult.do";
 	  }
-	 
+	  
+	  //상품상세페이지에서 주문페이지 호출
+	  @RequestMapping("/shop/orderNow.do")
+	  public ModelAndView insertDirectOrderForm(HttpSession session, @RequestParam int p_no, int cart_amount) { 
+		  Integer mem_num = (Integer)session.getAttribute("mem_num");
+		  MemberVO member = memberService.selectMember(mem_num);
+		  CartVO cartVO = new CartVO();
+		  cartVO.setMem_num(mem_num);
+		  cartVO.setP_no(p_no);
+		  ProductVO product = productService.ProductSelect(p_no);
+		  cartVO.setCart_amount(cart_amount);
+		  
+		  ModelAndView mav = new ModelAndView();
+		  
+		  mav.setViewName("orderNow");
+		  mav.addObject("cartVO", cartVO);
+		  mav.addObject("member",member);
+		  mav.addObject("product",product);
+		  return mav;
+	  }
+	  
+	  //상품상세페이지 -> 주문페이지 -> 주문
+	  @PostMapping("/shop/orderNow.do")
+	  public String insertDirectOrder(HttpSession session,OrderVO orderVO, OrderDetailVO orderDetailVO,DeliveryVO deliveryVO,int p_no, int cart_amount) {
+		  Integer mem_num = (Integer)session.getAttribute("mem_num");
+		  
+		  //주문번호 세팅 (yyyymmdd_랜덤6자리)
+		  Calendar cal = Calendar.getInstance();
+		  int year = cal.get(Calendar.YEAR);
+		  String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+		  String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+		  String subNum = "";
+			 
+		  for(int i = 1; i <= 6; i ++) {
+			  subNum += (int)(Math.random() * 10);
+		  }
+			 
+		  String orderNo = ymd + "_" + subNum;
+
+		  orderVO.setOrder_no(orderNo); //주문번호
+		  orderVO.setMem_num(mem_num); //회원번호
+		  
+		  orderDetailVO.setOrder_no(orderNo);
+		  orderDetailVO.setMem_num(mem_num);
+		  
+		  deliveryVO.setOrder_no(orderNo);
+		  
+		  productService.productAmountUpdate(cart_amount, p_no);
+		  
+		  return "redirect:/shop/orderResult.do";
+	  }
 	  
 	  //주문완료페이지
 	  @RequestMapping("/shop/orderResult")
@@ -161,6 +214,7 @@ public class OrderController {
 	  public ModelAndView cancelOrder(HttpSession session) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  List<OrderAllVO> list = orderService.selectCancelOrder(mem_num);
+		  System.out.println(list);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("orderCancel");

@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import kr.spring.order.vo.OrderAllVO;
+import kr.spring.order.vo.OrderListVO;
 import kr.spring.order.vo.OrderVO;
 
 public interface OrderService {

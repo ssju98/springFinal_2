@@ -14,6 +14,10 @@ public interface OrderMapper {
 	  @Insert("Insert into sorder(order_no,mem_num,order_zipcode,order_address1,order_address2,order_name, order_phone,order_method, order_pay, delivery_pay) "
 	  		+ "VALUES(#{order_no},#{mem_num}, #{order_zipcode}, #{order_address1}, #{order_address2},#{order_name},#{order_phone}, #{order_method},#{order_pay},#{delivery_pay})")
 	  public void insertOrder(OrderVO order);
+	  
+	  @Insert("Insert into sorder(order_no,mem_num,order_zipcode,order_address1,order_address2,order_name, order_phone,order_method, order_pay, delivery_pay) "
+		  		+ "VALUES(#{order_no},#{mem_num}, #{order_zipcode}, #{order_address1}, #{order_address2},#{order_name},#{order_phone}, #{order_method},#{order_pay},#{delivery_pay})")
+	  public void insertDirectOrder(OrderVO order);
 	 
 	  @Select("select * from sorder s, delivery d, delivery_status e "
 	  		+ "where s.order_no=d.order_no and d.d_status_num=e.d_status_num "
@@ -27,12 +31,12 @@ public interface OrderMapper {
 	  
 	  @Select("select * from sorder s, delivery d, delivery_status e "
 		  		+ "where s.order_no=d.order_no and d.d_status_num=e.d_status_num "
-		  		+ "and s.mem_num = #{mem_num} and d.d_status_num IN(3,5) ORDER BY s.order_date desc")
+		  		+ "and s.mem_num = #{mem_num} and d.d_status_num IN(3,5,8) ORDER BY s.order_date desc")
 	  public List<OrderAllVO> selectRefundOrder(int mem_num);
 	  
 	  @Select("select * from sorder s, delivery d, delivery_status e "
 		  		+ "where s.order_no=d.order_no and d.d_status_num=e.d_status_num "
-		  		+ "and s.mem_num = #{mem_num} and d.d_status_num IN(3,6) ORDER BY s.order_date desc")
+		  		+ "and s.mem_num = #{mem_num} and d.d_status_num IN(3,6,9) ORDER BY s.order_date desc")
 	  public List<OrderAllVO> selectExchageOrder(int mem_num);
 	  
 	  @Select("select * from sorder s, delivery d, delivery_status e "
@@ -52,6 +56,4 @@ public interface OrderMapper {
 	  		+ "where s.order_no = d.order_no and d.d_status_num=ds.d_status_num "
 	  		+ "and s.order_no=#{order_no}")
 	  public OrderAllVO selectOrderDetailInfo(String order_no);
-	 
-	  
 }

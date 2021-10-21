@@ -21,6 +21,10 @@
  	 		$('#product-detail-pay-text2').text(money);
  		});
  		
+ 		$('.order-btn').click(function(){
+ 			var cart_amount = $('#select_amount option:selected').val();
+ 		})
+ 		
  		$('.cart-btn').click(function(){
  			 var p_no = ${product.p_no};
  			var cart_amount = $('#select_amount option:selected').val();
@@ -112,7 +116,7 @@
 				<div class="product-option-amount">
 					수량
 				</div>
-				<select id="select_amount" class="form-select product-option-select mt-3" >
+				<select id="select_amount" name="select_amount" class="form-select product-option-select mt-3" >
 					<c:if test="${product.p_amount != 0 && product.p_amount >= 10}">	
 						<c:forEach var="i" begin="1" end="10">
 							<option value="${i}"
@@ -182,7 +186,7 @@
 			<button class="btn btn-outline-primary cart-btn">
 				장바구니
 			</button>
-			<button class="btn btn-primary order-btn">
+			<button class="btn btn-primary order-btn" onclick="location.href='${pageContext.request.contextPath}/shop/orderNow.do?p_no=${product.p_no}&cart_amount=${cart_amount}'">
 				바로구매
 			</button>
 		</c:if>

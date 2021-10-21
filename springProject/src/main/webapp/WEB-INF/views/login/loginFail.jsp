@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript">
 	alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-	history.go(-1);
+	location.href='loginForm.do';
 </script>

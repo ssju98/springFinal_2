@@ -20,5 +20,4 @@ public interface ProductMapper {
 	public void productAmountUpdate(int param1, int param2);
 	@Update("update product set p_amount=p_amount+#{param1} where p_no=#{param2}")
 	public void productAmountPlusUpdate(int param1, int param2);
-
 }
