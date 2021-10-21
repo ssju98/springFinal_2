@@ -72,6 +72,7 @@
 				<beans:value>/WEB-INF/tiles-def/category_sub.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/shopProduct.xml</beans:value>
 				<beans:value>/WEB-INF/tiles-def/qna.xml</beans:value>
+				<beans:value>/WEB-INF/tiles-def/product.xml</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
