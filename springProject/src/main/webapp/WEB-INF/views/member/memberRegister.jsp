@@ -17,9 +17,11 @@ justify-content:center;
 margin-left:80px;
 }
 .mid_form{
-display:flex;
+/* display:flex; */
 justify-content:center;
 width:100%;
+width:700px;
+margin : 0 auto;
 }
 .button{
 display:flex;
@@ -163,45 +165,45 @@ ul{
 		<div class="mid_form">
 		<ul>
 			<li>
-				<label for="mem_id">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;
-				<form:input path="mem_id" class="form-control" placeholder="4~12자 영문,숫자만 허용" />&nbsp;&nbsp;
+				<label for="mem_id" class="col-sm-2 col-form-label">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;
+				<form:input path="mem_id" class="form-control" placeholder="4~12자 영문,숫자만 허용" /><br>
 				<button type="button" id="confirmId" class="btn btn-primary">ID중복체크</button>
 				<span id="message_id"></span>
 				<form:errors path="mem_id" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="mem_name">이름</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label for="mem_name" class="col-sm-2 col-form-label">이름</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<form:input path="mem_name" class="form-control"/>
 				<form:errors path="mem_name" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="mem_passwd">비밀번호</label>
+				<label for="mem_passwd" class="col-sm-2 col-form-label">비밀번호</label>
 				<form:password path="mem_passwd" class="form-control" placeholder="4~12자 영문,숫자만 허용"/>
 				<form:errors path="mem_passwd" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="mem_phone">전화번호</label>
+				<label for="mem_phone" class="col-sm-2 col-form-label">전화번호</label>
 				<form:input path="mem_phone" class="form-control"/>
 				<form:errors path="mem_phone" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="mem_email">이메일</label>&nbsp;&nbsp;&nbsp;&nbsp;
+				<label for="mem_email" class="col-sm-2 col-form-label">이메일</label>&nbsp;&nbsp;&nbsp;&nbsp;
 				<form:input path="mem_email" class="form-control"/>
 				<form:errors path="mem_email" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="mem_zipcode">우편번호</label>
+				<label for="mem_zipcode" class="col-sm-2 col-form-label">우편번호</label>
 				<form:input path="mem_zipcode" class="form-control"/>
-				<form:errors path="mem_zipcode" cssClass="error-color"/>&nbsp;&nbsp;
+				<form:errors path="mem_zipcode" cssClass="error-color"/><br>
 				<button type="button" class="btn btn-primary" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
 			</li>
 			<li>
-				<label for="mem_address1">지번 주소</label>
+				<label for="mem_address1" class="col-sm-2 col-form-label">지번 주소</label>
 				<form:input path="mem_address1" class="form-control"/>
 				<form:errors path="mem_address1" cssClass="error-color"/>
 			</li>
 			<li>
-				<label for="mem_address2">상세 주소</label>
+				<label for="mem_address2" class="col-sm-2 col-form-label">상세 주소</label>
 				<form:input path="mem_address2" class="form-control"/>
 				<form:errors path="mem_address2" cssClass="error-color"/>
 			</li>
