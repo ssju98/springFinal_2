@@ -1,10 +1,13 @@
 package kr.spring.review.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.order.vo.OrderListVO;
+import kr.spring.review.vo.ReviewVO;
 
 public interface ReviewMapper {
 	
@@ -21,4 +24,10 @@ public interface ReviewMapper {
 			+ "left outer join REVIEW r on o.ORDER_NO = r.ORDER_NO "
 			+ "and d.P_NO = r.P_NO join DELIVERY l on o.ORDER_NO = l.ORDER_NO where l.D_STATUS_NUM = 4 and r.REVIEW_NO is not null  ORDER BY o.order_date desc")
 	public List<OrderListVO> selectReviewWritten(int mem_num);
+	
+	@Insert("INSERT INTO review (review_no,p_no,review_content,review_image,review_image_name,mem_num) VALUES (review_seq.nextval,#{p_no},#{review_content},#{review_image},#{review_image_name},#{mem_num})")
+	public void insertReview(ReviewVO review);
+	public int selectRowCount(Map<String,Object> map);
+
+	public ReviewVO selectReview(int review_no);
 }

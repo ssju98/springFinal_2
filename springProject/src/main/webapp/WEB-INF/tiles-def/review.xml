@@ -13,6 +13,10 @@
     	<put-attribute name="title" value="이미 작성한 후기"/>
     	<put-attribute name="body" value="/WEB-INF/views/review/reviewWritten.jsp"/>
     </definition>
+    <definition name="reviewWrite" extends="shopMain">
+    	<put-attribute name="title" value="상품 후기 작성하기"/>
+    	<put-attribute name="body" value="/WEB-INF/views/review/reviewWrite.jsp"/>
+    </definition>
 </tiles-definitions>
 
 
