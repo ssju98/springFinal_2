@@ -6,8 +6,8 @@
 <!-- 중앙 내용 시작 -->
 <div class="page-main">
 	<h2>상품 목록</h2>
-	<div class="align-right">
-		<input type="button" value="상품 등록" onclick="location.href='write.do'">
+	<div class="align-center">
+		<input type="button" value="상품 등록" onclick="location.href='productRegister.do'">
 	</div>
 	<c:if test="${count == 0}">
 	<div class="result-display">
@@ -17,19 +17,30 @@
 	<c:if test="${count > 0}">
 	<table>
 		<tr>
-			<th>상품 번호</th>
-			<th width="400">상품명</th>
-			<th>상품 이미지</th>
-			<th>상품 가격</th>
-			<th>할인율</th>
+			<th width="100">상품 번호</th>
+			<th width="100">상품명</th>
+			<th width="150">재고</th>
+			<th width="200">상품 이미지</th>
+			<th width="240">상품 설명</th>
+			<th width="200">상품 가격</th>
+			<th width="140">할인율(%)</th>
+			<th width="140">카테고리 번호</th>
+			<th width="200">수정/삭제</th>
 		</tr>
 		<c:forEach var="product" items="${list}">
 		<tr>
 			<td>${product.p_no}</td>
-			<td><a href="detail.do?board_num=${product.p_no}">${product.p_name}</a></td>
+			<td>${product.p_name}</td>
+			<td>${product.p_amount}</td>
 			<td><img src="photoView.do?p_no=${product.p_no}" style="max-width:100px;"></td>
+			<td>${product.p_sub_text}</td>
 			<td>${product.p_price}</td>
 			<td>${product.p_discount}</td>
+			<td>${product.c_sub_no}</td>
+			<td>
+				<input type="button" class="btn btn-info" value="수정" onclick="location.href='productUpdate.do?p_no=${product.p_no}'">
+				<input type="button" class="btn btn-danger deleteBtn" value="삭제" onclick="location.href='productDelete.do?p_no=${product.p_no}'" id="delete_${product.p_no}">
+			</td>
 		</tr>	
 		</c:forEach>
 	</table>

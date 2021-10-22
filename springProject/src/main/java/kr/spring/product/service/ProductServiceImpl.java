@@ -59,4 +59,21 @@ public class ProductServiceImpl implements ProductService{
 		return productMapper.ProductSelectAll();
 	}
 
+	@Override
+	public void deleteProduct(int p_no) {
+		productMapper.deleteProduct(p_no);
+		
+	}
+
+	@Override
+	public void insertProduct(ProductVO productVO) {
+		productMapper.insertProduct(productVO);
+	}
+
+	@Override
+	public void updateProduct(ProductVO productVO) {
+		productMapper.updateProduct(productVO);
+		
+	}
+
 }

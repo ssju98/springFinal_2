@@ -8,9 +8,17 @@
     	<put-attribute name="title" value="상품 관리 목록"/>
     	<put-attribute name="body" value="/WEB-INF/views/product/list.jsp"/>
     </definition>
-    <definition name="productWrite" extends="adminMain">
+    <definition name="productRegister" extends="adminMain">
     	<put-attribute name="title" value="상품 등록"/>
-    	<put-attribute name="body" value="/WEB-INF/views/product/write.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/product/productRegister.jsp"/>
+    </definition>
+    <definition name="productDelete" extends="adminMain">
+    	<put-attribute name="title" value="상품 삭제"/>
+    	<put-attribute name="body" value="/WEB-INF/views/product/productDelete.jsp"/>
+    </definition>
+    <definition name="productUpdate" extends="adminMain">
+    	<put-attribute name="title" value="상품 수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/product/productUpdate.jsp"/>
     </definition>
 
 </tiles-definitions>
