@@ -145,47 +145,49 @@ public class ProductController {
 		return mav;
 	}
 
-	/*
-	 * //ckeditor를 이용한 이미지 업로드
-	 * 
-	 * @RequestMapping("/product/imageUploader.do")
-	 * 
-	 * @ResponseBody public Map<String,Object> uploadImage(MultipartFile upload,
-	 * HttpSession session, HttpServletRequest request) throws Exception{
-	 * 
-	 * //업로드할 절대 경로 구하기 String realFolder =
-	 * session.getServletContext().getRealPath("/resources/image_upload");
-	 * 
-	 * //업로드한 파일 이름 String org_filename = upload.getOriginalFilename(); String
-	 * str_filename = System.currentTimeMillis() + org_filename;
-	 * 
-	 * logger.debug("<<원본 파일명>> : " + org_filename); logger.debug("<<저장할 파일명>> : " +
-	 * str_filename);
-	 * 
-	 * Integer mem_num = (Integer)session.getAttribute("mem_num");
-	 * 
-	 * String filepath = realFolder + "\\" + mem_num + "\\" + str_filename;
-	 * logger.debug("<<파일 경로>> : " + filepath);
-	 * 
-	 * File f = new File(filepath); if(!f.exists()) { f.mkdirs(); }
-	 * 
-	 * upload.transferTo(f);
-	 * 
-	 * Map<String,Object> map = new HashMap<String,Object>(); map.put("uploaded",
-	 * true); map.put("url",
-	 * request.getContextPath()+"/resources/image_upload/"+mem_num+"/"+str_filename)
-	 * ;
-	 * 
-	 * return map;
-	 */
-		//}
-	 
-
 	//자바빈(VO) 초기화
 	@ModelAttribute
 	public ProductVO initCommand() {
 		return new ProductVO();
 	}
+	
+	//ckeditor를 이용한 이미지 업로드
+		@RequestMapping("/product/imageUploader.do")
+		@ResponseBody
+		public Map<String,Object> uploadImage(MultipartFile upload,
+				                              HttpSession session,
+				                              HttpServletRequest request)
+		                                         throws Exception{
+			
+			//업로드할 절대 경로 구하기
+			String realFolder = 
+				session.getServletContext().getRealPath("/resources/image_upload");
+			
+			//업로드한 파일 이름
+			String org_filename = upload.getOriginalFilename();
+			String str_filename = System.currentTimeMillis() + org_filename;
+			
+			logger.debug("<<원본 파일명>> : " + org_filename);
+			logger.debug("<<저장할 파일명>> : " + str_filename);
+			
+			Integer mem_num = (Integer)session.getAttribute("mem_num");
+			
+			String filepath = realFolder + "\\" + mem_num + "\\" + str_filename;
+			logger.debug("<<파일 경로>> : " + filepath);
+			
+			File f = new File(filepath);
+			if(!f.exists()) {
+				f.mkdirs();
+			}
+			
+			upload.transferTo(f);
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("uploaded", true);
+			map.put("url", request.getContextPath()+"/resources/image_upload/"+mem_num+"/"+str_filename);
+			
+			return map;
+		}
 
 	//상품 리스트
 	@RequestMapping("/product/list.do")
