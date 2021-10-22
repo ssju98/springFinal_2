@@ -80,7 +80,7 @@
 						}
 					}
 					
-					ClassicEditor.create(document.querySelector('#content'),{
+					ClassicEditor.create(document.querySelector('#p_sub_text'),{
 						extraPlugins:[MyCustomUploadAdapterPlugin]
 					}).then(editor => {
 						window.editor = editor;

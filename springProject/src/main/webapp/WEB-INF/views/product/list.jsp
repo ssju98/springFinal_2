@@ -21,7 +21,6 @@
 			<th width="100">상품명</th>
 			<th width="150">재고</th>
 			<th width="200">상품 이미지</th>
-			<th width="240">상품 설명</th>
 			<th width="200">상품 가격</th>
 			<th width="140">할인율(%)</th>
 			<th width="140">카테고리 번호</th>
@@ -33,7 +32,6 @@
 			<td>${product.p_name}</td>
 			<td>${product.p_amount}</td>
 			<td><img src="photoView.do?p_no=${product.p_no}" style="max-width:100px;"></td>
-			<td>${product.p_sub_text}</td>
 			<td>${product.p_price}</td>
 			<td>${product.p_discount}</td>
 			<td>${product.c_sub_no}</td>

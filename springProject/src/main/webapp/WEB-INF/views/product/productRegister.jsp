@@ -6,7 +6,12 @@
 <style>
 	.ck-editor__editable_inline{
 		min-height:250px;
+		width: 400px;
 	}
+	
+	textarea {
+	width: 400px;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -72,7 +77,7 @@
 						}
 					}
 					
-					ClassicEditor.create(document.querySelector('#content'),{
+					ClassicEditor.create(document.querySelector('#p_sub_text'),{
 						extraPlugins:[MyCustomUploadAdapterPlugin]
 					}).then(editor => {
 						window.editor = editor;
@@ -82,7 +87,7 @@
 				</script>
 			</li>
 			<li>
-				<label for="upload">상품 이미지</label>
+				<label for="upload">상품 대표 이미지</label>
 				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
 			</li>
 			<li>
