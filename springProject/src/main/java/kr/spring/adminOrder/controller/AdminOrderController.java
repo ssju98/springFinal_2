@@ -71,8 +71,10 @@ public class AdminOrderController {
 		
 		//결과데이터 수
 		int count = adminOrderService.getOrderCount(map);
+		//부가적인 key
+		String addKey = "&start_date=" + start_date + "&end_date=" + end_date + "&d_status_num=" + d_status_num + "&orderby=" + orderby; 
 		
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "orderList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "orderList.do", addKey);
 		
 		List<AdminOrderVO> list = null;
 		if(count > 0) {

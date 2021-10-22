@@ -59,8 +59,10 @@ public class AdminMemberController {
 		
 		//결과데이터 수
 		int count = adminMemberService.getMemberCount(map);
+		//부가적인 key
+		String addKey = "&auth_num=" + auth_num; 
 		
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "memberList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "memberList.do", addKey);
 		
 		List<AdminMemberVO> list = null;
 		if(count > 0) {
@@ -143,7 +145,7 @@ public class AdminMemberController {
 		//회원정보 수정
 		adminMemberService.updateMember(adminMemberVO);
 		
-		//완료시 alert창에 표시할 내용
+		//alert창에 표시할 내용
 		model.addAttribute("message", "회원정보 수정이 완료되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/admin/memberDetail.do?mem_num=" + adminMemberVO.getMem_num());
 		

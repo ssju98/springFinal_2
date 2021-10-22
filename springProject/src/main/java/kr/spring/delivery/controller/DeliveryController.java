@@ -59,8 +59,10 @@ public class DeliveryController {
 		
 		//결과데이터 수
 		int count = deliveryService.getDeliveryCount(map);
+		//부가적인 key
+		String addKey = "&d_status_num=" + d_status_num; 
 		
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "deliveryList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "deliveryList.do", addKey);
 		
 		List<DeliveryVO> list = null;
 		if(count > 0) {
@@ -178,8 +180,10 @@ public class DeliveryController {
 		
 		//결과데이터 수
 		int count = deliveryService.getReturnCount(map);
+		//부가적인 key
+		String addKey = "&d_status_num=" + d_status_num; 
 		
-		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "returnList.do");
+		PagingUtil page = new PagingUtil(keyfield, keyword, currentPage, count, rowCount, pageCount, "returnList.do", addKey);
 		
 		List<DeliveryVO> list = null;
 		if(count > 0) {
