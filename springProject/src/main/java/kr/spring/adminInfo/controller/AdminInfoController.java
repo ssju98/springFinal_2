@@ -86,21 +86,16 @@ public class AdminInfoController {
 	public String adminInfoUpdateAction(LoginVO loginVO, HttpSession session) {
 		
 		System.out.println(loginVO.toString());
-		System.out.println("~~~~~~~~~~~~~~들어오나");
+
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		
 		if(mem_num!=null) { // 로그인중이면
-			System.out.println("==================수정성공====");
 			adminInfoService.updateInfoAction(loginVO);
 			
 			return "redirect:/admin/adminInfoForm.do"; //수정 성공 - 
 		}
 			
-		System.out.println("==================수정실패====");
-
-		
 		return "adminInfoUpdateForm"; //수정실패
-		
 	}
 	
 	

@@ -20,7 +20,7 @@ import kr.spring.login.vo.LoginVO;
   * @FileName : LoginController.java
   * @Date : 2021. 10. 9. 
   * @Author : 최유정
-  * @Description : 로그인처리 , 비밀번호찾기 Controller
+  * @Description : 로그인처리 
   */
 @Controller
 public class LoginController {
@@ -94,25 +94,26 @@ public class LoginController {
 //	}
 	
 	//아이디 찾기 폼
-	@RequestMapping("login/findIdForm.do")
-	public String findInfoForm() {
-		
-		return "findIdForm";
-	}
-
-	//비밀번호 찾기 폼
-	@RequestMapping("login/findPasswdForm.do")
-	public String findPasswdForm() {
-		
-		return "findPasswdForm";
-	}
-	
-	//비밀번호찾기 인증번호 확인 폼
-	@RequestMapping("login/passwdCodeSend.do")
-	public String passwdCodeCheck() {
-		
-		return "passwdCodeCheck";
-	}
+//	@RequestMapping("login/findIdForm.do")
+//	public String findInfoForm() {
+//		
+//		return "findIdForm";
+//	}
+//	
+//
+//	//비밀번호 찾기 폼
+//	@RequestMapping("login/findPasswdForm.do")
+//	public String findPasswdForm() {
+//		
+//		return "findPasswdForm";
+//	}
+//	
+//	//비밀번호찾기 인증번호 확인 폼
+//	@RequestMapping("login/passwdCodeSend.do")
+//	public String passwdCodeCheck() {
+//		
+//		return "passwdCodeCheck";
+//	}
 	
 
 }

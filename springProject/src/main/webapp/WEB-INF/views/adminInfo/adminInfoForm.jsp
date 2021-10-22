@@ -91,11 +91,9 @@ margin-left:480px;
     </tr>
     <tr>
     	<td colspan="2">
-  		<input type="hidden" name="mem_num" value="${vo.mem_num}"/>
-		<button type="button" class="btn btn-primary" onclick="location.href='adminInfoUpdateForm.do?mem_num=${vo.mem_num}'">수정</button>
-		<input type="button" class="btn btn-primary" value="비밀번호 변경" onclick="location.href='adminInfoPasswdUpdate.do?mem_num=${vo.mem_num}'"/>
-
-
+  			<input type="hidden" name="mem_num" value="${vo.mem_num}"/>
+			<button type="button" class="btn btn-primary" onclick="location.href='adminInfoUpdateForm.do?mem_num=${vo.mem_num}'">수정</button>
+			<input type="button" class="btn btn-primary" value="비밀번호 변경" onclick="location.href='adminInfoPasswdUpdate.do?mem_num=${vo.mem_num}'"/>
     	</td>
     </tr>
     

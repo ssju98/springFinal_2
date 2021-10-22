@@ -11,10 +11,18 @@
 	margin-top:50px;
 }
 .fineMain{
+	margin:0 auto;
+	display:inline-block;
 	width:600px;
-	align:center
+	
 }
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+	});
+
+</script>
 </head>
 <body>
 <form class="form-horizontal" action="${pageContext.request.contextPath}/login/passwdCodeSend.do" method="post">
@@ -23,9 +31,9 @@
 <h3>내 정보에 등록된 이메일로 찾기</h3>
 <div class="fineMain">
   <div class="form-group">
-    <label class="control-label col-sm-2" for="mem_name">이름:</label>
+    <label class="control-label col-sm-2" for="mem_name">아이디:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="mem_name" id="mem_name" placeholder="이름">
+      <input type="text" class="form-control" name="mem_name" id="mem_name" placeholder="아이디">
     </div>
   </div>
   <div class="form-group">
