@@ -1,6 +1,7 @@
 package kr.spring.qna.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,8 @@ public class QnaServiceImpl implements QnaService {
 
 	//글 전체목록
 	@Override
-	public List<QnaVO> selectAllQna(int board_kind) {
-		return qnaMapper.selectAllQna(board_kind);
+	public List<QnaVO> selectAllQna(Map<String, Object> map) {
+		return qnaMapper.selectAllQna(map);
 	}
 	
 	//글 상세목록
@@ -55,5 +56,33 @@ public class QnaServiceImpl implements QnaService {
 	public void updateQna(QnaVO qna) {
 		qnaMapper.updateQna(qna);
 		
+	}
+
+	@Override
+	public int selectCountQna(int board_kind) {
+		return qnaMapper.selectCountQna(board_kind);
+	}
+
+	@Override
+	public void insertProductQna(QnaVO qna) {
+		qna.setBoard_no(qnaMapper.selectQna_seq());
+		qna.setGrpno(qnaMapper.selectQna_seq());
+		qnaMapper.insertProductQna(qna);
+		
+	}
+
+	@Override
+	public int selectRowQnaCount(Map<String, Object> map) {
+		return qnaMapper.selectRowQnaCount(map);
+	}
+
+	@Override
+	public List<QnaVO> selectAllProductQna(Map<String, Object> map) {
+		return qnaMapper.selectAllProductQna(map);
+	}
+
+	@Override
+	public int selectAllPrpductQnaCount(Map<String, Object> map) {
+		return qnaMapper.selectAllPrpductQnaCount(map);
 	}
 }

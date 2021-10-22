@@ -15,10 +15,10 @@
 		<div class="menu mt-2">
 			<ul>
 			<c:if test="${qna.board_kind == 0}">
-				<li class="order-current"><a href="qnaProductList.do">상품 문의</a></li>
-				<li class="order-a"><a href="qnaDeliveryList.do">배송 문의</a></li>
-				<li class="order-a"><a href="qnaRefundList.do">교환/환불 문의</a></li>
-				<li class="order-a"><a href="qnaEtcList.do">기타 문의</a></li>
+				<li class="order-current"><a href="qnaList.do?board_kind=0">상품 문의</a></li>
+				<li class="order-a"><a href="qnaList.do?board_kind=1">배송 문의</a></li>
+				<li class="order-a"><a href="qnaList.do?board_kind=2">교환/환불 문의</a></li>
+				<li class="order-a"><a href="qnaList.do?board_kind=3">기타 문의</a></li>
 			</c:if>
 			<c:if test="${qna.board_kind == 1}">
 					<li class="order-a"><a href="qnaList.do?board_kind=0">상품 문의</a></li>
@@ -56,6 +56,22 @@
 				기타 문의게시판
 			</c:if>
 		</div>
+		<c:if test="${qna.p_no!=0}">
+		<div class="product-qna-div1" onclick="location.href='${pageContext.request.contextPath}/shop/productDetail.do?p_no=${qna.p_no}'">
+				<div class="product-qna-div2">
+					<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${qna.p_no}" width="90" height="90" style="margin-top:5px;">
+				</div>
+				<div class="product-qna-div3 ml-2">
+					<div class="product-qna-div4">
+					${qna.p_name}
+					</div>
+					<div class="product-qna-div5">
+					<fmt:formatNumber value="${qna.p_price }" pattern="#,###"/>원
+				</div >
+				</div>
+			</div>
+		</c:if>
+		
 		<table class="order-table" border="1">
 			<colgroup>
 				<col width="100px">

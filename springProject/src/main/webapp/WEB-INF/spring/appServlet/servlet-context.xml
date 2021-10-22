@@ -104,8 +104,7 @@
 			<mapping path="/shop/orderExchange"/>
 			<mapping path="/shop/orderRefund"/>
 			<mapping path="/shop/orderConfirm"/>
-						
-			<mapping path="/qna/qnaDetail.do"/>
+				
 			<mapping path="/qna/qnaWrite.do"/>
 			<mapping path="/qna/qnaReply.do"/>
 			<mapping path="/qna/qnaUpdate.do"/>

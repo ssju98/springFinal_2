@@ -22,7 +22,7 @@
 					<th>하위 카테고리 명</th>
 					<td>
 						<form:input path="c_sub_name" class="form-control form-control-sm"/>
-						<form:option value=${c_top_no} label=${c_top_name}></form:option>
+						<form:option value="${c_top_no}" label="${c_top_name}"></form:option>
 					</td>
 				</tr>
 				<tr>

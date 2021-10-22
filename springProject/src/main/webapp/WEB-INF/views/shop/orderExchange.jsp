@@ -116,5 +116,6 @@ $(document).ready(function(){
 				</tbody>
 			</c:forEach>
 		</table>
+		<div align="center">${pagingHtml}</div>
 	</div>
 </div>

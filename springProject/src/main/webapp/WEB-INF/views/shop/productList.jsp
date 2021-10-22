@@ -118,5 +118,6 @@ $(document).ready(function() {
 				<div class="list-container-empty" style="width: 240px; height: 360px; cursor:auto;"> </div>
 			</c:if>
 		</div>
+		
 	</div>	
 </div>

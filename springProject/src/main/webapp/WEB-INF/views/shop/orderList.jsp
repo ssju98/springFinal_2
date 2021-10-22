@@ -3,6 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderList.css"> 
+<script type="text/javascript">
+$(function(){
+	//배송조회 창 열기
+	$('.btn-tracking').click(function(){
+		var tnum = $(this).attr('data-tnum');
+		window.open('https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?displayHeader=N&sid1=' + tnum,
+			    	'_blank', 'titlebar=yes, width=800, height=700');
+		});
+});
+</script>
 <div class="top_menu_info">
 	<div>
 	홈 > 주문조회
@@ -74,6 +84,11 @@
 							<div class="order-state-text">
 								<h5><span class="badge badge-light">${list.d_status_name}</span></h5>
 							</div>
+							<div>
+								<c:if test="${list.d_status_num == 2 || list.d_status_num ==3}">
+									<button class="btn btn-secondary btn-xs cancle-btn btn-tracking" data-tnum="${list.tracking_num}">배송조회</button>
+								</c:if>
+							</div>
 							<div class="order-state-detail mt-1">
 								<a href="orderDetail.do?order_no=${list.order_no}">주문 상세 보기 > </a>
 							</div>
@@ -81,6 +96,8 @@
 					</tr>	
 				</tbody>
 			</c:forEach>
+			
 		</table>
+		<div align="center">${pagingHtml}</div>
 	</div>
 </div>

@@ -16,9 +16,18 @@ public class OrderListVO {
 	private String d_status_name;
 	private int Order_pay;
 	private int d_status_num;
+	private String tracking_num;
 	
 	
 	
+	
+	
+	public String getTracking_num() {
+		return tracking_num;
+	}
+	public void setTracking_num(String tracking_num) {
+		this.tracking_num = tracking_num;
+	}
 	public int getD_status_num() {
 		return d_status_num;
 	}

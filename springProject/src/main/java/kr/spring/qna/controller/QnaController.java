@@ -22,16 +22,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.product.service.ProductService;
+import kr.spring.product.vo.ProductVO;
 import kr.spring.qna.service.QnaService;
 import kr.spring.qna.vo.QnaVO;
+import kr.spring.util.PagingUtil;
+import kr.spring.util.StringUtil;
 
 
 @Controller
 public class QnaController {
 	private static final Logger logger = LoggerFactory.getLogger(QnaController.class);
+	private int rowCount = 10;
+	private int pageCount = 10;
 	
 	@Autowired
 	private QnaService qnaService;
+	@Autowired
+	private ProductService productService;
 	
 	//자바빈(VO)초기화
 	@ModelAttribute
@@ -39,51 +47,68 @@ public class QnaController {
 		return new QnaVO();
 	}
 	
-	//ckeditor를 이용한 이미지 업로드
-	@RequestMapping("/product/imageUploader.do")
-	@ResponseBody
-	public Map<String,Object> uploadImage(MultipartFile upload,
-			                              HttpSession session,
-			                              HttpServletRequest request)
-	                                         throws Exception{
-		
-		//업로드할 절대 경로 구하기
-		String realFolder = 
-			session.getServletContext().getRealPath("/resources/image_upload");
-		
-		//업로드한 파일 이름
-		String org_filename = upload.getOriginalFilename();
-		String str_filename = System.currentTimeMillis() + org_filename;
-		
-		logger.debug("<<원본 파일명>> : " + org_filename);
-		logger.debug("<<저장할 파일명>> : " + str_filename);
-		
-		Integer mem_num = (Integer)session.getAttribute("mem_num");
-		
-		String filepath = realFolder + "\\" + mem_num + "\\" + str_filename;
-		logger.debug("<<파일 경로>> : " + filepath);
-		
-		File f = new File(filepath);
-		if(!f.exists()) {
-			f.mkdirs();
-		}
-		
-		upload.transferTo(f);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("uploaded", true);
-		map.put("url", request.getContextPath()+"/resources/image_upload/"+mem_num+"/"+str_filename);
-		
-		return map;
-	}
+	
+	  //ckeditor를 이용한 이미지 업로드
+	  
+	  @RequestMapping("/product/imageUploader.do")
+	  
+	  @ResponseBody public Map<String,Object> uploadImage(MultipartFile upload,
+	  HttpSession session, HttpServletRequest request) throws Exception{
+	  
+	  //업로드할 절대 경로 구하기
+		  String realFolder =
+	  session.getServletContext().getRealPath("/resources/image_upload");
+	  
+	  //업로드한 파일 이름 
+	  String org_filename = upload.getOriginalFilename(); 
+	  String str_filename = System.currentTimeMillis() + org_filename;
+	  
+	  logger.debug("<<원본 파일명>> : " + org_filename); 
+	  logger.debug("<<저장할 파일명>> : " +str_filename);
+	  
+	  Integer mem_num = (Integer)session.getAttribute("mem_num");
+	  
+	  String filepath = realFolder + "\\" + mem_num + "\\" + str_filename;
+	  logger.debug("<<파일 경로>> : " + filepath);
+	  
+	  File f = new File(filepath); if(!f.exists()) { f.mkdirs(); }
+	  
+	  upload.transferTo(f);
+	  
+	  Map<String,Object> map = new HashMap<String,Object>(); map.put("uploaded",
+	  true); map.put("url",
+	  request.getContextPath()+"/resources/image_upload/"+mem_num+"/"+str_filename)
+	  ;
+	  
+	  return map; }
+	 
 	
 	//문의게시판목록
 	@RequestMapping("/qna/qnaList.do")
-	public ModelAndView qnaList(@RequestParam int board_kind) {
-		List<QnaVO> list = qnaService.selectAllQna(board_kind);
+	public ModelAndView qnaList(@RequestParam(value="board_kind") int board_kind,
+								@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								@RequestParam(value="keyfield",defaultValue="") String keyfield,
+								@RequestParam(value="keyword",defaultValue="") String keyword){
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("board_kind",board_kind);
+		
+		//글의 총 갯수
+		int count = qnaService.selectRowQnaCount(map);
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage, count, rowCount, pageCount, "qnaList.do","&board_kind="+board_kind);
+		
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+			
+		List<QnaVO> list = qnaService.selectAllQna(map);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list",list);
+		mav.addObject("count", count);
 		mav.addObject("board_kind",board_kind);
+		mav.addObject("pagingHtml", page.getPagingHtml());
 		mav.setViewName("qnaList");
 		return mav;
 	} 
@@ -93,6 +118,7 @@ public class QnaController {
 	public ModelAndView qnaDetail(@RequestParam int board_no) {
 		QnaVO qna = qnaService.selectDetailQna(board_no);
 		ModelAndView mav = new ModelAndView();
+		qna.setBoard_title(StringUtil.useNoHtml(qna.getBoard_title()));
 		mav.addObject("qna",qna);
 		mav.setViewName("qnaDetail");
 		return mav;
@@ -104,6 +130,25 @@ public class QnaController {
 		return new ModelAndView("qnaWrite","board_kind",board_kind);
 	}
 	
+	//문의게시판 상품 글 작성폼
+	@RequestMapping("/qna/qnaProductWrite.do")
+	public ModelAndView qnaProductWriteForm(@RequestParam int p_no) {
+		ProductVO product = productService.ProductSelect(p_no);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qnaProductWrite");
+		mav.addObject("product",product);
+		mav.addObject("board_kind",0);
+		return mav;
+	}
+	
+	//문의게시판 상품 글 작성폼
+	@PostMapping("/qna/qnaProductWrite.do")
+	public String qnaProdyctWrite(QnaVO qnaVO,HttpSession session) {
+		qnaVO.setMem_num((Integer)session.getAttribute("mem_num"));
+		qnaService.insertProductQna(qnaVO);
+		return "redirect:/qna/qnaList.do?board_kind="+qnaVO.getBoard_kind();
+	}
+	
 	//문의게시판 글 작성
 	@PostMapping("/qna/qnaWrite.do")
 	public String qnaWrite(QnaVO qnaVO, HttpSession session ) {
@@ -111,7 +156,12 @@ public class QnaController {
 		
 		qnaVO.setMem_num((Integer)session.getAttribute("mem_num"));
 		
-		qnaService.insertQna(qnaVO);
+		if(qnaVO.getP_no()==0) {
+			qnaService.insertQna(qnaVO);
+		}else {
+			qnaService.insertProductQna(qnaVO);
+		}
+		
 		
 		return "redirect:/qna/qnaList.do?board_kind="+qnaVO.getBoard_kind();
 	}	
@@ -120,8 +170,15 @@ public class QnaController {
 	@GetMapping("/qna/qnaReply.do")
 	public ModelAndView qnaReplyForm(@RequestParam int board_no) {
 		QnaVO qna = qnaService.selectDetailQna(board_no);
-		
-		return new ModelAndView("qnaReply","qna",qna);
+		ProductVO product = null;
+		if(qna.getP_no() != 0) {
+			product = productService.ProductSelect(qna.getP_no());
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("qnaReply");
+		mav.addObject("qna",qna);
+		mav.addObject("product",product);
+		return mav;
 	}
 		
 	//문의게시판 답변 작성
@@ -129,7 +186,11 @@ public class QnaController {
 	public String qnaReply(QnaVO qnaVO, HttpSession session) {
 		logger.debug("<<답변작성>> : " + qnaVO);
 		qnaVO.setMem_num((Integer)session.getAttribute("mem_num"));
-		qnaService.insertQna(qnaVO);
+		if(qnaVO.getP_no()==0) {
+			qnaService.insertQna(qnaVO);
+		}else {
+			qnaService.insertProductQna(qnaVO);
+		}
 		
 		return "redirect:/qna/qnaList.do?board_kind="+qnaVO.getBoard_kind();
 	}

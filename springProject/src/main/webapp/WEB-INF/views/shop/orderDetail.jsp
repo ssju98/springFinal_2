@@ -106,7 +106,7 @@
 						<c:if test="${order.order_method == 0}">
 							카드결제
 						</c:if>
-						<c:if test="${cart_pay>=1}">
+						<c:if test="${order.order_method == 1}">
 							현금결제
 						</c:if>
 					</div>

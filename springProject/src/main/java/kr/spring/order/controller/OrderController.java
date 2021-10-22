@@ -36,15 +36,18 @@ import kr.spring.orderDetail.service.OrderDetailService;
 import kr.spring.orderDetail.vo.OrderDetailVO;
 import kr.spring.product.service.ProductService;
 import kr.spring.product.vo.ProductVO;
+import kr.spring.util.PagingUtil;
 
 @Controller
 public class OrderController {
+	private int rowCount = 6;
+	private int pageCount = 10;
 	
 		private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 		@Autowired
 		private CartService cartService;		
-		@Autowired
+		@Autowired(required = true)
 		private OrderService orderService;		
 		@Autowired
 		private OrderDetailService orderDetailService;		
@@ -198,14 +201,26 @@ public class OrderController {
 	  
 	  //주문내역페이지
 	  @RequestMapping("/shop/orderList") 
-	  public ModelAndView listOrder(HttpSession session) {
+	  public ModelAndView listOrder(HttpSession session,
+			  						@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderListVO> list = orderService.selectAllOrder(mem_num);
-		 
-		  ModelAndView mav = new ModelAndView();
-		  mav.setViewName("orderList");
-		  mav.addObject("list",list);
+		  Map<String,Object> map = new HashMap<String,Object>();
+		  map.put("mem_num", mem_num);
 		  
+		 int count = orderService.selectAllOrderCount(mem_num);
+		  
+		  PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "orderList.do");
+			
+		  map.put("start", page.getStartCount());
+		  map.put("end", page.getEndCount());
+		  
+		  List<OrderListVO> list = orderService.selectAllOrder(map);
+		  
+		  ModelAndView mav = new ModelAndView();
+		  mav.addObject("list",list);
+		 mav.addObject("count",count);
+		  mav.addObject("pagingHtml",page.getPagingHtml());
+		  mav.setViewName("orderList");
 		  return mav; 
 	  }
 	  
@@ -217,6 +232,7 @@ public class OrderController {
 		 OrderAllVO order = orderService.selectOrderDetailInfo(order_no);
 		 
 		 ModelAndView  mav = new ModelAndView();
+		 
 		 mav.setViewName("orderDetail");
 		 mav.addObject("listProduct", listProduct);
 		 mav.addObject("order",order);
@@ -226,38 +242,77 @@ public class OrderController {
 	  
 	  //주문취소페이지
 	  @RequestMapping("/shop/orderCancel")
-	  public ModelAndView cancelOrder(HttpSession session) {
+	  public ModelAndView cancelOrder(HttpSession session,
+			  						@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderListVO> list = orderService.selectCancelOrder(mem_num);
+		  
+		  Map<String,Object> map = new HashMap<String,Object>();
+		  map.put("mem_num", mem_num);
+		  
+		  //주문 총 갯수
+		  int count = orderService.selectCancelOrderCount(mem_num);
+			
+		  PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "orderCancel.do");
+		
+		  map.put("start", page.getStartCount());
+		  map.put("end", page.getEndCount());
+		  
+		  
+		  List<OrderListVO> list = orderService.selectCancelOrder(map);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("orderCancel");
 		  mav.addObject("list",list);
+		  mav.addObject("count",count);
+		  mav.addObject("pagingHtml",page.getPagingHtml());
 		  return mav;
 	  }
 	  
 	  //주문교환페이지
 	  @RequestMapping("/shop/orderExchange")
-	  public ModelAndView exchangeOrder(HttpSession session) {
+	  public ModelAndView exchangeOrder(HttpSession session,
+			  							@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
+		  
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderListVO> list = orderService.selectExchageOrder(mem_num);
+		  
+		  Map<String,Object> map = new HashMap<String,Object>();
+		  map.put("mem_num", mem_num);
+		  
+		  int count = orderService.selectExchageOrderCount(mem_num);
+		  PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "orderCancel.do");
+		  map.put("start", page.getStartCount());
+		  map.put("end", page.getEndCount());
+		  
+		  List<OrderListVO> list = orderService.selectExchageOrder(map);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("orderExchange");
 		  mav.addObject("list",list);
+		  mav.addObject("count",count);
+		  mav.addObject("pagingHtml",page.getPagingHtml());
 		  
 		  return mav;
 	  }
 	  
 	  //주문반품페이지
 	  @RequestMapping("/shop/orderRefund")
-	  public ModelAndView refundOrder(HttpSession session) {
+	  public ModelAndView refundOrder(HttpSession session,@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderListVO> list = orderService.selectRefundOrder(mem_num);
+		  Map<String,Object> map = new HashMap<String,Object>();
+		  map.put("mem_num", mem_num);
+		  int count = orderService.selectRefundOrderCount(mem_num);
+		  
+		  PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "orderCancel.do");
+		  map.put("start", page.getStartCount());
+		  map.put("end", page.getEndCount());
+				  
+		  List<OrderListVO> list = orderService.selectRefundOrder(map);
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("refundExchange");
 		  mav.addObject("list",list);
+		  mav.addObject("count",count);
+		  mav.addObject("pagingHtml",page.getPagingHtml());
 		  return mav;
 	  }
 	  
@@ -265,13 +320,23 @@ public class OrderController {
 	  
 	  //주문구매확정페이지
 	  @RequestMapping("/shop/orderConfirm")
-	  public ModelAndView confirmOrder(HttpSession session) {
+	  public ModelAndView confirmOrder(HttpSession session,@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
-		  List<OrderListVO> list = orderService.selectConfirmOrder(mem_num);
+		  Map<String,Object> map = new HashMap<String,Object>();
+		  map.put("mem_num", mem_num);
+		  
+		  int count = orderService.selectConfirmOrderCount(mem_num);
+		  PagingUtil page = new PagingUtil(currentPage, count, rowCount, pageCount, "orderCancel.do");
+		  map.put("start", page.getStartCount());
+				  map.put("end", page.getEndCount());
+		  List<OrderListVO> list = orderService.selectConfirmOrder(map);
+		  
 		 
 		  ModelAndView mav = new ModelAndView();
 		  mav.setViewName("orderConfirm");
 		  mav.addObject("list",list);
+		  mav.addObject("count",count);
+		  mav.addObject("pagingHtml",page.getPagingHtml());
 		  return mav;
 	  } 
 	  

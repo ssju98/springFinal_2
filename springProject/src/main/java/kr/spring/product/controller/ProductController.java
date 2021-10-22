@@ -1,5 +1,6 @@
 package kr.spring.product.controller;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.category_sub.service.Category_subService;
@@ -30,6 +32,8 @@ import kr.spring.category_top.vo.Category_topVO;
 import kr.spring.member.controller.MemberController;
 import kr.spring.product.service.ProductService;
 import kr.spring.product.vo.ProductVO;
+import kr.spring.qna.service.QnaService;
+import kr.spring.qna.vo.QnaVO;
 import kr.spring.util.PagingUtil;
 
 @Controller
@@ -37,6 +41,11 @@ public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	private int rowCount = 10;
 	private int pageCount = 10;
+	private int rowCount2 = 10;
+	private int pageCount2 = 10;
+	
+	@Autowired
+	private QnaService qnaService;
 
 	@Autowired
 	private ProductService productService;
@@ -77,7 +86,8 @@ public class ProductController {
 
 	//상품 상세 목록
 	@RequestMapping("/shop/productDetail.do")
-	public ModelAndView productDetail(@RequestParam int p_no) {
+	public ModelAndView productDetail(@RequestParam int p_no,	
+									@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		
 		int count = productService.countProduct(p_no);
 		
@@ -85,18 +95,39 @@ public class ProductController {
 			 return new ModelAndView("/common/notice");
 		}
 		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("p_no",p_no);
+		
+		//상품 문의 총 갯수
+		int count2 = qnaService.selectAllPrpductQnaCount(map);
+		
+		//페이징처리
+		PagingUtil page = new PagingUtil(currentPage, count2, rowCount2, pageCount2, "productDetail.do","&p_no="+p_no);
+		
+		//페이징
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+		
+		
+		List<QnaVO> list = qnaService.selectAllProductQna(map);
+		
 		ProductVO product = productService.ProductSelect(p_no);
 		Category_topVO category_top = category_topService.selectCategoryOne(product.getC_top_no());
 		Category_subVO category_sub = category_subService.selectCategoryOne(product.getC_sub_no());
 		System.out.println(category_top);
 		System.out.println(category_sub);
-
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("shopProductDetail");
 		mav.addObject("product",product);
-		mav.addObject("category_top_name",category_top);
-		mav.addObject("category_sub_name",category_sub);
-
+		 mav.addObject("category_top_name",category_top);
+		 mav.addObject("category_sub_name",category_sub);
+		 //문의글
+		 mav.addObject("list",list);
+		 //문의글갯수
+		 mav.addObject("count",count2);
+		 mav.addObject("pagingHtml",page.getPagingHtml());
+		 
 		return mav;
 	}
 
@@ -114,44 +145,41 @@ public class ProductController {
 		return mav;
 	}
 
-	//상품관리 - 상품 리스트 , 상품 이미지 출력
-	//ckeditor를 이용한 이미지 업로드
-	//	@RequestMapping("/product/imageUploader.do")
-	//	@ResponseBody
-	//	public Map<String,Object> uploadImage(MultipartFile upload,
-	//			                              HttpSession session,
-	//			                              HttpServletRequest request)
-	//	                                         throws Exception{
-	//		
-	//		//업로드할 절대 경로 구하기
-	//		String realFolder = 
-	//			session.getServletContext().getRealPath("/resources/image_upload");
-	//		
-	//		//업로드한 파일 이름
-	//		String org_filename = upload.getOriginalFilename();
-	//		String str_filename = System.currentTimeMillis() + org_filename;
-	//		
-	//		logger.debug("<<원본 파일명>> : " + org_filename);
-	//		logger.debug("<<저장할 파일명>> : " + str_filename);
-	//		
-	//		Integer user_num = (Integer)session.getAttribute("user_num");
-	//		
-	//		String filepath = realFolder + "\\" + user_num + "\\" + str_filename;
-	//		logger.debug("<<파일 경로>> : " + filepath);
-	//		
-	//		File f = new File(filepath);
-	//		if(!f.exists()) {
-	//			f.mkdirs();
-	//		}
-	//		
-	//		upload.transferTo(f);
-	//		
-	//		Map<String,Object> map = new HashMap<String,Object>();
-	//		map.put("uploaded", true);
-	//		map.put("url", request.getContextPath()+"/resources/image_upload/"+user_num+"/"+str_filename);
-	//		
-	//		return map;
-	//	}
+	/*
+	 * //ckeditor를 이용한 이미지 업로드
+	 * 
+	 * @RequestMapping("/product/imageUploader.do")
+	 * 
+	 * @ResponseBody public Map<String,Object> uploadImage(MultipartFile upload,
+	 * HttpSession session, HttpServletRequest request) throws Exception{
+	 * 
+	 * //업로드할 절대 경로 구하기 String realFolder =
+	 * session.getServletContext().getRealPath("/resources/image_upload");
+	 * 
+	 * //업로드한 파일 이름 String org_filename = upload.getOriginalFilename(); String
+	 * str_filename = System.currentTimeMillis() + org_filename;
+	 * 
+	 * logger.debug("<<원본 파일명>> : " + org_filename); logger.debug("<<저장할 파일명>> : " +
+	 * str_filename);
+	 * 
+	 * Integer mem_num = (Integer)session.getAttribute("mem_num");
+	 * 
+	 * String filepath = realFolder + "\\" + mem_num + "\\" + str_filename;
+	 * logger.debug("<<파일 경로>> : " + filepath);
+	 * 
+	 * File f = new File(filepath); if(!f.exists()) { f.mkdirs(); }
+	 * 
+	 * upload.transferTo(f);
+	 * 
+	 * Map<String,Object> map = new HashMap<String,Object>(); map.put("uploaded",
+	 * true); map.put("url",
+	 * request.getContextPath()+"/resources/image_upload/"+mem_num+"/"+str_filename)
+	 * ;
+	 * 
+	 * return map;
+	 */
+		//}
+	 
 
 	//자바빈(VO) 초기화
 	@ModelAttribute

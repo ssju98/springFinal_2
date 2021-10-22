@@ -17,6 +17,7 @@
 			<li class="noLogin"><a href="${pageContext.request.contextPath}/member/registerUser.do">회원가입</a></li>
 		</c:if>
 		<c:if test="${!empty mem_num && mem_auth==2}">
+			<li>${mem_id}님</li>
 			<li><a href="${pageContext.request.contextPath}/shop/cart.do">장바구니</a></li>
 			<li><a href="${pageContext.request.contextPath}/shop/orderList.do">주문조회</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/myPage.do">마이페이지</a></li>

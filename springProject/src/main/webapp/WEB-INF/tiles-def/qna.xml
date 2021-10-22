@@ -17,6 +17,10 @@
     	<put-attribute name="title" value="문의글작성"/>
     	<put-attribute name="body" value="/WEB-INF/views/qna/qnaWrite.jsp"/> 
     </definition>
+    <definition name="qnaProductWrite" extends="shopMain">
+    	<put-attribute name="title" value="문의글작성"/>
+    	<put-attribute name="body" value="/WEB-INF/views/qna/qnaProductWrite.jsp"/> 
+    </definition>
     <definition name="qnaReply" extends="shopMain">
     	<put-attribute name="title" value="문의글답변작성"/>
     	<put-attribute name="body" value="/WEB-INF/views/qna/qnaReply.jsp"/> 

@@ -1,6 +1,7 @@
 package kr.spring.order.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,28 +25,23 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<OrderListVO> selectAllOrder(int mem_num) {
-		return orderMapper.selectAllOrder(mem_num);
-	}
-
-	@Override
 	public List<OrderAllVO> countOrderProduct(int mem_num) {
 		return orderMapper.countOrderProduct(mem_num);
 	}
 
 	@Override
-	public List<OrderListVO> selectRefundOrder(int mem_num) {
-		return orderMapper.selectRefundOrder(mem_num);
+	public List<OrderListVO> selectRefundOrder(Map<String,Object> map) {
+		return orderMapper.selectRefundOrder(map);
 	}
 
 	@Override
-	public List<OrderListVO> selectConfirmOrder(int mem_num) {
-		return orderMapper.selectConfirmOrder(mem_num);
+	public List<OrderListVO> selectConfirmOrder(Map<String,Object> map) {
+		return orderMapper.selectConfirmOrder(map);
 	}
 
 	@Override
-	public List<OrderListVO> selectExchageOrder(int mem_num) {
-		return orderMapper.selectExchageOrder(mem_num);
+	public List<OrderListVO> selectExchageOrder(Map<String,Object> map) {
+		return orderMapper.selectExchageOrder(map);
 	}
 
 	@Override
@@ -59,7 +55,38 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public List<OrderListVO> selectCancelOrder(int mem_num) {
-		return orderMapper.selectCancelOrder(mem_num);
+	public List<OrderListVO> selectCancelOrder(Map<String,Object> map) {
+		return orderMapper.selectCancelOrder(map);
 	}
+
+	@Override
+	public int selectCancelOrderCount(int mem_num) {
+		return orderMapper.selectCancelOrderCount(mem_num);
+	}
+
+	@Override
+	public List<OrderListVO> selectAllOrder(Map<String, Object> map) {
+		return orderMapper.selectAllOrder(map);
+	}
+
+	@Override
+	public int selectAllOrderCount(int mem_num) {
+		return orderMapper.selectAllOrderCount(mem_num);
+	}
+
+	@Override
+	public int selectRefundOrderCount(int mem_num) {
+		return orderMapper.selectRefundOrderCount(mem_num);
+	}
+
+	@Override
+	public int selectExchageOrderCount(int mem_num) {
+		return orderMapper.selectExchageOrderCount(mem_num);
+	}
+
+	@Override
+	public int selectConfirmOrderCount(int mem_num) {
+		return orderMapper.selectConfirmOrderCount(mem_num);
+	}
+
 }

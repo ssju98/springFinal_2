@@ -200,5 +200,94 @@
 		</c:if>
 	</div> 
 	</div>
+	<br>
+	<div style="clear:both;" >
+	<br>
+		<div id="middle-menu">
+			<ul>
+				<li><a href="#info">상품상세정보</a></li>
+				<li><a href="#review">상품사용후기</a></li>
+				<li><a href="#qna">상품문의</a></li>
+			</ul>
+		</div>
+		<div><a id="info"></a>
+		${product.p_sub_text}
+		</div>
+		<div id="middle-menu">
+			<ul>
+				<li><a href="#info">상품상세정보</a></li>
+				<li><a href="#review">상품사용후기</a></li>
+				<li><a href="#qna">상품문의</a></li>
+			</ul>
+		</div>
+		<div> <a id="review"></a>
+		
+		</div>
+		<div id="middle-menu">
+			<ul>
+				<li><a href="#info">상품상세정보</a></li>
+				<li><a href="#review">상품사용후기</a></li>
+				<li><a href="#qna">상품문의</a></li>
+			</ul>
+		</div>
+		<div><a id="qna"></a>
+		<div style="font-weight: 500; margin-top: 30px; float: left;">상품문의</div>
+		<div style="font-weight: 500; margin-top: 30px; float: right; margin-right: 15px;" >
+			<button class="btn btn-dark btn-xs" style="font-size: 14px;" onclick="location.href='${pageContext.request.contextPath}/qna/qnaProductWrite.do?p_no=${product.p_no}'">작성하기</button>
+		</div>
+		<c:if test="${count == 0}">
+			<div style=" width:100%; height:100px; margin: 0 auto; text-align:center; border: 1px solid #ebebeb; clear: both;">
+				<div style="font-size: 20px; font-weight: 500;margin-top:30px; ">
+					작성된 문의가 없습니다.
+				</div>
+			</div>
+		</c:if>
+		<c:if test="${count != 0}">
+				<table class="order-table" border="1" style="clear: both;">
+			<colgroup>
+				<col width="150px">
+				<col width="700px">
+				<col width="150px">
+				<col width="187px">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>게시물 번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<c:forEach var="list" items="${list}">
+				<tbody>
+					<tr>	
+						<td class="table-text">${list.board_no}</td>
+						<td class="table-product">
+							<div class="table-product-name">
+								<c:if test="${list.level > 1}">
+									<c:forEach begin="1" end="${list.level}">
+										&nbsp;
+									</c:forEach>
+									<a href="${pageContext.request.contextPath}/qna/qnaDetail.do?board_no=${list.board_no}">RE : </a> 
+								</c:if>
+								<a href="${pageContext.request.contextPath}/qna/qnaDetail.do?board_no=${list.board_no}">${list.board_title}</a>
+							</div>
+						</td>
+						<td class="table-text">
+							${list.mem_id}
+						</td>
+						<td class="table-text">
+							<fmt:formatDate value="${list.board_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
+						</td>
+					</tr>	
+				</tbody>
+			</c:forEach>
+		</table>
+		<div align="center">${pagingHtml}</div>
+		</c:if>
+	
+		</div>
+	</div>
+
 	
 </div>
