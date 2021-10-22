@@ -43,7 +43,7 @@
 					<td>${adminOrderVO.order_no}</td>
 				</tr>
 				<tr>
-					<th>주문일</th>
+					<th>주문일자</th>
 					<td>${adminOrderVO.order_date}</td>
 				</tr>
 				<tr>

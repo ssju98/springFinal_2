@@ -61,6 +61,9 @@
 			<form:hidden path="mem_num"/>
 			<form:hidden path="mem_id"/>
 			<form:hidden path="mem_date"/>
+			<form:hidden path="mem_zipcode"/>
+			<form:hidden path="mem_address1"/>
+			<form:hidden path="mem_address2"/>
 			<table class="table table-bordered">
 				<tr>
 					<th>관리자유형</th>
@@ -95,27 +98,6 @@
 						<form:input path="mem_email" class="form-control form-control-sm"/>
 						<form:errors path="mem_email" class="text-danger"/>
 					</td>
-				</tr>
-				<tr>
-					<th>우편번호</th>
-					<td>
-						<form:input path="mem_zipcode" class="form-control form-control-sm"/>
-						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-dark btn-sm">
-						<form:errors path="mem_zipcode" class="text-danger"/>
-					</td>
-				</tr>
-				<tr>
-					<th>주소</th>
-					<td>
-						<form:input path="mem_address1" class="form-control form-control-sm"/>
-						<form:errors path="mem_address1" class="text-danger"/>
-					</td>
-				</tr>
-				<tr>
-					<th>상세주소</th>
-					<td>
-						<form:input path="mem_address2" class="form-control form-control-sm"/>
-						<form:errors path="mem_address2" class="text-danger"/>
 				</tr>
 				<tr>
 					<th>등록일</th>

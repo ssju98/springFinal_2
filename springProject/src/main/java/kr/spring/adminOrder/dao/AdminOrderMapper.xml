@@ -74,7 +74,17 @@
 							o.order_date BETWEEN TO_DATE(#{start_date}, 'YYYY-MM-DD') AND TO_DATE(#{end_date}, 'YYYY-MM-DD') + 1
 					 	</if>
 					</where>
-			  		ORDER BY o.order_date DESC)a)
+			  		ORDER BY 
+				  		<if test="orderby == '' or orderby == 'date'">
+				  			o.order_date DESC
+				  		</if>
+				  		<if test="orderby == 'status'">
+				  			d.d_status_num
+				  		</if>
+				  		<if test="orderby == 'pay'">
+				  			o.order_pay DESC
+				  		</if>
+			  		)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>

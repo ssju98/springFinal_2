@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- CSS file -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
 <!-- BootStrap icon -->
@@ -46,9 +47,9 @@
 					<th>처리상태</th>
 					<td>
 						<div class="form-check-inline">
-						<input type="radio" name="d_status_num" value="" checked="checked" class="form-check-input">전체
-						<input type="radio" name="d_status_num" value="5" class="form-check-input ml-3">반품
-						<input type="radio" name="d_status_num" value="6" class="form-check-input ml-3">교환
+						<input type="radio" name="d_status_num" value="" class="form-check-input" <c:if test="${empty d_status_num}">checked='checked'</c:if>>전체
+						<input type="radio" name="d_status_num" value="5" class="form-check-input ml-3" <c:if test="${d_status_num == 5}">checked='checked'</c:if>>반품
+						<input type="radio" name="d_status_num" value="6" class="form-check-input ml-3" <c:if test="${d_status_num == 6}">checked='checked'</c:if>>교환
 						</div>
 					</td>
 				</tr>
@@ -57,10 +58,10 @@
 					<td>
 						<div class="form-inline">
 							<select name="keyfield" id="keyfield" class="form-control form-control-sm">
-								<option value="order_no">주문번호</option>
-								<option value="mem_id">아이디</option>
+								<option value="order_no" <c:if test="${keyfield == 'order_no'}">selected='selected'</c:if>>주문번호</option>
+								<option value="mem_id" <c:if test="${keyfield == 'mem_id'}">selected='selected'</c:if>>아이디</option>
 							</select>
-							<input type="search" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control form-control-sm ml-1">
+							<input type="search" name="keyword" id="keyword" value="${keyword}" placeholder="검색어 입력" class="form-control form-control-sm ml-1">
 							<input type="submit" value="검색" class="btn btn-dark btn-sm">
 						</div>
 					</td>
@@ -77,18 +78,20 @@
 		<table class="table table-hover table-bordered table-sm text-center">
 			<thead>
 				<tr>
-					<th class="c-date">주문일</th>
-					<th class="c-onum">주문번호</th>
-					<th class="c-id">주문자아이디</th>
-					<th class="c-satus">처리상태</th>
-					<th class="c-track">송장번호</th>
-					<th class="c-manage">관리</th>
+					<th class="c-15">주문일자</th>
+					<th class="c-15">주문번호</th>
+					<th class="c-15">주문자아이디</th>
+					<th class="c-15">처리상태</th>
+					<th class="c-20">송장번호</th>
+					<th class="c-20">관리</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="delivery" items="${list}">
 				<tr>
-					<td>${delivery.order_date}</td>
+					<td>
+						<fmt:formatDate value="${delivery.order_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
+					</td>
 					<td>${delivery.order_no}</td>
 					<td>${delivery.mem_id}</td>
 					<td>
@@ -115,6 +118,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<div class="result-count">[검색결과 : <b>${count}</b> 건]</div>
 		<div class="text-center mt-4">${pagingHtml}</div>
 		</c:if>
 	</div>

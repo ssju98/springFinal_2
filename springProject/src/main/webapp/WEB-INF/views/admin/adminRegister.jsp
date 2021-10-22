@@ -11,7 +11,7 @@
 		
 		//아이디 중복 체크
 		$('#confirmId').click(function(){
-			//체크 결과 스타일
+			//결과 문구 스타일 부여
 			$('#id_row').addClass('id-row');
 			
 			//공백 체크
@@ -66,7 +66,7 @@
 			$('#id_row').removeClass('id-row');
 		});
 		
-		//관리자 등록시 체크값 확인
+		//등록시 아이디 중복 체크값 확인
 		$('#register_form').submit(function(){
 			//중복체크 안된 경우
 			if(checkId == 0){
@@ -75,7 +75,7 @@
 				output = '<span id="message_id" class="text-danger">*아이디 중복체크는 필수입니다.</span>';
 				$('#message').append(output);
 				$('#mem_id').focus();
-				//공백 체크
+				//공백 체크 후 제거
 				if($('#mem_id').val().trim() == ''){
 					$('#mem_id').val('');
 				}
@@ -139,6 +139,9 @@
 	<div id="wide-width" class="wide-table">
 		<h4 id="header-main">관리자 등록</h4>
 		<form:form action="adminRegister.do" modelAttribute="adminMemberVO" class="form-inline" id="register_form">
+			<form:hidden path="mem_zipcode" value="00000"/>
+			<form:hidden path="mem_address1" value="00000"/>
+			<form:hidden path="mem_address2" value="00000"/>
 			<table class="table table-bordered">
 				<tr>
 					<th>관리자유형</th>
@@ -185,27 +188,6 @@
 						<form:input path="mem_email" class="form-control form-control-sm"/>
 						<form:errors path="mem_email" class="text-danger"/>
 					</td>
-				</tr>
-				<tr>
-					<th>우편번호</th>
-					<td>
-						<form:input path="mem_zipcode" class="form-control form-control-sm"/>
-						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-dark btn-sm">
-						<form:errors path="mem_zipcode" class="text-danger"/>
-					</td>
-				</tr>
-				<tr>
-					<th>주소</th>
-					<td>
-						<form:input path="mem_address1" class="form-control form-control-sm"/>
-						<form:errors path="mem_address1" class="text-danger"/>
-					</td>
-				</tr>
-				<tr>
-					<th>상세주소</th>
-					<td>
-						<form:input path="mem_address2" class="form-control form-control-sm"/>
-						<form:errors path="mem_address2" class="text-danger"/>
 				</tr>
 			</table>
 			<div class="element-center text-center div-button">

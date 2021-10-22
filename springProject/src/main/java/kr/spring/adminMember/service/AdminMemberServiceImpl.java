@@ -93,10 +93,4 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		adminMemberMapper.insertAdminDetail(adminMemberVO);
 	}
 
-	@Override
-	public void deleteAdmin(int mem_num) {
-		adminMemberMapper.deleteAdminDetail(mem_num);
-		adminMemberMapper.deleteAdmin(mem_num);
-	}
-
 }

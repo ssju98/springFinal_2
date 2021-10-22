@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- CSS file -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
 <!-- BootStrap icon -->
@@ -12,7 +13,7 @@
 		$('.btn-tracking').click(function(){
 			var tnum = $(this).attr('data-tnum');
 			window.open('https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?displayHeader=N&sid1=' + tnum,
-				    	'_blank', 'titlebar=yes, width=800, height=700');
+				    	'_blank', 'left=30pixels, top=50pixels, width=750, height=700');
  		});
 		
 		//배송준비 버튼 확인창
@@ -45,12 +46,11 @@
 					<th>배송상태</th>
 					<td>
 						<div class="form-check-inline">
-						<input type="radio" name="d_status_num" value="" checked="checked" class="form-check-input">전체
-						<input type="radio" name="d_status_num" value="0" class="form-check-input ml-3">결제완료
-						<input type="radio" name="d_status_num" value="1" class="form-check-input ml-3">배송준비중
-						<input type="radio" name="d_status_num" value="2" class="form-check-input ml-3">배송중
-						<input type="radio" name="d_status_num" value="3" class="form-check-input ml-3">배송완료
-						</div>
+						<input type="radio" name="d_status_num" value="" class="form-check-input" <c:if test="${empty d_status_num}">checked='checked'</c:if>>전체
+						<input type="radio" name="d_status_num" value="0" class="form-check-input ml-3" <c:if test="${d_status_num == '0'}">checked='checked'</c:if>>결제완료
+						<input type="radio" name="d_status_num" value="1" class="form-check-input ml-3" <c:if test="${d_status_num == 1}">checked='checked'</c:if>>배송준비중
+						<input type="radio" name="d_status_num" value="2" class="form-check-input ml-3" <c:if test="${d_status_num == 2}">checked='checked'</c:if>>배송중
+						<input type="radio" name="d_status_num" value="3" class="form-check-input ml-3" <c:if test="${d_status_num == 3}">checked='checked'</c:if>>배송완료						</div>
 					</td>
 				</tr>
 				<tr>
@@ -58,10 +58,10 @@
 					<td>
 						<div class="form-inline">
 							<select name="keyfield" id="keyfield" class="form-control form-control-sm">
-								<option value="order_no">주문번호</option>
-								<option value="mem_id">아이디</option>
+								<option value="order_no" <c:if test="${keyfield == 'order_no'}">selected='selected'</c:if>>주문번호</option>
+								<option value="mem_id" <c:if test="${keyfield == 'mem_id'}">selected='selected'</c:if>>아이디</option>
 							</select>
-							<input type="search" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control form-control-sm ml-1">
+							<input type="search" name="keyword" id="keyword" value="${keyword}" placeholder="검색어 입력" class="form-control form-control-sm ml-1">
 							<input type="submit" value="검색" class="btn btn-dark btn-sm">
 						</div>
 					</td>
@@ -78,18 +78,20 @@
 		<table class="table table-hover table-bordered table-sm text-center">
 			<thead>
 				<tr>
-					<th class="c-date">주문일</th>
-					<th class="c-onum">주문번호</th>
-					<th class="c-id">주문자아이디</th>
-					<th class="c-satus">배송상태</th>
-					<th class="c-track">송장번호</th>
-					<th class="c-manage">관리</th>
+					<th class="c-15">주문일자</th>
+					<th class="c-15">주문번호</th>
+					<th class="c-15">주문자아이디</th>
+					<th class="c-15">배송상태</th>
+					<th class="c-20">송장번호</th>
+					<th class="c-20">관리</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="delivery" items="${list}">
 				<tr>
-					<td>${delivery.order_date}</td>
+					<td>
+						<fmt:formatDate value="${delivery.order_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
+					</td>
 					<td>${delivery.order_no}</td>
 					<td>${delivery.mem_id}</td>
 					<td>
@@ -100,7 +102,7 @@
 					<td>
 						${delivery.tracking_num}
 						<c:if test="${!empty delivery.tracking_num}">
-							<button class="btn-tracking" data-tnum="${delivery.tracking_num}">
+							<button class="btn-tracking btn-detail" data-tnum="${delivery.tracking_num}">
 								<i class="bi bi-zoom-in "></i>조회
 							</button>
 						</c:if>
@@ -126,6 +128,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<div class="result-count">[검색결과 : <b>${count}</b> 건]</div>
 		<div class="text-center mt-4">${pagingHtml}</div>
 		</c:if>
 	</div>

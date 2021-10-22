@@ -24,5 +24,4 @@ public interface AdminMemberService {
 	public int getAdminCount();
 	public List<AdminMemberVO> getAdminList(Map<String,Object> map);
 	public void insertAdmin(AdminMemberVO adminMemberVO);
-	public void deleteAdmin(int mem_num);
 }
