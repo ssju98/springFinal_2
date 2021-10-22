@@ -76,6 +76,11 @@ public class AdminMemberController {
 		mav.addObject("list", list);
 		mav.addObject("pagingHtml", page.getPagingHtml());
 		
+		//검색조건 유지를 위한 데이터
+		mav.addObject("auth_num", auth_num);
+		mav.addObject("keyfield", keyfield);
+		mav.addObject("keyword", keyword);
+		
 		return mav;
 	}
 	
@@ -360,7 +365,7 @@ public class AdminMemberController {
 		
 		if(check) {
 			//관리자정보 삭제
-			adminMemberService.deleteAdmin(Integer.parseInt(adminMemberVO.getManage_num()));
+			adminMemberService.deleteMember(Integer.parseInt(adminMemberVO.getManage_num()));
 			
 			//완료시 alert창에 표시할 내용
 			model.addAttribute("message", "관리자 삭제가 완료되었습니다.");

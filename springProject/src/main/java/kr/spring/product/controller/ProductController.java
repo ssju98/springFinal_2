@@ -78,6 +78,13 @@ public class ProductController {
 	//상품 상세 목록
 	@RequestMapping("/shop/productDetail.do")
 	public ModelAndView productDetail(@RequestParam int p_no) {
+		
+		int count = productService.countProduct(p_no);
+		
+		if(count == 0) {
+			 return new ModelAndView("/common/notice");
+		}
+		
 		ProductVO product = productService.ProductSelect(p_no);
 		Category_topVO category_top = category_topService.selectCategoryOne(product.getC_top_no());
 		Category_subVO category_sub = category_subService.selectCategoryOne(product.getC_sub_no());

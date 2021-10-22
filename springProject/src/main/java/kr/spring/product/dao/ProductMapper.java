@@ -25,11 +25,12 @@ public interface ProductMapper {
 	public void productAmountUpdate(int param1, int param2);
 	@Update("update product set p_amount=p_amount+#{param1} where p_no=#{param2}")
 	public void productAmountPlusUpdate(int param1, int param2);
-	
 	@Delete("DELETE FROM product WHERE p_no=#{p_no}")
 	public void deleteProduct(int p_no);
 	@Insert("INSERT INTO product (p_no, p_name, p_price, p_amount, p_image_name, p_image, p_discount, p_sub_text, c_top_no, c_sub_no) "
 			+ "VALUES (p_no_seq.nextval, #{p_name}, #{p_price}, #{p_amount}, #{p_image_name}, #{p_image}, #{p_discount}, #{p_sub_text}, #{c_top_no}, #{c_sub_no})")
 	public void insertProduct(ProductVO product);
 	public void updateProduct(ProductVO productVO);
+	@Select("select count(*) from product where p_no = #{p_no}")
+	public int countProduct(int p_no);
 }

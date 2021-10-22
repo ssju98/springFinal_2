@@ -18,5 +18,5 @@ public interface ProductService {
 	public void deleteProduct(int p_no);
 	public void insertProduct(ProductVO productVO);
 	public void updateProduct(ProductVO productVO);
-	
+	public int countProduct(int p_no);
 }

@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+/* CSS 적용 페이지 : admin, adminMember, adminOrder 폴더 내 모든 JSP 파일 */
+
 /* 가로 너비 */
 div#narrow-width{
 	width: 450px;
@@ -30,9 +32,9 @@ div#wide-width{
 }
 
 
-/* 색 추가 */
+/* 글자 색 */
 .text-gray {
-  color: rgb(153, 159, 166);
+  color: rgb(141, 148, 156);
 }
 .text-blue {
   color: rgb(31, 58, 214);
@@ -73,28 +75,28 @@ input#mem_address2{
 
 
 /* 테이블 행 너비 */
-.wide-table th.c-num{
-	width: 6%
+.wide-table th.c-5{
+	width: 5%
 }
-.wide-table th.c-auth, .wide-table th.c-date, .wide-table th.c-method, 
-.wide-table th.c-satus, .wide-table th.c-mount, .wide-table th.c-pnum{
+.wide-table th.c-10{
 	width: 10%
 }
-.wide-table th.c-id, .wide-table th.c-name, .wide-table th.c-pay{
+.wide-table th.c-15{
 	width: 15%
 }
-.wide-table th.c-phone, .wide-table th.c-email{
-	width: 17%
-}
-.wide-table th.c-manage, .wide-table th.c-onum, .wide-table th.c-track{
+.wide-table th.c-20{
 	width: 20%
 }
-table.cell-4 th, tr.cell-4 th{
+.wide-table th.c-45{
+	width: 45%
+}
+table.split-4 th{
 	width: 12%;
 }
-table.cell-4 td, tr.cell-4 td{
+table.split-4 td{
 	width: 38%;
 }
+
 
 
 /* 관리자인증 페이지 */
@@ -121,12 +123,11 @@ table.cell-4 td, tr.cell-4 td{
 }
 
 
-/* 검색창,목록,상세 페이지 */
+/* 목록페이지, 상세페이지 */
 .wide-table tr{
 	height: 45px;
 }
 .wide-table th, .wide-table td{
-	font-size: 15px;
 	vertical-align: middle;
 	border-color: #dee2e6;
 }
@@ -146,14 +147,16 @@ table-hover.tbody tr:hover {
   color: #212529;
   background-color: rgba(0, 0, 0, 0.075);
 }
-.wide-table select#keyfield{
-	padding-top: 1px;
-}
 .wide-table button, .wide-table input[type="button"], .wide-table{
 	border-color: #c1c7d2;
 }
 .wide-table div{
 	vertical-align: middle;
+}
+
+/* 검색조건 테이블 */
+.wide-table select#keyfield{
+	padding-top: 1px;
 }
 .wide-table input[type="date"]{
 	border: 1px solid #dee2e6;
@@ -169,6 +172,33 @@ table-hover.tbody tr:hover {
 	font-size: 13px;
 	text-align: center;
 }
+div.result-count{
+	font-size: 14px;
+	margin-left: 3px;
+	margin-top: -10px;
+}
+
+
+/* 목록순서 셀렉트박스 */
+div.element-right{
+	text-align: -webkit-right;
+}
+select.order-select{
+	width: 110px;
+	margin-bottom: 5px;
+	margin-top: -5px;
+}
+
+
+/* 상세페이지 버튼 */
+.div-button input, .div-button button{
+	height: 35px;
+	width: 80px;
+	line-height: 1.35;
+	background-color: #f8f9fa;
+	border-color: #c1c7d2;
+	color: black;
+}
 
 
 /* 아이디 중복체크 결과 표시 */
@@ -181,34 +211,25 @@ span#message_id{
 }
 
 
-/* 상세 페이지 내 버튼 */
-.div-button input, .div-button button{
-	height: 35px;
-	width: 80px;
-	line-height: 1.35;
-	background-color: #f8f9fa;
-	border-color: #c1c7d2;
-	color: black;
-}
-
-
 /* 배송조회 버튼*/
-.btn-tracking{
-	padding: 0 4px;
+.btn-detail{
+	padding: 0 5px;
 	margin-left: 5px;
-	height: 28px;
+	height: 25px;
 	border: none;
 	background-color: #f8f9fa;
 	font-size: 13px;
+	border-radius: 0.25rem;
 }
-.btn-tracking:hover, .btn-tracking:focus{
+.btn-detail:hover, .btn-detail:focus{
 	background-color: #e2e6ea;
 }
-.btn-tracking i{
+.btn-detail i{
 	margin-right: 1px;
 }
 
-/* 회원 활동정보 테이블 */
+
+/* 회원-활동정보 테이블 */
 table#activity_table td{
 	font-size: 18px;
 	height: 60px;

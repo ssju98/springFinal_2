@@ -129,19 +129,30 @@ public class OrderController {
 	  public ModelAndView insertDirectOrderForm(HttpSession session, @RequestParam int p_no, int cart_amount) { 
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  MemberVO member = memberService.selectMember(mem_num);
+		  
+		  ProductVO product = productService.ProductSelect(p_no);
+		  int count = productService.countProduct(p_no);
+		 
+		  
+		  if(count == 0) {
+			  return new ModelAndView("/common/notice");
+		  }
+		  if(product.getP_amount() < cart_amount) { 
+			  return new ModelAndView("/common/notice");
+		  }
+		  
 		  CartVO cartVO = new CartVO();
 		  cartVO.setMem_num(mem_num);
-		  cartVO.setP_no(p_no);
-		  ProductVO product = productService.ProductSelect(p_no);
+		  cartVO.setP_no(p_no); 
 		  cartVO.setCart_amount(cart_amount);
-		  
 		  ModelAndView mav = new ModelAndView();
-		  
+			  
 		  mav.setViewName("orderNow");
 		  mav.addObject("cartVO", cartVO);
 		  mav.addObject("member",member);
 		  mav.addObject("product",product);
 		  return mav;
+		  
 	  }
 	  
 	  //상품상세페이지 -> 주문페이지 -> 주문

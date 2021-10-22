@@ -75,5 +75,8 @@ public class ProductServiceImpl implements ProductService{
 		productMapper.updateProduct(productVO);
 		
 	}
-
+	@Override
+	public int countProduct(int p_no) {
+		return productMapper.countProduct(p_no);
+	}
 }

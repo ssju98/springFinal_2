@@ -24,9 +24,7 @@ import kr.spring.adminMember.vo.AdminMemberVO;
 import kr.spring.adminOrder.service.AdminOrderService;
 import kr.spring.adminOrder.vo.AdminOrderVO;
 import kr.spring.delivery.service.DeliveryService;
-import kr.spring.delivery.vo.DeliveryVO;
 import kr.spring.order.service.OrderService;
-import kr.spring.order.vo.OrderAllVO;
 import kr.spring.util.PagingUtil;
 
 @Controller
@@ -57,7 +55,8 @@ public class AdminOrderController {
 									   @RequestParam(value="end_date", defaultValue="") String end_date,
 									   @RequestParam(value="d_status_num", defaultValue="") String d_status_num,
 									   @RequestParam(value="keyfield", defaultValue="") String keyfield,
-									   @RequestParam(value="keyword", defaultValue="") String keyword) {
+									   @RequestParam(value="keyword", defaultValue="") String keyword,
+									   @RequestParam(value="orderby", defaultValue="") String orderby) {
 		logger.debug("<<adminOrderList 호출>> currentPage : " + currentPage + ", d_status_num : " + d_status_num + 
 				     ", keyfield : " + keyfield +", keyword : " + keyword + "start_date : " + start_date + "end_date : " + end_date);
 		
@@ -68,6 +67,7 @@ public class AdminOrderController {
 		map.put("end_date", end_date);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("orderby", orderby);
 		
 		//결과데이터 수
 		int count = adminOrderService.getOrderCount(map);
@@ -88,6 +88,14 @@ public class AdminOrderController {
 		mav.addObject("list", list);
 		mav.addObject("pagingHtml", page.getPagingHtml());
 		
+		//검색조건 유지를 위한 데이터
+		mav.addObject("start_date", start_date);
+		mav.addObject("end_date", end_date);
+		mav.addObject("d_status_num", d_status_num);
+		mav.addObject("keyfield", keyfield);
+		mav.addObject("keyword", keyword);
+		mav.addObject("orderby", orderby);
+		
 		return mav;
 	}
 	
@@ -106,13 +114,10 @@ public class AdminOrderController {
 			mav.addObject("url", request.getContextPath() + "/admin/orderList.do");
 		}
 		
-		//주문상품 목록
-		List<OrderAllVO> listProduct = orderService.selectOrderDetailProduct(order_no);
-		
-		mav.addObject("listProduct", listProduct);
 		mav.setViewName("adminOrderDetail");
-		mav.addObject("adminMember", adminMemberService.selectMember(adminOrder.getMem_num()));
 		mav.addObject("adminOrder", adminOrder);
+		mav.addObject("list", orderService.selectOrderDetailProduct(order_no));
+		mav.addObject("adminMember", adminMemberService.selectMember(adminOrder.getMem_num()));
 		
 		return mav;
 	}

@@ -76,6 +76,11 @@ public class DeliveryController {
 		mav.addObject("list", list);
 		mav.addObject("pagingHtml", page.getPagingHtml());
 		
+		//검색조건 유지를 위한 데이터
+		mav.addObject("d_status_num", d_status_num);
+		mav.addObject("keyfield", keyfield);
+		mav.addObject("keyword", keyword);
+		
 		return mav;
 	}
 	
@@ -189,6 +194,11 @@ public class DeliveryController {
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("pagingHtml", page.getPagingHtml());
+		
+		//검색조건 유지를 위한 데이터
+		mav.addObject("d_status_num", d_status_num);
+		mav.addObject("keyfield", keyfield);
+		mav.addObject("keyword", keyword);
 		
 		return mav;
 	}

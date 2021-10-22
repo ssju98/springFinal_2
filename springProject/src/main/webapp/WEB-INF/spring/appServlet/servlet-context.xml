@@ -113,6 +113,8 @@
 			
 			<mapping path="/review/reviewAvaliable.do"/>
 			<mapping path="/review/reviewWritten.do"/>
+			
+			<mapping path="/review/write.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 		<!-- 관리자 여부 체크 -->

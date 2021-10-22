@@ -19,9 +19,12 @@ public interface QnaMapper {
 	public void insertQna(QnaVO qna);
 	
 	//문의글목록
-	@Select("SELECT LEVEL, BOARD_NO,GRPNO,BOARD_TITLE,BOARD_CONTENT,member.MEM_NUM,member.mem_id,BOARD_KIND,BOARD_PARENT,BOARD_DATE "
-			+ "FROM QNA, member WHERE BOARD_KIND = #{board_kind} and qna.mem_num=member.mem_num START WITH BOARD_PARENT = 0 "
-			+ "CONNECT BY PRIOR BOARD_NO = BOARD_PARENT ORDER SIBLINGS BY GRPNO desc")
+	/*
+	 * @Select("SELECT LEVEL, BOARD_NO,GRPNO,BOARD_TITLE,BOARD_CONTENT,member.MEM_NUM,member.mem_id,BOARD_KIND,BOARD_PARENT,BOARD_DATE "
+	 * +
+	 * "FROM QNA, member WHERE BOARD_KIND = #{board_kind} and qna.mem_num=member.mem_num START WITH BOARD_PARENT = 0 "
+	 * + "CONNECT BY PRIOR BOARD_NO = BOARD_PARENT ORDER SIBLINGS BY GRPNO desc")
+	 */
 	public List<QnaVO> selectAllQna(int board_kind);
 	
 	//글 상세

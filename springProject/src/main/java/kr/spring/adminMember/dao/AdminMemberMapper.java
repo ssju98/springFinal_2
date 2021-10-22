@@ -30,7 +30,7 @@ public interface AdminMemberMapper {
 	
 	@Delete("DELETE FROM member_detail WHERE mem_num=#{mem_num}")
 	public void deleteMember(int mem_num);
-	@Update("UPDATE member SET mem_auth=0 WHERE mem_num=#{mem_num} AND mem_auth IN(0,1,2)")
+	@Update("UPDATE member SET mem_auth=0 WHERE mem_num=#{mem_num}")
 	public void deleteMemberAuth(int mem_num);
 	
 	@Select("SELECT COUNT(*) FROM sorder WHERE mem_num=#{mem_num}")
@@ -59,10 +59,5 @@ public interface AdminMemberMapper {
 	public void insertAdmin(AdminMemberVO adminMemberVO);
 	@Insert("INSERT INTO member_detail VALUES (#{mem_passwd},#{mem_name},#{mem_phone},#{mem_email},#{mem_zipcode},#{mem_address1},#{mem_address2},SYSDATE,#{mem_num})")
 	public void insertAdminDetail(AdminMemberVO adminMemberVO);
-	
-	@Delete("DELETE FROM member_detail WHERE mem_num=#{mem_num}")
-	public void deleteAdminDetail(int mem_num);
-	@Delete("DELETE FROM member WHERE mem_num=#{mem_num} AND mem_auth IN (3,4)")
-	public void deleteAdmin(int mem_num);
 	
 }

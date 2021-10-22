@@ -5,21 +5,26 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- CSS file -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
+<!-- BootStrap icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
 <!-- 중앙 내용 시작 -->
 <div id="admin-main-width">
 	<div id="wide-width" class="wide-table">
 		<h4 id="header-main">주문 상세정보</h4>
 		<!-- 주문 정보 -->
-		<table class="table table-bordered">
-			<tr class="cell-4">
+		<table class="table table-bordered split-4">
+			<tr>
 				<th>주문번호</th>
 				<td>${adminOrder.order_no}</td>
-				<th>주문일</th>
-				<td>${adminOrder.order_date}</td>
+				<th>주문일자</th>
+				<td>
+					<fmt:formatDate value="${adminOrder.order_date}" pattern="yyyy-MM-dd HH:mm:ss"/>
+				</td>
 			</tr>
-			<tr class="cell-4">
+			<tr>
 				<th>주문자 아이디</th>
-				<td>${adminMember.mem_id}
+				<td>
+					<a href="${pageContext.request.contextPath}/admin/memberDetail.do?mem_num=${adminMember.mem_num}">${adminMember.mem_id}</a>
 					<span class="text-danger">
 					<c:if test="${adminMember.mem_auth == 0}">
 						[탈퇴회원]
@@ -32,7 +37,7 @@
 				<th>주문자 연락처</th>
 				<td>${adminMember.mem_phone}</td>
 			</tr>
-			<tr class="cell-4">
+			<tr>
 				<th>결제방법</th>
 				<td>
 					<c:if test="${adminOrder.order_method == 0}">카드</c:if>
@@ -50,14 +55,14 @@
 		</table>
 		<!-- 배송지 정보 -->
 		<h5 id="header-sub">배송지 정보</h5>
-		<table class="table table-bordered">
-			<tr class="cell-4">
+		<table class="table table-bordered split-4">
+			<tr>
 				<th>받는사람</th>
 				<td>${adminOrder.order_name}</td>
 				<th>연락처</th>
 				<td>${adminOrder.order_phone}</td>
 			</tr>
-			<tr class="cell-2">
+			<tr>
 				<th>배송지</th>
 				<td colspan="3">(${adminOrder.order_zipcode}) ${adminOrder.order_address1} ${adminOrder.order_address2}</td>
 			</tr>
@@ -74,18 +79,20 @@
 		<table class="table table-bordered text-center">
 			<thead>
 				<tr>
-					<th class="c-pnum">상품번호</th>
-					<th class="c-pname">상품명</th>
-					<th class="c-mount">수량</th>
-					<th class="c-pay">총상품금액</th>
-					<th class="c-pay">배송비</th>
+					<th class="c-10">상품번호</th>
+					<th class="c-45">상품명</th>
+					<th class="c-10">수량</th>
+					<th class="c-15">총상품금액</th>
+					<th class="c-10">배송비</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="product" items="${listProduct}" varStatus="status">
+				<c:forEach var="product" items="${list}" varStatus="status">
 				<tr>
 					<td>${product.p_no}</td>
-					<td>${product.p_name}</td>
+					<td>
+						<a href="${pageContext.request.contextPath}/shop/productDetail.do?p_no=${product.p_no}">${product.p_name}</a>
+					</td>
 					<td>${product.order_d_amount}</td>
 					<c:if test="${status.first}">
 					<td rowspan="${fn:length(listProduct)}"  class="text-right">
