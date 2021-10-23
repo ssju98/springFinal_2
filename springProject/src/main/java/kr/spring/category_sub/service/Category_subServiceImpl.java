@@ -29,7 +29,7 @@ public class Category_subServiceImpl implements Category_subService{
 
 	@Override
 	public void updateCategory_sub(Category_subVO category_sub) {
-		
+		category_subMapper.updateCategory_sub(category_sub);
 	}
 
 	@Override

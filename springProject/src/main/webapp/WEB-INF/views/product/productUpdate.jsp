@@ -53,7 +53,7 @@
 </script>
 <!-- 중앙 내용 시작 -->
 <div class="page-main">
-	<h2>상품 수정 페이지</h2>
+	<h2>상품 수정 페이지</h2><br>
 	<form:form id="update_form" action="productUpdate.do" modelAttribute="productVO"
 	           enctype="multipart/form-data">
 	    <form:hidden path="p_no"/>       
@@ -68,7 +68,7 @@
 				<label for="p_amount">재고 수량</label>
 				<form:input path="p_amount"/>
 				<form:errors path="p_amount" cssClass="error-color"/>
-			</li>
+			</li><br>
 			<li><b>상품 설명</b></li>
 			<li>
 				<form:textarea path="p_sub_text"/>
@@ -92,7 +92,7 @@
 			<li>
 				<label for="upload">상품 이미지</label>
 				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
-			</li>
+			</li><br>
 			<li>
 				<label for="p_price">상품 가격</label>
 				<form:input path="p_price"/>
@@ -102,7 +102,7 @@
 				<label for="p_discount">할인율</label>
 				<form:input path="p_discount"/>
 				<form:errors path="p_discount" cssClass="error-color"/>
-			</li>
+			</li><br>
 			<li>
 				<label for="c_top_no">상위카테고리 번호</label>
 				<form:select path="c_top_no">
@@ -119,12 +119,12 @@
 				<form:select path="c_sub_no">
 				</form:select>
 				<form:errors path="c_sub_no" cssClass="error-color"/>
-			</li>
+			</li><br><br>
 			
 		</ul>
 		<div class="align-center">
-			<form:button>수정</form:button>
-			<input type="button" value="목록" onclick="location.href='list.do'">
+			<form:button class="btn btn-primary">수정</form:button>
+			<input type="button" class="btn btn-secondary" value="취소" onclick="location.href='list.do'">
 		</div>	
 	</form:form>
 </div>

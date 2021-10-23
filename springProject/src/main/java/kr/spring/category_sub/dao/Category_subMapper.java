@@ -32,8 +32,8 @@ public interface Category_subMapper {
 	@Select("SELECT * FROM category_sub WHERE c_top_no=#{c_top_no} ORDER BY c_sub_no")
 	public List<Category_subVO> category_subWanted(int c_top_no);
 	
-	@Select("SELECT * FROM category_sub WHERE c_top_no=#{c_top_no} ORDER BY c_sub_no")
-	public Category_subVO chooseCategory_top(int c_top_no);
+	@Select("SELECT * FROM category_sub WHERE c_sub_no=#{c_top_no} ORDER BY c_sub_no")
+	public Category_subVO chooseCategory_top(int c_sub_no);
 	
 	@Select("SELECT * FROM category_sub WHERE c_sub_no = #{c_sub_no}")
 	public Category_subVO selectCategoryOne(int c_sub_no);

@@ -16,7 +16,7 @@
 	});
 </script>
 <div id="main-width">
-<div id="menuinfo">소분류 카테고리 목록</div>
+<h3>소분류 카테고리 목록</h3>
 	<div class="card mt-3">
 		 <div class="card-body object-center text-center">
 			<table class="table table-hover text-center line-bottom">

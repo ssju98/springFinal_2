@@ -3,6 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 	.ck-editor__editable_inline{
 		min-height:250px;
@@ -50,8 +52,9 @@
 	})
 </script>
 <!-- 중앙 내용 시작 -->
-<div class="page-main">
-	<h2>상품 등록 페이지</h2>
+<div id="admin-main-width">
+<div id="wide-width" class="wide-table">
+	<h2>상품 등록 페이지</h2><br>
 	<form:form id="register_form" action="productRegister.do" modelAttribute="productVO"
 	           enctype="multipart/form-data">
 	    <form:errors element="div" cssClass="error-color"/>       
@@ -64,8 +67,8 @@
 			<li>
 				<label for="p_amount">재고 수량</label>
 				<form:input path="p_amount"/>
-				<form:errors path="p_amount" cssClass="error-color"/>
-			</li>
+				<form:errors path="p_amount" cssClass="error-color"/><br>
+			</li><br>
 			<li><b>상품 설명</b></li>
 			<li>
 				<form:textarea path="p_sub_text"/>
@@ -88,7 +91,7 @@
 			</li>
 			<li>
 				<label for="upload">상품 대표 이미지</label>
-				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg">
+				<input type="file" name="upload" id="upload" accept="image/gif,image/png,image/jpeg"><br>
 			</li>
 			<li>
 				<label for="p_price">상품 가격</label>
@@ -98,8 +101,8 @@
 			<li>
 				<label for="p_discount">할인율</label>
 				<form:input path="p_discount"/>
-				<form:errors path="p_discount" cssClass="error-color"/>
-			</li>
+				<form:errors path="p_discount" cssClass="error-color"/><br>
+			</li><br>
 			<li>
 				<label for="c_top_no">상위카테고리 번호</label>
 				<form:select path="c_top_no">
@@ -114,13 +117,14 @@
 				<form:select path="c_sub_no">
 				</form:select>
 				<form:errors path="c_sub_no" cssClass="error-color"/>
-			</li>
+			</li><br><br>
 			
 		</ul>
 		<div class="align-center">
-			<form:button>전송</form:button>
-			<input type="button" value="목록" onclick="location.href='list.do'">
+			<form:button class="btn btn-primary">등록</form:button>
+			<input type="button" class="btn btn-secondary" value="취소" onclick="location.href='list.do'">
 		</div>	
 	</form:form>
+</div>
 </div>
 <!-- 중앙 내용 끝 -->

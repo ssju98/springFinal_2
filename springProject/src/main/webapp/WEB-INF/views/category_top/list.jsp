@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div id="main-width">
-<div id="menuinfo">대분류 카테고리 목록</div>
+<h3>대분류 카테고리 목록</h3><br>
 	<div class="card mt-3">
 		 <div class="card-body object-center text-center">
 			<table class="table table-hover text-center line-bottom">

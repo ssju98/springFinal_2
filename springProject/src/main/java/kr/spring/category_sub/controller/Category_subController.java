@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.category_sub.service.Category_subService;
+import kr.spring.category_top.service.Category_topService;
 import kr.spring.category_sub.vo.Category_subVO;
+import kr.spring.category_top.vo.Category_topVO;
 
 @Controller
 public class Category_subController {
@@ -29,6 +31,9 @@ public class Category_subController {
 	@Autowired
 	private Category_subService category_subService;
 	
+	@Autowired
+	private Category_topService category_topService;
+	
 	//자바빈(VO)초기화
 	@ModelAttribute
 	public Category_subVO initCommand() {
@@ -37,8 +42,12 @@ public class Category_subController {
 	
 	// 하위 카테고리 등록
 	@GetMapping("/category_top/category_sub/category_subRegister")
-	public String category_subRegisterForm(Category_subVO category_subVO){
+	public String category_subRegisterForm(Category_subVO category_subVO, Model model){
 		logger.info("<<category_sub_registerForm>>");
+		
+		List<Category_topVO> list = category_topService.selectCategory_top();
+
+		model.addAttribute("topList", list);
 
 		return "category_sub_register"; //타일스 식별자		
 	}
@@ -50,7 +59,7 @@ public class Category_subController {
 
 		category_subService.insertCategory_sub(category_subVO);
 
-		return "redirect:/category_top/category_sub/list.do";
+		return "redirect:/category_top/category_sub/list.do?c_top_no="+category_subVO.getC_top_no();
 		
 	}
 	
@@ -74,10 +83,12 @@ public class Category_subController {
 		logger.debug("c_sub_no : " + c_sub_no);
 		
 		Category_subVO category_subVO = category_subService.category_subWant(c_sub_no);
+		List<Category_topVO> list = category_topService.selectCategory_top();
 		
-		logger.debug("Category_subVO : " + category_subVO);
+		logger.info("Category_subVO : " + category_subVO);
 		
 		model.addAttribute("category_subVO", category_subVO);
+		model.addAttribute("topList", list);
 		
 		return "category_sub_update"; //타일스 설정
 	}
@@ -97,7 +108,7 @@ public class Category_subController {
 		//소분류 카테고리 정보수정
 		category_subService.updateCategory_sub(category_subVO);
 		
-		return "redirect:/category_top/category_sub/list.do";
+		return "redirect:/category_top/category_sub/list.do?c_top_no="+category_subVO.getC_top_no();
 	}
 	
 	//하위카테고리 삭제 폼

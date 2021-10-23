@@ -2,12 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<!-- CSS file -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminPage.css">
+<!-- BootStrap icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
 <!-- 중앙 내용 시작 -->
-<div class="page-main">
-	<h2>상품 목록</h2>
+<div id="admin-main-width">
+<div id="wide-width">
+	<h2>상품 목록</h2><br>
 	<div class="align-center">
-		<input type="button" value="상품 등록" onclick="location.href='productRegister.do'">
+		<input type="button" class="btn btn-secondary" value="상품 등록" onclick="location.href='productRegister.do'"><br><br>
 	</div>
 	<c:if test="${count == 0}">
 	<div class="result-display">
@@ -15,7 +19,7 @@
 	</div>	
 	</c:if>
 	<c:if test="${count > 0}">
-	<table>
+	<table class="table table-hover table-bordered table-sm text-center">
 		<tr>
 			<th width="100">상품 번호</th>
 			<th width="100">상품명</th>
@@ -44,4 +48,5 @@
 	</table>
 	<div class="align-center">${pagingHtml}</div>
 	</c:if>
+</div>
 </div>
