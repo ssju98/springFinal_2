@@ -7,6 +7,8 @@
 	.ck-editor__editable_inline{
 		min-height:250px;
 	}
+	form ul li {
+	list-style: none;}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

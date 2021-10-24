@@ -52,17 +52,17 @@ public class QnaController {
 	public ModelAndView qnaList(@RequestParam(value="board_kind") int board_kind,
 								@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 								@RequestParam(value="keyfield",defaultValue="") String keyfield,
-								@RequestParam(value="keyword",defaultValue="") String keyword){
+								@RequestParam(value="keyword2",defaultValue="") String keyword2){
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
+		map.put("keyword2", keyword2);
 		map.put("board_kind",board_kind);
 		
 		//글의 총 갯수
 		int count = qnaService.selectRowQnaCount(map);
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,currentPage, count, rowCount, pageCount, "qnaList.do","&board_kind="+board_kind);
+		PagingUtil page = new PagingUtil(keyfield,keyword2,currentPage, count, rowCount, pageCount, "qnaList.do","&board_kind="+board_kind);
 		
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());

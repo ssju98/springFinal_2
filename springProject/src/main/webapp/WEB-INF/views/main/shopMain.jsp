@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/productList.css"> 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/template/productList.css"> 
 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -92,11 +92,11 @@
         },
       });
       </script>
- 		<div class="list-container">
+ 		<div class="list-container mt-3">
 			<c:forEach var="product" items="${list}">
 				<div class="list-content" onclick="location.href='productDetail.do?p_no=${product.p_no}'">
 					<div class="image-ani">
-					<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${product.p_no}" width="240" height="auto">
+					<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${product.p_no}" width="230" height="230">
 				</div>
 				
 					<div class="list-name mt-2 pl-2">
@@ -136,17 +136,6 @@
 					</c:if>
 					</div>
 				</c:if>
-				<div class="list-rating pl-2">
-					<div class="list-star">
-						<img src="${pageContext.request.contextPath}/resources/images/star.png" width="15px;" height="auto;">
-						<span class="list-rating-num">
-							4.7
-						</span>
-						<span class="list-review">
-							리뷰 19
-						</span>	
-					</div>
-				</div>
 				<c:if test="${product.p_amount != 0}">	
 					<c:if test="${product.p_discount != 0}">
 						<div class="special-price-div ml-2">
@@ -165,92 +154,19 @@
 				</c:if>
 				</div>
 			</c:forEach>
-			<c:if test="${count%4==3}">
-				<div class="list-container-empty" style="width: 240px; height: 360px; cursor:auto;"> </div>
+			<c:if test="${count%5==2}">
+				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
+				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
+				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
 			</c:if>			
-			<c:if test="${count%4==2}">
-				<div class="list-container-empty" style="width: 240px; height: 360px; cursor:auto;"> </div>
-				<div class="list-container-empty" style="width: 240px; height: 360px; cursor:auto;"> </div>
+			<c:if test="${count%5==3}">
+				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
+				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
 			</c:if>
-						<c:forEach var="product" items="${list}">
-				<div class="list-content" onclick="location.href='productDetail.do?p_no=${product.p_no}'">
-					<div class="image-ani">
-					<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${product.p_no}" width="240" height="auto">
-				</div>
-				
-					<div class="list-name mt-2 pl-2">
-						${product.p_name}
-					</div>
-					<c:if test="${product.p_amount==0 }">
-						<c:if test="${product.p_discount != 0}">
-							<div class="list-sale mr-1 pl-2" style="opacity: 0.2">
-								${product.p_discount}%
-							</div>
-						</c:if>
-					</c:if>
-					<c:if test="${product.p_amount!=0 }">
-						<c:if test="${product.p_discount != 0}">
-							<div class="list-sale mr-1 pl-2">
-								${product.p_discount}%
-							</div>
-						</c:if>
-					</c:if>
-				<c:if test="${product.p_amount!=0 }">
-				<div class="list-price pl-2">
-					<c:if test="${product.p_discount != 0}">
-						<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원				
-					</c:if>
-					<c:if test="${product.p_discount == 0}">
-						<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
-					</c:if>
-					</div>
-				</c:if>
-				<c:if test="${product.p_amount==0 }">
-				<div class="list-price pl-2" style="opacity: 0.2">
-					<c:if test="${product.p_discount != 0}">
-						<fmt:formatNumber value="${product.p_price-(product.p_price*product.p_discount/100)}" pattern="#,###"/>원				
-					</c:if>
-					<c:if test="${product.p_discount == 0}">
-						<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
-					</c:if>
-					</div>
-				</c:if>
-				<div class="list-rating pl-2">
-					<div class="list-star">
-						<img src="${pageContext.request.contextPath}/resources/images/star.png" width="15px;" height="auto;">
-						<span class="list-rating-num">
-							4.7
-						</span>
-						<span class="list-review">
-							리뷰 19
-						</span>	
-					</div>
-				</div>
-				<c:if test="${product.p_amount != 0}">	
-					<c:if test="${product.p_discount != 0}">
-						<div class="special-price-div ml-2">
-							<div class="special-price-text">
-								특가
-							</div>
-						</div>	
-					</c:if>
-				</c:if>
-				<c:if test="${product.p_amount == 0}">	
-					<div class="soldout-div ml-2">
-						<div class="special-price-text">
-							품절
-						</div>
-					</div>	
-				</c:if>
-				</div>
-			</c:forEach>
-			<c:if test="${count%4==3}">
-				<div class="list-container-empty" style="width: 240px; height: 360px; cursor:auto;"> </div>
-			</c:if>			
-			<c:if test="${count%4==2}">
-				<div class="list-container-empty" style="width: 240px; height: 360px; cursor:auto;"> </div>
-				<div class="list-container-empty" style="width: 240px; height: 360px; cursor:auto;"> </div>
+			<c:if test="${count%5==4}">
+				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
 			</c:if>
 		</div>
 </div>
+
 <!-- 메인 끝 -->

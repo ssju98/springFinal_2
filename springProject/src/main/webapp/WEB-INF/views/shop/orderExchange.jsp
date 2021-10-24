@@ -51,13 +51,13 @@ $(document).ready(function(){
 				<li class="order-a"><a href="orderConfirm.do">구매확정</a></li>
 			</ul>
 		</div>
-		<div id="showmenu">구매후기</div>
+		<%-- <div id="showmenu">구매후기</div>
 		<div class="menu mt-2">
 			<ul>
 				<li class="order-a"><a href="${pageContext.request.contextPath}/review/reviewAvaliable.do">작성 가능한 후기</a></li>
 				<li class="order-a"><a href="${pageContext.request.contextPath}/review/reviewWritten.do">이미 작성한 후기</a></li>
 			</ul>
-		</div>
+		</div> --%>
 	</div>
 	<div class="top-small-menu">
 		<div class="top-small-menu-title mt-3">
@@ -116,6 +116,6 @@ $(document).ready(function(){
 				</tbody>
 			</c:forEach>
 		</table>
-		<div align="center">${pagingHtml}</div>
+		<div align="center" style="margin-bottom: 100px;">${pagingHtml}</div>
 	</div>
 </div>

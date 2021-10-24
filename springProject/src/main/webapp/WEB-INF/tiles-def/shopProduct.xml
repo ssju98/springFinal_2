@@ -9,6 +9,10 @@
     	<put-attribute name="title" value="상품페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/shop/productList.jsp"/>
     </definition>
+    <definition name="shopProductSearchList" extends="shopMain">
+    	<put-attribute name="title" value="상품페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/shop/productSearchList.jsp"/>
+    </definition>
      <definition name="shopProductDetail" extends="shopMain">
     	<put-attribute name="title" value="상품상세페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/shop/productDetail.jsp"/> 

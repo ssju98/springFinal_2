@@ -59,12 +59,22 @@ public class ProductController {
 	// 상품 카테고리별 목록
 	@RequestMapping("/shop/productList.do")
 	public ModelAndView ShopProductList(@RequestParam(value="c_top_no") int c_top_no, 
-			@RequestParam(value="c_sub_no") int c_sub_no) {
+										@RequestParam(value="c_sub_no") int c_sub_no,
+										@RequestParam(value="orderby",defaultValue="") String orderby) {
 
 		List<ProductVO> list = null;
 		int count = productService.ProductCategorySelectCount(c_top_no, c_sub_no);
 		if(count > 0) {
-			list = productService.ProductCategorySelectAll(c_top_no, c_sub_no);
+			if(orderby.equals("default") || orderby.equals("")) {
+				list = productService.ProductCategorySelectAll(c_top_no, c_sub_no);
+			}else if(orderby.equals("best")){
+				list = productService.selectPriceBest(c_top_no,c_sub_no);
+			}else if(orderby.equals("high")) {
+				list = productService.selectPriceHigh(c_top_no, c_sub_no);
+			}else if(orderby.equals("row")) {
+				list=productService.selectPriceRow(c_top_no, c_sub_no);
+			}
+			
 		}
 
 		Category_topVO category_top = category_topService.selectCategoryOne(c_top_no);
@@ -80,7 +90,29 @@ public class ProductController {
 		mav.addObject("category_sub",list_sub);
 		mav.addObject("category_top_name",category_top);
 		mav.addObject("category_sub_name",category_sub);
+		
+		mav.addObject("c_sub_no",c_sub_no);
+		mav.addObject("c_top_no",c_top_no);
+		mav.addObject("orderby",orderby);
 
+		return mav;
+	}
+	
+	//상품 검색 목록
+	@RequestMapping("/shop/productSearch.do")
+	public ModelAndView productSearch(@RequestParam(value="keyfield",defaultValue="p_name") String keyfield,
+									  @RequestParam(value="keyword",defaultValue="") String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = productService.selectCountSearchProduct(map);
+		List<ProductVO> list = productService.selectSearchProduct(map);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("shopProductSearchList");
+		mav.addObject("list",list);
+		mav.addObject("keyword",keyword);
+		mav.addObject("count",count);
 		return mav;
 	}
 
@@ -191,13 +223,9 @@ public class ProductController {
 
 	//상품 리스트
 	@RequestMapping("/product/list.do")
-	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
-			@RequestParam(value="keyfield",defaultValue="") String keyfield,
-			@RequestParam(value="keyword",defaultValue="") String keyword) {
+	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
 
 
 
@@ -208,9 +236,9 @@ public class ProductController {
 
 		//페이지 처리
 		PagingUtil page = 
-				new PagingUtil(keyfield,keyword,currentPage,count,rowCount,pageCount,"list.do");
+				new PagingUtil(currentPage,count,rowCount,pageCount,"list.do");
 
-		map.put("start",page.getStartCount());
+		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());
 
 		List<ProductVO> list = null;
@@ -249,7 +277,7 @@ public class ProductController {
 		//카테고리 삭제
 		productService.deleteProduct(p_no);
 
-		return "product/list";
+		return "redirect:/product/list.do";
 	}
 
 	// 상품 등록

@@ -60,7 +60,7 @@ public class LoginController {
 			session.setAttribute("mem_id", vo.getMem_id()); //아이디
 			session.setAttribute("mem_auth", vo.getMem_auth()); //0:탈퇴 1:정지 2:일반 3:일반관리자 4:최고관리자
 			
-			return "shopMain"; //타일즈 식별자
+			return "redirect:/shop/main.do";
 		}
 		
 		return "login/loginFail";

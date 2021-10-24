@@ -41,12 +41,12 @@
 					</tr>
 					
 					</c:forEach>
-						
+
 					</tbody>
 				</table>
 				<input type="button" class="btn btn-secondary" value="카테고리 등록" onclick="location.href='category_subRegister.do'">
 			</div>
 			<br><br>
 		</div>
-	<input type="button" class="btn btn-secondary" value="상위 카테고리 관리" onclick="history.back(-1)">
+	<input type="button" class="btn btn-secondary" value="상위 카테고리 관리" onclick="location.href='${pageContext.request.contextPath}/category_top/list.do'">
 </div>

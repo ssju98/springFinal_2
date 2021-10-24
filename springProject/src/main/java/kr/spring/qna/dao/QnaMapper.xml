@@ -14,11 +14,11 @@
 		FROM member, qna left join product on qna.p_no = product.p_no
 		<where>
 			board_kind = ${board_kind} and qna.mem_num=member.mem_num 
-			<if test="keyword != '' and keyfield == 'mem_id'">
-		       and member.mem_id LIKE '%' || #{keyword} || '%'
+			<if test="keyword2 != '' and keyfield == 'mem_id'">
+		       and member.mem_id LIKE '%' || #{keyword2} || '%'
 		    </if>
-		    <if test="keyword != '' and keyfield == 'board_content'">
-		       and board_content LIKE '%' || #{keyword} || '%'
+		    <if test="keyword2 != '' and keyfield == 'board_content'">
+		       and board_content LIKE '%' || #{keyword2} || '%'
 		    </if>
 		</where>
 		START WITH BOARD_PARENT = 0 
@@ -34,10 +34,10 @@
 		<where>
 			board_kind = ${board_kind} and qna.mem_num=member.mem_num 
 			<if test="keyword != '' and keyfield == 'mem_id'">
-		       and member.mem_id LIKE '%' || #{keyword} || '%'
+		       and member.mem_id LIKE '%' || #{keyword2} || '%'
 		    </if>
 		    <if test="keyword != '' and keyfield == 'board_content'">
-		       and board_content LIKE '%' || #{keyword} || '%'
+		       and board_content LIKE '%' || #{keyword2} || '%'
 		    </if>
 		</where>
   	</select>

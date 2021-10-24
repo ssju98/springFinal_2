@@ -79,4 +79,34 @@ public class ProductServiceImpl implements ProductService{
 	public int countProduct(int p_no) {
 		return productMapper.countProduct(p_no);
 	}
+
+	@Override
+	public List<ProductVO> selectSearchProduct(Map<String, Object> map) {
+		return productMapper.selectSearchProduct(map);
+	}
+
+	@Override
+	public int selectCountSearchProduct(Map<String, Object> map) {
+		return productMapper.selectCountSearchProduct(map);
+	}
+
+	@Override
+	public int selectMainProduct() {
+		return productMapper.selectMainProduct();
+	}
+
+	@Override
+	public List<ProductVO> selectPriceHigh(int c_top_no, int c_sub_no) {
+		return productMapper.selectPriceHigh(c_top_no,c_sub_no);
+	}
+
+	@Override
+	public List<ProductVO> selectPriceRow(int c_top_no, int c_sub_no) {
+		return productMapper.selectPriceRow(c_top_no,c_sub_no);
+	}
+
+	@Override
+	public List<ProductVO> selectPriceBest(int c_top_no, int c_sub_no) {
+		return productMapper.selectPriceBest(c_top_no,c_sub_no);
+	}
 }

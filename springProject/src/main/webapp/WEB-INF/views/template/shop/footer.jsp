@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/template/fotter_template.css">
+
 <!-- 하단 시작 -->
 <footer>
 	<div class="footer-div">
@@ -23,7 +26,7 @@
 			<br><br>
 			<br><br>
 		</div>
-
 	</div>
 </footer>
+
 <!-- 하단 끝 -->

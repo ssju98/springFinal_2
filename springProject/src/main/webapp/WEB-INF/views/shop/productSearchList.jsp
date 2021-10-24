@@ -9,19 +9,11 @@ $(document).ready(function() {
     $('[id=showmenu]').click(function() {
         $('[class=menu]').not($(this).next('[class=menu]').slideToggle("slow")).slideUp();
     });
-		
-    
-    var select = document.getElementById('orderby');
-    select.onchange = function(){
-    	form.submit();
-    };
 });
-
-
 </script>
 <div class="top_menu_info">
 	<div>
-	${category_top_name.c_top_name} > ${category_sub_name.c_sub_name}
+	홈 > 검색
 	</div>
 </div>
 <div id="main-width">
@@ -41,25 +33,11 @@ $(document).ready(function() {
 	</div>
 	<div class="top-small-menu">
 		<div class="top-small-menu-title">
-			${category_sub_name.c_sub_name}
+			${keyword} 검색 목록
 		</div>
 		<div class="menu-amount mb-3">
 			${count}개의 상품
 		</div>
-		<%-- <form action="productList.do" method="get" id="search_form">
-			<div class="element-right">
-			<input type="hidden" id="c_sub_no" name="c_sub_no" value="${c_sub_no}">
-			<input type="hidden" id="c_top_no" name="c_top_no" value="${c_top_no}">
-				<select name="orderby" id="orderby" class="form-control form-control-sm order-select">
-					<option value="default" <c:if test="${empty orderby || orderby == 'default'}">selected='selected'</c:if>>기본순</option>
-					<option value="best" <c:if test="${orderby == 'best'}">selected='selected'</c:if>>판매순</option>
-					<option value="high" <c:if test="${orderby == 'high'}">selected='selected'</c:if>>가격높은순</option>
-					<option value="row" <c:if test="${orderby == 'row'}">selected='selected'</c:if>>가격낮은순</option>
-				</select>
-				<input type="submit">
-			</div>
-		</form> --%>
-		
 		<div class="list-container">
 			<c:forEach var="product" items="${list}">
 				<div class="list-content" onclick="location.href='productDetail.do?p_no=${product.p_no}'">

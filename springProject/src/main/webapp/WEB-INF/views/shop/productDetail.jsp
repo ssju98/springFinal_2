@@ -79,22 +79,16 @@
 	<div class="product-detail-sumnail">
 		<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${product.p_no}" width="520" height="520">
 	</div>
-	<div class="product-detail-info ml-5 mt-4">
+	<div class="product-detail-info ml-5 mt-5">
 		<div class="product-detail-name" >
 			${product.p_name}
-		</div>
-		<div class="product-detail-rating mt-2">
-			<img src="${pageContext.request.contextPath}/resources/images/star_detail.png">
-			<div class="product-detail-review-count ml-1 mb-1">
-				30개 리뷰
-			</div>
 		</div>
 		<c:if test="${product.p_discount != 0}">
 			<div class="product-detail-sale">
 				${product.p_discount}%
 			</div>
 			<div class="product-detail-netprice ml-2">
-				${product.p_price}원
+			<fmt:formatNumber value="${product.p_price}" pattern="#,###"/>원	
 			</div>
 		</c:if>
 		<div class="product-detail-saleprice mt-3 mb-3">
@@ -205,32 +199,21 @@
 	<br>
 		<div id="middle-menu">
 			<ul>
-				<li><a href="#info">상품상세정보</a></li>
-				<li><a href="#review">상품사용후기</a></li>
+				<li><a href="#info">상품상세정보</a></li><a id="info"></a>
 				<li><a href="#qna">상품문의</a></li>
 			</ul>
 		</div>
-		<div><a id="info"></a>
+		<div style="margin: 0 auto; text-align: center; margin-top: 20px; margin-bottom: 15px;">
+		<img src="${pageContext.request.contextPath}/product/photoView.do?p_no=${product.p_no}" >
 		${product.p_sub_text}
 		</div>
 		<div id="middle-menu">
 			<ul>
 				<li><a href="#info">상품상세정보</a></li>
-				<li><a href="#review">상품사용후기</a></li>
-				<li><a href="#qna">상품문의</a></li>
+				<li><a href="#qna">상품문의</a></li><a id="qna"></a>
 			</ul>
 		</div>
-		<div> <a id="review"></a>
-		
-		</div>
-		<div id="middle-menu">
-			<ul>
-				<li><a href="#info">상품상세정보</a></li>
-				<li><a href="#review">상품사용후기</a></li>
-				<li><a href="#qna">상품문의</a></li>
-			</ul>
-		</div>
-		<div><a id="qna"></a>
+		<div>
 		<div style="font-weight: 500; margin-top: 30px; float: left;">상품문의</div>
 		<div style="font-weight: 500; margin-top: 30px; float: right; margin-right: 15px;" >
 			<button class="btn btn-dark btn-xs" style="font-size: 14px;" onclick="location.href='${pageContext.request.contextPath}/qna/qnaProductWrite.do?p_no=${product.p_no}'">작성하기</button>

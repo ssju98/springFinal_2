@@ -19,4 +19,12 @@ public interface ProductService {
 	public void insertProduct(ProductVO productVO);
 	public void updateProduct(ProductVO productVO);
 	public int countProduct(int p_no);
+	
+	public List<ProductVO> selectSearchProduct(Map<String, Object> map);
+	public int selectCountSearchProduct(Map<String, Object> map);
+	public int selectMainProduct();
+	
+	public List<ProductVO> selectPriceHigh(int c_top_no, int c_sub_no);
+	public  List<ProductVO> selectPriceRow(int c_top_no, int c_sub_no);
+	public  List<ProductVO> selectPriceBest(int c_top_no, int c_sub_no);
 }

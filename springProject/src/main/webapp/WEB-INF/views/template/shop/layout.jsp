@@ -13,6 +13,9 @@
 <body>
 	<tiles:insertAttribute name="header"/>
 	<tiles:insertAttribute name="body"/>
+	<div style="margin-top: 50px;">
+	<tiles:insertAttribute name="footer"/>
+	</div>
 </body>
 
 </html>

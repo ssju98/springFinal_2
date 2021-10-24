@@ -40,7 +40,7 @@ import kr.spring.util.PagingUtil;
 
 @Controller
 public class OrderController {
-	private int rowCount = 6;
+	private int rowCount = 5;
 	private int pageCount = 10;
 	
 		private static final Logger logger = LoggerFactory.getLogger(OrderController.class);

@@ -105,7 +105,7 @@ public class AdminMemberController {
 		model.addAttribute("adminMemberVO", adminMemberVO);
 		model.addAttribute("orderCnt", adminMemberService.getOrderCount(mem_num));
 		model.addAttribute("cancelCnt", adminMemberService.getCancelCount(mem_num));
-		model.addAttribute("reviewCnt", adminMemberService.getReviewCount(mem_num));
+//		model.addAttribute("reviewCnt", adminMemberService.getReviewCount(mem_num));
 		model.addAttribute("qnaCnt", adminMemberService.getQnaCount(mem_num));
 		
 		return "adminMemberDetail";

@@ -37,8 +37,11 @@ public interface AdminMemberMapper {
 	public int getOrderCount(int mem_num);
 	@Select("SELECT COUNT(*) FROM sorder o JOIN delivery d ON o.order_no=d.order_no WHERE d_status_num=7 AND mem_num=#{mem_num}")
 	public int getCancelCount(int mem_num);
-	@Select("SELECT COUNT(*) FROM review WHERE mem_num=#{mem_num}")
-	public int getReviewCount(int mem_num);
+
+	/*
+	 * @Select("SELECT COUNT(*) FROM review WHERE mem_num=#{mem_num}") public int
+	 * getReviewCount(int mem_num);
+	 */
 	@Select("SELECT COUNT(*) FROM qna WHERE mem_num=#{mem_num}")
 	public int getQnaCount(int mem_num);
 	
@@ -47,7 +50,7 @@ public interface AdminMemberMapper {
 	@Select("SELECT * FROM member m LEFT OUTER JOIN member_detail d ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num} AND mem_auth IN (3,4)")
 	public AdminMemberVO selectAdmin(int mem_num);
 	
-	@Select("SELECT COUNT(*) FROM member WHERE mem_auth IN (3,4)")
+	@Select("SELECT COUNT(*) FROM member m, member_detail d WHERE m.mem_auth IN (3,4) and m.mem_num = d.mem_num")
 	public int getAdminCount();
 	
 	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM member m JOIN member_detail d ON m.mem_num=d.mem_num WHERE mem_auth IN (3,4) ORDER BY m.mem_auth DESC, m.mem_num)a) WHERE rnum >= #{start} AND rnum <= #{end}")

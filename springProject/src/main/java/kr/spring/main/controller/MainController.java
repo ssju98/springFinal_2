@@ -21,9 +21,10 @@ public class MainController {
 	public String main(Model model) {
 		
 		List<ProductVO> list = productService.ProductSelectAll();
+		int count = productService.selectMainProduct();
 		
 		model.addAttribute("list",list);
-		
+		model.addAttribute("count",count);
 		return "shopMain";//타일스 식별자
 	}
 	

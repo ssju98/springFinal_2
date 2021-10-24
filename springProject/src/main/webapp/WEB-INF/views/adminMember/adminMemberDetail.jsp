@@ -65,7 +65,7 @@
 				<tr>
 					<th>주문건수</th>
 					<th>취소건수</th>
-					<th>후기건수</th>
+					<!-- <th>후기건수</th> -->
 					<th>문의건수</th>
 				</tr>
 			</thead>
@@ -73,7 +73,7 @@
 				<tr>
 					<td><b>${orderCnt}</b> 건</td>
 					<td><b>${cancelCnt}</b> 건</td>
-					<td><b>${reviewCnt}</b> 건</td>
+					<%-- <td><b>${reviewCnt}</b> 건</td> --%>
 					<td><b>${qnaCnt}</b> 건</td>
 				</tr>
 			</tbody>

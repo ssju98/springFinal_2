@@ -238,5 +238,7 @@ table#activity_table td{
 
 
 
-
+.product_register ul li{
+	list-style: none;
+}
 

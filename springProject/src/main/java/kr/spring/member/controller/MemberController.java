@@ -85,7 +85,7 @@ public class MemberController {
 	  //회원가입 
 	  memberService.insertMember(memberVO);
 	  
-	  	return "shopMain"; 
+	  	return "redirect:/shop/main.do"; 
 	  } 
 	  
 	  //회원 상세 정보(마이페이지)

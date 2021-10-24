@@ -6,10 +6,10 @@
 <script type="text/javascript">
 	$(function(){
 		//검색 유효성 체크
-		$('#search_form').submit(function(){
-			if($('#keyword').val().trim() == ''){
+		$('#search_form2').submit(function(){
+			if($('#keyword2').val().trim() == ''){
 				alert('검색어를 입력하세요!');
-				$('#keyword').val('').focus();
+				$('#keyword2').val('').focus();
 				return false;
 			}
 		});
@@ -68,14 +68,14 @@
 			</c:if>
 		</div>
 		<div class="mb-2 mt-3">
-			<form action="qnaList.do" method="get" id="search_form" style="width: auto;">
+			<form action="qnaList.do" method="get" id="search_form2" style="width: auto;">
 			<input type="hidden" id="board_kind" name="board_kind" value="${board_kind}">
 				<div class="form-inline">
 					<select name="keyfield" id="keyfield" class="form-control form-control-sm">
 						<option value="mem_id">아이디</option>
 						<option value="board_content">내용</option>
 					</select>
-					<input type="search" name="keyword" id="keyword" placeholder="검색어 입력" class="form-control form-control-sm ml-1">
+					<input type="search" name="keyword2" id="keyword2" placeholder="검색어 입력" class="form-control form-control-sm ml-1">
 					<input type="submit" value="검색" class="btn btn-dark btn-sm">
 				</div>
 			</form>
@@ -181,7 +181,7 @@
 			</c:forEach>
 		</table>
 		</c:if>
-		<div align="center">${pagingHtml}</div>
+		<div align="center" style="margin-bottom: 100px;">${pagingHtml}</div>
 	</div>
 	
 </div>
