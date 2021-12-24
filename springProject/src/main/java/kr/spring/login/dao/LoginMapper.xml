@@ -4,13 +4,11 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.login.dao.LoginMapper">  
 
-	<select id="loginAction" parameterType="Integer" resultType="LoginVO">
+	<select id="loginAction" parameterType="Integer" resultType="kr.spring.login.vo.LoginVO">
 			SELECT * FROM member m LEFT OUTER JOIN member_detail d ON m.mem_num=d.mem_num WHERE m.mem_id=#{mem_id}
 	</select>
+
 	
-	<select id="loginMem_num" parameterType="Integer" resultType="Integer">
-			SELECT m.mem_num FROM member m LEFT OUTER JOIN member_detail d ON m.mem_num=d.mem_num WHERE m.mem_id=#{mem_id}
-	</select>
 </mapper>
 
 

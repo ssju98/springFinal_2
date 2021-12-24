@@ -55,6 +55,12 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public void updateQna(QnaVO qna) {
 		qnaMapper.updateQna(qna);
+		
+	}
+
+	@Override
+	public int selectCountQna(int board_kind) {
+		return qnaMapper.selectCountQna(board_kind);
 	}
 
 	@Override

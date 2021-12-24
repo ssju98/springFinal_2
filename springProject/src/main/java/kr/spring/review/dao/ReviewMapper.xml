@@ -3,71 +3,14 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.review.dao.ReviewMapper">  
-		<select id="selectReviewAvaliable" resultType="OrderListVO" parameterType="map">
-		SELECT
-		  *
-		FROM (SELECT 
-		        a.*,
-		        rownum rnum
-		      FROM (select o.ORDER_NO, o.ORDER_DATE ,o.MEM_NUM, p.P_NAME, p.P_NO, p.P_PRICE 
-			from SORDER o join SORDER_DETAIL d on o.ORDER_NO = d.ORDER_NO 
-			AND o.mem_num=#{mem_num} join PRODUCT p on d.P_NO = p.P_NO 
-			left outer join REVIEW r on o.ORDER_NO = r.ORDER_NO 
-			and d.P_NO = r.P_NO join DELIVERY l on o.ORDER_NO = l.ORDER_NO where l.D_STATUS_NUM = 4 and r.REVIEW_NO is null ORDER BY o.order_date DESC)a)
-			<![CDATA[
-				WHERE rnum >= #{start} AND rnum <= #{end}  
-			]]> 
-		</select>
-		
-		<select id="selectReviewAvaliableCount" parameterType="integer" resultType="integer">
-			select count(*)
-			from SORDER o join SORDER_DETAIL d on o.ORDER_NO = d.ORDER_NO 
-			AND o.mem_num=#{mem_num} join PRODUCT p on d.P_NO = p.P_NO 
-			left outer join REVIEW r on o.ORDER_NO = r.ORDER_NO 
-			and d.P_NO = r.P_NO join DELIVERY l on o.ORDER_NO = l.ORDER_NO where l.D_STATUS_NUM = 4 and r.REVIEW_NO is null ORDER BY o.order_date DESC
-		</select> 
-		
-		<select id="selectReviewWritten" resultType="ReviewListVO" parameterType="map">
-		SELECT
-		  *
-		FROM (SELECT 
-		        a.*,
-		        rownum rnum
-		      FROM (select o.ORDER_NO, o.ORDER_DATE , p.P_NAME, p.P_NO, p.p_PRICE,P.P_image, p.p_image_name, r.review_no, r.review_image,r.review_image_name, r.review_content, r.review_rating, r.regdate, r.mem_num 
-			from SORDER o join SORDER_DETAIL d on o.ORDER_NO = d.ORDER_NO 
-			AND o.mem_num=#{mem_num} join PRODUCT p on d.P_NO = p.P_NO 
-			left outer join REVIEW r on o.ORDER_NO = r.ORDER_NO 
-			and d.P_NO = r.P_NO join DELIVERY l on o.ORDER_NO = l.ORDER_NO where l.D_STATUS_NUM = 4 and r.REVIEW_NO is not null  ORDER BY r.regdate DESC)a)
-			<![CDATA[
-				WHERE rnum >= #{start} AND rnum <= #{end}  
-			]]> 
-		</select>
-		
-		<select id="selectReviewWrittenCount" parameterType="integer" resultType="integer">
-			select count(*)
-			from SORDER o join SORDER_DETAIL d on o.ORDER_NO = d.ORDER_NO 
-			AND o.mem_num=#{mem_num} join PRODUCT p on d.P_NO = p.P_NO 
-			left outer join REVIEW r on o.ORDER_NO = r.ORDER_NO 
-			and d.P_NO = r.P_NO join DELIVERY l on o.ORDER_NO = l.ORDER_NO where l.D_STATUS_NUM = 4 and r.REVIEW_NO is not null  ORDER BY o.order_date DESC
-		</select>
-		
-		<update id="updateReview" parameterType="ReviewVO">
-			update review set 
-			<if test="review_image != ''">
-				review_image = #{review_image},
-				review_image_name = #{review_image_name},
-			</if>
-			review_content=#{review_content}, 
-			review_rating=#{review_rating} 
-			where review_no=#{review_no}
-		</update>
-		
-		<select id="selectProductReview" parameterType="map" resultType="ReviewVO">
-		select r.*, c.mem_name from review r 
-		Left outer join member b
-		on r.mem_num = b.mem_num
-		join member_detail c
-		on b.mem_num = c.mem_num
-		where r.p_no=#{p_no}
+		<select resultType="integer" parameterType="map" id="selectRowCount">
+			SELECT
+				COUNT(*)
+			FROM review r JOIN member m ON r.mem_num = m.mem_num 
+			<where>
+				<if test="keyword != '' and keyfield == 1">
+					r.p_no LIKE '%' || #{keyword} || '%' 
+				</if>
+			</where>
 		</select>
 </mapper>

@@ -23,7 +23,7 @@ public interface AdminMemberMapper {
 	@Select("SELECT * FROM member m LEFT OUTER JOIN member_detail d ON m.mem_num=d.mem_num WHERE m.mem_num=#{mem_num} AND mem_auth IN(0,1,2)")
 	public AdminMemberVO selectMember(int mem_num);
 	
-	@Update("UPDATE member_detail SET mem_name=#{mem_name},mem_phone=#{mem_phone},mem_email=#{mem_email} WHERE mem_num=#{mem_num}")
+	@Update("UPDATE member_detail SET mem_name=#{mem_name},mem_phone=#{mem_phone},mem_email=#{mem_email},mem_zipcode=#{mem_zipcode},mem_address1=#{mem_address1},mem_address2=#{mem_address2} WHERE mem_num=#{mem_num}")
 	public void updateMember(AdminMemberVO adminMemberVO);
 	@Update("UPDATE member SET mem_auth=#{mem_auth} WHERE mem_num=#{mem_num}")
 	public void updateMemberAuth(AdminMemberVO adminMemberVO);
@@ -38,6 +38,10 @@ public interface AdminMemberMapper {
 	@Select("SELECT COUNT(*) FROM sorder o JOIN delivery d ON o.order_no=d.order_no WHERE d_status_num=7 AND mem_num=#{mem_num}")
 	public int getCancelCount(int mem_num);
 
+	/*
+	 * @Select("SELECT COUNT(*) FROM review WHERE mem_num=#{mem_num}") public int
+	 * getReviewCount(int mem_num);
+	 */
 	@Select("SELECT COUNT(*) FROM qna WHERE mem_num=#{mem_num}")
 	public int getQnaCount(int mem_num);
 	
@@ -56,7 +60,7 @@ public interface AdminMemberMapper {
 	public int selectMem_num();
 	@Insert("INSERT INTO member VALUES (#{mem_num},#{mem_id},#{mem_auth})")
 	public void insertAdmin(AdminMemberVO adminMemberVO);
-	@Insert("INSERT INTO member_detail (mem_num,mem_name,mem_passwd,mem_phone,mem_email) VALUES (#{mem_num},#{mem_name},#{mem_passwd},#{mem_phone},#{mem_email})")
+	@Insert("INSERT INTO member_detail VALUES (#{mem_passwd},#{mem_name},#{mem_phone},#{mem_email},#{mem_zipcode},#{mem_address1},#{mem_address2},SYSDATE,#{mem_num})")
 	public void insertAdminDetail(AdminMemberVO adminMemberVO);
 	
 }

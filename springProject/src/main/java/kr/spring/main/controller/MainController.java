@@ -20,8 +20,8 @@ public class MainController {
 	@RequestMapping("/shop/main.do")
 	public String main(Model model) {
 		
-		List<ProductVO> list = productService.selectAllProduct();
-		int count = productService.selectRowCount();
+		List<ProductVO> list = productService.ProductSelectAll();
+		int count = productService.selectMainProduct();
 		
 		model.addAttribute("list",list);
 		model.addAttribute("count",count);

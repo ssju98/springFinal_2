@@ -15,23 +15,9 @@
 	padding: 85px 0;
 }
 
-.top_menu_info{
-	width:100%; 
-	height:35px; 
-	background: #f4f4f5;
-	border-bottom: 1px solid #ebebeb;
-	border-top:1px solid #ebebeb;
-	color:#a1a1a5;
-}
-
-.top_menu_info > div {
-	width:1200px; 
-	line-height: 35px;  
-	margin:0 auto; 
-	font-size: 13px;
-	color:#a1a1a5;
-}
-
+/* table tr:last-child{ */
+/* 	display:none; */
+/* } */
 </style>
 <script type="text/javascript">
 	function check_pw(){
@@ -56,11 +42,6 @@
 	}
 	
 </script>
-<div class="top_menu_info">
-	<div>
-	홈 > 비밀번호 변경
-	</div>
-</div>
 <form id="adminModify" action="${pageContext.request.contextPath}/admin/adminInfoPwUpdateAction.do" method="post">
 <table class="table">
   <h2>변경할 비밀번호 입력</h2>

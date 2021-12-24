@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.order.vo.OrderListVO;
 import kr.spring.review.dao.ReviewMapper;
-import kr.spring.review.vo.ReviewListVO;
 import kr.spring.review.vo.ReviewVO;
 
 @Service
@@ -20,23 +19,13 @@ public class ReviewServiceImpl implements ReviewService {
 	ReviewMapper reviewMapper;
 
 	@Override
-	public List<OrderListVO> selectReviewAvaliable(Map<String, Object> map) {
-		return reviewMapper.selectReviewAvaliable(map);
+	public List<OrderListVO> selectReviewAvaliavle(int mem_num) {
+		return reviewMapper.selectReviewAvaliavle(mem_num);
 	}
 
 	@Override
-	public List<ReviewListVO> selectReviewWritten(Map<String, Object> map) {
-		return reviewMapper.selectReviewWritten(map);
-	}
-	
-	@Override
-	public int selectReviewAvaliableCount(int mem_num) {
-		return reviewMapper.selectReviewAvaliableCount(mem_num);
-	}
-	
-	@Override
-	public int selectReviewWrittenCount(int mem_num) {
-		return reviewMapper.selectReviewWrittenCount(mem_num);
+	public List<OrderListVO> selectReviewWritten(int mem_num) {
+		return reviewMapper.selectReviewWritten(mem_num);
 	}
 
 	@Override
@@ -46,28 +35,12 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
+	public int selectRowCount(Map<String, Object> map) {
+		return reviewMapper.selectRowCount(map);
+	}
+
+	@Override
 	public ReviewVO selectReview(int review_no) {
 		return reviewMapper.selectReview(review_no);
-	}
-
-	@Override
-	public void deleteReview(int review_no) {
-		reviewMapper.deleteReview(review_no);
-	}
-
-	@Override
-	public void updateReview(ReviewVO reviewVO) {
-		reviewMapper.updateReview(reviewVO);
-		
-	}
-
-	@Override
-	public List<ReviewVO> selectProductReview(int p_no) {
-		return reviewMapper.selectProductReview(p_no);
-	}
-
-	@Override
-	public int selectProductReviewCount(int p_no) {
-		return reviewMapper.selectProductReviewCount(p_no);
 	}
 }

@@ -11,7 +11,5 @@ import kr.spring.login.vo.LoginVO;
 public interface LoginMapper {
 	
 	public LoginVO loginAction(String id);
-	
-	public int loginMem_num(String id);
-	
+
 }

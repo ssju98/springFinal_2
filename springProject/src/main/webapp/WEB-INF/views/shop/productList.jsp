@@ -4,12 +4,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/productList.css"> 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/template/fotter_template.css"> 
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <script type="text/javascript">
 $(document).ready(function() {
     $('[id=showmenu]').click(function() {
         $('[class=menu]').not($(this).next('[class=menu]').slideToggle("slow")).slideUp();
     });
+		
+    
+    var select = document.getElementById('orderby');
+    select.onchange = function(){
+    	form.submit();
+    };
 });
 
 
@@ -38,23 +43,24 @@ $(document).ready(function() {
 		<div class="top-small-menu-title">
 			${category_sub_name.c_sub_name}
 		</div>
-		<div class="menu-div">
-			<div class="menu-amount mb-3">
-				${count}개의 상품
-			</div>
+		<div class="menu-amount mb-3">
+			${count}개의 상품
+		</div>
+		<%-- <form action="productList.do" method="get" id="search_form">
 			<div class="element-right">
 			<input type="hidden" id="c_sub_no" name="c_sub_no" value="${c_sub_no}">
 			<input type="hidden" id="c_top_no" name="c_top_no" value="${c_top_no}">
-				<select name="orderby" id="orderby" class="form-control form-control-sm order-select" onchange="location.href=this.value">
-					<option value="productList.do?c_top_no=${c_top_no}&c_sub_no=${c_sub_no}&orderby=default" <c:if test="${empty orderby || orderby == 'default'}">selected='selected'</c:if>>기본순</option>
-					<option value="productList.do?c_top_no=${c_top_no}&c_sub_no=${c_sub_no}&orderby=best" <c:if test="${orderby == 'best'}">selected='selected'</c:if>>판매순</option>
-					<option value="productList.do?c_top_no=${c_top_no}&c_sub_no=${c_sub_no}&orderby=high" <c:if test="${orderby == 'high'}">selected='selected'</c:if>>가격높은순</option>
-					<option value="productList.do?c_top_no=${c_top_no}&c_sub_no=${c_sub_no}&orderby=row" <c:if test="${orderby == 'row'}">selected='selected'</c:if>>가격낮은순</option>
+				<select name="orderby" id="orderby" class="form-control form-control-sm order-select">
+					<option value="default" <c:if test="${empty orderby || orderby == 'default'}">selected='selected'</c:if>>기본순</option>
+					<option value="best" <c:if test="${orderby == 'best'}">selected='selected'</c:if>>판매순</option>
+					<option value="high" <c:if test="${orderby == 'high'}">selected='selected'</c:if>>가격높은순</option>
+					<option value="row" <c:if test="${orderby == 'row'}">selected='selected'</c:if>>가격낮은순</option>
 				</select>
+				<input type="submit">
 			</div>
-		</div>
+		</form> --%>
 		
-		<div class="list-container mt-3">
+		<div class="list-container">
 			<c:forEach var="product" items="${list}">
 				<div class="list-content" onclick="location.href='productDetail.do?p_no=${product.p_no}'">
 					<div class="image-ani">
@@ -97,19 +103,6 @@ $(document).ready(function() {
 						<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
 					</c:if>
 					</div>
-				</c:if>
-				<c:if test="${product.p_review_count !=0}">
-					<div class="list-rating pl-2">
-						<div class="list-star">
-							<i class="fas fa-star" style="font-size: 13px; color:#35c5f0;"></i>
-							<span class="list-rating-num">
-								${product.p_review_rating}	
-							</span>
-							<span class="list-review">
-								리뷰 ${product.p_review_count}
-							</span>	
-						</div>
-					</div>	
 				</c:if>
 				<c:if test="${product.p_amount != 0}">	
 					<c:if test="${product.p_discount != 0}">

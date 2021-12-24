@@ -16,6 +16,8 @@ public interface AdminMemberService {
 	public void deleteMember(int mem_num);
 	public int getOrderCount(int mem_num);
 	public int getCancelCount(int mem_num);
+
+	/* public int getReviewCount(int mem_num); */
 	public int getQnaCount(int mem_num);
 	
 	//============== 관리자관리 ==============

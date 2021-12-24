@@ -1,68 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>비밀번호 찾기</title>
 <style type="text/css">
-.top_menu_info{
-	width:100%; 
-	height:35px; 
-	background: #f4f4f5;
-	border-bottom: 1px solid #ebebeb;
-	border-top:1px solid #ebebeb;
+.form-horizontal{
+	text-align:center;
+	margin-top:50px;
 }
-
-.top_menu_info > div {
-	width:1200px; 
-	line-height: 35px;  
-	margin:0 auto; 
-	font-size: 13px;
-	color:#a1a1a5;
+.fineMain{
+	margin:0 auto;
+	display:inline-block;
+	width:600px;
+	
 }
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		//이메일 정규식 : 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식
-		var regExpEmail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-	
-		$('#findPasswdForm').submit(function(){
-			if($('#mem_email').val().trim()==''){
-				alert('이메일을 입력해주세요!');
-				$('#mem_email').focus();
-				$('#mem_email').val('');
-				return false;
-			}else if(!regExpEmail.test($('#mem_email').val().trim())){	//정규식을 이용한 이메일 유효성 검사
-				alert('이메일 형식이 일치하지 않습니다.');
-				return false;
-			}
-		});
+		
 	});
+
 </script>
-<title>비밀번호 찾기</title>
 </head>
 <body>
-<div class="top_menu_info">
-	<div>
-	홈 > 비밀번호 찾기
-	</div>
-</div>
-<div id="main-width" style="margin: 0 auto; padding-top: 6%;">
-<h4 style="text-align: center;">비밀번호 찾기</h4>
-<div class="mt-4" style="width: 1200px;" >
-<form:form id="findPasswdForm" action="findPasswd.do" modelAttribute="memberVO" style="padding-left:35%;">
+<form class="form-horizontal" action="${pageContext.request.contextPath}/login/passwdCodeSend.do" method="post">
+
+<h1>비밀번호 찾기</h1>
+<h3>내 정보에 등록된 이메일로 찾기</h3>
+<div class="fineMain">
   <div class="form-group">
-    <label class="control-label col-sm-6" for="mem_email">가입한 이메일 주소를 입력해주세요</label>
-    <div class="col-sm-6 input-group input-group-lg">
-    	<form:input path="mem_email" class="form-control" style="font-size:18px;"/>
+    <label class="control-label col-sm-2" for="mem_name">아이디:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="mem_name" id="mem_name" placeholder="아이디">
     </div>
   </div>
-  <div class="form-group ml-3 pt-1">
-      <button type="submit" id="findIdBtn" name="findIdBtn" class="btn btn-info" style="width:47%; height:47px;">확인</button>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="mem_email">이메일:</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control" name="mem_email" id="mem_email" placeholder="이메일">
+    </div>
   </div>
-</form:form>
+  
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">인증번호 전송</button>
+    </div>
+  </div>
 </div>
-</div>
+</form>
 </body>
 </html>

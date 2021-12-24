@@ -8,20 +8,10 @@
 		SET 
 		  mem_name = #{mem_name},
 		  mem_phone = #{mem_phone},
-		  mem_email = #{mem_email}
+		  mem_email = #{mem_email},
+		  mem_zipcode = #{mem_zipcode},
+		  mem_address1 = #{mem_address1},
+		  mem_address2 = #{mem_address2}
 		WHERE mem_num = #{mem_num}		  	   
 	</update>
-	
-	<select id="memberCount" parameterType="MemberVO" resultType="Integer">
-		select count(*)
-		from member m,member_detail b
-		where b.mem_name=#{mem_name} and b.mem_email=#{mem_email} and m.mem_num = b.mem_num	
-	</select>
-	
-	<select id="findIdMember" parameterType="MemberVO" resultType="MemberVO">
-		select m.mem_id, NVL(b.mem_token,0) mem_token
-		from member m,member_detail b
-		where b.mem_name=#{mem_name} and b.mem_email=#{mem_email} and m.mem_num = b.mem_num
-	</select> 
-	
 </mapper>

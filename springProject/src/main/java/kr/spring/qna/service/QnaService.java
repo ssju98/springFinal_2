@@ -12,6 +12,7 @@ public interface QnaService {
 	public List<QnaVO> selectAllQna(Map<String, Object> map);
 	public void deleteQna(int board_no);
 	public void updateQna(QnaVO qna);
+	public int selectCountQna(int board_kind);
 	public void insertProductQna(QnaVO qna);
 	public int selectRowQnaCount(Map<String,Object> map);
 	public List<QnaVO> selectAllProductQna(Map<String, Object> map);

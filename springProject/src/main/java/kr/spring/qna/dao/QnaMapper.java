@@ -26,11 +26,11 @@ public interface QnaMapper {
 	@Select("SELECT * FROM member m, qna q left join  product p on q.p_no = p.p_no where board_no = #{board_no} and q.mem_num = m.mem_num ")
 	public QnaVO selectDetailQna(int board_no);
 	
-	//글 삭제
+	//글삭제
 	@Delete("DELETE FROM qna WHERE board_no = #{board_no}")
 	public void deleteQna(int board_no);
 	
-	//글 삭제시, 답변글도 같이 삭제
+	//글삭제시, 답변글도 같이 삭제
 	@Delete("DELETE FROM qna WHERE board_parent = #{board_parent}")
 	public void deleteQnaReply(int board_parent);
 	
@@ -39,17 +39,19 @@ public interface QnaMapper {
 	public void updateQna(QnaVO qnavo);
 	
 	//글 갯수
+	@Select("select count(*) from qna where board_kind = #{board_kind}")
+	public int selectCountQna(int board_kind);
+	
 	public int selectRowQnaCount(Map<String,Object> map);
 	
-	//상품 문의 등록
 	@Insert("insert into qna(board_no,grpno,board_title,board_content,mem_num,board_kind,board_parent,p_no) "
 			+ "values(#{board_no},#{grpno}, #{board_title},#{board_content},#{mem_num},#{board_kind},#{board_parent},#{p_no})")
 	public void insertProductQna(QnaVO qna);
 	
-	//특정상품 문의글 목록(상품상세페이지 노출)
+	//특정상품 문의글목록
 	public List<QnaVO> selectAllProductQna(Map<String, Object> map);
 	
-	//특정상품 문의글 갯수(상품상세페이지 노출)
+	//특정상품 문의글 갯수
 	public int selectAllPrpductQnaCount(Map<String, Object> map);
 	
 	

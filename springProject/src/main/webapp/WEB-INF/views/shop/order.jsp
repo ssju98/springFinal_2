@@ -167,11 +167,11 @@ $(document).ready(function(){
 			    <label for="order_address" class="col-sm-2 col-form-label">배송지 주소</label>
 			    <div class="col-sm-5">
 			    	<div class="row g-3 pb-1">
-			      		<input type="text" class="form-control col-sm-7" id="order_zipcode" name="order_zipcode"<%--  value="${member.mem_zipcode}" --%> placeholder="우편번호를 입력하세요.">
+			      		<input type="text" class="form-control col-sm-7" id="order_zipcode" name="order_zipcode" value="${member.mem_zipcode}" placeholder="우편번호를 입력하세요.">
 						<button type="button" class="btn btn-outline-dark col-sm-4 ml-1 bt" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
 			      	</div>
-			      	<input type="text" class="form-control mb-2" id="order_address1" name="order_address1" <%-- value="${member.mem_address1}" --%> placeholder="주소를 입력하세요.">
-			      	<input type="text" class="form-control mb-2" id="order_address2" name="order_address2" <%-- value="${member.mem_address2}" --%> placeholder="상세주소를 입력하세요.">
+			      	<input type="text" class="form-control mb-2" id="order_address1" name="order_address1" value="${member.mem_address1}" placeholder="주소를 입력하세요.">
+			      	<input type="text" class="form-control mb-2" id="order_address2" name="order_address2" value="${member.mem_address2}" placeholder="상세주소를 입력하세요.">
 			    </div>
 			</div>
 		</div>

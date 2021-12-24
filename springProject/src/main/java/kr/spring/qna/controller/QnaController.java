@@ -97,7 +97,7 @@ public class QnaController {
 	//문의게시판 상품 글 작성폼
 	@RequestMapping("/qna/qnaProductWrite.do")
 	public ModelAndView qnaProductWriteForm(@RequestParam int p_no) {
-		ProductVO product = productService.productSelect(p_no);
+		ProductVO product = productService.ProductSelect(p_no);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("qnaProductWrite");
 		mav.addObject("product",product);
@@ -136,7 +136,7 @@ public class QnaController {
 		QnaVO qna = qnaService.selectDetailQna(board_no);
 		ProductVO product = null;
 		if(qna.getP_no() != 0) {
-			product = productService.productSelect(qna.getP_no());
+			product = productService.ProductSelect(qna.getP_no());
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("qnaReply");
