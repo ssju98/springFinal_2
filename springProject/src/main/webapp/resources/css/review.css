@@ -1,0 +1,26 @@
+@charset "UTF-8";
+.review-container{
+	height: 120px;
+	width:inherit;
+	margin : 0 auto;
+}
+.review-img{
+	cursor: pointer;
+	float: left;
+}
+
+.review-content{
+	display: flex;
+	align-items:center;
+	height:120px;
+}
+
+.review-name {
+	font-weight: 500;
+	width:inherit;
+	height:120px;
+	font-size:18px;
+	word-break:break-all;
+	cursor: pointer;
+	float: right;
+}

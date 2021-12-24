@@ -1,0 +1,14 @@
+@charset "UTF-8";
+textarea{
+    resize: none;
+}
+
+.rating{
+	line-height:35px;
+}
+
+.font-style{
+	font-weight: bold; 
+	text-align: center; 
+	font-size: 14px;
+}
