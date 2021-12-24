@@ -4,8 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/template/productList.css"> 
 <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
    <style>
       .swiper {
         width: 100%;
@@ -136,6 +138,19 @@
 					</c:if>
 					</div>
 				</c:if>
+				<c:if test="${product.p_review_count != 0}">
+					<div class="list-rating pl-2">
+						<div class="list-star">
+							<i class="fas fa-star" style="font-size: 13px; color:#35c5f0;"></i>
+							<span class="list-rating-num">
+								${product.p_review_rating}	
+							</span>
+							<span class="list-review">
+								리뷰 ${product.p_review_count}
+							</span>	
+						</div>
+					</div>	
+				</c:if>
 				<c:if test="${product.p_amount != 0}">	
 					<c:if test="${product.p_discount != 0}">
 						<div class="special-price-div ml-2">
@@ -155,16 +170,16 @@
 				</div>
 			</c:forEach>
 			<c:if test="${count%5==2}">
-				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
-				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
-				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
+				<div class="list-container-empty" style="width: 230px; height: 375px; cursor:auto;"> </div>
+				<div class="list-container-empty" style="width: 230px; height: 375px; cursor:auto;"> </div>
+				<div class="list-container-empty" style="width: 230px; height: 375px; cursor:auto;"> </div>
 			</c:if>			
 			<c:if test="${count%5==3}">
-				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
-				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
+				<div class="list-container-empty" style="width: 230px; height: 375px; cursor:auto;"> </div>
+				<div class="list-container-empty" style="width: 230px; height: 375px; cursor:auto;"> </div>
 			</c:if>
 			<c:if test="${count%5==4}">
-				<div class="list-container-empty" style="width: 230px; height: 350px; cursor:auto;"> </div>
+				<div class="list-container-empty" style="width: 230px; height: 375px; cursor:auto;"> </div>
 			</c:if>
 		</div>
 </div>

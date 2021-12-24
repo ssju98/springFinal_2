@@ -47,15 +47,37 @@ width:100%;
       text-align: center;
 }
 .table caption{caption-side: bottom; display: none;}
+.top_menu_info{
+	width:100%; 
+	height:35px; 
+	background: #f4f4f5;
+	border-bottom: 1px solid #ebebeb;
+	border-top:1px solid #ebebeb;
+	color:#a1a1a5;
+}
+
+.top_menu_info > div {
+	width:1200px; 
+	line-height: 35px;  
+	margin:0 auto; 
+	font-size: 13px;
+	color:#a1a1a5;
+}
+
 </style>	
 <!-- 중앙 내용 시작 -->
+<div class="top_menu_info">
+	<div>
+	홈 > 마이페이지
+	</div>
+</div>
 <div class="page-main">
 	<h2>회원 상세 정보</h2><br><br>
 	<form:form id="mypage_form" action="myPage.do" modelAttribute="memberVO">
 	<table class="table">
     
-	    <tr><th>이름</th><th>전화번호</th><th>이메일</th><th>우편번호</th><th>주소</th><th>상세주소</th><th>가입날짜</th></tr>
-	    <tr><td>${member.mem_name}</td><td>${member.mem_phone}</td><td>${member.mem_email}</td><td>${member.mem_zipcode}</td><td>${member.mem_address1}</td><td>${member.mem_address2}</td><td>${member.mem_date}</td></tr>
+	    <tr><th>이름</th><th>전화번호</th><th>이메일</th><th>가입날짜</th></tr>
+	    <tr style="text-align: center;"><td>${member.mem_name}</td><td>${member.mem_phone}</td><td>${member.mem_email}</td><%-- <td>${member.mem_zipcode}</td><td>${member.mem_address1}</td><td>${member.mem_address2}</td> --%><td>${member.mem_date}</td></tr>
   	</table><br><br>
 
 	<hr size="1" width="100%">

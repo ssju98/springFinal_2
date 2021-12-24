@@ -37,16 +37,63 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.updateMember(member);
 	}
 
-	/*
-	 * @Override public void updatePassword(MemberVO member) { // TODO
-	 * Auto-generated method stub
-	 * 
-	 * }
-	 */
 	@Override
 	public void deleteMember(Integer mem_num) {
 		memberMapper.deleteMember(mem_num);
 		memberMapper.deleteMember_detail(mem_num);
 		
+	}
+
+	@Override
+	public int memberCount(MemberVO member) {
+		return memberMapper.memberCount(member);
+	}
+
+	@Override
+	public MemberVO findIdMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		return memberMapper.findIdMember(member);
+	}
+
+	@Override
+	public int memberPasswdCount(String mem_email) {
+		return memberMapper.memberPasswdCount(mem_email);
+	}
+
+	@Override
+	public void updateMemberPasswd(MemberVO member) {
+		memberMapper.updateMemberPasswd(member);
+	}
+
+	@Override
+	public void insertMemberKakao(MemberVO member) {
+		member.setMem_num(memberMapper.selectMem_num());
+		memberMapper.insertMember(member);
+		memberMapper.insertMember_DetailKakao(member);
+		
+	}
+
+	@Override
+	public int selectMemberCount(String id) {
+		return memberMapper.selectMemberCount(id);
+		
+	}
+
+	@Override
+	public void insertMemberNaver(MemberVO member) {
+		member.setMem_num(memberMapper.selectMem_num());
+		memberMapper.insertMember(member);
+		memberMapper.insertMember_DetailNaver(member);
+		
+	}
+
+	@Override
+	public String selectmemberPasswdToken(String mem_email) {
+		return memberMapper.selectmemberPasswdToken(mem_email);
+	}
+
+	@Override
+	public int selectCheckMemberEmail(String mem_email) {
+		return memberMapper.selectCheckMemberEmail(mem_email);
 	}
 }

@@ -60,11 +60,6 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		return adminMemberMapper.getCancelCount(mem_num);
 	}
 
-	/*
-	 * @Override public int getReviewCount(int mem_num) { return
-	 * adminMemberMapper.getReviewCount(mem_num); }
-	 */
-
 	@Override
 	public int getQnaCount(int mem_num) {
 		return adminMemberMapper.getQnaCount(mem_num);

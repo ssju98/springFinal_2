@@ -57,6 +57,7 @@ public class OrderController {
 		private DeliveryService deliveryService;
 		@Autowired
 		private ProductService productService;
+		
 		//자바빈(VO) 초기화
 		@ModelAttribute("orderVO")
 		public OrderVO initCommand() {
@@ -64,7 +65,7 @@ public class OrderController {
 		}
 
 	  //장바구니에서 주문페이지 호출 
-	  @GetMapping("/shop/order") 
+	  @GetMapping("/shop/order.do") 
 	  public ModelAndView insertOrderForm(HttpSession session) { 
 		  
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
@@ -83,9 +84,10 @@ public class OrderController {
 	  }
 	  
 	  //장바구니에서 주문 insert
-	  @PostMapping("/shop/order")
-	  public String insertOrder(HttpSession session, OrderVO orderVO, OrderDetailVO orderDetailVO,DeliveryVO deliveryVO) {
-			
+	  @PostMapping("/shop/order.do")
+	  public String insertOrder(HttpSession session, OrderVO orderVO, OrderDetailVO orderDetailVO) {
+		  DeliveryVO deliveryVO = new DeliveryVO();
+		  
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  
 		  //주문번호 세팅 (yyyymmdd_랜덤6자리)
@@ -108,21 +110,9 @@ public class OrderController {
 		  orderDetailVO.setMem_num(mem_num);
 		  
 		  deliveryVO.setOrder_no(orderNo);	  
-	
-		  orderService.insertOrder(orderVO); 					//주문테이블 insert		  
-		  orderDetailService.insertOrderDetail(orderDetailVO); 	//주문상세테이블 insert
-		  deliveryService.insertOrderDelivery(orderNo);			//배송테이블 insert
 		  
-		  //주문 완료 후, 카트에 담긴 상품을 삭제하기위해 orderDetail목록 가져옴
-		  List<OrderDetailVO> orderList = orderDetailService.selectOrderDetail(orderNo);
-		  
-		  //상품 수량 변경
-		  for(OrderDetailVO vo : orderList) {
-			  productService.productAmountUpdate(vo.getOrder_d_amount(), vo.getP_no());
-		  }
-		  
-		  //장바구니 목록 삭제
-		  cartService.deleteAllCart(mem_num);		
+		  //주문테이블 insert, 주문상세테이블 insert, 배송테이블 insert, 상품 수량 update, 장바구니 목록 delete
+		  orderService.insertCartOrder(orderVO,orderDetailVO,orderNo);
 		  
 		  return "redirect:/shop/orderResult.do";
 	  }
@@ -133,13 +123,14 @@ public class OrderController {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  MemberVO member = memberService.selectMember(mem_num);
 		  
-		  ProductVO product = productService.ProductSelect(p_no);
+		  ProductVO product = productService.productSelect(p_no);
 		  int count = productService.countProduct(p_no);
 		 
-		  
+		  //해당 상품이 없으면 notice페이지 호출
 		  if(count == 0) {
 			  return new ModelAndView("/common/notice");
 		  }
+		  //상품의 재고보다 구매하려는 수량이 더 많으면 notice 페이지 호출
 		  if(product.getP_amount() < cart_amount) { 
 			  return new ModelAndView("/common/notice");
 		  }
@@ -160,8 +151,10 @@ public class OrderController {
 	  
 	  //상품상세페이지 -> 주문페이지 -> 주문
 	  @PostMapping("/shop/orderNow.do")
-	  public String insertDirectOrder(HttpSession session,OrderVO orderVO, OrderDetailVO orderDetailVO,DeliveryVO deliveryVO,int p_no, int cart_amount) {
-		  Integer mem_num = (Integer)session.getAttribute("mem_num");
+	  public String insertDirectOrder(HttpSession session,OrderVO orderVO, OrderDetailVO orderDetailVO,int p_no, int cart_amount) {
+		  DeliveryVO deliveryVO = new DeliveryVO();
+		  ProductVO productVO = new ProductVO();
+		  Integer mem_num = (Integer)session.getAttribute("mem_num");		  
 		  
 		  //주문번호 세팅 (yyyymmdd_랜덤6자리)
 		  Calendar cal = Calendar.getInstance();
@@ -179,28 +172,26 @@ public class OrderController {
 		  orderVO.setOrder_no(orderNo); //주문번호
 		  orderVO.setMem_num(mem_num); //회원번호
 		  
-		  //orderDetailVO.setOrder_no(orderNo);
-		  //orderDetailVO.setMem_num(mem_num);
 		  
 		  deliveryVO.setOrder_no(orderNo);
 		  
-		  orderService.insertOrder(orderVO);  //주문테이블 insert
-		  orderDetailService.insertDirectOrderDetail(orderNo, p_no, cart_amount); //주문상세테이블 insert
-		  deliveryService.insertOrderDelivery(orderNo); //delivery테이블 insert
+		  orderDetailVO.setOrder_no(orderNo);
+		  orderDetailVO.setOrder_d_amount(cart_amount);
 		  
-		  productService.productAmountUpdate(cart_amount, p_no);
+		  //주문테이블 insert, 주문상세테이블 insert, 배송테이블 insert, 상품 재고 update
+		  orderService.insertDirectOrder(orderVO, orderDetailVO); 
 		  
 		  return "redirect:/shop/orderResult.do";
 	  }
 	  
 	  //주문완료페이지
-	  @RequestMapping("/shop/orderResult")
+	  @RequestMapping("/shop/orderResult.do")
 	  public String resultOrder() {
 		  return "orderResult";
 	  }
 	  
 	  //주문내역페이지
-	  @RequestMapping("/shop/orderList") 
+	  @RequestMapping("/shop/orderList.do") 
 	  public ModelAndView listOrder(HttpSession session,
 			  						@RequestParam(value="pageNum",defaultValue="1") int currentPage){
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
@@ -224,8 +215,8 @@ public class OrderController {
 		  return mav; 
 	  }
 	  
-	  //주문상세내역페이지
-	  @RequestMapping("/shop/orderDetail")
+	  //주문 상세 페이지
+	  @RequestMapping("/shop/orderDetail.do")
 	  public ModelAndView detailOrder(HttpSession session, @RequestParam String order_no) {
 		 
 		 List<OrderAllVO> listProduct = orderService.selectOrderDetailProduct(order_no);
@@ -241,7 +232,7 @@ public class OrderController {
 		 
 	  
 	  //주문취소페이지
-	  @RequestMapping("/shop/orderCancel")
+	  @RequestMapping("/shop/orderCancel.do")
 	  public ModelAndView cancelOrder(HttpSession session,
 			  						@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
@@ -269,7 +260,7 @@ public class OrderController {
 	  }
 	  
 	  //주문교환페이지
-	  @RequestMapping("/shop/orderExchange")
+	  @RequestMapping("/shop/orderExchange.do")
 	  public ModelAndView exchangeOrder(HttpSession session,
 			  							@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
 		  
@@ -295,7 +286,7 @@ public class OrderController {
 	  }
 	  
 	  //주문반품페이지
-	  @RequestMapping("/shop/orderRefund")
+	  @RequestMapping("/shop/orderRefund.do")
 	  public ModelAndView refundOrder(HttpSession session,@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  Map<String,Object> map = new HashMap<String,Object>();
@@ -319,7 +310,7 @@ public class OrderController {
 	  
 	  
 	  //주문구매확정페이지
-	  @RequestMapping("/shop/orderConfirm")
+	  @RequestMapping("/shop/orderConfirm.do")
 	  public ModelAndView confirmOrder(HttpSession session,@RequestParam(value="pageNum",defaultValue="1") int currentPage) {
 		  Integer mem_num = (Integer)session.getAttribute("mem_num");
 		  Map<String,Object> map = new HashMap<String,Object>();

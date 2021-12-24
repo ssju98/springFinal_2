@@ -18,11 +18,6 @@ public class DeliveryServiceImpl implements DeliveryService {
 	DeliveryMapper deliveryMapper;
 
 	@Override
-	public void insertOrderDelivery(String order_no) {
-		deliveryMapper.insertOrderDelivery(order_no);		
-	}
-
-	@Override
 	public void updateOrderDeilveryCancel(String order_no) {
 		deliveryMapper.updateOrderDeilveryCancel(order_no);	
 	}

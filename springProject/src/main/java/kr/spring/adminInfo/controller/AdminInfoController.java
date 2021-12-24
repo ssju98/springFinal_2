@@ -86,7 +86,6 @@ public class AdminInfoController {
 	public String adminInfoUpdateAction(LoginVO loginVO, HttpSession session) {
 		
 		System.out.println(loginVO.toString());
-
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		
 		if(mem_num!=null) { // 로그인중이면

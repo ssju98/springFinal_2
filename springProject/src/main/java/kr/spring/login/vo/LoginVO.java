@@ -18,9 +18,6 @@ public class LoginVO {
 	private String mem_name; //이름
 	private String mem_phone; //휴대폰
 	private String mem_email; //이메일
-	private String mem_zipcode; //우편번호
-	private String mem_address1; //주소
-	private String mem_address2; //상세주소
 	private Date mem_date; //가입일
 	
 	
@@ -76,24 +73,6 @@ public class LoginVO {
 	public void setMem_email(String mem_email) {
 		this.mem_email = mem_email;
 	}
-	public String getMem_zipcode() {
-		return mem_zipcode;
-	}
-	public void setMem_zipcode(String mem_zipcode) {
-		this.mem_zipcode = mem_zipcode;
-	}
-	public String getMem_address1() {
-		return mem_address1;
-	}
-	public void setMem_address1(String mem_address1) {
-		this.mem_address1 = mem_address1;
-	}
-	public String getMem_address2() {
-		return mem_address2;
-	}
-	public void setMem_address2(String mem_address2) {
-		this.mem_address2 = mem_address2;
-	}
 	public Date getMem_date() {
 		return mem_date;
 	}
@@ -105,7 +84,6 @@ public class LoginVO {
 	public String toString() {
 		return "LoginVO [mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", mem_passwd="
 				+ mem_passwd + ", mem_name=" + mem_name + ", mem_phone=" + mem_phone + ", mem_email=" + mem_email
-				+ ", mem_zipcode=" + mem_zipcode + ", mem_address1=" + mem_address1 + ", mem_address2=" + mem_address2
 				+ ", mem_date=" + mem_date + "]";
 	}
 	

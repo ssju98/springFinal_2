@@ -6,6 +6,7 @@
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order.css">
  <script>
  	$(document).ready(function(){
+ 		//상품 삭제 버튼 클릭
  		$("button[id^='delete_btn']").on('click', function(e) {
  			var choice = confirm('해당 상품을 삭제하시겠습니까?');
  			if(choice){
@@ -16,6 +17,7 @@
  			}
  		  });
  		
+ 		//상품 수량 selectbox 수정 시
  		$("select[id^='select_amount']").on('change', function(e) {
  				var p_no = $(this).attr('id').substring(14);
  				var cart_amount = $(this).children("option:selected").text();

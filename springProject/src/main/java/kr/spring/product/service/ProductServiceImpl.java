@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.category_sub.vo.Category_subVO;
+import kr.spring.orderDetail.vo.OrderDetailVO;
 import kr.spring.product.dao.ProductMapper;
 import kr.spring.product.vo.ProductVO;
+import kr.spring.review.dao.ReviewMapper;
 
 @Service
 @Transactional
@@ -18,29 +21,19 @@ public class ProductServiceImpl implements ProductService{
 	private ProductMapper productMapper;
 
 	@Override
-	public List<ProductVO> ProductSelectAll() {
-		return productMapper.ProductSelectAll();
-	}
-
-	@Override
-	public ProductVO ProductSelect(int p_no) {
-		return productMapper.ProductSelect(p_no);
-	}
-
-	@Override
-	public List<ProductVO> ProductCategorySelectAll(int c_top_no, int c_sub_no) {
-		return productMapper.ProductCategorySelectAll(c_top_no, c_sub_no);
-	}
-
-	@Override
-	public int ProductCategorySelectCount(int c_top_no, int c_sub_no) {
-		return productMapper.ProductCategorySelectCount(c_top_no, c_sub_no);
-	}
-
-	@Override
-	public void productAmountUpdate(int p_amount, int p_no) {
-		productMapper.productAmountUpdate(p_amount, p_no);
+	public ProductVO productSelect(int p_no) {
+		return productMapper.productSelect(p_no);
 		
+	}
+
+	@Override
+	public List<ProductVO> productCategorySelectAll(Category_subVO category_subVO) {
+		return productMapper.productCategorySelectAll(category_subVO);
+	}
+
+	@Override
+	public int productCategorySelectCount(Category_subVO category_subVO) {
+		return productMapper.productCategorySelectCount(category_subVO);
 	}
 
 	@Override
@@ -50,13 +43,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int selectRowCount(Map<String, Object> map) {
-		return productMapper.selectRowCount(map);
-	}
-
-	@Override
-	public List<ProductVO> selectList(Map<String, Object> map) {
-		return productMapper.ProductSelectAll();
+	public int selectRowCount() {
+		return productMapper.selectRowCount();
 	}
 
 	@Override
@@ -91,22 +79,49 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int selectMainProduct() {
-		return productMapper.selectMainProduct();
+	public List<ProductVO> selectPriceHigh(Category_subVO category_subVO) {
+		return productMapper.selectPriceHigh(category_subVO);
 	}
 
 	@Override
-	public List<ProductVO> selectPriceHigh(int c_top_no, int c_sub_no) {
-		return productMapper.selectPriceHigh(c_top_no,c_sub_no);
+	public List<ProductVO> selectPriceRow(Category_subVO category_subVO) {
+		return productMapper.selectPriceRow(category_subVO);
 	}
 
 	@Override
-	public List<ProductVO> selectPriceRow(int c_top_no, int c_sub_no) {
-		return productMapper.selectPriceRow(c_top_no,c_sub_no);
+	public List<ProductVO> selectPriceBest(Category_subVO category_subVO) {
+		return productMapper.selectPriceBest(category_subVO);
 	}
 
 	@Override
-	public List<ProductVO> selectPriceBest(int c_top_no, int c_sub_no) {
-		return productMapper.selectPriceBest(c_top_no,c_sub_no);
+	public List<ProductVO> selectProductAll(Map<String, Object> map) {
+		return productMapper.selectProductAll(map);
+	}
+
+	@Override
+	public List<ProductVO> selectSearchPriceHigh(Map<String, Object> map) {
+		return productMapper.selectSearchPriceHigh(map);
+	}
+
+	@Override
+	public List<ProductVO> selectSearchPriceRow(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return productMapper.selectSearchPriceRow(map);
+	}
+
+	@Override
+	public List<ProductVO> selectSearchPriceBest(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return productMapper.selectSearchPriceBest(map);
+	}
+
+	@Override
+	public ProductVO selectProduct(int p_no) {
+		return productMapper.selectProduct(p_no);
+	}
+
+	@Override
+	public List<ProductVO> selectAllProduct() {
+		return productMapper.selectAllProduct();
 	}
 }
