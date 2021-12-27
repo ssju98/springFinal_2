@@ -17,6 +17,21 @@ width:600px;
 margin-top:80px;
 margin-left:480px;
 }
+.top_menu_info{
+	width:100%; 
+	height:35px; 
+	background: #f4f4f5;
+	border-bottom: 1px solid #ebebeb;
+	border-top:1px solid #ebebeb;
+	color:#a1a1a5;
+}
+.top_menu_info > div {
+	width:1200px; 
+	line-height: 35px;  
+	margin:0 auto; 
+	font-size: 13px;
+	color:#a1a1a5;
+}
 	
 </style>
 <script type="text/javascript">
@@ -36,6 +51,11 @@ margin-left:480px;
 </script>	
 </head>
 <body>
+<div class="top_menu_info">
+	<div>
+	홈 > 마이페이지 
+	</div>
+</div>
 <table class="table" id="adminInfoForm">
   <tbody>
   
@@ -71,19 +91,6 @@ margin-left:480px;
     <tr>
       <th scope="row">이메일</th>
       <td>${vo.mem_email}</td>
-    </tr>
-
-    <tr>
-      <th scope="row">우편번호</th>
-      <td>${vo.mem_zipcode}</td>
-    </tr>
-    <tr>
-      <th scope="row">주소</th>
-      <td>${vo.mem_address1}</td>
-    </tr>
-    <tr>
-      <th scope="row">상세주소</th>
-      <td>${vo.mem_address2}</td>
     </tr>
     <tr>
       <th scope="row">가입일</th>

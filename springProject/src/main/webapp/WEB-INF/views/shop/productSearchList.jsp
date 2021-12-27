@@ -35,8 +35,20 @@ $(document).ready(function() {
 		<div class="top-small-menu-title">
 			${keyword} 검색 목록
 		</div>
-		<div class="menu-amount mb-3">
-			${count}개의 상품
+		<div class="menu-div">
+			<div class="menu-amount mb-3">
+				${count}개의 상품
+			</div>
+			<div class="element-right">
+			<input type="hidden" id="c_sub_no" name="c_sub_no" value="${c_sub_no}">
+			<input type="hidden" id="c_top_no" name="c_top_no" value="${c_top_no}">
+				<select name="orderby" id="orderby" class="form-control form-control-sm order-select" onchange="location.href=this.value">
+					<option value="productSearch.do?keyfield=p_name&keyword=${keyword}&orderby=default" <c:if test="${empty orderby || orderby == 'default'}">selected='selected'</c:if>>기본순</option>
+					<option value="productSearch.do?keyfield=p_name&keyword=${keyword}&orderby=best" <c:if test="${orderby == 'best'}">selected='selected'</c:if>>판매순</option>
+					<option value="productSearch.do?keyfield=p_name&keyword=${keyword}&orderby=high" <c:if test="${orderby == 'high'}">selected='selected'</c:if>>가격높은순</option>
+					<option value="productSearch.do?keyfield=p_name&keyword=${keyword}&orderby=row" <c:if test="${orderby == 'row'}">selected='selected'</c:if>>가격낮은순</option>
+				</select>
+			</div>
 		</div>
 		<div class="list-container">
 			<c:forEach var="product" items="${list}">
@@ -81,6 +93,19 @@ $(document).ready(function() {
 						<fmt:formatNumber value="${product.p_price }" pattern="#,###"/>원
 					</c:if>
 					</div>
+				</c:if>
+				<c:if test="${product.p_review_count !=0}">
+					<div class="list-rating pl-2">
+						<div class="list-star">
+							<i class="fas fa-star" style="font-size: 13px; color:#35c5f0;"></i>
+							<span class="list-rating-num">
+								${product.p_review_rating}	
+							</span>
+							<span class="list-review">
+								리뷰 ${product.p_review_count}
+							</span>	
+						</div>
+					</div>	
 				</c:if>
 				<c:if test="${product.p_amount != 0}">	
 					<c:if test="${product.p_discount != 0}">

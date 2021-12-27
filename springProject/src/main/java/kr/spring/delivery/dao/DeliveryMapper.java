@@ -9,23 +9,30 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.delivery.vo.DeliveryVO;
 
+
 public interface DeliveryMapper {
+	//============== 주문조회 페이지 ==============
 	@Insert("insert into delivery(delivery_no,order_no) "
 			+ "VALUES(delivery_no_seq.nextval,#{order_no})")
 	public void insertOrderDelivery(String order_no);
 	
+	//결제완료 -> 주문취소
 	@Update("UPDATE delivery SET d_status_num = 7 WHERE order_no = #{order_no}")
 	public void updateOrderDeilveryCancel(String order_no);
 	
+	//배송완료 -> 구매확정
 	@Update("UPDATE delivery SET d_status_num = 4 WHERE order_no = #{order_no}")
 	public void updateOrderDeilveryConfirm(String order_no);
 	
+	//배송완료 -> 반품 신청
 	@Update("UPDATE delivery SET d_status_num = 5 WHERE order_no = #{order_no}")
 	public void updateOrderDeilveryRefund(String order_no);
 	
+	//배송완료 -> 교환 신청
 	@Update("UPDATE delivery SET d_status_num = 6 WHERE order_no = #{order_no}")
 	public void updateOrderDeilveryExchange(String order_no);
 	
+	//주문현황 확인
 	@Select("SELECT * from delivery where order_no = ${order_no}")
 	public DeliveryVO selectOrderDelivery(String order_no);
 	

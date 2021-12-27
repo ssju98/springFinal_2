@@ -5,67 +5,30 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.min.css">
 <script  type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <script  type="text/javascript" src="${pageContext.request.contextPath}/resources/css/bootstrap/bootstrap.css"></script>
-
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("mem_address1").value = extraAddr;
-                
-                } else {
-                    document.getElementById("mem_address1").value = '';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('mem_zipcode').value = data.zonecode;
-                document.getElementById("mem_address1").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("mem_address2").focus();
-            }
-        }).open();
-    }
-</script>
 <style>
-
 #adminModify{
 	width:50%;
 	margin:0 auto;
 	padding: 85px 0;
 }
-
 table tr:last-child{
 	display:none;
 }
-
+.top_menu_info{
+	width:100%; 
+	height:35px; 
+	background: #f4f4f5;
+	border-bottom: 1px solid #ebebeb;
+	border-top:1px solid #ebebeb;
+	color:#a1a1a5;
+}
+.top_menu_info > div {
+	width:1200px; 
+	line-height: 35px;  
+	margin:0 auto; 
+	font-size: 13px;
+	color:#a1a1a5;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -83,11 +46,6 @@ $(document).ready(function(){
             alert("이름은 한글만 입력해주세요.(특수문자,영어,숫자 사용불가)");
             return false;
         }
-        
-        
-        
-
-
 		if($('#mem_phone').val().trim()==''){
 			alert('휴대폰번호를 입력하세요');
 			$('#mem_phone').focus();
@@ -103,7 +61,6 @@ $(document).ready(function(){
 			return false; 
 		}
 		
-
 		if($('#mem_email').val().trim()==''){
 			alert('이메일 입력하세요!');
 			$('#mem_email').focus();
@@ -118,31 +75,14 @@ $(document).ready(function(){
 			return false; 
 		}
 		
-		
-		if($('#mem_zipcode').val().trim()==''){
-			alert('우편번호를 체크하세요!');
-			$('#mem_zipcode').focus();
-			return false;
-		}
-		
-		if($('#mem_address1').val().trim()==''){
-			alert('주소를 입력하세요!');
-			$('#mem_address1').focus();
-			return false;
-		}
-		
-		if($('#mem_address2').val().trim()==''){
-			alert('상세주소를 입력하세요!');
-			$('#mem_address2').focus();
-			return false;
-		}
-		
-		
-		
 	});
 });
 </script>
-
+<div class="top_menu_info">
+	<div>
+	홈 > 정보 수정
+	</div>
+</div>
 <form id="adminModify" action="${pageContext.request.contextPath}/admin/adminInfoUpdateAction.do" method="post">
 <table class="table">
   <tbody>
@@ -179,21 +119,6 @@ $(document).ready(function(){
       <th scope="row">이메일</th>
       <td><input type="text" name="mem_email" id="mem_email" value="${vo.mem_email}"/></td>
     </tr>
-
-    <tr>
-      <th scope="row">우편번호</th>
-      <td><input type="text" name="mem_zipcode" id="mem_zipcode" value="${vo.mem_zipcode}" readonly/>&nbsp;
-		<button type="button" class="btn btn-outline-dark" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">주소</th>
-      <td><input type="text" name="mem_address1" id="mem_address1" value="${vo.mem_address1}"/></td>
-    </tr>
-    <tr>
-      <th scope="row">상세주소</th>
-      <td><input type="text" name="mem_address2" id="mem_address2" value="${vo.mem_address2}"/></td>
-    </tr>
     <tr>
       <th scope="row">가입일</th>
       <td>${vo.mem_date}</td>
@@ -216,4 +141,3 @@ $(document).ready(function(){
   <input type="hidden" name="mem_date" value="${vo.mem_date}" />
   
 </form>
-  

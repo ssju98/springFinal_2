@@ -52,6 +52,7 @@
 	line-height: 35px;  
 	margin:0 auto; 
 	font-size: 13px;
+	color:#a1a1a5;
 }
 
 .list-container{
@@ -160,4 +161,23 @@
 
 .confirm-btn{
 	font-size:13px;
+}
+
+
+.order-empty-main{
+	width:100%;
+	border: 1px solid #f1f1f1;
+}
+
+.order-empty-container{
+	padding-top:70px;
+	height: 180px;
+	width:1000px;
+	margin : 0 auto;
+	text-align:center; 
+}
+
+.order-empty-text{
+	font-size: 17px; 
+	font-weight: bold;
 }

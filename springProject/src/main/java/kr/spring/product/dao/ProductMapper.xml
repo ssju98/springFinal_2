@@ -19,15 +19,22 @@
 		 WHERE p_no=#{p_no}
 	</update>
 	
+	<!-- 상품 검색 정렬 : 기본순 -->
 	<select id="selectSearchProduct"  parameterType="map" resultType="ProductVO">
-	Select * FROM product 
-		<where>
+		select p.*, r.p_review_rating, NVL(r.p_review_count,0) p_review_count
+        from product p left outer Join
+        (SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+        on p.p_no = r.p_no 
+        <where>
 			<if test="keyord != '' and keyfield == 'p_name'">
 				p_name LIKE '%' || #{keyword} || '%'
 			</if>
 		</where>
+	ORDER BY decode(p_amount,0,1)DESC
 	</select>
-	<select id="selectCountSearchProduct" parameterType="map" resultType="integer">
+	
+	<!-- 상품 검색 목록 갯수 -->
+	<select id="selectCountSearchProduct" parameterType="map" resultType="integer">		
 		select count(*) from
 		product
 		<where>
@@ -35,5 +42,113 @@
 				p_name LIKE '%' || #{keyword} || '%'
 			</if>
 		</where>
+	</select>
+	
+	<select id="selectProductAll" parameterType="map" resultType="ProductVO">
+	SELECT
+		  *
+		FROM (SELECT 
+		        a.*,
+		        rownum rnum
+		      FROM ( select * from product order by product.p_no)a)
+            <![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}  
+		]]> 
+	</select>
+	
+	<!-- 상품 검색 정렬 : 판매순 -->
+	<select id="selectSearchPriceBest" parameterType="map" resultType="ProductVO">
+	select p.*, r.p_review_rating, NVL(r.p_review_count,0) p_review_count,p.p_price,NVL(b.cnt,0) as p_snumber
+        from product p left outer Join
+        (SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+        on p.p_no = r.p_no 
+        LEFT OUTER JOIN (SELECT p_no, COUNT(*) AS CNT FROM sorder_detail GROUP BY p_no)b 
+        on p.p_no = b.p_no
+		<where>
+			<if test="keyord != '' and keyfield == 'p_name'">
+				p_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</where>
+	ORDER BY decode(p.p_amount,0,1)DESC, p_snumber DESC
+	</select>
+	
+	<!-- 상품 검색 정렬 : 높은 가격순 -->
+	<select id="selectSearchPriceHigh" parameterType="map" resultType="ProductVO">
+	select p.*, r.p_review_rating, NVL(r.p_review_count,0) p_review_count
+        from product p left outer Join
+        (SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+        on p.p_no = r.p_no 
+		<where>
+			<if test="keyord != '' and keyfield == 'p_name'">
+				p_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</where>
+	ORDER BY decode(p_amount,0,1)DESC, (p_price-p_price*p_discount/100) DESC
+	</select>
+	
+	<!-- 상품 검색 정렬 : 낮은 가격순 -->
+	<select id="selectSearchPriceRow" parameterType="map" resultType="ProductVO">
+	select p.*, r.p_review_rating, NVL(r.p_review_count,0) p_review_count
+        from product p left outer Join
+        (SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+        on p.p_no = r.p_no 
+		<where>
+			<if test="keyord != '' and keyfield == 'p_name'">
+				p_name LIKE '%' || #{keyword} || '%'
+			</if>
+		</where>
+	ORDER BY decode(p_amount,0,1)DESC, (p_price-p_price*p_discount/100)
+	</select>
+	
+	<!-- 카테고리 정렬 : 판매순 -->
+	<select id="selectPriceBest" parameterType="Category_subVO" resultType="ProductVO">
+		select p.*, r.p_review_rating, NVL(r.p_review_count,0) p_review_count,p.p_price,NVL(b.cnt,0) as p_snumber
+        from product p left outer Join
+        (SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+        on p.p_no = r.p_no 
+        LEFT OUTER JOIN (SELECT p_no, COUNT(*) AS CNT FROM sorder_detail GROUP BY p_no)b 
+        on p.p_no = b.p_no
+        where p.c_top_no=4100 and p.c_sub_no=4101 ORDER BY decode(p_amount,0,1)DESC, p_snumber DESC
+	</select>
+	
+	<!-- 카테고리 정렬 : 가격 높은 순 -->
+	<select id="selectPriceHigh" parameterType="Category_subVO" resultType="ProductVO">
+		select p.*, r.p_review_rating, NVL(r.p_review_count,0) p_review_count
+        from product p left outer Join
+        (SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+        on p.p_no = r.p_no where p.c_top_no = #{c_top_no} and p.c_sub_no = #{c_sub_no} 
+        ORDER BY decode(p_amount,0,1)DESC, (p.p_price-p.p_price*p.p_discount/100) DESC
+	</select>
+	
+	<!-- 카테고리 정렬 : 가격 낮은 순 -->
+	<select id="selectPriceRow" parameterType="Category_subVO" resultType="ProductVO">
+		select p.*, r.p_review_rating, NVL(r.p_review_count,0) p_review_count
+        from product p left outer Join
+        (SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+        on p.p_no = r.p_no where p.c_top_no = #{c_top_no} and p.c_sub_no = #{c_sub_no} 
+        ORDER BY decode(p_amount,0,1)DESC, (p.p_price-p.p_price*p.p_discount/100)
+	</select>
+	
+	<!-- 특정 상품 조회 + 리뷰 평점, 리뷰 갯수 -->
+	<select id="selectProduct" parameterType="integer" resultType="ProductVO">
+		select p.*, r.p_review_rating, NVL(r.p_review_count,0) p_review_count
+        from product p left outer Join
+        (SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+        on p.p_no = r.p_no where p.p_no=#{p_no}
+	</select>
+	
+	<!-- 모든 상품 조회 + 리뷰 평점, 리뷰 갯수 -->
+	<select id="selectAllProduct" resultType="ProductVO">
+		select p.*, NVL(r.p_review_rating,0) p_review_rating, NVL(r.p_review_count,0)p_review_count
+		from product p left OUTER Join 
+		(SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+		on p.p_no = r.p_no ORDER BY decode(p_amount,0,1)DESC 
+	</select>
+	
+	<select id ="productCategorySelectAll" parameterType="Category_subVO" resultType="ProductVO">
+		select p.*, r.p_review_rating, NVL(r.p_review_count,0) p_review_count
+        from product p left outer Join
+        (SELECT p_no, AVG(review_rating) p_review_rating, count(*) p_review_count FROM review r GROUP BY p_no) r
+        on p.p_no = r.p_no where p.c_top_no = #{c_top_no} and p.c_sub_no = #{c_sub_no} ORDER BY decode(p_amount,0,1)DESC 
 	</select>
 </mapper>

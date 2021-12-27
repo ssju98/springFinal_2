@@ -13,11 +13,11 @@ import kr.spring.adminInfo.service.AdminInfoService;
 import kr.spring.login.vo.LoginVO;
 
 /**
-  * @FileName : AdminInfoController.java
-  * @Date : 2021. 10. 11. 
-  * @Author : 최유정
-  * @Description : 관리자 마이페이지
-  */
+ * @FileName : AdminInfoController.java
+ * @Date : 2021. 10. 11. 
+ * @Author : 최유정
+ * @Description : 관리자 마이페이지
+ */
 
 @Controller
 public class AdminInfoController {
@@ -86,7 +86,6 @@ public class AdminInfoController {
 	public String adminInfoUpdateAction(LoginVO loginVO, HttpSession session) {
 		
 		System.out.println(loginVO.toString());
-
 		Integer mem_num = (Integer)session.getAttribute("mem_num");
 		
 		if(mem_num!=null) { // 로그인중이면

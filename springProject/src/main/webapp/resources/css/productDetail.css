@@ -6,6 +6,7 @@
 	background: #f4f4f5;
 	border-bottom: 1px solid #ebebeb;
 	border-top:1px solid #ebebeb;
+	color:#a1a1a5;
 }
 
 .top_menu_info > div {
@@ -13,6 +14,7 @@
 	line-height: 35px;  
 	margin:0 auto; 
 	font-size: 13px;
+	color:#a1a1a5;
 }
 
 .product-detail-sumnail > img{
@@ -41,12 +43,15 @@
 
 .product-detail-review-count{
 	display: inline-block; 
+	float:left;
 	font-size: 14px; 
 	font-weight: bold;
 	color:#35c5f0;
+	margin-top: 3px;
 }
 
 .product-detail-sale{
+	clear:both;
 	font-size:17px;
 	color:#656e75;
 	float: left;
@@ -172,7 +177,7 @@
 
 #middle-menu ul li{
 	float: left; 
-	width: 50%; 
+	width: 33%; 
 	line-height: 40px; 
 	text-align: center; 
 	background: #f2f2f2;
@@ -196,6 +201,7 @@
 
 .order-table{
 	border : 1px solid #f4f4f5;
+	clear: both;
 
 }
 
@@ -234,4 +240,100 @@
 .table-product{
 	padding-left: 15px;
 	text-align: left;
+}
+
+.product_sub_info{
+	margin: 0 auto; 
+	text-align: center; 
+	margin-top: 20px; 
+	margin-bottom: 15px; 
+	max-width: 1200px;
+}
+
+.qna-list-div{
+	font-weight: 500; 
+	font-size:18px; 
+	margin-top: 30px; 
+	float: left;
+	
+}
+
+.qna-list-container{
+	font-weight: 500; 
+	margin-top: 30px; 
+	float: right; 
+	margin-right: 15px;
+}
+
+.qna-list-container > btn{
+	font-size: 14px;
+}
+
+.qna-empty-container{
+	width:100%; 
+	height:100px; 
+	margin: 0 auto; 
+	text-align:center; 
+	border: 1px solid #ebebeb; 
+	clear: both;
+}
+
+.qna-empty{
+	font-size: 20px; 
+	font-weight: 500;
+	margin-top:30px; 
+}
+
+.RatingStar{float: left;}
+.inner-star::before{color: #35c5f0;}
+.outer-star {position: relative;display: inline-block;color: #CCCCCC;}
+.inner-star {position: absolute;left: 0;top: 0;width: 0%;overflow: hidden;}
+.outer-star::before, .inner-star::before {content: '\f005 \f005 \f005 \f005 \f005';font-family: 'Font Awesome 5 free';font-weight: 900;}
+
+.review-list-detail-div{
+	font-weight: 500; 
+	font-size:18px; 
+	margin-top: 30px; 
+	padding-bottom: 10px;
+}
+
+.review-list-div{
+	border-top: 1px solid #f1f1f1; 
+	border-bottom: 1px solid #f1f1f1; 
+	width:98%; 
+	height: auto;
+}
+.review-list-div2{
+	width: 100%; 
+	height: auto; 
+	overflow:hidden;
+}
+
+.review-list-rating{
+	height:5px;
+	float:left;
+}
+
+.review-list-date{
+	font-size: 15px; 
+	color:#9b9b9b;
+}
+
+.review-list-content-div{
+	clear:both;
+}
+
+.review-list-content{
+	float: left; 
+	width: 80%;
+	word-break:break-all;
+}
+
+.reviw-list-btn-div{
+	float:right; 
+	width:100px;
+}
+
+.review-list-img{
+	float:right;
 }

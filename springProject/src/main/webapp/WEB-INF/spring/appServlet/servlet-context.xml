@@ -32,6 +32,10 @@
 	
 	<context:component-scan base-package="kr.spring.**.controller" />
 	
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="kr.spring.login.vo.NaverLoginBO" />
+
+	
 	<!-- 파일 업로드 -->
 	<beans:bean id="multipartResolver"
 	  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -96,14 +100,15 @@
 			<mapping path="/member/delete.do"/>
 			<mapping path="/shop/cart.do"/>
 			<mapping path="/shop/deleteCart.do"/>		
-			<mapping path="/shop/order"/>
-			<mapping path="/shop/orderResult"/>
-			<mapping path="/shop/orderList"/>
-			<mapping path="/shop/orderDetail"/>
-			<mapping path="/shop/orderCancel"/>
-			<mapping path="/shop/orderExchange"/>
-			<mapping path="/shop/orderRefund"/>
-			<mapping path="/shop/orderConfirm"/>
+			<mapping path="/shop/order.do"/>
+			<mapping path="/shop/orderResult.do"/>
+			<mapping path="/shop/orderList.do"/>
+			<mapping path="/shop/orderDetail.do"/>
+			<mapping path="/shop/orderCancel.do"/>
+			<mapping path="/shop/orderExchange.do"/>
+			<mapping path="/shop/orderRefund.do"/>
+			<mapping path="/shop/orderConfirm.do"/>
+			<mapping path="/shop/orderNow.do"/>
 				
 			<mapping path="/qna/qnaWrite.do"/>
 			<mapping path="/qna/qnaReply.do"/>
@@ -112,8 +117,6 @@
 			
 			<mapping path="/review/reviewAvaliable.do"/>
 			<mapping path="/review/reviewWritten.do"/>
-			
-			<mapping path="/review/write.do"/>
 			<beans:bean class="kr.spring.interceptor.LoginCheckInterceptor"/>
 		</interceptor>
 		<!-- 관리자 여부 체크 -->
@@ -129,6 +132,7 @@
 			<mapping path="/admin/adminRegister.do"/>
 			<mapping path="/admin/adminUpdate.do"/>
 			<mapping path="/admin/adminDelete.do"/>
+			
 			<beans:bean class="kr.spring.interceptor.SuperAdminCheckInterceptor"/>
 		</interceptor>
 		<!-- 메뉴 인터셉트 -->

@@ -31,4 +31,8 @@ public class LoginServiceImpl implements LoginService{
 		
 	}
 
+	@Override
+	public int loginMem_num(String id) {
+		return loginMapper.loginMem_num(id);
+	}
 }

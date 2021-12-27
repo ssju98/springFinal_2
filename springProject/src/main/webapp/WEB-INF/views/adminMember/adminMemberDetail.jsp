@@ -41,10 +41,6 @@
 				<td>${adminMemberVO.mem_email}</td>
 			</tr>
 			<tr>
-				<th>주소</th>
-				<td>(${adminMemberVO.mem_zipcode}) ${adminMemberVO.mem_address1} ${adminMemberVO.mem_address2}</td>
-			</tr>
-			<tr>
 				<th>가입일</th>
 				<td>${adminMemberVO.mem_date}</td>
 			</tr>

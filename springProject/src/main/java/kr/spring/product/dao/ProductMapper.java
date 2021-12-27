@@ -8,45 +8,80 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.category_sub.vo.Category_subVO;
+import kr.spring.orderDetail.vo.OrderDetailVO;
 import kr.spring.product.vo.ProductVO;
 
 public interface ProductMapper {
-	@Select("SELECT * FROM product")
-	public List<ProductVO> ProductSelectAll();
+
+	//해당 카테고리의 상품 갯수
+	@Select("select count(*) from product where c_top_no = #{c_top_no} AND c_sub_no = #{c_sub_no}")
+	public int productCategorySelectCount(Category_subVO category_subVO);
+	
+	//해당 카테고리 정렬 : 기본순
+	public List<ProductVO> productCategorySelectAll(Category_subVO category_subVO);
+	
+	//해당 카테고리 정렬 : 가격 높은 순
+	public List<ProductVO> selectPriceHigh(Category_subVO category_subVO);
+	
+	//해당 카테고리 정렬 : 가격 낮은 순
+	public  List<ProductVO> selectPriceRow(Category_subVO category_subVO);
+	
+	////해당 카테고리 정렬 : 판매순
+	public  List<ProductVO> selectPriceBest(Category_subVO category_subVO);
+	
+	//상품 검색 목록 갯수
+	public int selectCountSearchProduct(Map<String, Object> map);
+	
+	//상품 검색 정렬 : 기본순
+	public List<ProductVO> selectSearchProduct(Map<String, Object> map);
+	
+	//상품 검색 정렬 : 높은 가격순
+	public List<ProductVO> selectSearchPriceHigh(Map<String, Object> map);
+	
+	//상품 검색 정렬 : 낮은 가격순
+	public List<ProductVO> selectSearchPriceRow(Map<String, Object> map);
+	
+	//상품 검색 정렬 : 판매순
+	public List<ProductVO> selectSearchPriceBest(Map<String, Object> map);
+	
+	//상품 존재 여부 확인
+	@Select("select count(*) from product where p_no = #{p_no}")
+	public int countProduct(int p_no);
+	
+	//총 상품 갯수
 	@Select("SELECT COUNT(*) FROM product")
-	public int selectRowCount(Map<String, Object> map);
+	public int selectRowCount();
+	
+	//특정 상품 조회
 	@Select("Select * FROM product WHERE p_no=#{p_no}")
-	public ProductVO ProductSelect(int p_no);
-	@Select("select * from product where c_top_no = #{param1} AND c_sub_no = #{param2} order by decode(p_amount,0,1)DESC")
-	public List<ProductVO> ProductCategorySelectAll(int param1, int param2);
-	@Select("select count(*) from product where c_top_no = #{param1} AND c_sub_no = #{param2}")
-	public int ProductCategorySelectCount(int param1, int param2);
-	@Update("update product set p_amount=p_amount-#{param1} where p_no=#{param2}")
-	public void productAmountUpdate(int param1, int param2);
+	public ProductVO productSelect(int p_no);
+	
+	//상품 재고 수정
+	@Update("update product set p_amount=p_amount-#{order_d_amount} where p_no=#{p_no}")
+	public void productAmountUpdate(OrderDetailVO orderDetailVO);
+		
+	//상품 재고 추가(반품 시)
 	@Update("update product set p_amount=p_amount+#{param1} where p_no=#{param2}")
 	public void productAmountPlusUpdate(int param1, int param2);
+	
+	//특정 상품 조회 + 리뷰 평점, 리뷰 갯수
+	public ProductVO selectProduct(int p_no);
+	
+	//모든 상품 조회 + 리뷰 평점, 리뷰 갯수
+	public List<ProductVO> selectAllProduct();
+
+	
+	//--------------------관리자 관리 : 상품 관리--------------------------------------
+	public List<ProductVO> selectProductAll(Map<String,Object>map);
+	
 	@Delete("DELETE FROM product WHERE p_no=#{p_no}")
 	public void deleteProduct(int p_no);
+	
 	@Insert("INSERT INTO product (p_no, p_name, p_price, p_amount, p_image_name, p_image, p_discount, p_sub_text, c_top_no, c_sub_no) "
 			+ "VALUES (product_seq.nextval, #{p_name}, #{p_price}, #{p_amount}, #{p_image_name}, #{p_image}, #{p_discount}, #{p_sub_text}, #{c_top_no}, #{c_sub_no})")
 	public void insertProduct(ProductVO product);
+	
 	public void updateProduct(ProductVO productVO);
-	@Select("select count(*) from product where p_no = #{p_no}")
-	public int countProduct(int p_no);
-	public List<ProductVO> selectSearchProduct(Map<String, Object> map);
-	public int selectCountSearchProduct(Map<String, Object> map);
-	@Select("select count(*) from product")
-	public int selectMainProduct();
-	
-	@Select("select * from product p where p.c_top_no=#{param1} and p.c_sub_no=#{param2} order by (p.p_price-p.p_price*p.p_discount/100) desc")
-	public List<ProductVO> selectPriceHigh(int param1, int param2);
-	
-	@Select("select * from product p where p.c_top_no=#{param1} and p.c_sub_no=#{param2} order by (p.p_price-p.p_price*p.p_discount/100)")
-	public  List<ProductVO> selectPriceRow(int param1, int param2);
 
-	@Select("SELECT p.p_name, p.p_no, p.p_amount, p.p_discount,p.p_image_name,p.p_image,p.p_price,nvl(b.cnt,0) as p_snumber "
-			+ "FROM product p LEFT OUTER JOIN (SELECT p_no, COUNT(*) AS CNT FROM sorder_detail GROUP BY p_no)b "
-			+ "ON p.p_no = b.p_no WHERE p.c_top_no=#{param1} and p.c_sub_no=#{param2} ORDER BY p.p_no")
-	public  List<ProductVO> selectPriceBest(int param1, int param2);
 }
-

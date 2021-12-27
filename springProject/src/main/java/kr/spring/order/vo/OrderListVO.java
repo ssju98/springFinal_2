@@ -16,12 +16,15 @@ public class OrderListVO {
 	private String d_status_name;
 	private int Order_pay;
 	private int d_status_num;
+	private int p_price;
 	private String tracking_num;
 	
-	
-	
-	
-	
+	public int getP_price() {
+		return p_price;
+	}
+	public void setP_price(int p_price) {
+		this.p_price = p_price;
+	}
 	public String getTracking_num() {
 		return tracking_num;
 	}

@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!-- 상단 시작 -->
 <script type="text/javascript">
-	/* $(function(){
+	$(function(){
 		//검색 유효성 체크
 		$('#main_search_form').submit(function(){
 			if($('#keyword').val().trim() == ''){
@@ -13,7 +13,7 @@
 				return false;
 			}
 		});
-	}); */
+	}); 
 </script>
 <div id="header" class="mb-3">
 	<a href="${pageContext.request.contextPath}/shop/main.do">
@@ -28,21 +28,21 @@
 	</form>
 	<div class="header-menu">
 		<ul>
-		<c:if test="${empty mem_num}">
+		<c:if test="${empty mem_id}">
 			<li class="noLogin"><a href="${pageContext.request.contextPath}/login/loginForm.do">로그인</a></li>
 			<li class="noLogin"><a href="${pageContext.request.contextPath}/member/registerUser.do">회원가입</a></li>
 		</c:if>
-		<c:if test="${!empty mem_num && mem_auth==2}">
-			<li>${mem_id}님</li>
+		<c:if test="${!empty mem_id && mem_auth==2}">
+			<li>${mem_name}님</li>
 			<li><a href="${pageContext.request.contextPath}/shop/cart.do">장바구니</a></li>
 			<li><a href="${pageContext.request.contextPath}/shop/orderList.do">주문조회</a></li>
 			<li><a href="${pageContext.request.contextPath}/member/myPage.do">마이페이지</a></li>
 		</c:if>
-		<c:if test="${!empty mem_num && (mem_auth==3 || mem_auth==4) }">
+		<c:if test="${!empty mem_id && (mem_auth==3 || mem_auth==4) }">
          	<li><a href="${pageContext.request.contextPath}/admin/adminInfoForm.do">마이페이지</a></li>
 			<li><a href="${pageContext.request.contextPath}/admin/main.do">관리자페이지로</a></li>
 		</c:if>
-		<c:if test="${!empty mem_num}">
+		<c:if test="${!empty mem_id}">
 			<li><a href="${pageContext.request.contextPath}/login/logout.do">로그아웃</a></li>
 		</c:if>
 		</ul> 

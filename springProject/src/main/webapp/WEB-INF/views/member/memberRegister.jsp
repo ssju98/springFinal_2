@@ -31,62 +31,27 @@ width:100%;
 ul{
    list-style:none;
 }
+.top_menu_info{
+	width:100%; 
+	height:35px; 
+	background: #f4f4f5;
+	border-bottom: 1px solid #ebebeb;
+	border-top:1px solid #ebebeb;
+	color:#a1a1a5;
+}
+.top_menu_info > div {
+	width:1200px; 
+	line-height: 35px;  
+	margin:0 auto; 
+	font-size: 13px;
+	color:#a1a1a5;
+}
 </style>
-<script>
-    function sample4_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var roadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 참고 항목 변수
-
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                }
-                
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                
-                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('mem_zipcode').value = data.zonecode;
-                document.getElementById("mem_address1").value = roadAddr;
-                
-                if(roadAddr !== ''){
-                    document.getElementById("mem_address2").value = extraRoadAddr;
-                } else {
-                    document.getElementById("mem_address2").value = '';
-                }
-                
-
-                var guideTextBox = document.getElementById("guide");
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block';
-
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
-                } else {
-                    guideTextBox.innerHTML = '';
-                    guideTextBox.style.display = 'none';
-                }
-            }
-        }).open();
-    }
-</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var checkId = 0;
+		var checkEmail = 0;
 		
 		//아이디 중복 체크
 		$('#confirmId').click(function(){
@@ -133,12 +98,64 @@ ul{
 			$('#message_id').text('');
 		});
 		
+		//이메일 중복 체크
+		$('#confirmEmail').click(function(){
+			if($('#mem_email').val().trim()==''){
+				$('#message_email').css('color','red').text('이메일을 입력하세요.');
+				$('#mem_email').val('').focus();//공백이 있으면 공백을 지우고 포커스를 줌
+				return;
+			}	
+			
+		$.ajax({
+			url:'confirmEmail.do',
+			type:'post',
+			data:{mem_email:$('#mem_email').val()},
+			dataType:'json',
+			cache:false,
+			timeout:30000,
+			success:function(param){
+				if(param.result == 'emailNotFound'){
+					$('#message_email').css('color','#000').text('등록가능한 이메일입니다.');
+					checkId = 1;
+				}else if(param.result == 'emailDuplicated'){
+					$('#message_email').css('color','red').text('이미 가입된 이메일입니다.');
+					$('#mem_email').val('').focus();
+					checkId = 0;
+				}else if(param.result == 'notMatchPattern'){
+					$('#message_email').css('color','red').text('이메일 형식에 맞게 입력해주세요.');
+					$('#mem_email').val('').focus();
+					checkId = 0;
+				}else{
+					checkId = 0;
+					alert('이메일 중복체크 오류입니다.');
+				}
+			},
+			error:function(){
+				checkId = 0;
+				alert('네트워크 오류 발생');
+			}
+		}); //end if ajax
+		}); //end if click
+		
+		//이메일 중복 안내 메시지 초기화 및 이메일 중복 값 초기화
+		$('#register_form #mem_email').keydown(function(){
+			checkId = 0;
+			$('#message_email').text('');
+		});
+		
 		//submit 이벤트 발생시 아이디 중복 체크 여부 확인
 		$('#register_form').submit(function(){
 			if(checkId==0){
 				$('#message_id').css('color','red').text('아이디 중복 체크 필수');
 				if($('#mem_id').val().trim()==''){
 					$('#mem_id').val('').focus();
+				}
+				return false;
+			}
+			if(checkEmail==0){
+				$('#message_email').css('color','red').text('이메일 중복 체크 필수');
+				if($('#mem_email').val().trim()==''){
+					$('#mem_email').val('').focus();
 				}
 				return false;
 			}
@@ -159,6 +176,11 @@ ul{
 	});
 </script>        
 <!-- 중앙 내용 시작 -->
+<div class="top_menu_info">
+	<div>
+	홈 > 회원가입
+	</div>
+</div>
 <div class="page-main">
 	<h1>회원가입</h1><br><br>
 	<form:form id="register_form" action="registerUser.do" modelAttribute="memberVO">
@@ -166,8 +188,8 @@ ul{
 		<ul>
 			<li>
 				<label for="mem_id" class="col-sm-2 col-form-label">아이디</label>&nbsp;&nbsp;&nbsp;&nbsp;
-				<form:input path="mem_id" class="form-control" placeholder="4~12자 영문,숫자만 허용" /><br>
-				<button type="button" id="confirmId" class="btn btn-primary">ID중복체크</button>
+				<form:input path="mem_id" class="form-control" placeholder="4~12자 영문,숫자만 허용" />
+				<button type="button" id="confirmId" class="btn btn-primary btn-sm mt-1">ID중복체크</button>
 				<span id="message_id"></span>
 				<form:errors path="mem_id" cssClass="error-color"/>
 			</li>
@@ -189,23 +211,9 @@ ul{
 			<li>
 				<label for="mem_email" class="col-sm-2 col-form-label">이메일</label>&nbsp;&nbsp;&nbsp;&nbsp;
 				<form:input path="mem_email" class="form-control"/>
+				<button type="button" id="confirmEmail" class="btn btn-primary btn-smmt-1">이메일중복체크</button>
+				<span id="message_email"></span>
 				<form:errors path="mem_email" cssClass="error-color"/>
-			</li>
-			<li>
-				<label for="mem_zipcode" class="col-sm-2 col-form-label">우편번호</label>
-				<form:input path="mem_zipcode" class="form-control"/>
-				<form:errors path="mem_zipcode" cssClass="error-color"/><br>
-				<button type="button" class="btn btn-primary" onclick="sample4_execDaumPostcode()">우편번호 찾기</button>
-			</li>
-			<li>
-				<label for="mem_address1" class="col-sm-2 col-form-label">지번 주소</label>
-				<form:input path="mem_address1" class="form-control"/>
-				<form:errors path="mem_address1" cssClass="error-color"/>
-			</li>
-			<li>
-				<label for="mem_address2" class="col-sm-2 col-form-label">상세 주소</label>
-				<form:input path="mem_address2" class="form-control"/>
-				<form:errors path="mem_address2" cssClass="error-color"/>
 			</li>
 		</ul>
 		</div>

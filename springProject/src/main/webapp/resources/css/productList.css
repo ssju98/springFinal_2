@@ -54,9 +54,11 @@
 	line-height: 35px;  
 	margin:0 auto; 
 	font-size: 13px;
+	color:#a1a1a5;
 }
 
 .list-container{
+	clear:both;
 	display: flex;
 	justify-content: space-between;
 	flex-flow:wrap;
@@ -88,8 +90,13 @@
 	font-weight: bold;
 }
 
+.menu-div{
+	height: 40px;
+	border-bottom:1px solid #cfcfd0;
+}
+
 .menu-amount{
-	border-bottom:1px solid #cfcfd0; 
+	float:left;
 	height:40px; 
 	line-height:40px; 
 	font-size: 13px;
@@ -97,7 +104,7 @@
 
 .list-content{
 	width: 240px;
-	height:360px;
+	height:375px;
 	background: white;
 }
 
@@ -146,6 +153,7 @@
 
 .list-rating {
 	clear: both;
+	margin-bottom: 2px;
 }
 
 .list-star{
@@ -192,10 +200,11 @@
 
 /* 목록순서 셀렉트박스 */
 div.element-right{
+	float:right;
+	margin-top:4px;
 	text-align: -webkit-right;
 }
 select.order-select{
 	width: 110px;
 	margin-bottom: 5px;
-	margin-top: -5px;
 }

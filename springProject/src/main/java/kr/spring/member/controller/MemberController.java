@@ -54,12 +54,37 @@ public class MemberController {
 		  //아이디 중복 
 		  map.put("result", "idDuplicated"); 
 	  }else {
-		  if(!Pattern.matches("^[A-Za-z0-9]{4,12}$", mem_id)) { 
+		  if(!Pattern.matches("^[A-Za-z0-9]{4,12}$", mem_id))  { 
 		  //패턴 불일치
 		  map.put("result", "notMatchPattern"); 
 	  }else { 
 		  //아이디 미중복 
 		  map.put("result","idNotFound"); 
+	  } 
+	}
+	  return map; 
+	}
+	  
+	 //회원가입 - 이메일 중복 체크
+	  @RequestMapping("/member/confirmEmail.do")
+	  @ResponseBody 
+	  public Map<String,String> processEmail(@RequestParam String mem_email){
+	  
+	  //logger.debug("<<id>> : " + mem_id);
+	  
+	  Map<String,String> map = new HashMap<String,String>();
+	  
+	  int count = memberService.selectCheckMemberEmail(mem_email); 
+	  if(count != 0) {
+		  //이메일 중복 
+		  map.put("result", "emailDuplicated"); 
+	  }else {  
+		if(!Pattern.matches("^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\\.[A-Za-z0-9\\-]+$", mem_email)) { 
+		  //패턴 불일치
+		  map.put("result", "notMatchPattern"); 
+	  }else { 
+		  //이메일 미중복 
+		  map.put("result","emailNotFound"); 
 	  } 
 	}
 	  return map; 

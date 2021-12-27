@@ -12,11 +12,7 @@
 		UPDATE member_detail SET mem_passwd=#{mem_passwd},
 								 mem_name=#{mem_name},
 								 mem_phone=#{mem_phone},
-								 mem_email=#{mem_email},
-								 mem_zipcode=#{mem_zipcode},
-								 mem_address1=#{mem_address1},
-								 mem_address2=#{mem_address2},
-								 mem_date=#{mem_date}
+								 mem_email=#{mem_email}
 					WHERE mem_num=#{mem_num}
 	</update>
 	
@@ -24,14 +20,4 @@
 		UPDATE member_detail SET mem_passwd=#{mem_passwd}
 						WHERE mem_num = #{mem_num}
 	</update>
-	
-	
-	
 </mapper>
-
-
-
-
-
-
-

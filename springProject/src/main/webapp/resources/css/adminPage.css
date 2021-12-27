@@ -87,6 +87,10 @@ input#mem_address2{
 .wide-table th.c-20{
 	width: 20%
 }
+
+.wide-table th.c-25{
+	width: 25%
+}
 .wide-table th.c-45{
 	width: 45%
 }
@@ -241,4 +245,3 @@ table#activity_table td{
 .product_register ul li{
 	list-style: none;
 }
-

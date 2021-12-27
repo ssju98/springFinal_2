@@ -18,11 +18,9 @@
 #menu ul li a{
 	color:black;
 }
-
 .header-menu ul li a{
 	color:black;
 }
-
 .form__container{
 	display:flex;
 	justify-content:center;
@@ -32,13 +30,10 @@
 	
 	
 }
-
 .login-form{
 width:300px;
 margin-top:80px;
-
 }
-
 .login .top li label {
 	display:inline-block;
 	width:100px;
@@ -53,13 +48,10 @@ margin-top:80px;
 	height:35px;
 	border-color:#d9d9d9;
 }
-
 ul{
 	list-style:none;
 }
-
 .login .top{ position:relative; }
-
 .login .top li .a{
 	width:111px; height:69px;
 	background:#328ba8;
@@ -71,26 +63,47 @@ ul{
 	font-wight:bold;
 	border:1px;
 }
-
 .login .top li.btn {
 	position: absolute; right:-80px; top:-6px; 
 }
-
 .main-login{
 	text-align:center;
 	font-size:30px;
 	padding-bottom:10px;
 	
 }
-
 .col1{ 
  	text-align:center; 
  	padding-bottom:50px;
 }
-
-
-
+.btn{
+	padding-left: 80px;
+	padding-bottom: 10px;
+}
+ul li{
+color:#8a8a92;
+}
+.top_menu_info{
+	width:100%; 
+	height:35px; 
+	background: #f4f4f5;
+	border-bottom: 1px solid #ebebeb;
+	border-top:1px solid #ebebeb;
+	color:#a1a1a5;
+}
+.top_menu_info > div {
+	width:1200px; 
+	line-height: 35px;  
+	margin:0 auto; 
+	font-size: 13px;
+	color:#a1a1a5;
+}
 </style>
+<div class="top_menu_info">
+	<div>
+	홈 > 로그인
+	</div>
+</div>
 <form class="form__container" action="${pageContext.request.contextPath}/login/loginAction.do" method="post">
 
 	<fieldset>
@@ -103,15 +116,18 @@ ul{
 		<ul class="top">
 			<li><label for="txt1">아이디</label><input type="text" name="mem_id" id="txt1"/></li>
 			<li><label for="txt2">비밀번호</label><input type="password" name="mem_passwd" id="txt2"/></li>
-			
-<!-- 			<li class="btn"><a href="#">로그인</a></li> -->
+		
 			<li class="btn"><button  class="a" type="submit">로그인</button></li>
 		</ul>
 		
-<!-- 		<ul class="btn"> -->
-<!-- 			<li>아이디를 잊으셨나요? <a href="findIdForm.do">아이디 찾기</a></li>		 -->
-<!-- 			<li>비밀번호를 잊으셨나요? <a href="findPasswdForm.do">비밀번호 찾기</a></li>		 -->
-<!-- 		</ul> -->
+ 		<ul class="btn">
+ 			<li>아이디를 잊으셨나요? <a href="findIdForm.do">아이디 찾기</a></li>		
+			<li>비밀번호를 잊으셨나요? <a href="findPasswdForm.do">비밀번호 찾기</a></li>		
+ 		</ul>
+ 		<ul style="padding-left: 90px;">
+ 			<li><a href="${naver_url}"><img width="250" src="${pageContext.request.contextPath}/resources/images/naver_Btn.png"/></a></li>
+ 			<li class="mt-1"><a href="${kakao_url}"><img width="250" src="${pageContext.request.contextPath}/resources/images/kakao_Btn.png"/></a></li>
+ 		</ul> 	
 		</div>
 		
 	</fieldset>
