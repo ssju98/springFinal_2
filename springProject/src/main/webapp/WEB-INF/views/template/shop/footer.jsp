@@ -8,23 +8,11 @@
 <footer>
 	<div class="footer-div">
 		<div class="footer-div-content">
-			<span>ABOUT</span>
-			<hr class="longhr"> 
-			(주)버킷플레이스<br>
-			서울 서초구 서초대로 74길 4<br>
-			삼성생명서초타워 25, 27층<br>
-			사사업자등록번호 : 19-86-91245<br>
-			통신판매업신고번호 : 제2018-서울서초-0580호<br>
-			대표이사 : 이승재<br>
-		</div>
-		<div class="footer-div-content">
-			<span>CALL CENTER</span>
-			<hr class="longhr">
-			Tel_1670-0876<br>
-			Email_cs@bucketplace.net<br>
-			Email_contact@bucketplace.net
-			<br><br>
-			<br><br>
+			<div class="call-title">고객센터</div>
+			<div class="call-number">1600-1234</div>
+			<div class="call-time" >평일 09:00 ~ 18:00 (주말 & 공휴일 제외)</div>
+			상호명 : (주)내일의 집 &nbsp; 이메일 : ttss@test.net &nbsp; 대표자 : 김길동 &nbsp; 사업자등록번호 : 3434-23-123123<br>
+			주소 : 서울특별시 마포구 월드컵북로 21 풍성빌딩 2층
 		</div>
 	</div>
 </footer>
